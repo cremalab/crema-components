@@ -20,7 +20,6 @@ This directory is intended to organize global application [types](http://www.typ
 
 4. Add a description to the comment block. This will be important documentation and useful context for yourself whenever you hover over the reference (in VSCode at least).
 5. Add some fields to your interface:
-
    ```ts
    /**
     * ExampleType
@@ -35,7 +34,6 @@ This directory is intended to organize global application [types](http://www.typ
    ```
 
 6. Import elsewhere for use:
-
    ```ts
    import { ExampleType } from "../../types/ExampleType"
 

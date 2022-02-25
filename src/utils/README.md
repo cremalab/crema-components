@@ -13,7 +13,6 @@ This directory is intended to organize global application utilities—functions,
 1. In terminal run `npm run new:util` to generate a new `utility`
 2. Name your utility, e.g. `exampleUtil` (names will be transformed to **Camel Case**, i.e. `thisIsCamelCase`)
 3. The following directory and files will be generated:
-
    ```
    src/utils
    ├── exampleUtil
