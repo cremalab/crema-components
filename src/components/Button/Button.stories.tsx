@@ -9,7 +9,7 @@ import { Button } from "./Button"
  */
 
 export default {
-  title: "Button",
+  title: "Components/Button",
 } as ComponentMeta<typeof Button>
 
 const Template: Story<ComponentProps<typeof Button>> = (args) => (
