@@ -1,0 +1,109 @@
+{
+  "name": "crema-app-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "2.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "7.16.12",
+    "@cremalab/scripts-web": "0.11.0",
+    "@storybook/addon-actions": "6.4.16",
+    "@storybook/addon-centered": "5.3.21",
+    "@storybook/addon-essentials": "6.4.16",
+    "@storybook/addon-links": "6.4.16",
+    "@storybook/addons": "6.4.16",
+    "@storybook/cli": "6.4.16",
+    "@storybook/node-logger": "6.4.16",
+    "@storybook/preset-create-react-app": "3.2.0",
+    "@storybook/react": "6.4.16",
+    "@testing-library/cypress": "8.0.2",
+    "@testing-library/jest-dom": "5.16.1",
+    "@testing-library/react": "12.1.2",
+    "@testing-library/user-event": "13.5.0",
+    "@types/jest": "27.4.0",
+    "@types/node": "16.11.21",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "cross-env": "7.0.3",
+    "cypress": "9.3.1",
+    "dependency-cruiser": "10.9.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-config-react-app": "6.0.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.28.0",
+    "husky": "7.0.4",
+    "husky-add-issue-tracker": "0.1.1",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.5.1",
+    "serve": "12.0.1",
+    "source-map-explorer": "2.5.2",
+    "start-server-and-test": "1.14.0",
+    "typescript": "4.5.5",
+    "wait-on": "6.0.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:ci": "run-s build static",
+    "build": "react-scripts build",
+    "test": "react-scripts test --testMatch=[ \"**/?(*.)test.ts?(x)\" ]",
+    "new:component": "cremalab-scripts-web new component",
+    "new:type": "cremalab-scripts-web new type",
+    "new:util": "cremalab-scripts-web new util",
+    "prepush": "npm run test:ci",
+    "static": "serve -s build",
+    "deps:graph": "depcruise --validate --output-type dot -- src | dot -T svg > dependency-graph.svg",
+    "deps:report": "depcruise --validate --output-type err-html --output-to dependency-report.html -- src",
+    "test:ci": "cross-env CI=true run-s test:lint test:deps test:types \"test:unit -- -i\" test:e2e:ci",
+    "test:deps": "depcruise --validate -- src",
+    "test:e2e": "cypress run",
+    "test:e2e:ci": "cross-env CYPRESS_baseUrl=http://localhost:5000 start-server-and-test start:ci http://localhost:5000 \"cypress run --port 5052\"",
+    "test:lint": "eslint -c ./.eslintrc.js ./src --ext .ts,.tsx",
+    "test:lint:fix": "npm run test:lint -- --fix",
+    "test:playground": "cross-env BABEL_ENV=development start-storybook --no-dll -p 9009 -s public",
+    "test:playground:build": "build-storybook --no-dll",
+    "test:playground:ci": "start-storybook --no-dll -p 5000 -s public --ci",
+    "test:types": "tsc",
+    "test:unit": "npm run test --",
+    "test:unit:coverage": "npm run test:unit -- --coverage --watchAll=false",
+    "test:unit:coverage:watch": "npm run test:unit:coverage -- --watchAll=true",
+    "test:analyze": "run-s test:analyze:*",
+    "test:analyze:build": "npm run build",
+    "test:analyze:explore": "source-map-explorer build/static/js/main.*",
+    "build-storybook": "build-storybook -s public",
+    "storybook": "start-storybook -p 6006 -s public",
+    "prepare": "husky install"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!**/*.d.ts",
+      "!node_modules",
+      "!src/**/?(*.)stories.{ts,tsx}",
+      "!src/**/?(*.)test.{ts,tsx}",
+      "!src/**/index.{ts,tsx}",
+      "!src/types/*",
+      "!src/reportWebVitals.ts",
+      "!src/serviceWorker.ts"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
