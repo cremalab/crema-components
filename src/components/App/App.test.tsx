@@ -4,7 +4,7 @@ import { App } from "./App"
 describe("App", () => {
   it("renders expected text", () => {
     // Arrange
-    const text = "Learn React"
+    const text = "Button text"
 
     // Act
     render(<App />)
