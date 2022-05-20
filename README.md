@@ -1,9 +1,8 @@
-# 🌈 Crema Components 
+# 🌈 Crema Components
 
 [![Build Status](https://github.com/cremalab/crema-app-web/workflows/CI/badge.svg)](https://github.com/cremalab/crema-app-web/actions)
 [![codecov](https://codecov.io/gh/cremalab/app-web/branch/develop/graph/badge.svg?token=8epVUIKnmy)](https://codecov.io/gh/cremalab/app-web)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 
 **🧰 Tools Used**
 
@@ -13,7 +12,7 @@
 - [Husky](https://github.com/typicode/husky/tree/master) for running tasks via git hooks
 - [Hygen](http://www.hygen.io) for component and util generators
 - [Jest](https://jestjs.io) for unit tests
-- [Prettier](https://prettier.io) for code formatting (🚨 DO NOT enable the VS Code Prettier plugin—ESLint runs it for you under the hood. 🎉)
+- [Prettier](https://prettier.io) for code formatting
 - [Storybook](https://storybook.js.org) for component playground
 - [TypeScript](http://www.typescriptlang.org) for Static Typing in JavaScript ([Learn](http://www.typescriptlang.org/docs/handbook/basic-types.html))
 
@@ -25,19 +24,19 @@
 2. `nvm install` (in new sessions run `nvm use` to load version specified in `.nvmrc` unless aliased to default)
 3. `npm i -g npm@latest` (npm@v7+ required)
 4. `npm i` (install project dependencies)
-5. [Install the ESLint plugin for ~~your editor~~ VS Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and enable "Fix on Save" in `settings.json`:
+5. Install the [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) plugins for ~~your editor~~ VS Code and enable "Fix on Save" in `settings.json`:
    ```json
    {
      "editor.codeActionsOnSave": {
        "source.fixAll.eslint": true
-     }
+     },
+     "editor.defaultFormatter": "esbenp.prettier-vscode",
+     "editor.formatOnSave": true
    }
    ```
-   > Go to settings (`⌘ + ,`), search `codeActionsOnSave` and click "Edit in settings.json", then add `"editor.codeActionsOnSave": {...}` within the existing JSON object.
+   > To access `settings.json` in VS Code, type `shift + ⌘ + P`) then search "Open Settings (JSON)"—add the above settings within the existing JSON object.
    >
    > "But I don't use VS Code." That's fine but you're on your own. 😅
-   >
-   > 🚨 DO NOT enable the VS Code Prettier plugin for this project—ESLint runs it for you under the hood. 🎉
 
 ## 👟 Run
 
@@ -77,7 +76,7 @@ Below is the project's file-tree with notes added as inline comments.
 │   │   └── sample_spec.ts
 │   └── ...
 ├── public # 👈 Static files
-├── src 
+├── src
 │   ├── assets # 👈 fonts, images, etc.
 │   │   └── logo.svg
 │   ├── components # 👈  Use `npm run new:component` to generate
