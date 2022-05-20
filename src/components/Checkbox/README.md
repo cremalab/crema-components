@@ -15,7 +15,8 @@ DESCRIPTION_HERE
 ![Checkbox](../../../.loki/reference/chrome_Checkbox_example.png)
 
 > Image location: [`.loki/reference/chrome_Checkbox_example.png`](../../../.loki/reference/chrome_Checkbox_example.png)
-> 
-> To regenerate: 
+>
+> To regenerate:
+>
 > 1. `npm run test:playground` (skip if running)
 > 1. `npm run test:visual:update -- --storiesFilter="^Checkbox example\$"`
