@@ -1,9 +1,8 @@
-# 🌈 Crema Components 
+# 🌈 Crema Components
 
 [![Build Status](https://github.com/cremalab/crema-app-web/workflows/CI/badge.svg)](https://github.com/cremalab/crema-app-web/actions)
 [![codecov](https://codecov.io/gh/cremalab/app-web/branch/develop/graph/badge.svg?token=8epVUIKnmy)](https://codecov.io/gh/cremalab/app-web)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 
 **🧰 Tools Used**
 

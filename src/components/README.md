@@ -10,6 +10,7 @@ This project uses [`@cremalab/scripts-web`](https://github.com/cremalab/scripts)
 2. Name your component, e.g. `ExampleComponent`
 3. Choose between options regarding how much example code to generate. _The following examples are shown as if you answered `yes` to "example code" and `no` to "include useState"._
 4. The following directory and files will be generated:
+
    ```
    src/components/ExampleComponent/
    ├── ExampleComponent.stories.tsx 👈 Component stories (`npm run test:playground`)
