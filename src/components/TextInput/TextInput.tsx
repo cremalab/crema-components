@@ -11,7 +11,7 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   inputRef?: Ref<HTMLInputElement>
   label?: string
   name: string
-  onChange?: () => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const TextInput = forwardRef<HTMLDivElement, TextInputProps>(
