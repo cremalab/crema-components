@@ -28,10 +28,10 @@ describe("TextInput", () => {
 
   it("input calls the most used events during usage", async () => {
     const events = {
-      onChange: jest.fn(),
-      onBlur: jest.fn(),
-      onFocus: jest.fn(),
       onClick: jest.fn(),
+      onFocus: jest.fn(),
+      onBlur: jest.fn(),
+      onChange: jest.fn(),
     }
     const textToType = "typing into input"
 
@@ -40,13 +40,13 @@ describe("TextInput", () => {
     )
     const received = await findByLabelText("Test Input")
 
-    userEvent.type(received, textToType)
+    await userEvent.type(received, textToType)
     userEvent.tab()
 
     expect(events.onClick).toHaveBeenCalledTimes(1)
     expect(events.onFocus).toHaveBeenCalledTimes(1)
-    expect(events.onChange).toHaveBeenCalledTimes(textToType.length)
     expect(events.onBlur).toHaveBeenCalledTimes(1)
+    expect(events.onChange).toHaveBeenCalledTimes(textToType.length)
   })
 
   it("renders the helper text", async () => {

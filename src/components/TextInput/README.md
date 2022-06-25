@@ -15,7 +15,8 @@ DESCRIPTION_HERE
 ![TextInput](../../../.loki/reference/chrome_TextInput_example.png)
 
 > Image location: [`.loki/reference/chrome_TextInput_example.png`](../../../.loki/reference/chrome_TextInput_example.png)
-> 
-> To regenerate: 
+>
+> To regenerate:
+>
 > 1. `npm run test:playground` (skip if running)
 > 1. `npm run test:visual:update -- --storiesFilter="^TextInput example\$"`

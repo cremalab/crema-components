@@ -1,4 +1,4 @@
-import { HTMLProps, ReactNode, Ref, forwardRef } from "react"
+import { ChangeEvent, HTMLProps, ReactNode, Ref, forwardRef } from "react"
 import { InputHelperText } from "./InputHelperText"
 import { InputLabel } from "./InputLabel"
 
@@ -11,7 +11,7 @@ export interface TextInputProps extends HTMLProps<HTMLInputElement> {
   inputRef?: Ref<HTMLInputElement>
   label?: string
   name: string
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const TextInput = forwardRef<HTMLDivElement, TextInputProps>(
