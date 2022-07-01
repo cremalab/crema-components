@@ -26,6 +26,15 @@ Default.args = {
   max: 100,
 }
 
+export const CustomAcceleration = Template.bind({})
+
+CustomAcceleration.args = {
+  control: (props) => <input {...props} />,
+  acceleration: 50,
+  min: 4,
+  max: 100,
+}
+
 export const CustomStep = Template.bind({})
 
 CustomStep.args = {
@@ -79,6 +88,4 @@ StyledEverything.args = {
       )
     }
   },
-  incrementText: "Add",
-  decrementText: "Subtract",
 }
