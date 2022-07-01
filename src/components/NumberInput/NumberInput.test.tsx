@@ -41,4 +41,21 @@ describe("NumberInput", () => {
     // Assert
     expect(input.value).toBe("-1")
   })
+  it("renders a custom button", () => {
+    // Arrange
+    const testID = /customButton/
+    // Act
+    render(
+      <NumberInput
+        control={(props) => <input {...props} />}
+        customButton={(props, buttonType) => (
+          <button data-testid={`${testID}_${buttonType}`} {...props} />
+        )}
+      />,
+    )
+    const customButtons = screen.getAllByTestId(testID)
+
+    // Assert
+    expect(customButtons).toHaveLength(2)
+  })
 })

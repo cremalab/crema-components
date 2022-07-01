@@ -20,7 +20,10 @@ interface NumberInputProps extends Omit<InputControlProps, "ref" | "type"> {
   control: (props: InputControlProps) => JSX.Element
   incrementText?: string
   decrementText?: string
-  customButton?: (props: CustomButtonProps) => JSX.Element
+  customButton?: (
+    props: ButtonControlProps,
+    buttonType: CustomButtonProps["buttonType"],
+  ) => JSX.Element
 }
 
 export function NumberInput({
@@ -58,11 +61,11 @@ export function NumberInput({
   }
 
   const ButtonElement = (props: CustomButtonProps) => {
+    const propsOverride = { ...props }
+    delete propsOverride["buttonType"]
     if (customButton) {
-      return customButton(props)
+      return customButton(propsOverride, props.buttonType)
     } else {
-      const propsOverride = { ...props }
-      delete propsOverride["buttonType"]
       return <button {...propsOverride} />
     }
   }
