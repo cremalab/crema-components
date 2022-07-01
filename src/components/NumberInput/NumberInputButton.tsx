@@ -11,11 +11,13 @@ export interface ButtonControlProps {
 interface NumberInputButtonProps {
   action: () => void
   control: (props: ButtonControlProps) => JSX.Element
+  acceleration?: number
 }
 
 export function NumberInputButton({
   action,
   control: Button,
+  acceleration = 100,
 }: NumberInputButtonProps) {
   const [hold, setHold] = useState(false)
 
@@ -32,12 +34,12 @@ export function NumberInputButton({
       return
     }
 
-    const holdInterval = setInterval(action, 100)
+    const holdInterval = setInterval(action, acceleration)
 
     return () => {
       clearInterval(holdInterval)
     }
-  }, [hold, action])
+  }, [hold, action, acceleration])
 
   return (
     <Button
