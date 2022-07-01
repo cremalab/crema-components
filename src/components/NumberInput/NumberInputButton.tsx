@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from "react"
+import { ReactNode, useCallback, useEffect, useState } from "react"
 
 export interface ButtonControlProps {
   onMouseLeave: () => void
   onMouseUp: () => void
   onMouseDown: () => void
   onClick: () => void
+  children?: ReactNode
 }
 
 interface NumberInputButtonProps {
