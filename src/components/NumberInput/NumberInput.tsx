@@ -12,7 +12,8 @@ interface InputControlProps {
 }
 
 type CustomButtonProps = ButtonControlProps & {
-  buttonType: "increment" | "decrement"
+  buttonType?: "increment" | "decrement"
+  "aria-label": "click to increase value" | "click to decrease value"
 }
 
 interface NumberInputProps extends Omit<InputControlProps, "ref" | "type"> {
@@ -56,14 +57,25 @@ export function NumberInput({
     )
   }
 
-  const ButtonElement = (props: CustomButtonProps) =>
-    customButton ? customButton(props) : <button {...props} />
+  const ButtonElement = (props: CustomButtonProps) => {
+    if (customButton) {
+      return customButton(props)
+    } else {
+      const propsOverride = { ...props }
+      delete propsOverride["buttonType"]
+      return <button {...propsOverride} />
+    }
+  }
 
   return (
     <div className={containerClassName}>
       <NumberInputButton
         control={(props) => (
-          <ButtonElement {...props} buttonType="decrement">
+          <ButtonElement
+            {...props}
+            buttonType="decrement"
+            aria-label="click to decrease value"
+          >
             {props.children ?? decrementText}
           </ButtonElement>
         )}
@@ -72,7 +84,11 @@ export function NumberInput({
       {InputElement}
       <NumberInputButton
         control={(props) => (
-          <ButtonElement {...props} buttonType="increment">
+          <ButtonElement
+            {...props}
+            buttonType="increment"
+            aria-label="click to increase value"
+          >
             {props.children ?? incrementText}
           </ButtonElement>
         )}
