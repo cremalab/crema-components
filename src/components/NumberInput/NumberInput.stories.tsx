@@ -53,11 +53,23 @@ StyledInput.args = {
 export const StyledEverything = Template.bind({})
 
 StyledEverything.args = {
-  containerClassName: "container centered",
+  containerClassName: "container centerItems",
   control: (props) => <input {...props} className="customInput fullWidth" />,
-  customButton: (props) => (
-    <button {...props} className="customButton fullWidth" />
-  ),
+  customButton: (props) => {
+    if (props.buttonType === "increment") {
+      return (
+        <div {...props} className="flex customButton justifyCenter fullWidth">
+          ☝️
+        </div>
+      )
+    } else {
+      return (
+        <div {...props} className="flex customButton justifyCenter fullWidth">
+          <div style={{ transform: "rotate(180deg)" }}>☝️</div>
+        </div>
+      )
+    }
+  },
   incrementText: "Add",
   decrementText: "Subtract",
 }
