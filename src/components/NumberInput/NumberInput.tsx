@@ -11,11 +11,15 @@ interface InputControlProps {
   containerClassName?: HTMLAttributes<HTMLDivElement>["className"]
 }
 
+type CustomButtonProps = ButtonControlProps & {
+  buttonType: "increment" | "decrement"
+}
+
 interface NumberInputProps extends Omit<InputControlProps, "ref" | "type"> {
   control: (props: InputControlProps) => JSX.Element
   incrementText?: string
   decrementText?: string
-  customButton?: (props: ButtonControlProps) => JSX.Element
+  customButton?: (props: CustomButtonProps) => JSX.Element
 }
 
 export function NumberInput({
@@ -52,21 +56,25 @@ export function NumberInput({
     )
   }
 
-  const ButtonElement = (props: ButtonControlProps) =>
+  const ButtonElement = (props: CustomButtonProps) =>
     customButton ? customButton(props) : <button {...props} />
 
   return (
     <div className={containerClassName}>
       <NumberInputButton
         control={(props) => (
-          <ButtonElement {...props}>{decrementText}</ButtonElement>
+          <ButtonElement {...props} buttonType="decrement">
+            {props.children ?? decrementText}
+          </ButtonElement>
         )}
         action={decrement}
       />
       {InputElement}
       <NumberInputButton
         control={(props) => (
-          <ButtonElement {...props}>{incrementText}</ButtonElement>
+          <ButtonElement {...props} buttonType="increment">
+            {props.children ?? incrementText}
+          </ButtonElement>
         )}
         action={increment}
       />
