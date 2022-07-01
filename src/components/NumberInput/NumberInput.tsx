@@ -4,7 +4,7 @@ import "./styles.css"
 
 interface InputControlProps {
   ref: Ref<HTMLInputElement>
-  type?: "number"
+  type: "number"
   defaultValue?: number
   min?: number
   max?: number
