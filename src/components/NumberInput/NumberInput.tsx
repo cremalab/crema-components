@@ -1,4 +1,4 @@
-import { HTMLAttributes, Ref, useCallback, useRef } from "react"
+import { Ref, useCallback, useRef } from "react"
 import { ButtonControlProps, NumberInputButton } from "./NumberInputButton"
 import "./styles.css"
 
@@ -8,7 +8,7 @@ interface InputControlProps {
   defaultValue?: number
   min?: number
   max?: number
-  containerClassName?: HTMLAttributes<HTMLDivElement>["className"]
+  containerClassName?: string
 }
 
 type CustomButtonProps = ButtonControlProps & {
