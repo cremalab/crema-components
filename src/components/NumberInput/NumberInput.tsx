@@ -29,9 +29,13 @@ export interface NumberInputProps
   extends Omit<InputControlProps, "ref" | "type"> {
   /** The input to render. It must by an element of type 'input'. */
   control: (props: InputControlProps) => JSX.Element
-  /** Override the default incrementText. If your using customButton and pass it children, this text will be overriden by its children.*/
+  /** Override the default incrementText. If your using customButton and pass it children, this text will be overriden by its children.
+   * @default
+   * "+" */
   incrementText?: string
-  /** Override the default decrementText. If your using customButton and pass it children, this text will be overriden by its children.*/
+  /** Override the default decrementText. If your using customButton and pass it children, this text will be overriden by its children.
+   * @default
+   * "-" */
   decrementText?: string
   /** Use a custom element for the buttons. */
   customButton?: (
