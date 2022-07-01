@@ -1,4 +1,5 @@
 import { Button } from "../Button"
+import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
 export function App() {
@@ -7,6 +8,12 @@ export function App() {
       <Button ariaLabel="example button" name="example button">
         Button text
       </Button>
+      <TextInput
+        name="test-input"
+        label="Test Input"
+        hideLabel={false}
+        helperText="this is helper text"
+      />
     </div>
   )
 }
