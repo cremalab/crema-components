@@ -43,7 +43,12 @@ export const TextInput = forwardRef<HTMLDivElement, TextInputProps>(
             {...inputProps}
           />
         </div>
-        <InputHelperText helperText={helperText} helperTextId={helperTextId} />
+        {helperText && (
+          <InputHelperText
+            helperText={helperText}
+            helperTextId={helperTextId}
+          />
+        )}
       </div>
     )
   },

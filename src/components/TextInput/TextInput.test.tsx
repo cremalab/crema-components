@@ -103,4 +103,24 @@ describe("TextInput", () => {
     expect(events.onChange).toHaveBeenCalledTimes(0)
     expect(events.onBlur).toHaveBeenCalledTimes(0)
   })
+
+  it("renders correctly when helperText is provided", async () => {
+    const helperText = "this is helper text"
+
+    const { findByLabelText, findByText } = await render(
+      <TextInput
+        name="test-input"
+        label="Test Input"
+        helperText={helperText}
+      />,
+    )
+    const receivedInput = await findByLabelText("Test Input")
+    const receivedHelperText = await findByText(helperText)
+
+    expect(receivedHelperText).toBeInTheDocument()
+    expect(receivedInput).toHaveAttribute(
+      "aria-describedby",
+      receivedHelperText.id,
+    )
+  })
 })

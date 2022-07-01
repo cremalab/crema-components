@@ -67,3 +67,17 @@ WithPlaceholder.args = {
   placeholder: "Placeholder text",
   type: "text",
 }
+
+export const WithHelperText = Template.bind({})
+
+WithHelperText.args = {
+  className: "",
+  disabled: false,
+  hideLabel: false,
+  id: "1",
+  label: "Helper Text Input",
+  name: "Helper Text Input",
+  placeholder: "Placeholder text",
+  type: "text",
+  helperText: "Helper text",
+}
