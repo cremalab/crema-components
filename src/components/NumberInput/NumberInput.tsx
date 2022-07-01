@@ -7,7 +7,15 @@ interface InputControlProps {
   type: "number"
   defaultValue?: number
   step?: number
+  /**The minimum number allowed.
+   *  @default
+   * -Infinity
+   * */
   min?: number
+  /**The minimum number allowed.
+   *  @default
+   * Infinity
+   * */
   max?: number
   containerClassName?: string
 }
@@ -19,13 +27,21 @@ type CustomButtonProps = ButtonControlProps & {
 
 export interface NumberInputProps
   extends Omit<InputControlProps, "ref" | "type"> {
+  /** The input to render. It must by an element of type 'input'. */
   control: (props: InputControlProps) => JSX.Element
+  /** Override the default incrementText. If your using customButton and pass it children, this text will be overriden by its children.*/
   incrementText?: string
+  /** Override the default decrementText. If your using customButton and pass it children, this text will be overriden by its children.*/
   decrementText?: string
+  /** Use a custom element for the buttons. */
   customButton?: (
     props: ButtonControlProps,
     buttonType: CustomButtonProps["buttonType"],
   ) => JSX.Element
+  /** The interval number in ms
+   * @default
+   * 100*/
+  acceleration?: number
 }
 
 export function NumberInput({
@@ -38,6 +54,7 @@ export function NumberInput({
   customButton,
   containerClassName,
   step,
+  acceleration,
 }: NumberInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -77,6 +94,7 @@ export function NumberInput({
   return (
     <div className={containerClassName}>
       <NumberInputButton
+        acceleration={acceleration}
         control={(props) => (
           <ButtonElement
             {...props}
@@ -90,6 +108,7 @@ export function NumberInput({
       />
       {InputElement}
       <NumberInputButton
+        acceleration={acceleration}
         control={(props) => (
           <ButtonElement
             {...props}
