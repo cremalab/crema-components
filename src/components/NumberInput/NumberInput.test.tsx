@@ -113,4 +113,24 @@ describe("NumberInput", () => {
     await userEvent.click(decreaseButton)
     expect(input.value).toBe("0")
   })
+  it("invokes onChange anytime the value is changed", async () => {
+    // Arrange
+    const onChange = jest.fn()
+    const decreaseLabel = "click to decrease value"
+
+    // Act
+    render(
+      <NumberInput
+        control={(props) => <input {...props} />}
+        onChange={onChange}
+      />,
+    )
+
+    const decreaseButton = screen.getByLabelText(decreaseLabel)
+    await userEvent.click(decreaseButton)
+    await userEvent.click(decreaseButton)
+
+    // Assert
+    expect(onChange).toBeCalledTimes(2)
+  })
 })
