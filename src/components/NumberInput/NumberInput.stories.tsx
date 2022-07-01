@@ -55,8 +55,8 @@ export const StyledEverything = Template.bind({})
 StyledEverything.args = {
   containerClassName: "container centerItems",
   control: (props) => <input {...props} className="customInput fullWidth" />,
-  customButton: (props) => {
-    if (props.buttonType === "increment") {
+  customButton: (props, buttonType) => {
+    if (buttonType === "increment") {
       return (
         <div {...props} className="flex customButton justifyCenter fullWidth">
           ☝️
