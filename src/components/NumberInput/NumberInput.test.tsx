@@ -133,4 +133,13 @@ describe("NumberInput", () => {
     // Assert
     expect(onChange).toBeCalledTimes(2)
   })
+  it("throws an error if control is passed an element that is not of type 'input'", () => {
+    jest.spyOn(global.console, "error").mockImplementation(jest.fn())
+    // Assert
+    expect(() =>
+      render(<NumberInput control={(props) => <p {...props} />} />),
+    ).toThrowError(
+      "'control' only accepts functions that return elements of type 'input'",
+    )
+  })
 })
