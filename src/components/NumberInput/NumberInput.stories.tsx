@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions"
 import decoratorCentered from "@storybook/addon-centered"
 import { Story } from "@storybook/react"
 import { ComponentProps } from "react"
@@ -24,6 +25,7 @@ Default.args = {
   control: (props) => <input {...props} />,
   min: 4,
   max: 100,
+  onChange: action("onChange"),
 }
 
 export const CustomAcceleration = Template.bind({})

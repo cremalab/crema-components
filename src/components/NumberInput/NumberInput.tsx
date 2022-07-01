@@ -42,6 +42,7 @@ export interface NumberInputProps
    * @default
    * 100*/
   acceleration?: number
+  onChange?: (value: number) => void
 }
 
 export function NumberInput({
@@ -55,16 +56,23 @@ export function NumberInput({
   containerClassName,
   step,
   acceleration,
+  onChange,
 }: NumberInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const increment = useCallback(() => {
-    if (Number(inputRef.current?.value) < max) inputRef.current?.stepUp()
-  }, [max])
+    if (Number(inputRef.current?.value) < max) {
+      onChange?.(Number(inputRef.current?.value) ?? 0)
+      inputRef.current?.stepUp()
+    }
+  }, [max, onChange])
 
   const decrement = useCallback(() => {
-    if (Number(inputRef.current?.value) > min) inputRef.current?.stepDown()
-  }, [min])
+    if (Number(inputRef.current?.value) > min) {
+      onChange?.(Number(inputRef.current?.value) ?? 0)
+      inputRef.current?.stepDown()
+    }
+  }, [min, onChange])
 
   const InputElement = control({
     defaultValue: defaultValue ?? (min !== -Infinity ? min : 0),
