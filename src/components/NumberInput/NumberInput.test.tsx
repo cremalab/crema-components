@@ -80,4 +80,37 @@ describe("NumberInput", () => {
     // Assert
     expect(input.value).toBe("0.1")
   })
+  // this is the default behavior for the native control as well
+  it("only allows a range defined by min/max (when pressing arrows)", async () => {
+    // Arrange
+    const min = 0
+    const max = 3
+    const increaseLabel = "click to increase value"
+    const decreaseLabel = "click to decrease value"
+    const testID = "numberInput"
+
+    // Act
+    render(
+      <NumberInput
+        defaultValue={0}
+        min={min}
+        max={max}
+        control={(props) => <input data-testid={testID} {...props} />}
+      />,
+    )
+
+    const increaseButton = screen.getByLabelText(increaseLabel)
+    const decreaseButton = screen.getByLabelText(decreaseLabel)
+    await userEvent.click(increaseButton)
+    await userEvent.click(increaseButton)
+    await userEvent.click(increaseButton)
+    await userEvent.click(increaseButton)
+    const input = screen.getByTestId(testID) as HTMLInputElement
+    expect(input.value).toBe("3")
+    await userEvent.click(decreaseButton)
+    await userEvent.click(decreaseButton)
+    await userEvent.click(decreaseButton)
+    await userEvent.click(decreaseButton)
+    expect(input.value).toBe("0")
+  })
 })
