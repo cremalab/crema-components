@@ -22,7 +22,7 @@ describe("NumberInput", () => {
     // Assert
     expect(input.value).toBe("1")
   })
-  it("decreases the value when increment action is invoked", async () => {
+  it("decreases the value when decrement action is invoked", async () => {
     // Arrange
     const decreaseLabel = "click to decrease value"
     const testID = "numberInput"
