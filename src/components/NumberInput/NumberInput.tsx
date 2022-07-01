@@ -17,7 +17,8 @@ type CustomButtonProps = ButtonControlProps & {
   "aria-label": "click to increase value" | "click to decrease value"
 }
 
-interface NumberInputProps extends Omit<InputControlProps, "ref" | "type"> {
+export interface NumberInputProps
+  extends Omit<InputControlProps, "ref" | "type"> {
   control: (props: InputControlProps) => JSX.Element
   incrementText?: string
   decrementText?: string

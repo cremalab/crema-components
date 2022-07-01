@@ -76,8 +76,6 @@ describe("NumberInput", () => {
     const input = screen.getByTestId(testID) as HTMLInputElement
 
     // Assert
-
-    // Assert
     expect(input.value).toBe("0.1")
   })
   // this is the default behavior for the native control as well
@@ -101,6 +99,8 @@ describe("NumberInput", () => {
 
     const increaseButton = screen.getByLabelText(increaseLabel)
     const decreaseButton = screen.getByLabelText(decreaseLabel)
+
+    // Assert
     await userEvent.click(increaseButton)
     await userEvent.click(increaseButton)
     await userEvent.click(increaseButton)
