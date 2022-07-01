@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.container.centered {
+  max-width: 80px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.customButton {
+  border-radius: 28px;
+  padding: 8px;
+  background-color: rgb(144, 137, 198);
+  border: 2px slateblue solid;
+  color: white;
+  cursor: pointer;
+}
+
+.customButton:hover {
+  background-color: rgb(170, 165, 201);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.customInput {
+  border-radius: 12px;
+  border: 2px slateblue solid;
+  padding: 8px;
+  margin: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
