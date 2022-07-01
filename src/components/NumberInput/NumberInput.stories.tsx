@@ -23,27 +23,13 @@ export const Default = Template.bind({})
 
 Default.args = {
   control: (props) => <input {...props} />,
+  acceleration: 100,
+  decrementText: "-",
+  incrementText: "+",
   min: 4,
   max: 100,
   onChange: action("onChange"),
-}
-
-export const CustomAcceleration = Template.bind({})
-
-CustomAcceleration.args = {
-  control: (props) => <input {...props} />,
-  acceleration: 50,
-  min: 4,
-  max: 100,
-}
-
-export const CustomStep = Template.bind({})
-
-CustomStep.args = {
-  control: (props) => <input {...props} />,
-  step: 0.1,
-  min: 4,
-  max: 100,
+  step: 0,
 }
 
 export const CustomButton = Template.bind({})
