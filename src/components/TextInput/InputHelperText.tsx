@@ -1,19 +1,10 @@
 import { ReactNode } from "react"
 
 interface Props {
-  className?: string
-  helperText?: ReactNode
+  helperText: ReactNode
   helperTextId: string
 }
 
-export function InputHelperText({
-  className,
-  helperTextId,
-  helperText,
-}: Props) {
-  return (
-    <div className={className} id={helperTextId}>
-      {helperText}
-    </div>
-  )
+export function InputHelperText({ helperTextId, helperText }: Props) {
+  return <div id={helperTextId}>{helperText}</div>
 }

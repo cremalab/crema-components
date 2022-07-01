@@ -13,9 +13,8 @@ exports[`TextInput renders the expected markup 1`] = `
       <input
         aria-describedby="test-input-helper-text"
         aria-label="Test Input"
-        id="test-input"
+        label="Test Input"
         name="test-input"
-        type="text"
       />
     </div>
     <div

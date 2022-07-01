@@ -6,9 +6,9 @@ describe("TextInput", () => {
   it("renders the expected markup", async () => {
     const { asFragment } = await render(
       <TextInput
+        helperText="Test Helper Text"
         name="test-input"
         label="Test Input"
-        helperText="Test Helper Text"
       />,
     )
 
@@ -23,7 +23,7 @@ describe("TextInput", () => {
 
     expect(received).toBeInTheDocument()
     expect(received).toHaveAttribute("name", "test-input")
-    expect(received).toHaveAttribute("id", "test-input")
+    expect(received).toHaveAttribute("aria-label", "Test Input")
   })
 
   it("input calls the most used events during usage", async () => {
@@ -78,7 +78,6 @@ describe("TextInput", () => {
 
     expect(received).toBeInTheDocument()
     expect(received).toHaveAttribute("name", "test-input")
-    expect(received).toHaveAttribute("id", "test-input")
     expect(receivedText).not.toBeInTheDocument()
   })
 
