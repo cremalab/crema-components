@@ -26,6 +26,15 @@ Default.args = {
   max: 100,
 }
 
+export const CustomStep = Template.bind({})
+
+CustomStep.args = {
+  control: (props) => <input {...props} />,
+  step: 0.1,
+  min: 4,
+  max: 100,
+}
+
 export const CustomButton = Template.bind({})
 
 CustomButton.args = {

@@ -6,6 +6,7 @@ interface InputControlProps {
   ref: Ref<HTMLInputElement>
   type: "number"
   defaultValue?: number
+  step?: number
   min?: number
   max?: number
   containerClassName?: string
@@ -35,6 +36,7 @@ export function NumberInput({
   max = Infinity,
   customButton,
   containerClassName,
+  step,
 }: NumberInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -52,6 +54,7 @@ export function NumberInput({
     max,
     type: "number",
     ref: inputRef,
+    step,
   })
 
   if (InputElement.type !== "input") {

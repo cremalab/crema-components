@@ -58,4 +58,26 @@ describe("NumberInput", () => {
     // Assert
     expect(customButtons).toHaveLength(2)
   })
+  it("supports step", async () => {
+    // Arrange
+    const step = 0.1
+    const increaseLabel = "click to increase value"
+    const testID = "numberInput"
+    // Act
+    render(
+      <NumberInput
+        defaultValue={0}
+        step={step}
+        control={(props) => <input data-testid={testID} {...props} />}
+      />,
+    )
+    const increaseButton = screen.getByLabelText(increaseLabel)
+    await userEvent.click(increaseButton)
+    const input = screen.getByTestId(testID) as HTMLInputElement
+
+    // Assert
+
+    // Assert
+    expect(input.value).toBe("0.1")
+  })
 })
