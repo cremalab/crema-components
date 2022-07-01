@@ -10,7 +10,7 @@ import "./storyStyles.css"
  */
 
 export default {
-  title: "NumberInput",
+  title: "Components/NumberInput",
   decorators: [decoratorCentered],
 }
 
