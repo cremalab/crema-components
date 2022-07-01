@@ -3,11 +3,22 @@
   flex-direction: column-reverse;
 }
 
-.container.centered {
+.flex {
+  display: flex;
+}
+
+.centerItems {
+  align-items: center;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.container {
   max-width: 80px;
   display: flex;
   flex-direction: column-reverse;
-  align-items: center;
 }
 
 .customButton {
