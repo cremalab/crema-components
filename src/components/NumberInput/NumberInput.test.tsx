@@ -1,7 +1,25 @@
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { NumberInput } from "./NumberInput"
 
 describe("NumberInput", () => {
-  it("is defined", expect(NumberInput).toBeDefined)
+  it("increases the value when increment action is invoked", async () => {
+    // Arrange
+    const increaseLabel = "click to increase value"
+    const testID = "numberInput"
+    // Act
+    render(
+      <NumberInput
+        min={0}
+        control={(props) => <input data-testid={testID} {...props} />}
+      />,
+    )
 
-  it.todo(`add meaningful tests 👍`)
+    const increaseButton = screen.getByLabelText(increaseLabel)
+    await userEvent.click(increaseButton)
+    const input = screen.getByTestId(testID) as HTMLInputElement
+
+    // Assert
+    expect(input.value).toBe("1")
+  })
 })
