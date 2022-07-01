@@ -3,7 +3,7 @@ import { ButtonControlProps, NumberInputButton } from "./NumberInputButton"
 import "./styles.css"
 
 interface InputControlProps {
-  ref?: Ref<HTMLInputElement>
+  ref: Ref<HTMLInputElement>
   type?: "number"
   defaultValue?: number
   min?: number
