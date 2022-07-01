@@ -42,6 +42,7 @@ export interface NumberInputProps
    * @default
    * 100*/
   acceleration?: number
+  /** An onChange callback that will return the current numerical value */
   onChange?: (value: number) => void
 }
 
