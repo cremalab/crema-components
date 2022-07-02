@@ -22,7 +22,6 @@ const Template: Story<ComponentProps<typeof NumberInput>> = (args) => (
 export const Default = Template.bind({})
 
 Default.args = {
-  control: (props) => <input {...props} />,
   acceleration: 100,
   decrementText: "-",
   incrementText: "+",
@@ -35,7 +34,6 @@ Default.args = {
 export const CustomButton = Template.bind({})
 
 CustomButton.args = {
-  control: (props) => <input {...props} />,
   min: 4,
   max: 100,
   customButton: (props) => <button {...props} className="customButton" />,
@@ -44,7 +42,6 @@ CustomButton.args = {
 export const StyledContainer = Template.bind({})
 
 StyledContainer.args = {
-  control: (props) => <input {...props} />,
   min: 4,
   max: 100,
   containerClassName: "container",

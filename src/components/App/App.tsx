@@ -1,4 +1,5 @@
 import { Button } from "../Button"
+import { NumberInput } from "../NumberInput"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
@@ -14,6 +15,7 @@ export function App() {
         hideLabel={false}
         helperText="this is helper text"
       />
+      <NumberInput />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Ref, useCallback, useRef } from "react"
+import { Ref, useCallback, useMemo, useRef } from "react"
 import { ButtonControlProps, NumberInputButton } from "./NumberInputButton"
 import "./styles.css"
 
@@ -18,6 +18,7 @@ interface InputControlProps {
    * */
   max?: number
   containerClassName?: string
+  testID?: string
 }
 
 type CustomButtonProps = ButtonControlProps & {
@@ -27,8 +28,8 @@ type CustomButtonProps = ButtonControlProps & {
 
 export interface NumberInputProps
   extends Omit<InputControlProps, "ref" | "type"> {
-  /** The input to render. It must by an element of type 'input'. */
-  control: (props: InputControlProps) => JSX.Element
+  /** The custom input to render. It must by an element of type 'input'. */
+  control?: (props: InputControlProps) => JSX.Element
   /** Override the default incrementText. If your using customButton and pass it children, this text will be overriden by its children.
    * @default
    * "+" */
@@ -50,6 +51,10 @@ export interface NumberInputProps
   onChange?: (value: number) => void
 }
 
+const getDefaultValue = (min: number, defaultValue?: number) => {
+  return defaultValue ?? (min !== -Infinity ? min : 0)
+}
+
 export function NumberInput({
   control,
   incrementText = "+",
@@ -62,6 +67,7 @@ export function NumberInput({
   step,
   acceleration,
   onChange,
+  testID,
 }: NumberInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -79,14 +85,23 @@ export function NumberInput({
     }
   }, [min, onChange])
 
-  const InputElement = control({
-    defaultValue: defaultValue ?? (min !== -Infinity ? min : 0),
-    min,
-    max,
-    type: "number",
-    ref: inputRef,
-    step,
-  })
+  const InputProps: InputControlProps = useMemo(
+    () => ({
+      defaultValue: getDefaultValue(min, defaultValue),
+      min,
+      max,
+      type: "number",
+      ref: inputRef,
+      step,
+      "data-testid": testID,
+    }),
+    [min, max, defaultValue, step, testID],
+  )
+
+  const InputElement = useMemo(
+    () => (control ? control(InputProps) : <input {...InputProps} />),
+    [control, InputProps],
+  )
 
   if (InputElement.type !== "input") {
     throw new Error(

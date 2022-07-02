@@ -8,12 +8,7 @@ describe("NumberInput", () => {
     const increaseLabel = "click to increase value"
     const testID = "numberInput"
     // Act
-    render(
-      <NumberInput
-        defaultValue={0}
-        control={(props) => <input data-testid={testID} {...props} />}
-      />,
-    )
+    render(<NumberInput testID={testID} defaultValue={0} />)
 
     const increaseButton = screen.getByLabelText(increaseLabel)
     await userEvent.click(increaseButton)
@@ -27,12 +22,7 @@ describe("NumberInput", () => {
     const decreaseLabel = "click to decrease value"
     const testID = "numberInput"
     // Act
-    render(
-      <NumberInput
-        defaultValue={0}
-        control={(props) => <input data-testid={testID} {...props} />}
-      />,
-    )
+    render(<NumberInput testID={testID} defaultValue={0} />)
 
     const decreaseButton = screen.getByLabelText(decreaseLabel)
     await userEvent.click(decreaseButton)
@@ -47,7 +37,6 @@ describe("NumberInput", () => {
     // Act
     render(
       <NumberInput
-        control={(props) => <input {...props} />}
         customButton={(props, buttonType) => (
           <button data-testid={`${testID}_${buttonType}`} {...props} />
         )}
@@ -58,19 +47,25 @@ describe("NumberInput", () => {
     // Assert
     expect(customButtons).toHaveLength(2)
   })
+  it("renders a custom input", () => {
+    // Arrange
+    const testID = "customInput"
+    // Act
+    render(
+      <NumberInput testID={testID} control={(props) => <input {...props} />} />,
+    )
+    const customInput = screen.getByTestId(testID)
+
+    // Assert
+    expect(customInput).toBeInTheDocument()
+  })
   it("supports step", async () => {
     // Arrange
     const step = 0.1
     const increaseLabel = "click to increase value"
     const testID = "numberInput"
     // Act
-    render(
-      <NumberInput
-        defaultValue={0}
-        step={step}
-        control={(props) => <input data-testid={testID} {...props} />}
-      />,
-    )
+    render(<NumberInput testID={testID} defaultValue={0} step={step} />)
     const increaseButton = screen.getByLabelText(increaseLabel)
     await userEvent.click(increaseButton)
     const input = screen.getByTestId(testID) as HTMLInputElement
@@ -88,14 +83,7 @@ describe("NumberInput", () => {
     const testID = "numberInput"
 
     // Act
-    render(
-      <NumberInput
-        defaultValue={0}
-        min={min}
-        max={max}
-        control={(props) => <input data-testid={testID} {...props} />}
-      />,
-    )
+    render(<NumberInput testID={testID} defaultValue={0} min={min} max={max} />)
 
     const increaseButton = screen.getByLabelText(increaseLabel)
     const decreaseButton = screen.getByLabelText(decreaseLabel)
@@ -119,12 +107,7 @@ describe("NumberInput", () => {
     const decreaseLabel = "click to decrease value"
 
     // Act
-    render(
-      <NumberInput
-        control={(props) => <input {...props} />}
-        onChange={onChange}
-      />,
-    )
+    render(<NumberInput onChange={onChange} />)
 
     const decreaseButton = screen.getByLabelText(decreaseLabel)
     await userEvent.click(decreaseButton)
