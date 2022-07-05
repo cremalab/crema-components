@@ -36,7 +36,7 @@ export const CustomButton = Template.bind({})
 CustomButton.args = {
   min: 4,
   max: 100,
-  customButton: (props) => <button {...props} className="customButton" />,
+  button: (props) => <button {...props} className="customButton" />,
 }
 
 export const StyledContainer = Template.bind({})
@@ -58,7 +58,7 @@ export const StyledEverything = Template.bind({})
 StyledEverything.args = {
   containerClassName: "container centerItems",
   control: (props) => <input {...props} className="customInput fullWidth" />,
-  customButton: (props, buttonType) => {
+  button: (props, buttonType) => {
     if (buttonType === "increment") {
       return (
         <div {...props} className="flex customButton justifyCenter fullWidth">

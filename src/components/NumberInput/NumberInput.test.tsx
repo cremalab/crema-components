@@ -37,7 +37,7 @@ describe("NumberInput", () => {
     // Act
     render(
       <NumberInput
-        customButton={(props, buttonType) => (
+        button={(props, buttonType) => (
           <button data-testid={`${testID}_${buttonType}`} {...props} />
         )}
       />,

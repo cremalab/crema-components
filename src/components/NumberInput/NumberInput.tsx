@@ -39,7 +39,7 @@ export interface NumberInputProps
    * "-" */
   decrementText?: string
   /** Use a custom element for the buttons. */
-  customButton?: (
+  button?: (
     props: ButtonControlProps,
     buttonType: CustomButtonProps["buttonType"],
   ) => JSX.Element
@@ -62,7 +62,7 @@ export function NumberInput({
   defaultValue,
   min = -Infinity,
   max = Infinity,
-  customButton,
+  button,
   containerClassName,
   step,
   acceleration,
@@ -112,8 +112,8 @@ export function NumberInput({
   const ButtonElement = (props: CustomButtonProps) => {
     const propsOverride = { ...props }
     delete propsOverride["buttonType"]
-    if (customButton) {
-      return customButton(propsOverride, props.buttonType)
+    if (button) {
+      return button(propsOverride, props.buttonType)
     } else {
       return <button {...propsOverride} />
     }
