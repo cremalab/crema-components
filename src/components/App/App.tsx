@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { Button } from "../Button"
 import { NumberInput } from "../NumberInput"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
 export function App() {
+  const [value, setValue] = useState(0)
   return (
     <div className="App">
       <Button ariaLabel="example button" name="example button">
@@ -15,7 +17,7 @@ export function App() {
         hideLabel={false}
         helperText="this is helper text"
       />
-      <NumberInput />
+      <NumberInput value={value} onChange={setValue} />
     </div>
   )
 }
