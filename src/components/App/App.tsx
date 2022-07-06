@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Button } from "../Button"
-import "./App.styles.css"
 import { Modal } from "../Modal"
+import { TextInput } from "../TextInput"
+import "./App.styles.css"
 
 export function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -21,7 +22,7 @@ export function App() {
       <Button ariaLabel="example button" name="example button">
         Button text
       </Button>
-      <>
+      <div>
         <Button ariaLabel="open" onClick={() => setIsOpen(true)}>
           Open modal
         </Button>
@@ -32,7 +33,13 @@ export function App() {
           title="Modal title"
           children={modalChildren}
         />
-      </>
+      </div>
+      <TextInput
+        name="test-input"
+        label="Test Input"
+        hideLabel={false}
+        helperText="this is helper text"
+      />
     </div>
   )
 }
