@@ -6,6 +6,7 @@ interface InputControlProps {
   ref: Ref<HTMLInputElement>
   type: "number"
   defaultValue?: number
+  value?: number
   step?: number
   /**The minimum number allowed.
    *  @default
@@ -60,6 +61,7 @@ export function NumberInput({
   incrementText = "+",
   decrementText = "-",
   defaultValue,
+  value,
   min = -Infinity,
   max = Infinity,
   button,
@@ -73,21 +75,22 @@ export function NumberInput({
 
   const increment = useCallback(() => {
     if (Number(inputRef.current?.value) < max) {
-      onChange?.(Number(inputRef.current?.value) ?? 0)
       inputRef.current?.stepUp()
+      onChange?.(Number(inputRef.current?.value) ?? 0)
     }
   }, [max, onChange])
 
   const decrement = useCallback(() => {
     if (Number(inputRef.current?.value) > min) {
-      onChange?.(Number(inputRef.current?.value) ?? 0)
       inputRef.current?.stepDown()
+      onChange?.(Number(inputRef.current?.value) ?? 0)
     }
   }, [min, onChange])
 
   const InputProps: InputControlProps = useMemo(
     () => ({
       defaultValue: getDefaultValue(min, defaultValue),
+      value,
       min,
       max,
       type: "number",
@@ -95,7 +98,7 @@ export function NumberInput({
       step,
       "data-testid": testID,
     }),
-    [min, max, defaultValue, step, testID],
+    [min, max, defaultValue, step, testID, value],
   )
 
   const InputElement = useMemo(
