@@ -9,4 +9,3 @@ DESCRIPTION_HERE
 - `NumberInput.tsx`: Component code
 - `index.ts`: Component export
 - `README.md`: Component documentation (hey, that's me!)
-
