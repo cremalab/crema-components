@@ -1,12 +1,11 @@
-import { Ref, useCallback, useMemo, useRef } from "react"
+import { ChangeEvent, Ref, useCallback, useMemo, useRef } from "react"
 import { ButtonControlProps, NumberInputButton } from "./NumberInputButton"
 import "./styles.css"
 
 interface InputControlProps {
   ref: Ref<HTMLInputElement>
   type: "number"
-  defaultValue?: number
-  value?: number
+  value?: string
   step?: number
   /**The minimum number allowed.
    *  @default
@@ -20,15 +19,28 @@ interface InputControlProps {
   max?: number
   containerClassName?: string
   testID?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
+type CustomButton = (props: ButtonControlProps) => JSX.Element
+
 type CustomButtonProps = ButtonControlProps & {
-  buttonType?: "increment" | "decrement"
+  button?: CustomButton
   "aria-label": "click to increase value" | "click to decrease value"
 }
 
+const ButtonElement = (props: CustomButtonProps) => {
+  const propsOverride = { ...props }
+  delete propsOverride["button"]
+  if (props.button) {
+    return props.button(propsOverride)
+  } else {
+    return <button {...propsOverride} />
+  }
+}
+
 export interface NumberInputProps
-  extends Omit<InputControlProps, "ref" | "type"> {
+  extends Omit<InputControlProps, "ref" | "type" | "onChange"> {
   /** The custom input to render. It must by an element of type 'input'. */
   control?: (props: InputControlProps) => JSX.Element
   /** Override the default incrementText. If your using customButton and pass it children, this text will be overriden by its children.
@@ -39,32 +51,27 @@ export interface NumberInputProps
    * @default
    * "-" */
   decrementText?: string
-  /** Use a custom element for the buttons. */
-  button?: (
-    props: ButtonControlProps,
-    buttonType: CustomButtonProps["buttonType"],
-  ) => JSX.Element
+  /** Use a custom element for the increment action. */
+  incrementButton?: CustomButton
+  /** Use a custom element for the decrement action. */
+  decrementButton?: CustomButton
   /** The interval number in ms
    * @default
    * 100*/
   acceleration?: number
   /** An onChange callback that will return the current numerical value */
-  onChange?: (value: number) => void
-}
-
-const getDefaultValue = (min: number, defaultValue?: number) => {
-  return defaultValue ?? (min !== -Infinity ? min : 0)
+  onChange?: (value?: string) => void
 }
 
 export function NumberInput({
   control,
   incrementText = "+",
   decrementText = "-",
-  defaultValue,
   value,
   min = -Infinity,
   max = Infinity,
-  button,
+  incrementButton,
+  decrementButton,
   containerClassName,
   step,
   acceleration,
@@ -73,32 +80,41 @@ export function NumberInput({
 }: NumberInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e.target.value)
+    },
+    [onChange],
+  )
+
   const increment = useCallback(() => {
-    if (Number(inputRef.current?.value) < max) {
+    const currentValue = inputRef.current?.value
+    if (Number(currentValue) < max) {
       inputRef.current?.stepUp()
-      onChange?.(Number(inputRef.current?.value) ?? 0)
+      onChange?.(currentValue)
     }
   }, [max, onChange])
 
   const decrement = useCallback(() => {
-    if (Number(inputRef.current?.value) > min) {
+    const currentValue = inputRef.current?.value
+    if (Number(currentValue) > min) {
       inputRef.current?.stepDown()
-      onChange?.(Number(inputRef.current?.value) ?? 0)
+      onChange?.(currentValue)
     }
   }, [min, onChange])
 
   const InputProps: InputControlProps = useMemo(
     () => ({
-      defaultValue: getDefaultValue(min, defaultValue),
-      value,
+      value: value ? value : min !== -Infinity ? String(min) : "0",
       min,
       max,
       type: "number",
       ref: inputRef,
       step,
       "data-testid": testID,
+      onChange: handleChange,
     }),
-    [min, max, defaultValue, step, testID, value],
+    [min, max, step, testID, value, handleChange],
   )
 
   const InputElement = useMemo(
@@ -112,16 +128,6 @@ export function NumberInput({
     )
   }
 
-  const ButtonElement = (props: CustomButtonProps) => {
-    const propsOverride = { ...props }
-    delete propsOverride["buttonType"]
-    if (button) {
-      return button(propsOverride, props.buttonType)
-    } else {
-      return <button {...propsOverride} />
-    }
-  }
-
   return (
     <div className={containerClassName}>
       <NumberInputButton
@@ -129,7 +135,7 @@ export function NumberInput({
         control={(props) => (
           <ButtonElement
             {...props}
-            buttonType="decrement"
+            button={decrementButton}
             aria-label="click to decrease value"
           >
             {props.children ?? decrementText}
@@ -143,7 +149,7 @@ export function NumberInput({
         control={(props) => (
           <ButtonElement
             {...props}
-            buttonType="increment"
+            button={incrementButton}
             aria-label="click to increase value"
           >
             {props.children ?? incrementText}

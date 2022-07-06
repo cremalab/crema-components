@@ -5,7 +5,7 @@ import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
 export function App() {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState<string>()
   return (
     <div className="App">
       <Button ariaLabel="example button" name="example button">

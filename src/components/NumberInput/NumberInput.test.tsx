@@ -8,7 +8,7 @@ describe("NumberInput", () => {
     const increaseLabel = "click to increase value"
     const testID = "numberInput"
     // Act
-    render(<NumberInput testID={testID} defaultValue={0} />)
+    render(<NumberInput testID={testID} value="0" />)
 
     const increaseButton = screen.getByLabelText(increaseLabel)
     await userEvent.click(increaseButton)
@@ -22,7 +22,7 @@ describe("NumberInput", () => {
     const decreaseLabel = "click to decrease value"
     const testID = "numberInput"
     // Act
-    render(<NumberInput testID={testID} defaultValue={0} />)
+    render(<NumberInput testID={testID} value="0" />)
 
     const decreaseButton = screen.getByLabelText(decreaseLabel)
     await userEvent.click(decreaseButton)
@@ -37,8 +37,11 @@ describe("NumberInput", () => {
     // Act
     render(
       <NumberInput
-        button={(props, buttonType) => (
-          <button data-testid={`${testID}_${buttonType}`} {...props} />
+        incrementButton={(props) => (
+          <button data-testid={`${testID}_increment`} {...props} />
+        )}
+        decrementButton={(props) => (
+          <button data-testid={`${testID}_decrement`} {...props} />
         )}
       />,
     )
@@ -65,7 +68,7 @@ describe("NumberInput", () => {
     const increaseLabel = "click to increase value"
     const testID = "numberInput"
     // Act
-    render(<NumberInput testID={testID} defaultValue={0} step={step} />)
+    render(<NumberInput testID={testID} value="0" step={step} />)
     const increaseButton = screen.getByLabelText(increaseLabel)
     await userEvent.click(increaseButton)
     const input = screen.getByTestId(testID) as HTMLInputElement
@@ -83,7 +86,7 @@ describe("NumberInput", () => {
     const testID = "numberInput"
 
     // Act
-    render(<NumberInput testID={testID} defaultValue={0} min={min} max={max} />)
+    render(<NumberInput testID={testID} value="0" min={min} max={max} />)
 
     const increaseButton = screen.getByLabelText(increaseLabel)
     const decreaseButton = screen.getByLabelText(decreaseLabel)
@@ -107,7 +110,7 @@ describe("NumberInput", () => {
     const decreaseLabel = "click to decrease value"
 
     // Act
-    render(<NumberInput onChange={onChange} />)
+    render(<NumberInput onChange={onChange} value="0" />)
 
     const decreaseButton = screen.getByLabelText(decreaseLabel)
     await userEvent.click(decreaseButton)

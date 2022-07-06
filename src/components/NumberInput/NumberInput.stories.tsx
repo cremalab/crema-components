@@ -36,7 +36,8 @@ export const CustomButton = Template.bind({})
 CustomButton.args = {
   min: 4,
   max: 100,
-  button: (props) => <button {...props} className="customButton" />,
+  incrementButton: (props) => <button {...props} className="customButton" />,
+  decrementButton: (props) => <button {...props} className="customButton" />,
 }
 
 export const StyledContainer = Template.bind({})
@@ -58,19 +59,18 @@ export const StyledEverything = Template.bind({})
 StyledEverything.args = {
   containerClassName: "container centerItems",
   control: (props) => <input {...props} className="customInput fullWidth" />,
-  button: (props, buttonType) => {
-    if (buttonType === "increment") {
-      return (
-        <div {...props} className="flex customButton justifyCenter fullWidth">
-          ☝️
-        </div>
-      )
-    } else {
-      return (
-        <div {...props} className="flex customButton justifyCenter fullWidth">
-          <div style={{ transform: "rotate(180deg)" }}>☝️</div>
-        </div>
-      )
-    }
+  incrementButton: (props) => {
+    return (
+      <div {...props} className="flex customButton justifyCenter fullWidth">
+        ☝️
+      </div>
+    )
+  },
+  decrementButton: (props) => {
+    return (
+      <div {...props} className="flex customButton justifyCenter fullWidth">
+        <div style={{ transform: "rotate(180deg)" }}>☝️</div>
+      </div>
+    )
   },
 }
