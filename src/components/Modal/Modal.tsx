@@ -1,5 +1,7 @@
-import { HTMLProps, ReactNode, useEffect } from "react"
+import { HTMLProps, ReactNode, useRef } from "react"
 import { createPortal } from "react-dom"
+import { useKeyPress } from "../../hooks/useKeyPress"
+import { useOutsideClick } from "../../hooks/useOutsideClick"
 import styles from "./Modal.module.css"
 
 interface Props extends HTMLProps<HTMLDivElement> {
@@ -9,30 +11,25 @@ interface Props extends HTMLProps<HTMLDivElement> {
 }
 
 export function Modal({ children, open, onClose, title }: Props) {
-  useEffect(() => {
-    const keyHandler = (e: KeyboardEvent) => {
-      if (["Escape"].indexOf(e.code) >= 0) {
-        onClose && onClose()
-      }
-    }
+  const modalRef = useRef<HTMLDivElement>(null)
 
-    if (open) {
-      window?.addEventListener("keydown", keyHandler)
-    }
-    return () => {
-      window?.removeEventListener("keydown", keyHandler)
-    }
-  }, [open, onClose])
+  useOutsideClick(modalRef, () => {
+    onClose?.()
+  })
+
+  useKeyPress(["Escape"], () => {
+    onClose?.()
+  })
+
+  if (!open) return null
 
   return createPortal(
-    open ? (
-      <div className={styles.modalOverlay}>
-        <div className={styles.modalWindow}>
-          <p>{title}</p>
-          <div>{children}</div>
-        </div>
+    <div className={styles.modalOverlay} data-testid="modal-overlay">
+      <div className={styles.modalWindow} ref={modalRef}>
+        <p>{title}</p>
+        <div>{children}</div>
       </div>
-    ) : null,
+    </div>,
     document.body,
   )
 }
