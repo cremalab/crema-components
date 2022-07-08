@@ -1,8 +1,10 @@
 import { HTMLProps, ReactNode, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
+import FocusLock from "react-focus-lock"
 import { useKeyPress } from "../../hooks/useKeyPress"
 import { useOutsideClick } from "../../hooks/useOutsideClick"
 import styles from "./Modal.module.css"
+import { ModalTitle } from "./ModalTitle"
 
 interface Props extends HTMLProps<HTMLDivElement> {
   children: ReactNode
@@ -22,10 +24,8 @@ export function Modal({ children, open, onClose, title }: Props) {
 
   useEffect(() => {
     if (open) {
-      // disable page scrolling
       document.body.style.overflow = "hidden"
     } else {
-      // enable page scrolling
       document.body.style.overflow = "auto"
     }
   }, [open])
@@ -41,8 +41,10 @@ export function Modal({ children, open, onClose, title }: Props) {
         aria-labelledby={title}
         role="dialog"
       >
-        <p>{title}</p>
-        <div>{children}</div>
+        <FocusLock disabled={!open}>
+          {title ? <ModalTitle onClose={onClose}>{title}</ModalTitle> : null}
+          <div>{children}</div>
+        </FocusLock>
       </div>
     </div>,
     document.body,

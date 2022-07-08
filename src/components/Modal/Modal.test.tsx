@@ -1,6 +1,7 @@
 import { act, render } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { Modal } from "./Modal"
+import { ModalTitle } from "./ModalTitle"
 
 describe("Modal", () => {
   it("renders nothing when open = false", async () => {
@@ -67,5 +68,80 @@ describe("Modal", () => {
     userEvent.keyboard("[Escape]")
 
     expect(onClose).toHaveBeenCalled()
+  })
+
+  it("does not render a title if no title is provided", async () => {
+    // Arrange
+    const children = "children"
+
+    // Act
+    const { queryByText } = await render(<Modal open={true}>{children}</Modal>)
+
+    // Assert
+    expect(queryByText(children)).toBeInTheDocument()
+  })
+})
+
+describe("ModalTitle", () => {
+  it("renders the children", async () => {
+    // Arrange
+    // Act
+    const { findByText } = await render(<ModalTitle>Test Title</ModalTitle>)
+    const received = await findByText("Test Title")
+
+    // Assert
+    expect(received).toBeInTheDocument()
+  })
+
+  it("does not render the close button if no onClose is given", async () => {
+    // Arrange
+    // Act
+    const { queryByLabelText } = await render(
+      <ModalTitle>Test Title</ModalTitle>,
+    )
+    const closeButton = queryByLabelText("close the modal")
+
+    // Assert
+    expect(closeButton).toBeNull()
+  })
+
+  it("calls onClose when the close button is clicked", async () => {
+    // Arrange
+    const onClose = jest.fn()
+
+    // Act
+    const { queryByLabelText } = await render(
+      <ModalTitle onClose={onClose}>Test Title</ModalTitle>,
+    )
+
+    const closeButton = queryByLabelText("close the modal") as HTMLElement
+    await act(async () => userEvent.click(closeButton))
+
+    // Assert
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  it("renders children in a paragraph tag if children is a string", async () => {
+    // Arrange
+    const children = "Test Title"
+    // Act
+    const { findByText } = await render(<ModalTitle>{children}</ModalTitle>)
+    const received = await findByText("Test Title")
+
+    // Assert
+    expect(received).toBeInTheDocument()
+    expect(received.tagName).toBe("P")
+  }, 10000)
+
+  it("renders children in a div tag if children is not a string", async () => {
+    // Arrange
+    const children = <div>Test Title</div>
+    // Act
+    const { findByText } = await render(<ModalTitle>{children}</ModalTitle>)
+    const received = await findByText("Test Title")
+
+    // Assert
+    expect(received).toBeInTheDocument()
+    expect(received.tagName).toBe("DIV")
   })
 })
