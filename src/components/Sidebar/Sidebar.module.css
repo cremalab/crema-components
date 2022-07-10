@@ -1,0 +1,35 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: #f2f3f5;
+  width: 300px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  padding: 1rem 1.5rem;
+  z-index: 10;
+}
+
+.sidebarOverlay {
+  background-color: hsla(170, 5%, 15%, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.sidebarRight {
+  right: 0;
+}
+
+.sidebarTitle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sidebarTitleClose {
+  color: #808080;
+  cursor: pointer;
+}
