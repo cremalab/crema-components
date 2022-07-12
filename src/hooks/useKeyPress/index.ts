@@ -24,6 +24,5 @@ export function useKeyPress(
       document.removeEventListener("keydown", listener)
       document.removeEventListener("keyup", listener)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [handler, keyCodes])
 }

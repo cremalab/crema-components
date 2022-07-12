@@ -11,7 +11,7 @@ interface Props extends HTMLProps<HTMLDivElement> {
   onClose?: () => void
 }
 
-export function Modal({ children, open, onClose, title }: Props) {
+export function Modal({ children, open, onClose, title, ...props }: Props) {
   const modalRef = useRef<HTMLDivElement>(null)
 
   useOutsideClick(modalRef, () => {
@@ -40,6 +40,7 @@ export function Modal({ children, open, onClose, title }: Props) {
         aria-modal
         aria-labelledby={title}
         role="dialog"
+        {...props}
       >
         <FocusLock disabled={!open}>
           {title ? <ModalTitle onClose={onClose}>{title}</ModalTitle> : null}
