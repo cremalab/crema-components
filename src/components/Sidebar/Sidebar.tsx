@@ -1,16 +1,15 @@
 import classNames from "classnames"
-import { ReactNode } from "react"
+import { HTMLProps, ReactNode } from "react"
 import { createPortal } from "react-dom"
 import styles from "./Sidebar.module.css"
 import { SidebarTitle } from "./SidebarTitle"
 
-export interface Props {
+export interface Props extends HTMLProps<HTMLDivElement> {
   children: ReactNode
   hideOverlay?: boolean
   isOpen: boolean
   onClose?: () => void
   position?: "left" | "right"
-  title?: ReactNode
 }
 
 export const Sidebar = ({
@@ -20,6 +19,7 @@ export const Sidebar = ({
   onClose,
   position,
   title,
+  ...props
 }: Props) => {
   if (!isOpen) return null
 
@@ -36,6 +36,7 @@ export const Sidebar = ({
         className={classNames(styles.sidebar, {
           [styles.sidebarRight]: position === "right",
         })}
+        {...props}
       >
         {title && <SidebarTitle onClose={onClose}>{title}</SidebarTitle>}
         {children}

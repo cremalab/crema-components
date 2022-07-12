@@ -32,7 +32,7 @@ export function App() {
       <Sidebar
         onClose={() => setSidebarExpanded(false)}
         isOpen={sidebarExpanded}
-        title={<h2>Sidebar Title</h2>}
+        title="Sidebar Title"
         hideOverlay={true}
         position="left"
       >
