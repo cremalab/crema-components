@@ -62,10 +62,15 @@ export function App() {
         hideOverlay={false}
         position="left"
       >
-        <div>
-          <h1>Sidebar</h1>
-          <p>This is a sidebar</p>
-        </div>
+        <p>This is a sidebar</p>
+        <Button
+          ariaLabel="Close Modal"
+          aria-labelledby="close-modal"
+          className="close-modal"
+          onClick={() => setIsOpen(false)}
+        >
+          Close
+        </Button>
       </Sidebar>
     </div>
   )

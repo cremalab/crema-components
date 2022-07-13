@@ -1,6 +1,7 @@
 import classNames from "classnames"
 import { HTMLProps, ReactNode, useRef } from "react"
 import { createPortal } from "react-dom"
+import FocusLock from "react-focus-lock"
 import { useKeyPress } from "../../hooks/useKeyPress"
 import { useOutsideClick } from "../../hooks/useOutsideClick"
 import styles from "./Sidebar.module.css"
@@ -44,6 +45,8 @@ export const Sidebar = ({
         ></div>
       )}
       <div
+        aria-label={title ?? "Sidebar"}
+        aria-orientation="vertical"
         className={classNames(styles.sidebar, {
           [styles.sidebarRight]: position === "right",
           [styles.sidebarLeft]: position === "left",
@@ -51,8 +54,10 @@ export const Sidebar = ({
         ref={sidebarRef}
         {...props}
       >
-        {title && <SidebarTitle onClose={onClose}>{title}</SidebarTitle>}
-        {children}
+        <FocusLock disabled={!open}>
+          {title && <SidebarTitle onClose={onClose}>{title}</SidebarTitle>}
+          {children}
+        </FocusLock>
       </div>
     </>,
     document.body,
