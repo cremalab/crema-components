@@ -28,13 +28,15 @@ export function App() {
       <Button ariaLabel="example button" name="example button">
         Button text
       </Button>
-      <Button
-        ariaLabel="example button"
-        name="example button"
-        onClick={onClick}
-      >
-        open sidebar
-      </Button>
+      <div>
+        <Button
+          ariaLabel="example button"
+          name="example button"
+          onClick={onClick}
+        >
+          Open sidebar
+        </Button>
+      </div>
       <div>
         <Button ariaLabel="open" onClick={() => setIsOpen(true)}>
           Open modal
@@ -55,9 +57,9 @@ export function App() {
       />
       <Sidebar
         onClose={() => setSidebarExpanded(false)}
-        isOpen={sidebarExpanded}
+        open={sidebarExpanded}
         title="Sidebar Title"
-        hideOverlay={true}
+        hideOverlay={false}
         position="left"
       >
         <div>

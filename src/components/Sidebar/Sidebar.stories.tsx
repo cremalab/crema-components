@@ -3,7 +3,7 @@ import { ComponentProps, useState } from "react"
 import { Button } from "../Button"
 import { TextInput } from "../TextInput"
 import { Sidebar } from "./Sidebar"
-
+import styles from "./Sidebar.module.css"
 /**
  * See Storybook Docs: Writing Stories
  * https://storybook.js.org/docs/basics/writing-stories/
@@ -23,12 +23,14 @@ export const Basic: Story<ComponentProps<typeof Sidebar>> = () => {
         Open basic sidebar
       </Button>
       <Sidebar
-        isOpen={sidebarExpanded}
+        open={sidebarExpanded}
         hideOverlay={false}
         position="left"
         onClose={() => setSidebarExpanded(false)}
       >
-        <p>I am a basic sidebar 😃</p>
+        <div className={styles.sidebarChildren}>
+          <p>I am a basic sidebar 😃</p>
+        </div>
         <Button
           ariaLabel="Close Sidebar"
           aria-labelledby="close-sidebar"
@@ -52,10 +54,13 @@ export const WithTitle: Story<ComponentProps<typeof Sidebar>> = () => {
       </Button>
       <Sidebar
         title="Hello from the sidebar!"
-        isOpen={sidebarExpanded}
+        hideOverlay={false}
+        open={sidebarExpanded}
         onClose={() => setSidebarExpanded(false)}
       >
-        <p>I am a sidebar. I have a title! 😃</p>
+        <div className={styles.sidebarChildren}>
+          <p>I am a sidebar. I have a title! 😃</p>
+        </div>
         <Button
           ariaLabel="Close Sidebar"
           aria-labelledby="close-sidebar"
@@ -79,25 +84,23 @@ export const WithOverlay: Story<ComponentProps<typeof Sidebar>> = () => {
       </Button>
       <Sidebar
         title="Sidebar With Title"
-        isOpen={sidebarExpanded}
+        open={sidebarExpanded}
         onClose={() => setSidebarExpanded(false)}
         hideOverlay={false}
       >
-        <div>
+        <div className={styles.sidebarChildren}>
           <p>Sidebars can be cool</p>
           <p>I am a sidebar. I have a title! 😃</p>
           <TextInput name="test-input" label="Test Input" hideLabel={false} />
-          <div style={{ marginTop: "1rem" }}>
-            <Button
-              ariaLabel="Close Sidebar"
-              aria-labelledby="close-sidebar"
-              className="close-sidebar"
-              onClick={() => setSidebarExpanded(false)}
-            >
-              Close
-            </Button>
-          </div>
         </div>
+        <Button
+          ariaLabel="Close Sidebar"
+          aria-labelledby="close-sidebar"
+          className="close-sidebar"
+          onClick={() => setSidebarExpanded(false)}
+        >
+          Close
+        </Button>
       </Sidebar>
     </div>
   )
@@ -113,25 +116,23 @@ export const NoOverlay: Story<ComponentProps<typeof Sidebar>> = () => {
       </Button>
       <Sidebar
         title="Sidebar With Title"
-        isOpen={sidebarExpanded}
+        open={sidebarExpanded}
         onClose={() => setSidebarExpanded(false)}
         hideOverlay={true}
       >
-        <div>
+        <div className={styles.sidebarChildren}>
           <p>Sidebars can be cool</p>
           <p>I am a sidebar. I have a title! 😃</p>
           <TextInput name="test-input" label="Test Input" hideLabel={false} />
-          <div style={{ marginTop: "1rem" }}>
-            <Button
-              ariaLabel="Close Sidebar"
-              aria-labelledby="close-sidebar"
-              className="close-sidebar"
-              onClick={() => setSidebarExpanded(false)}
-            >
-              Close
-            </Button>
-          </div>
         </div>
+        <Button
+          ariaLabel="Close Sidebar"
+          aria-labelledby="close-sidebar"
+          className="close-sidebar"
+          onClick={() => setSidebarExpanded(false)}
+        >
+          Close
+        </Button>
       </Sidebar>
     </div>
   )
@@ -147,25 +148,23 @@ export const LeftPosition: Story<ComponentProps<typeof Sidebar>> = () => {
       </Button>
       <Sidebar
         title="Sidebar With Title"
-        isOpen={sidebarExpanded}
+        open={sidebarExpanded}
         onClose={() => setSidebarExpanded(false)}
         position="left"
       >
-        <div>
+        <div className={styles.sidebarChildren}>
           <p>Sidebars can be cool</p>
           <p>I am a sidebar. I have a title! 😃</p>
           <TextInput name="test-input" label="Test Input" hideLabel={false} />
-          <div style={{ marginTop: "1rem" }}>
-            <Button
-              ariaLabel="Close Sidebar"
-              aria-labelledby="close-sidebar"
-              className="close-sidebar"
-              onClick={() => setSidebarExpanded(false)}
-            >
-              Close
-            </Button>
-          </div>
         </div>
+        <Button
+          ariaLabel="Close Sidebar"
+          aria-labelledby="close-sidebar"
+          className="close-sidebar"
+          onClick={() => setSidebarExpanded(false)}
+        >
+          Close
+        </Button>
       </Sidebar>
     </div>
   )
@@ -181,25 +180,23 @@ export const RightPosition: Story<ComponentProps<typeof Sidebar>> = () => {
       </Button>
       <Sidebar
         title="Sidebar With Title"
-        isOpen={sidebarExpanded}
+        open={sidebarExpanded}
         onClose={() => setSidebarExpanded(false)}
         position="right"
       >
-        <div>
+        <div className={styles.sidebarChildren}>
           <p>Sidebars can be cool</p>
           <p>I am a sidebar. I have a title! 😃</p>
           <TextInput name="test-input" label="Test Input" hideLabel={false} />
-          <div style={{ marginTop: "1rem" }}>
-            <Button
-              ariaLabel="Close Sidebar"
-              aria-labelledby="close-sidebar"
-              className="close-sidebar"
-              onClick={() => setSidebarExpanded(false)}
-            >
-              Close
-            </Button>
-          </div>
         </div>
+        <Button
+          ariaLabel="Close Sidebar"
+          aria-labelledby="close-sidebar"
+          className="close-sidebar"
+          onClick={() => setSidebarExpanded(false)}
+        >
+          Close
+        </Button>
       </Sidebar>
     </div>
   )

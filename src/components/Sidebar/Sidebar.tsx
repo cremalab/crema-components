@@ -9,7 +9,6 @@ import { SidebarTitle } from "./SidebarTitle"
 export interface Props extends HTMLProps<HTMLDivElement> {
   children: ReactNode
   hideOverlay?: boolean
-  isOpen: boolean
   onClose?: () => void
   position?: "left" | "right"
 }
@@ -17,9 +16,9 @@ export interface Props extends HTMLProps<HTMLDivElement> {
 export const Sidebar = ({
   children,
   hideOverlay,
-  isOpen,
+  open,
   onClose,
-  position,
+  position = "left",
   title,
   ...props
 }: Props) => {
@@ -33,7 +32,7 @@ export const Sidebar = ({
     onClose?.()
   })
 
-  if (!isOpen) return null
+  if (!open) return null
 
   return createPortal(
     <>
@@ -47,6 +46,7 @@ export const Sidebar = ({
       <div
         className={classNames(styles.sidebar, {
           [styles.sidebarRight]: position === "right",
+          [styles.sidebarLeft]: position === "left",
         })}
         ref={sidebarRef}
         {...props}

@@ -24,6 +24,10 @@
   right: 0;
 }
 
+.sidebarLeft {
+  left: 0;
+}
+
 .sidebarTitle {
   display: flex;
   align-items: flex-start;
@@ -33,4 +37,16 @@
 .sidebarTitleClose {
   color: #808080;
   cursor: pointer;
+}
+
+.sidebarChildren {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  .sidebar {
+    width: 250px;
+  }
 }
