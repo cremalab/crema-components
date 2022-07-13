@@ -1,6 +1,8 @@
 import classNames from "classnames"
-import { HTMLProps, ReactNode } from "react"
+import { HTMLProps, ReactNode, useRef } from "react"
 import { createPortal } from "react-dom"
+import { useKeyPress } from "../../hooks/useKeyPress"
+import { useOutsideClick } from "../../hooks/useOutsideClick"
 import styles from "./Sidebar.module.css"
 import { SidebarTitle } from "./SidebarTitle"
 
@@ -21,6 +23,16 @@ export const Sidebar = ({
   title,
   ...props
 }: Props) => {
+  const sidebarRef = useRef<HTMLDivElement>(null)
+
+  useOutsideClick(sidebarRef, () => {
+    onClose?.()
+  })
+
+  useKeyPress(["Escape"], () => {
+    onClose?.()
+  })
+
   if (!isOpen) return null
 
   return createPortal(
@@ -36,6 +48,7 @@ export const Sidebar = ({
         className={classNames(styles.sidebar, {
           [styles.sidebarRight]: position === "right",
         })}
+        ref={sidebarRef}
         {...props}
       >
         {title && <SidebarTitle onClose={onClose}>{title}</SidebarTitle>}
