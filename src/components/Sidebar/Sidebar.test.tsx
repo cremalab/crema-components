@@ -42,7 +42,7 @@ describe("Sidebar", () => {
 
     // Act
     const { findByTestId } = render(
-      <Sidebar open={true} title={title} onClose={onClose}>
+      <Sidebar open={true} title={title} onClose={onClose} hideOverlay={false}>
         {children}
       </Sidebar>,
     )
@@ -67,6 +67,23 @@ describe("Sidebar", () => {
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).toHaveBeenCalled()
+  })
+
+  it("does not call onClose when the sidebar is not open and the escape key is pressed", async () => {
+    // Arrange
+    const onClose = jest.fn()
+    const title = "title"
+    const children = "children"
+
+    // Act
+    render(
+      <Sidebar open={false} title={title} onClose={onClose}>
+        {children}
+      </Sidebar>,
+    )
+    await userEvent.keyboard("[Escape]")
+
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   it("does not render a title when title is not provided", async () => {

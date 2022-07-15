@@ -70,6 +70,23 @@ describe("Modal", () => {
     expect(onClose).toHaveBeenCalled()
   })
 
+  it("does not call onClose when the modal is not open and the escape key is pressed", async () => {
+    // Arrange
+    const onClose = jest.fn()
+    const title = "title"
+    const children = "children"
+
+    // Act
+    render(
+      <Modal open={false} title={title} onClose={onClose}>
+        {children}
+      </Modal>,
+    )
+    await userEvent.keyboard("[Escape]")
+
+    expect(onClose).not.toHaveBeenCalled()
+  })
+
   it("does not render a title if no title is provided", async () => {
     // Arrange
     const children = "children"

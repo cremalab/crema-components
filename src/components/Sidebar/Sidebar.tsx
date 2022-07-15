@@ -30,13 +30,13 @@ export const Sidebar = ({
   })
 
   useKeyPress(["Escape"], () => {
-    onClose?.()
+    if (open) onClose?.()
   })
 
   if (!open) return null
 
   return createPortal(
-    <>
+    <div>
       {!hideOverlay && (
         <div
           className={styles.sidebarOverlay}
@@ -59,7 +59,7 @@ export const Sidebar = ({
           {children}
         </FocusLock>
       </div>
-    </>,
+    </div>,
     document.body,
   )
 }

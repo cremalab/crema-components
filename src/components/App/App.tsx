@@ -9,10 +9,6 @@ export function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [sidebarExpanded, setSidebarExpanded] = useState(false)
 
-  const onClick = () => {
-    setSidebarExpanded(!sidebarExpanded)
-  }
-
   const modalChildren = (
     <Button
       ariaLabel="Close Modal"
@@ -30,9 +26,9 @@ export function App() {
       </Button>
       <div>
         <Button
-          ariaLabel="example button"
-          name="example button"
-          onClick={onClick}
+          ariaLabel="sidebar button"
+          name="sidebar button"
+          onClick={() => setSidebarExpanded(!sidebarExpanded)}
         >
           Open sidebar
         </Button>
@@ -56,7 +52,7 @@ export function App() {
         helperText="this is helper text"
       />
       <Sidebar
-        onClose={() => setSidebarExpanded(false)}
+        onClose={() => setSidebarExpanded(!sidebarExpanded)}
         open={sidebarExpanded}
         title="Sidebar Title"
         hideOverlay={false}
@@ -64,10 +60,10 @@ export function App() {
       >
         <p>This is a sidebar</p>
         <Button
-          ariaLabel="Close Modal"
-          aria-labelledby="close-modal"
-          className="close-modal"
-          onClick={() => setIsOpen(false)}
+          ariaLabel="Close sidebar"
+          aria-labelledby="close-sidebar"
+          className="close-sidebar"
+          onClick={() => setSidebarExpanded(!sidebarExpanded)}
         >
           Close
         </Button>
