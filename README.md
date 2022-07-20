@@ -24,7 +24,7 @@
 -   Chips/Tags
 -   Progress Bar
 -   Loader
--   Toast
+-   Toast (in progress)
 -   Banner
 -   Tabs
 -   Tooltips
