@@ -1,13 +1,13 @@
-import { fireEvent, render, waitFor } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { Button } from "./Button"
 
 describe("Button", () => {
   it("creates the appropriate aria-label", async () => {
     const label = "button label"
 
-    const { getByLabelText } = render(<Button ariaLabel={label}>Button</Button>)
+    render(<Button ariaLabel={label}>Button</Button>)
 
-    const button = getByLabelText(label)
+    const button = screen.getByLabelText(label)
 
     expect(button).toBeInTheDocument()
   })
@@ -15,13 +15,13 @@ describe("Button", () => {
   it("fires the passed function when clicked", async () => {
     const mockFn = jest.fn()
 
-    const { getByText } = render(
+    render(
       <Button name="Button" ariaLabel="example button" onClick={mockFn}>
         Button
       </Button>,
     )
-    const button = getByText("Button")
-    await waitFor(() => fireEvent.click(button))
+    const button = screen.getByText("Button")
+    fireEvent.click(button)
 
     expect(mockFn).toHaveBeenCalled()
   })
@@ -29,12 +29,12 @@ describe("Button", () => {
   it("can be disabled", async () => {
     const text = "Button Text"
 
-    const { findByText } = render(
+    render(
       <Button ariaLabel="button label" disabled={true}>
         {text}
       </Button>,
     )
-    const buttonText = await findByText(text)
+    const buttonText = await screen.findByText(text)
 
     expect(buttonText).toBeDisabled()
   })

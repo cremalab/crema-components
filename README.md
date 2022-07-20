@@ -16,20 +16,20 @@
 - [Storybook](https://storybook.js.org) for component playground
 - [TypeScript](http://www.typescriptlang.org) for Static Typing in JavaScript ([Learn](http://www.typescriptlang.org/docs/handbook/basic-types.html))
 
-
 **🛣 Roadmap**
--   Pagination (in progress)
--   Breadcrumbs
--   Slider
--   Chips/Tags
--   Progress Bar
--   Loader
--   Toast
--   Banner
--   Tabs
--   Tooltips
--   Search Input
--   Link
+
+- Pagination (in progress)
+- Breadcrumbs
+- Slider
+- Chips/Tags
+- Progress Bar
+- Loader
+- Toast
+- Banner
+- Tabs
+- Tooltips
+- Search Input
+- Link
 
 ## 🏗 Setup
 
