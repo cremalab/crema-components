@@ -2,30 +2,20 @@ import { ReactNode } from "react"
 import { Button } from "../Button"
 import styles from "./Pagination.module.css"
 
-interface Props {
-  currentPage: number
-  totalPages: number
-  onPage: (event: React.MouseEvent<HTMLButtonElement>, page: number) => void
-  renderPageItem?: (props: {
-    pageNumber: number
-    onPage: (
-      event: React.MouseEvent<HTMLButtonElement>,
-      pageNumber: number,
-    ) => void
-    label?: string
-    disabled?: boolean
-  }) => ReactNode
-  siblingCount?: number
-}
+type OnPage = (event: React.MouseEvent<HTMLButtonElement>, page: number) => void
 
 interface RenderItemProps {
   pageNumber: number
-  onPage: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    pageNumber: number,
-  ) => void
+  onPage: OnPage
   disabled?: boolean
   label?: string
+}
+interface Props {
+  currentPage: number
+  totalPages: number
+  onPage: OnPage
+  renderPageItem?: (props: RenderItemProps) => ReactNode
+  siblingCount?: number
 }
 
 function defaultRenderPageItem({

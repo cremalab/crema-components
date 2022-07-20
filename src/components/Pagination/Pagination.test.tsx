@@ -21,6 +21,7 @@ describe("Pagination", () => {
       "Next",
     ])
   })
+
   it("uses siblingCount to limit number of individual page buttons to display", async () => {
     const pageFn = jest.fn()
 
@@ -44,6 +45,7 @@ describe("Pagination", () => {
       "Next",
     ])
   })
+
   it("renders siblings to the right if currentPage is below siblingCount", async () => {
     const pageFn = jest.fn()
 
@@ -65,6 +67,7 @@ describe("Pagination", () => {
       "Next",
     ])
   })
+
   it("renders siblings to the left if currentPage is close to totalPages", async () => {
     const pageFn = jest.fn()
 
@@ -88,6 +91,7 @@ describe("Pagination", () => {
       "Next",
     ])
   })
+
   it("renders an ellipsis for previous range if siblings don't account for all", async () => {
     const pageFn = jest.fn()
 
@@ -103,6 +107,7 @@ describe("Pagination", () => {
 
     expect(ellipsis).toBeDefined()
   })
+
   it("renders an ellipsis for next range if siblings don't account for all", async () => {
     const pageFn = jest.fn()
 
@@ -118,6 +123,7 @@ describe("Pagination", () => {
 
     expect(ellipsis).toBeDefined()
   })
+
   it("renders a component for each page with renderPageItem if defined", async () => {
     const pageFn = jest.fn()
 
@@ -141,6 +147,7 @@ describe("Pagination", () => {
 
     expect(match.tagName).toEqual("A")
   })
+
   it("calls onPage with event and next page number when clicking the Next button", async () => {
     const user = userEvent.setup()
     const pageFn = jest.fn()
@@ -156,6 +163,7 @@ describe("Pagination", () => {
       3,
     )
   })
+
   it("calls onPage with event and previous page number when clicking the Previous button", async () => {
     const user = userEvent.setup()
     const pageFn = jest.fn()
