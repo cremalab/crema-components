@@ -1,10 +1,10 @@
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { TextInput } from "./TextInput"
 
 describe("TextInput", () => {
-  it("renders the expected markup", async () => {
-    const { asFragment } = await render(
+  it("renders the expected markup", () => {
+    const { asFragment } = render(
       <TextInput
         helperText="Test Helper Text"
         name="test-input"
@@ -16,10 +16,8 @@ describe("TextInput", () => {
   })
 
   it("renders an input w/ the required attributes", async () => {
-    const { findByLabelText } = await render(
-      <TextInput name="test-input" label="Test Input" />,
-    )
-    const received = await findByLabelText("Test Input")
+    render(<TextInput name="test-input" label="Test Input" />)
+    const received = await screen.findByLabelText("Test Input")
 
     expect(received).toBeInTheDocument()
     expect(received).toHaveAttribute("name", "test-input")
@@ -35,10 +33,8 @@ describe("TextInput", () => {
     }
     const textToType = "typing into input"
 
-    const { findByLabelText } = await render(
-      <TextInput name="test-input" label="Test Input" {...events} />,
-    )
-    const received = await findByLabelText("Test Input")
+    render(<TextInput name="test-input" label="Test Input" {...events} />)
+    const received = await screen.findByLabelText("Test Input")
 
     await userEvent.type(received, textToType)
     userEvent.tab()
@@ -52,15 +48,15 @@ describe("TextInput", () => {
   it("renders the helper text", async () => {
     const helperText = "this is helper text"
 
-    const { findByLabelText, findByText } = await render(
+    render(
       <TextInput
         name="test-input"
         label="Test Input"
         helperText={helperText}
       />,
     )
-    const receivedInput = await findByLabelText("Test Input")
-    const receivedHelperText = await findByText(helperText)
+    const receivedInput = await screen.findByLabelText("Test Input")
+    const receivedHelperText = await screen.findByText(helperText)
 
     expect(receivedHelperText).toBeInTheDocument()
     expect(receivedInput).toHaveAttribute(
@@ -70,11 +66,9 @@ describe("TextInput", () => {
   })
 
   it("renders correctly when hideLabel is true", async () => {
-    const { findByLabelText, queryByText } = await render(
-      <TextInput name="test-input" label="Test Input" hideLabel={true} />,
-    )
-    const received = await findByLabelText("Test Input")
-    const receivedText = queryByText("Test Input")
+    render(<TextInput name="test-input" label="Test Input" hideLabel={true} />)
+    const received = await screen.findByLabelText("Test Input")
+    const receivedText = screen.queryByText("Test Input")
 
     expect(received).toBeInTheDocument()
     expect(received).toHaveAttribute("name", "test-input")
@@ -90,10 +84,10 @@ describe("TextInput", () => {
     }
     const textToType = "typing into input"
 
-    const { findByLabelText } = await render(
+    render(
       <TextInput name="test-input" label="Test Input" disabled {...events} />,
     )
-    const received = await findByLabelText("Test Input")
+    const received = await screen.findByLabelText("Test Input")
 
     userEvent.type(received, textToType)
     userEvent.tab()
@@ -107,15 +101,15 @@ describe("TextInput", () => {
   it("renders correctly when helperText is provided", async () => {
     const helperText = "this is helper text"
 
-    const { findByLabelText, findByText } = await render(
+    render(
       <TextInput
         name="test-input"
         label="Test Input"
         helperText={helperText}
       />,
     )
-    const receivedInput = await findByLabelText("Test Input")
-    const receivedHelperText = await findByText(helperText)
+    const receivedInput = await screen.findByLabelText("Test Input")
+    const receivedHelperText = await screen.findByText(helperText)
 
     expect(receivedHelperText).toBeInTheDocument()
     expect(receivedInput).toHaveAttribute(
