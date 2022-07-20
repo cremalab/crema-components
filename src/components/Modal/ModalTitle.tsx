@@ -11,15 +11,17 @@ export function ModalTitle({ children, onClose }: Props) {
     <div className={styles.modalTitle}>
       <div>{typeof children === "string" ? <p>{children}</p> : children}</div>
       {onClose ? (
-        <div
-          className={styles.modalTitleClose}
-          aria-label="close the modal"
-          onClick={onClose}
-          onKeyPress={onClose}
-          role="button"
-          tabIndex={0}
-        >
-          x
+        <div>
+          <div
+            className={styles.modalTitleClose}
+            aria-label="close the modal"
+            onClick={onClose}
+            onKeyPress={onClose}
+            role="button"
+            tabIndex={0}
+          >
+            x
+          </div>
         </div>
       ) : null}
     </div>
