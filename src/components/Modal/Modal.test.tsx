@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { Modal } from "./Modal"
 import { ModalTitle } from "./ModalTitle"
@@ -21,13 +21,13 @@ describe("Modal", () => {
     const children = "children"
 
     // Act
-    const { findByText } = render(
+    render(
       <Modal open={true} title={title}>
         {children}
       </Modal>,
     )
-    const titleNode = await findByText(title)
-    const childrenNode = await findByText(children)
+    const titleNode = await screen.findByText(title)
+    const childrenNode = await screen.findByText(children)
 
     // Assert
     expect(titleNode).toBeInTheDocument()
@@ -41,12 +41,12 @@ describe("Modal", () => {
     const children = "children"
 
     // Act
-    const { findByTestId } = render(
+    render(
       <Modal open={true} title={title} onClose={onClose}>
         {children}
       </Modal>,
     )
-    const overlay = await findByTestId("modal-overlay")
+    const overlay = await screen.findByTestId("modal-overlay")
     await userEvent.click(overlay)
 
     expect(onClose).toHaveBeenCalled()
@@ -75,10 +75,10 @@ describe("Modal", () => {
     const children = "children"
 
     // Act
-    const { queryByText } = render(<Modal open={true}>{children}</Modal>)
+    render(<Modal open={true}>{children}</Modal>)
 
     // Assert
-    expect(queryByText(children)).toBeInTheDocument()
+    expect(screen.getByText(children)).toBeInTheDocument()
   })
 })
 
@@ -86,8 +86,8 @@ describe("ModalTitle", () => {
   it("renders the children", async () => {
     // Arrange
     // Act
-    const { findByText } = render(<ModalTitle>Test Title</ModalTitle>)
-    const received = await findByText("Test Title")
+    render(<ModalTitle>Test Title</ModalTitle>)
+    const received = await screen.findByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
@@ -96,8 +96,8 @@ describe("ModalTitle", () => {
   it("does not render the close button if no onClose is given", async () => {
     // Arrange
     // Act
-    const { queryByLabelText } = render(<ModalTitle>Test Title</ModalTitle>)
-    const closeButton = queryByLabelText("close the modal")
+    render(<ModalTitle>Test Title</ModalTitle>)
+    const closeButton = screen.queryByLabelText("close the modal")
 
     // Assert
     expect(closeButton).toBeNull()
@@ -108,11 +108,11 @@ describe("ModalTitle", () => {
     const onClose = jest.fn()
 
     // Act
-    const { queryByLabelText } = render(
-      <ModalTitle onClose={onClose}>Test Title</ModalTitle>,
-    )
+    render(<ModalTitle onClose={onClose}>Test Title</ModalTitle>)
 
-    const closeButton = queryByLabelText("close the modal") as HTMLElement
+    const closeButton = screen.queryByLabelText(
+      "close the modal",
+    ) as HTMLElement
     await userEvent.click(closeButton)
 
     // Assert
@@ -123,8 +123,8 @@ describe("ModalTitle", () => {
     // Arrange
     const children = "Test Title"
     // Act
-    const { findByText } = render(<ModalTitle>{children}</ModalTitle>)
-    const received = await findByText("Test Title")
+    render(<ModalTitle>{children}</ModalTitle>)
+    const received = await screen.findByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
@@ -135,8 +135,8 @@ describe("ModalTitle", () => {
     // Arrange
     const children = <div>Test Title</div>
     // Act
-    const { findByText } = render(<ModalTitle>{children}</ModalTitle>)
-    const received = await findByText("Test Title")
+    render(<ModalTitle>{children}</ModalTitle>)
+    const received = await screen.findByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
