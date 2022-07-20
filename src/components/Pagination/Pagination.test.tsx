@@ -6,10 +6,10 @@ describe("Pagination", () => {
   it("renders a button for each surrounding page", async () => {
     const pageFn = jest.fn()
 
-    const { getAllByRole } = render(
+    const screen = render(
       <Pagination currentPage={3} totalPages={6} onPage={pageFn} />,
     )
-    const buttons = getAllByRole("button")
+    const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
       "Previous",
@@ -24,7 +24,7 @@ describe("Pagination", () => {
   it("uses siblingCount to limit number of individual page buttons to display", async () => {
     const pageFn = jest.fn()
 
-    const { getAllByRole } = render(
+    const screen = render(
       <Pagination
         currentPage={3}
         totalPages={100}
@@ -32,7 +32,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
-    const buttons = getAllByRole("button")
+    const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
       "Previous",
@@ -47,7 +47,7 @@ describe("Pagination", () => {
   it("renders siblings to the right if currentPage is below siblingCount", async () => {
     const pageFn = jest.fn()
 
-    const { getAllByRole } = render(
+    const screen = render(
       <Pagination
         currentPage={1}
         totalPages={100}
@@ -55,7 +55,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
-    const buttons = getAllByRole("button")
+    const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
       "Previous",
@@ -68,7 +68,7 @@ describe("Pagination", () => {
   it("renders siblings to the left if currentPage is close to totalPages", async () => {
     const pageFn = jest.fn()
 
-    const { getAllByRole } = render(
+    const screen = render(
       <Pagination
         currentPage={98}
         totalPages={100}
@@ -76,7 +76,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
-    const buttons = getAllByRole("button")
+    const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
       "Previous",
@@ -91,7 +91,7 @@ describe("Pagination", () => {
   it("renders an ellipsis for previous range if siblings don't account for all", async () => {
     const pageFn = jest.fn()
 
-    const { getByText } = render(
+    const screen = render(
       <Pagination
         currentPage={98}
         totalPages={100}
@@ -99,7 +99,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
-    const ellipsis = getByText("...")
+    const ellipsis = screen.getByText("...")
 
     expect(ellipsis).toBeDefined()
   })
@@ -121,7 +121,7 @@ describe("Pagination", () => {
   it("renders a component for each page with renderPageItem if defined", async () => {
     const pageFn = jest.fn()
 
-    const { getByTitle } = render(
+    const screen = render(
       <Pagination
         currentPage={3}
         totalPages={6}
@@ -137,7 +137,7 @@ describe("Pagination", () => {
         )}
       />,
     )
-    const match = getByTitle("Go to page 4")
+    const match = screen.getByTitle("Go to page 4")
 
     expect(match.tagName).toEqual("A")
   })
@@ -145,10 +145,10 @@ describe("Pagination", () => {
     const user = userEvent.setup()
     const pageFn = jest.fn()
 
-    const { getByText } = render(
+    const screen = render(
       <Pagination currentPage={2} totalPages={3} onPage={pageFn} />,
     )
-    const button = getByText("Next")
+    const button = screen.getByText("Next")
     await user.click(button)
 
     expect(pageFn).toHaveBeenCalledWith(
@@ -160,10 +160,10 @@ describe("Pagination", () => {
     const user = userEvent.setup()
     const pageFn = jest.fn()
 
-    const { getByText } = render(
+    const screen = render(
       <Pagination currentPage={2} totalPages={3} onPage={pageFn} />,
     )
-    const button = getByText("Previous")
+    const button = screen.getByText("Previous")
     await user.click(button)
 
     expect(pageFn).toHaveBeenCalledWith(
