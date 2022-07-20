@@ -1,4 +1,5 @@
-import decoratorCentered from "@storybook/addon-centered"
+import { ComponentMeta, Story } from "@storybook/react"
+import { ComponentProps } from "react"
 import { Loader } from "./Loader"
 
 /**
@@ -7,8 +8,22 @@ import { Loader } from "./Loader"
  */
 
 export default {
-  title: "Loader",
-  decorators: [decoratorCentered],
+  title: "Components/Loader",
+} as ComponentMeta<typeof Loader>
+
+const Template: Story<ComponentProps<typeof Loader>> = (args) => (
+  <Loader {...args} />
+)
+
+export const Default = Template.bind({})
+
+Default.args = {
+  timeout: 500,
 }
 
-export const Example = () => <Loader />
+export const WithChildren = Template.bind({})
+
+WithChildren.args = {
+  timeout: 500,
+  children: <div>Loading</div>,
+}

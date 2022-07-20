@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefaultSpinner renders the expected structure with size = large 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="DefaultSpinner large"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DefaultSpinner renders the expected structure with size = medium 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="DefaultSpinner medium"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DefaultSpinner renders the expected structure with size = small 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="DefaultSpinner small"
+  >
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+</DocumentFragment>
+`;
