@@ -42,8 +42,9 @@ export function App() {
           open={isOpen}
           onClose={() => setIsOpen(false)}
           title="Modal title"
-          children={modalChildren}
-        />
+        >
+          {modalChildren}
+        </Modal>
       </div>
       <TextInput
         name="test-input"
