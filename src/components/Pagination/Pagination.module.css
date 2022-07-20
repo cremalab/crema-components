@@ -1,0 +1,20 @@
+.paginationContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.pagesContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.pageButton {
+    margin: 0 0.5em;
+}
+
+.currentPage {
+    font-weight: bold;
+    margin: 0 0.5em;
+}
