@@ -2,7 +2,7 @@ import { HTMLProps, ReactNode, Ref, forwardRef } from "react"
 import { InputHelperText } from "./InputHelperText"
 import { InputLabel } from "./InputLabel"
 
-export interface TextInputProps extends HTMLProps<HTMLInputElement> {
+interface TextInputProps extends HTMLProps<HTMLInputElement> {
   helperText?: ReactNode
   hideLabel?: boolean
   inputRef?: Ref<HTMLInputElement>
