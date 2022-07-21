@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import styles from "./DefaultSpinner.module.css"
 
 interface DefaultSpinnerProps {
@@ -7,8 +8,9 @@ interface DefaultSpinnerProps {
 export function DefaultSpinner({ size = "medium" }: DefaultSpinnerProps) {
   return (
     <div
-      className={`${styles.DefaultSpinner} ${styles[size]}`}
+      className={classNames(styles.DefaultSpinner, styles[size])}
       aria-hidden="true"
+      data-testid="spinner"
     >
       <div></div>
       <div></div>

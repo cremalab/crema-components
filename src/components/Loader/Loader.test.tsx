@@ -78,10 +78,12 @@ describe("DefaultSpinner", () => {
     const size = "small"
 
     // Act
-    const { asFragment } = render(<DefaultSpinner size={size} />)
+    render(<DefaultSpinner size={size} />)
+
+    const spinner = screen.getByTestId("spinner")
 
     // Assert
-    expect(asFragment()).toMatchSnapshot()
+    expect(spinner).toHaveClass("DefaultSpinner", size)
   })
 
   it("renders the expected structure with size = medium", () => {
@@ -89,10 +91,12 @@ describe("DefaultSpinner", () => {
     const size = "medium"
 
     // Act
-    const { asFragment } = render(<DefaultSpinner size={size} />)
+    render(<DefaultSpinner size={size} />)
+
+    const spinner = screen.getByTestId("spinner")
 
     // Assert
-    expect(asFragment()).toMatchSnapshot()
+    expect(spinner).toHaveClass("DefaultSpinner", size)
   })
 
   it("renders the expected structure with size = large", () => {
@@ -100,9 +104,11 @@ describe("DefaultSpinner", () => {
     const size = "large"
 
     // Act
-    const { asFragment } = render(<DefaultSpinner size={size} />)
+    render(<DefaultSpinner size={size} />)
+
+    const spinner = screen.getByTestId("spinner")
 
     // Assert
-    expect(asFragment()).toMatchSnapshot()
+    expect(spinner).toHaveClass("DefaultSpinner", size)
   })
 })
