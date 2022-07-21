@@ -29,21 +29,25 @@ export default {
 const defaultMessage = "Grab a 🍞 and make some toast!"
 
 const Template: ComponentStory<typeof Toast> = (args) => {
-  const [showToast, setshowToast] = useState(false)
-  const toggle = () => {
-    console.log("TOGGLE was called")
-    setshowToast(!showToast)
+  const [showToast, setShowToast] = useState(false)
+
+  const handleClose = () => {
+    setShowToast(false)
+  }
+
+  const handleOpen = () => {
+    setShowToast(true)
   }
 
   return (
     <div>
-      <Button ariaLabel="Open" onClick={toggle}>
+      <Button ariaLabel="Open" onClick={handleOpen}>
         Open toast
       </Button>
       <Toast
         {...args}
         showToast={showToast}
-        handleClose={args.handleClose || toggle}
+        handleClose={args.handleClose || handleClose}
         message={args.message || defaultMessage}
         autoDismiss={args.autoDismiss}
       />
@@ -52,24 +56,29 @@ const Template: ComponentStory<typeof Toast> = (args) => {
 }
 
 const ActionTemplate: ComponentStory<typeof Toast> = (args) => {
-  const [showToast, setshowToast] = useState(false)
-  const toggle = () => {
-    setshowToast(!showToast)
+  const [showToast, setShowToast] = useState(false)
+
+  const handleClose = () => {
+    setShowToast(false)
+  }
+
+  const handleOpen = () => {
+    setShowToast(true)
   }
 
   return (
     <div>
-      <Button ariaLabel="Open" onClick={() => setshowToast(true)}>
+      <Button ariaLabel="Open" onClick={handleOpen}>
         Open Toast
       </Button>
       <Toast
         {...args}
         showToast={showToast}
-        handleClose={toggle}
+        handleClose={handleClose}
         message={defaultMessage}
         autoDismiss={false}
         action={
-          <Button ariaLabel="Dismiss toast" onClick={toggle}>
+          <Button ariaLabel="Dismiss toast" onClick={handleClose}>
             Dismiss
           </Button>
         }
@@ -93,8 +102,6 @@ export const Warning = Template.bind({})
 Warning.args = {
   type: "warning",
   message: "I am a warning toast.",
-  autoDismiss: false,
-  duration: 3000,
 }
 
 export const Error = Template.bind({})
@@ -102,8 +109,6 @@ export const Error = Template.bind({})
 Error.args = {
   type: "error",
   message: "I am an error toast.",
-  autoDismiss: false,
-  duration: 3000,
 }
 
 export const Info = Template.bind({})
@@ -111,8 +116,6 @@ export const Info = Template.bind({})
 Info.args = {
   type: "info",
   message: "I am an info toast.",
-  autoDismiss: false,
-  duration: 3000,
 }
 
 export const Success = Template.bind({})
@@ -120,6 +123,4 @@ export const Success = Template.bind({})
 Success.args = {
   type: "success",
   message: "I am a success toast.",
-  autoDismiss: false,
-  duration: 3000,
 }

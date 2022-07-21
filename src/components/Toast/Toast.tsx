@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useState } from "react"
+import { ReactNode, useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
+import { useKeyPress } from "../../hooks/useKeyPress"
 import styles from "./Toast.module.css"
 
 export type ToastType = "success" | "info" | "error" | "warning"
@@ -29,29 +30,48 @@ export function Toast({
   horizontalPosition = "center",
   type = "success",
   handleClose,
-  duration = 1500,
+  duration = 5000,
 }: ToastProps) {
   const [visibility, setVisibility] = useState<"hidden" | "visible">("hidden")
+  const timer = useRef<NodeJS.Timeout>()
+
+  useKeyPress(["Escape"], handleClose)
 
   useEffect(() => {
-    if (autoDismiss && showToast) {
+    if (showToast) {
       setVisibility("visible")
-      const timer = setTimeout(() => {
+    }
+    return () => {
+      setVisibility("hidden")
+    }
+  }, [showToast])
+
+  useEffect(() => {
+    if (autoDismiss) {
+      timer.current = setTimeout(() => {
         setVisibility("hidden")
       }, duration)
-      return () => {
-        clearTimeout(timer)
-      }
-    } else {
-      return
     }
-  }, [autoDismiss, showToast, duration])
+    return () => {
+      clearTimeout(timer.current)
+    }
+  }, [autoDismiss, duration, showToast])
+
+  const onTransitionEnd = () => {
+    if (visibility === "hidden") {
+      handleClose()
+    }
+  }
+
+  const containerClasses = [styles.toastOverlay, styles[visibility]].join(" ")
 
   return showToast
     ? createPortal(
         <div
-          onTransitionEnd={() => visibility === "hidden" && handleClose()}
-          className={[styles.toastOverlay, styles[visibility]].join(" ")}
+          role="alert"
+          aria-live={type === "error" ? "assertive" : "polite"}
+          onTransitionEnd={onTransitionEnd}
+          className={containerClasses}
         >
           <div className={styles.toastContainer}>
             <div
@@ -62,7 +82,9 @@ export function Toast({
             >
               <div className={styles.toastContent}>
                 <div>{message}</div>
-                <div className={styles.toastActionContainer}>{action}</div>
+                {action ? (
+                  <div className={styles.toastActionContainer}>{action}</div>
+                ) : null}
               </div>
             </div>
           </div>

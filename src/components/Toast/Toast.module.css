@@ -1,7 +1,6 @@
 .toastContent {
   display: flex;
   align-items: center;
-  height: 100%;
 }
 
 .toastActionContainer {
@@ -20,7 +19,7 @@
 
 .toast {
   position: absolute;
-  padding: 16px 24px 16px 24px;
+  padding: 12px 24px 12px 24px;
   border-radius: 8px;
 }
 
