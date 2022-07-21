@@ -130,7 +130,7 @@ describe("Pagination", () => {
         currentPage={3}
         totalPages={6}
         onPage={pageFn}
-        renderPaginationControl={({ pageNumber, label }) => (
+        renderPaginator={({ pageNumber, label }) => (
           <a
             key={pageNumber}
             title={label || `Go to page ${pageNumber}`}
@@ -172,5 +172,21 @@ describe("Pagination", () => {
       expect.objectContaining({ _reactName: "onClick" }),
       1,
     )
+  })
+
+  it("can start on a page other than 1", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        firstPage={5}
+        currentPage={8}
+        totalPages={4}
+        onPage={pageFn}
+      />,
+    )
+    const button = screen.queryByText("1")
+
+    expect(button).toBeNull()
   })
 })

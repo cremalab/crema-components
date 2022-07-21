@@ -61,7 +61,7 @@ WithCustomPageItem.args = {
   currentPage: 30,
   totalPages: 100,
   siblingCount: 1,
-  renderPaginationControl: ({ pageNumber, label, disabled }) => (
+  renderPaginator: ({ pageNumber, label, disabled }) => (
     <a
       href={`https://www.example.com/articles?page=${pageNumber}`}
       style={{
@@ -73,4 +73,14 @@ WithCustomPageItem.args = {
       {label || `Go to page ${pageNumber}`}
     </a>
   ),
+}
+
+export const WithDefinedFirstPage = Template.bind({})
+
+WithDefinedFirstPage.args = {
+  onPage: action("onPage"),
+  currentPage: 52,
+  totalPages: 100,
+  siblingCount: 1,
+  firstPage: 50,
 }
