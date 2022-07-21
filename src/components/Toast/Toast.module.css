@@ -1,0 +1,73 @@
+.toastContent {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.toastActionContainer {
+  padding-left: 16px;
+}
+
+.visible {
+  transition: opacity 300ms ease-in-out;
+  opacity: 1;
+}
+
+.hidden {
+  transition: opacity 300ms ease-in-out;
+  opacity: 0;
+}
+
+.toast {
+  position: absolute;
+  padding: 16px 24px 16px 24px;
+  border-radius: 8px;
+}
+
+.toast[data-type="success"] {
+  background: lightgreen;
+}
+
+.toast[data-type="error"] {
+  background: lightcoral;
+}
+
+.toast[data-type="info"] {
+  background: lightblue;
+}
+
+.toast[data-type="warning"] {
+  background: lightgoldenrodyellow;
+}
+
+.toast[data-y-position="top"] {
+  margin-top: 24px;
+  top: 0;
+}
+
+.toast[data-y-position="center"] {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.toast[data-y-position="bottom"] {
+  margin-bottom: 24px;
+  bottom: 0;
+}
+
+.toast[data-x-position="left"] {
+  left: 0;
+  margin-left: 24px;
+}
+
+.toast[data-x-position="center"] {
+  left: 50%;
+  transform: translate(-50%); 
+}
+
+.toast[data-x-position="right"] {
+  right: 0;
+  margin-right: 24px;
+}
+
+
