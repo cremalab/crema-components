@@ -39,10 +39,11 @@ export const Sidebar = ({
     <div>
       {!hideOverlay && (
         <div
+          aria-hidden={true}
           className={styles.sidebarOverlay}
           onClick={onClose}
           data-testid="sidebar-backdrop"
-        ></div>
+        />
       )}
       <div
         aria-label={title ?? "Sidebar"}

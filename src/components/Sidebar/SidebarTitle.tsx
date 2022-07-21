@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { Button } from "../Button"
 import styles from "./Sidebar.module.css"
 
 interface Props {
@@ -13,13 +14,13 @@ export function SidebarTitle({ children, onClose }: Props) {
       {onClose ? (
         <div>
           {
-            <div
+            <Button
               className={styles.sidebarTitleClose}
-              aria-label="close the sidebar"
+              ariaLabel="close the sidebar"
               onClick={onClose}
             >
               x
-            </div>
+            </Button>
           }
         </div>
       ) : null}
