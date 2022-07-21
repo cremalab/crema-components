@@ -61,7 +61,7 @@ WithCustomPageItem.args = {
   currentPage: 30,
   totalPages: 100,
   siblingCount: 1,
-  renderPageItem: ({ pageNumber, label, disabled }) => (
+  renderPaginationControl: ({ pageNumber, label, disabled }) => (
     <a
       href={`https://www.example.com/articles?page=${pageNumber}`}
       style={{

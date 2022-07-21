@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { Button } from "../Button"
+import { range } from "../../utils/range"
 import styles from "./Pagination.module.css"
 
 type OnPage = (event: React.MouseEvent<HTMLButtonElement>, page: number) => void
@@ -14,11 +15,11 @@ interface Props {
   currentPage: number
   totalPages: number
   onPage: OnPage
-  renderPageItem?: (props: RenderItemProps) => ReactNode
+  renderPaginationControl?: (props: RenderItemProps) => ReactNode
   siblingCount?: number
 }
 
-function defaultRenderPageItem({
+function defaultrenderPaginationControl({
   pageNumber,
   onPage,
   disabled,
@@ -41,12 +42,12 @@ export function Pagination({
   currentPage,
   totalPages,
   onPage,
-  renderPageItem,
+  renderPaginationControl = defaultrenderPaginationControl,
   siblingCount = 2,
 }: Props) {
-  const pageArray = new Array(totalPages).fill(1).map((_, i) => i + 1)
   const firstPage = 1
   const lastPage = totalPages
+  const pageArray = range(firstPage, totalPages)
   const prevPages = pageArray
     .slice(0, currentPage - 1)
     .filter((x) => x !== firstPage)
@@ -56,17 +57,13 @@ export function Pagination({
     .slice(currentPage, pageArray.length)
     .slice(0, siblingCount)
 
-  const renderPageFunction = renderPageItem
-    ? renderPageItem
-    : defaultRenderPageItem
-
   return (
     <div
       className={styles.paginationContainer}
       role="navigation"
       aria-label="pagination navigation"
     >
-      {renderPageFunction({
+      {renderPaginationControl({
         pageNumber: currentPage - 1,
         onPage,
         disabled: currentPage === firstPage,
@@ -75,7 +72,7 @@ export function Pagination({
 
       <div className={styles.pagesContainer}>
         {currentPage > firstPage &&
-          renderPageFunction({
+          renderPaginationControl({
             pageNumber: firstPage,
             onPage,
           })}
@@ -85,22 +82,22 @@ export function Pagination({
           : currentPage > firstPage) && <span>...</span>}
 
         {prevPages.map((pageNumber) =>
-          renderPageFunction({ pageNumber, onPage }),
+          renderPaginationControl({ pageNumber, onPage }),
         )}
 
         <span className={styles.currentPage}>{currentPage.toString()}</span>
 
         {nextPages.map((pageNumber) =>
-          renderPageFunction({ pageNumber, onPage }),
+          renderPaginationControl({ pageNumber, onPage }),
         )}
 
         {lastPage > currentPage + siblingCount + 1 && <span>...</span>}
 
         {currentPage !== lastPage &&
-          renderPageFunction({ pageNumber: lastPage, onPage })}
+          renderPaginationControl({ pageNumber: lastPage, onPage })}
       </div>
 
-      {renderPageFunction({
+      {renderPaginationControl({
         pageNumber: currentPage + 1,
         onPage,
         disabled: currentPage === lastPage,

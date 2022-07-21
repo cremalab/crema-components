@@ -130,7 +130,7 @@ describe("Pagination", () => {
         currentPage={3}
         totalPages={6}
         onPage={pageFn}
-        renderPageItem={({ pageNumber, label }) => (
+        renderPaginationControl={({ pageNumber, label }) => (
           <a
             key={pageNumber}
             title={label || `Go to page ${pageNumber}`}
