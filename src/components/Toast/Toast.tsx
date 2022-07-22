@@ -48,7 +48,9 @@ export function Toast({
 
   useEffect(() => {
     if (autoDismiss) {
+      console.log("USE_EFFECT")
       timer.current = setTimeout(() => {
+        console.log("INSIDE", duration)
         setVisibility("hidden")
       }, duration)
     }
@@ -58,12 +60,14 @@ export function Toast({
   }, [autoDismiss, duration, showToast])
 
   const onTransitionEnd = () => {
+    console.log("OUTSIDE", visibility)
     if (visibility === "hidden") {
+      console.log("HIDDEN", visibility)
       handleClose()
     }
   }
 
-  const containerClasses = [styles.toastOverlay, styles[visibility]].join(" ")
+  const containerClasses = [styles[visibility]].join(" ")
 
   return showToast
     ? createPortal(
