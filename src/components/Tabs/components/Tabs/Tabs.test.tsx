@@ -50,6 +50,33 @@ describe("Tabs", () => {
     expect(contentNode2).toBeNull()
   })
 
+  it("sets initial active using initialTab prop", () => {
+    // Arrange
+    const label1 = "Tab 1"
+    const content1 = "Content 1"
+    const label2 = "Tab 2"
+    const content2 = "Content 2"
+
+    // Act
+    render(
+      <Tabs initialTab={1}>
+        <Tab label={label1}>{content1}</Tab>
+        <Tab label={label2}>{content2}</Tab>
+      </Tabs>,
+    )
+
+    const menuItemNode1 = screen.getByText(label1)
+    const menuItemNode2 = screen.getByText(label2)
+    const contentNode1 = screen.queryByText(content1)
+    const contentNode2 = screen.getByText(content2)
+
+    // Assert
+    expect(menuItemNode1).toBeInTheDocument()
+    expect(menuItemNode2).toBeInTheDocument()
+    expect(contentNode1).toBeNull()
+    expect(contentNode2).toBeInTheDocument()
+  })
+
   it("renders a Tab's content when clicked", async () => {
     // Arrange
     const label1 = "Tab 1"
