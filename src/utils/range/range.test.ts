@@ -30,4 +30,13 @@ describe("range", () => {
 
     expect(received[0]).toEqual(expected)
   })
+
+  it("uses `start` at 0 if start is not provided", () => {
+    const size = 5
+
+    const received = range(size)
+    const expected = 0
+
+    expect(received[0]).toEqual(expected)
+  })
 })
