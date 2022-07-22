@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { HTMLProps, ReactNode, useRef } from "react"
+import { HTMLProps, useRef } from "react"
 import { createPortal } from "react-dom"
 import FocusLock from "react-focus-lock"
 import { useKeyPress } from "../../hooks/useKeyPress"
@@ -8,7 +8,6 @@ import styles from "./Sidebar.module.css"
 import { SidebarTitle } from "./SidebarTitle"
 
 export interface Props extends HTMLProps<HTMLDivElement> {
-  children: ReactNode
   hideOverlay?: boolean
   onClose?: () => void
   position?: "left" | "right"

@@ -6,7 +6,7 @@ import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
 export function App() {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [sidebarExpanded, setSidebarExpanded] = useState(false)
 
   const modalChildren = (
@@ -14,7 +14,7 @@ export function App() {
       ariaLabel="Close Modal"
       aria-labelledby="close-modal"
       className="close-modal"
-      onClick={() => setIsOpen(false)}
+      onClick={() => setIsModalOpen(false)}
     >
       Close
     </Button>
@@ -28,19 +28,19 @@ export function App() {
         <Button
           ariaLabel="sidebar button"
           name="sidebar button"
-          onClick={() => setSidebarExpanded(!sidebarExpanded)}
+          onClick={() => setSidebarExpanded(true)}
         >
           Open sidebar
         </Button>
       </div>
       <div>
-        <Button ariaLabel="open" onClick={() => setIsOpen(true)}>
+        <Button ariaLabel="open" onClick={() => setIsModalOpen(true)}>
           Open modal
         </Button>
         <Modal
           aria-labelledby="modal"
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
           title="Modal title"
         >
           {modalChildren}
@@ -53,7 +53,7 @@ export function App() {
         helperText="this is helper text"
       />
       <Sidebar
-        onClose={() => setSidebarExpanded(!sidebarExpanded)}
+        onClose={() => setSidebarExpanded(false)}
         open={sidebarExpanded}
         title="Sidebar Title"
         hideOverlay={false}
@@ -64,7 +64,7 @@ export function App() {
           ariaLabel="Close sidebar"
           aria-labelledby="close-sidebar"
           className="close-sidebar"
-          onClick={() => setSidebarExpanded(!sidebarExpanded)}
+          onClick={() => setSidebarExpanded(false)}
         >
           Close
         </Button>

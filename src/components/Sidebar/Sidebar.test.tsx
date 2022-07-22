@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { Sidebar } from "./Sidebar"
 import { SidebarTitle } from "./SidebarTitle"
@@ -6,13 +6,13 @@ import { SidebarTitle } from "./SidebarTitle"
 describe("Sidebar", () => {
   it("renders nothing when open = false", async () => {
     // Arrange
+    const children = "This should not render"
+
     // Act
-    const { asFragment } = render(
-      <Sidebar open={false}>this should not render</Sidebar>,
-    )
+    render(<Sidebar open={false}>{children}</Sidebar>)
 
     // Assert
-    expect(asFragment()).toMatchSnapshot()
+    expect(screen.queryByText(children)).toBeNull()
   })
 
   it("renders content when open = true", async () => {
@@ -21,13 +21,13 @@ describe("Sidebar", () => {
     const children = "children"
 
     // Act
-    const { findByText } = render(
+    render(
       <Sidebar open={true} title={title}>
         {children}
       </Sidebar>,
     )
-    const titleNode = await findByText(title)
-    const childrenNode = await findByText(children)
+    const titleNode = screen.queryByText(title)
+    const childrenNode = screen.queryByText(children)
 
     // Assert
     expect(titleNode).toBeInTheDocument()
@@ -41,12 +41,12 @@ describe("Sidebar", () => {
     const children = "children"
 
     // Act
-    const { findByTestId } = render(
+    render(
       <Sidebar open={true} title={title} onClose={onClose} hideOverlay={false}>
         {children}
       </Sidebar>,
     )
-    const overlay = await findByTestId("sidebar-backdrop")
+    const overlay = await screen.findByTestId("sidebar-backdrop")
     await userEvent.click(overlay)
 
     expect(onClose).toHaveBeenCalled()
@@ -91,10 +91,10 @@ describe("Sidebar", () => {
     const children = "children"
 
     // Act
-    const { queryByText } = render(<Sidebar open={true}>{children}</Sidebar>)
+    render(<Sidebar open={true}>{children}</Sidebar>)
 
     // Assert
-    expect(queryByText(children)).toBeInTheDocument()
+    expect(screen.getByText(children)).toBeInTheDocument()
   })
 })
 
@@ -102,8 +102,8 @@ describe("SidebarTitle", () => {
   it("renders the children", async () => {
     // Arrange
     // Act
-    const { findByText } = render(<SidebarTitle>Test Title</SidebarTitle>)
-    const received = await findByText("Test Title")
+    render(<SidebarTitle>Test Title</SidebarTitle>)
+    const received = screen.queryByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
@@ -112,9 +112,9 @@ describe("SidebarTitle", () => {
   it("does not render the close button if no onClose is given", async () => {
     // Arrange
     // Act
-    const { queryByLabelText } = render(<SidebarTitle>Test Title</SidebarTitle>)
+    render(<SidebarTitle>Test Title</SidebarTitle>)
 
-    const closeButton = queryByLabelText("close the sidebar")
+    const closeButton = screen.queryByText("close the sidebar")
 
     // Assert
     expect(closeButton).toBeNull()
@@ -125,11 +125,8 @@ describe("SidebarTitle", () => {
     const onClose = jest.fn()
 
     // Act
-    const { queryByLabelText } = render(
-      <SidebarTitle onClose={onClose}>Test Title</SidebarTitle>,
-    )
-
-    const closeButton = queryByLabelText("close the sidebar") as HTMLElement
+    render(<SidebarTitle onClose={onClose}>Test Title</SidebarTitle>)
+    const closeButton = screen.getByRole("button")
     await userEvent.click(closeButton)
 
     // Assert
@@ -140,23 +137,23 @@ describe("SidebarTitle", () => {
     // Arrange
     const children = "Test Title"
     // Act
-    const { findByText } = render(<SidebarTitle>{children}</SidebarTitle>)
-    const received = await findByText("Test Title")
+    render(<SidebarTitle>{children}</SidebarTitle>)
+    const received = screen.queryByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
-    expect(received.tagName).toBe("P")
+    expect(received?.tagName).toBe("P")
   })
 
   it("renders children in a div tag if children is not a string", async () => {
     // Arrange
     const children = <div>Test Title</div>
     // Act
-    const { findByText } = render(<SidebarTitle>{children}</SidebarTitle>)
-    const received = await findByText("Test Title")
+    render(<SidebarTitle>{children}</SidebarTitle>)
+    const received = screen.queryByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
-    expect(received.tagName).toBe("DIV")
+    expect(received?.tagName).toBe("DIV")
   })
 })

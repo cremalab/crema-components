@@ -12,17 +12,13 @@ export function SidebarTitle({ children, onClose }: Props) {
     <div className={styles.sidebarTitle}>
       <div>{typeof children === "string" ? <p>{children}</p> : children}</div>
       {onClose ? (
-        <div>
-          {
-            <Button
-              className={styles.sidebarTitleClose}
-              ariaLabel="close the sidebar"
-              onClick={onClose}
-            >
-              x
-            </Button>
-          }
-        </div>
+        <Button
+          className={styles.sidebarTitleClose}
+          ariaLabel="close the sidebar"
+          onClick={onClose}
+        >
+          x
+        </Button>
       ) : null}
     </div>
   )
