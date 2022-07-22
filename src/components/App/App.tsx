@@ -3,6 +3,7 @@ import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { Sidebar } from "../Sidebar"
 import { Pagination } from "../Pagination"
+import { Tab, Tabs } from "../Tabs"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
@@ -75,6 +76,11 @@ export function App() {
         totalPages={50}
         onPage={(_, page) => alert(`I want to go to page ${page}`)}
       />
+      <Tabs>
+        <Tab label="Tab 1">Content 1</Tab>
+        <Tab label="Tab 2">Content 2</Tab>
+        <Tab label="Tab 3">Content 3</Tab>
+      </Tabs>
     </div>
   )
 }
