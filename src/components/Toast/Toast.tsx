@@ -41,33 +41,24 @@ export function Toast({
     if (showToast) {
       setVisibility("visible")
     }
-    return () => {
-      setVisibility("hidden")
-    }
   }, [showToast])
 
   useEffect(() => {
     if (autoDismiss) {
-      console.log("USE_EFFECT")
       timer.current = setTimeout(() => {
-        console.log("INSIDE", duration)
         setVisibility("hidden")
       }, duration)
     }
     return () => {
       clearTimeout(timer.current)
     }
-  }, [autoDismiss, duration, showToast])
+  }, [autoDismiss, duration])
 
   const onTransitionEnd = () => {
-    console.log("OUTSIDE", visibility)
     if (visibility === "hidden") {
-      console.log("HIDDEN", visibility)
       handleClose()
     }
   }
-
-  const containerClasses = [styles[visibility]].join(" ")
 
   return showToast
     ? createPortal(
@@ -75,10 +66,11 @@ export function Toast({
           role="alert"
           aria-live={type === "error" ? "assertive" : "polite"}
           onTransitionEnd={onTransitionEnd}
-          className={containerClasses}
+          className={styles[visibility]}
         >
           <div className={styles.toastContainer}>
             <div
+              aria-label={`a ${type} toast`}
               data-type={type}
               data-x-position={horizontalPosition}
               data-y-position={verticalPosition}
