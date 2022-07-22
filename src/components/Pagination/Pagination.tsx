@@ -85,7 +85,7 @@ function generatePaginators({
       ? currentPage - siblingCount
       : siblingCount
 
-  const prevPages = range(prevPagesStart, prevPagesSize)
+  const prevPages = range(prevPagesSize, prevPagesStart)
 
   // Next Pages
   const nextPagesStart = currentPage + 1
@@ -95,7 +95,7 @@ function generatePaginators({
       ? totalPages - currentPage - 1
       : siblingCount
 
-  const nextPages = range(nextPagesStart, nextPagesSize)
+  const nextPages = range(nextPagesSize, nextPagesStart)
 
   // Separators
   const hasPrevSeparator =
