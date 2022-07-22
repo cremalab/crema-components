@@ -25,7 +25,7 @@
 - ~~Loader~~
 - Toast
 - Banner
-- Tabs
+- Tabs (in progress)
 - Tooltips
 - Search Input
 - Link
