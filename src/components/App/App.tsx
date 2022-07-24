@@ -1,10 +1,15 @@
 import { useState } from "react"
-import { ToasterProvider } from "../../context/ToasterContext"
+import {
+  ToasterProvider,
+  createToasterConfig,
+} from "../../context/ToasterContext"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 import { ToastContainer } from "./ToastContainer"
+
+const toasterConfig = createToasterConfig({ position: { vertical: "center" } })
 
 export function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -20,7 +25,7 @@ export function App() {
     </Button>
   )
   return (
-    <ToasterProvider config={{ position: { vertical: "center" } }}>
+    <ToasterProvider config={toasterConfig}>
       <div className="App">
         <Button ariaLabel="example button" name="example button">
           Button text

@@ -16,6 +16,7 @@ interface ToastProps {
   horizontalPosition?: HorizontalPostion
   handleClose?: () => void
   duration?: number
+  animationDuration?: number
   autoDismiss?: boolean
   message: string
   action?: ReactNode
@@ -30,9 +31,9 @@ export function Toast({
   type = "success",
   handleClose,
   duration = 5000,
+  animationDuration = 300,
 }: ToastProps) {
   const [visibility, setVisibility] = useState<"hidden" | "visible">("hidden")
-  const [isMounted, setIsMounted] = useState(true)
   const timer = useRef<NodeJS.Timeout>()
 
   useKeyPress(["Escape"], () => handleClose?.())
@@ -54,37 +55,40 @@ export function Toast({
 
   const onTransitionEnd = () => {
     if (visibility === "hidden") {
-      setIsMounted(false)
       handleClose?.()
     }
   }
 
-  return isMounted
-    ? createPortal(
+  return createPortal(
+    <div
+      role="alert"
+      aria-live={type === "error" ? "assertive" : "polite"}
+      data-duration={animationDuration}
+      style={{
+        transition: "ease-in-out",
+        transitionDuration: animationDuration + "ms",
+        opacity: visibility === "hidden" ? 0 : 1,
+      }}
+      onTransitionEnd={onTransitionEnd}
+      className={styles[visibility]}
+    >
+      <div className={styles.toastContainer}>
         <div
-          role="alert"
-          aria-live={type === "error" ? "assertive" : "polite"}
-          onTransitionEnd={onTransitionEnd}
-          className={styles[visibility]}
+          aria-label={`a ${type} toast`}
+          data-type={type}
+          data-x-position={horizontalPosition}
+          data-y-position={verticalPosition}
+          className={styles.toast}
         >
-          <div className={styles.toastContainer}>
-            <div
-              aria-label={`a ${type} toast`}
-              data-type={type}
-              data-x-position={horizontalPosition}
-              data-y-position={verticalPosition}
-              className={styles.toast}
-            >
-              <div className={styles.toastContent}>
-                <div>{message}</div>
-                {action ? (
-                  <div className={styles.toastActionContainer}>{action}</div>
-                ) : null}
-              </div>
-            </div>
+          <div className={styles.toastContent}>
+            <div>{message}</div>
+            {action ? (
+              <div className={styles.toastActionContainer}>{action}</div>
+            ) : null}
           </div>
-        </div>,
-        document.body,
-      )
-    : null
+        </div>
+      </div>
+    </div>,
+    document.body,
+  )
 }

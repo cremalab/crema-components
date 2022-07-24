@@ -6,7 +6,7 @@ import {
   useState,
 } from "react"
 import { v4 } from "uuid"
-import { Toast } from "../components/Toast"
+import { Toast as ToastCard } from "../components/Toast"
 
 interface Position {
   vertical?: "top" | "center" | "bottom"
@@ -15,33 +15,36 @@ interface Position {
 
 export interface ToasterConfig {
   duration?: number
+  animationDuration?: number
   autoDismiss?: boolean
   position?: Position
 }
+
+export const createToasterConfig = (config: ToasterConfig) => config
 
 interface ToasterProviderProps {
   children: ReactNode
   config?: ToasterConfig
 }
 
-type NotificationType = "success" | "info" | "error" | "warning"
+type ToastType = "success" | "info" | "error" | "warning"
 
-type Notification = {
+type Toast = {
   id: string
   message: string
-  type: NotificationType
+  type: ToastType
   onClose?: () => void
   action?: ReactNode
 }
 
 interface ContextProps {
-  notifications: Notification[]
-  addNotification: (notification: Omit<Notification, "id">) => void
+  toasts: Toast[]
+  addToast: (notification: Omit<Toast, "id">) => void
 }
 
 export const ToasterContext = createContext<ContextProps>({
-  notifications: [],
-  addNotification: (notification) => [notification],
+  toasts: [],
+  addToast: (notification) => [notification],
 })
 
 const DEFAULT_POSITION: Position = {
@@ -51,7 +54,7 @@ const DEFAULT_POSITION: Position = {
 
 const DEFAULT_DURATION = 5000
 
-const ANIMATION_DURATION = 300
+const DEFAULT_ANIMATION_DURATION = 300
 
 export function ToasterProvider({
   children,
@@ -61,41 +64,40 @@ export function ToasterProvider({
     duration = DEFAULT_DURATION,
     autoDismiss = true,
     position = DEFAULT_POSITION,
+    animationDuration = DEFAULT_ANIMATION_DURATION,
   } = config
 
   const id = v4()
 
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [toasts, setToasts] = useState<Toast[]>([])
 
   useEffect(() => {
     const timer = setTimeout(
-      () => setNotifications(notifications.slice(1)),
-      duration + ANIMATION_DURATION,
+      () => setToasts(toasts.slice(1)),
+      duration + DEFAULT_ANIMATION_DURATION,
     )
     return () => {
       clearTimeout(timer)
     }
-  }, [notifications, duration])
+  }, [toasts, duration])
 
-  const addNotification: ContextProps["addNotification"] = useCallback(
+  const addToast: ContextProps["addToast"] = useCallback(
     (notification) =>
-      setNotifications((notifications) => [
-        { ...notification, id },
-        ...notifications,
-      ]),
+      setToasts((toasts) => [{ ...notification, id }, ...toasts]),
     [id],
   )
 
   return (
-    <ToasterContext.Provider value={{ notifications, addNotification }}>
+    <ToasterContext.Provider value={{ toasts, addToast }}>
       {children}
       <div>
-        {notifications.map((notification) => (
+        {toasts.map((notification) => (
           <div key={notification.id}>
-            <Toast
+            <ToastCard
               showToast={true}
               autoDismiss={autoDismiss}
               duration={duration}
+              animationDuration={animationDuration}
               horizontalPosition={position.horizontal}
               verticalPosition={position.vertical}
               handleClose={notification.onClose}

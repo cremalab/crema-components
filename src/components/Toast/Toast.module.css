@@ -7,16 +7,6 @@
   padding-left: 16px;
 }
 
-.visible {
-  transition: opacity 300ms ease-in-out;
-  opacity: 1;
-}
-
-.hidden {
-  transition: opacity 300ms ease-in-out;
-  opacity: 0;
-}
-
 .toast {
   position: absolute;
   padding: 12px 24px 12px 24px;
