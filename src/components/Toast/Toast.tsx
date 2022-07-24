@@ -10,11 +10,11 @@ export type VerticalPosition = "top" | "center" | "bottom"
 export type HorizontalPostion = "left" | "center" | "right"
 
 interface ToastProps {
-  showToast: boolean
+  showToast?: boolean
   type?: ToastType
   verticalPosition?: VerticalPosition
   horizontalPosition?: HorizontalPostion
-  handleClose: () => void
+  handleClose?: () => void
   duration?: number
   autoDismiss?: boolean
   message: string
@@ -24,7 +24,6 @@ interface ToastProps {
 export function Toast({
   action,
   autoDismiss = true,
-  showToast,
   message,
   verticalPosition = "bottom",
   horizontalPosition = "center",
@@ -33,15 +32,14 @@ export function Toast({
   duration = 5000,
 }: ToastProps) {
   const [visibility, setVisibility] = useState<"hidden" | "visible">("hidden")
+  const [isMounted, setIsMounted] = useState(true)
   const timer = useRef<NodeJS.Timeout>()
 
-  useKeyPress(["Escape"], handleClose)
+  useKeyPress(["Escape"], () => handleClose?.())
 
   useEffect(() => {
-    if (showToast) {
-      setVisibility("visible")
-    }
-  }, [showToast])
+    setVisibility("visible")
+  }, [])
 
   useEffect(() => {
     if (autoDismiss) {
@@ -56,11 +54,12 @@ export function Toast({
 
   const onTransitionEnd = () => {
     if (visibility === "hidden") {
-      handleClose()
+      setIsMounted(false)
+      handleClose?.()
     }
   }
 
-  return showToast
+  return isMounted
     ? createPortal(
         <div
           role="alert"
