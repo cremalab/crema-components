@@ -63,16 +63,11 @@ describe("getToastTransitionStyles", () => {
       transition,
     }
 
-    const unmounted = {
-      ...defaultStyle,
-      transition,
-    }
-
     // Assert
     expect(receivedEntered).toEqual(expectedEntered)
     expect(receivedEntering).toEqual(expectedOthers)
     expect(receivedExit).toEqual(expectedOthers)
     expect(receivedExiting).toEqual(expectedOthers)
-    expect(receivedUnmounted).toEqual(unmounted)
+    expect(receivedUnmounted).toEqual(expectedOthers)
   })
 })

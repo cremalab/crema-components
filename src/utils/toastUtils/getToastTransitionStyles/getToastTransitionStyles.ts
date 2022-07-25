@@ -17,7 +17,7 @@ export const getToastTransitionStyles = ({
   transitionStatus,
 }: Args) => {
   const defaultStyle: CSSProperties = {
-    transition: `all ${animationDuration}ms ease-in-out`,
+    transition: `transform ${animationDuration}ms ease-in-out`,
     width: 300,
   }
 
@@ -26,7 +26,7 @@ export const getToastTransitionStyles = ({
     entered: { transform: "scale(1)" },
     exiting: { transform: "scale(0)" },
     exited: { transform: "scale(0)" },
-    unmounted: {},
+    unmounted: { transform: "scale(0)" },
   }
 
   const styles = {

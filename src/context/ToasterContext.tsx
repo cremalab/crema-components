@@ -71,6 +71,8 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
   const [toasts, setToasts] = useState<Toast[]>([])
   const timer = useRef<NodeJS.Timeout>()
 
+  console.log(toasts)
+
   const removeToast = useCallback((id: string) => {
     setToasts((toasts) => toasts.filter((toast) => toast.id !== id))
   }, [])
@@ -82,11 +84,13 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
   useKeyPress(["Escape"], removeOldest)
 
   useEffect(() => {
-    timer.current = setTimeout(removeOldest, duration)
+    if (toasts.length) {
+      timer.current = setTimeout(removeOldest, duration)
+    }
     return () => {
       clearTimeout(timer.current)
     }
-  }, [toasts, duration, removeOldest])
+  }, [toasts.length, duration, removeOldest])
 
   const addToast: ContextProps["addToast"] = useCallback(
     (toast) => {
@@ -112,13 +116,7 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
     <ToasterContext.Provider value={{ toasts, addToast, removeAll }}>
       {children}
       {createPortal(
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <div>
           <div style={getToastPositionStyles({ position })}>
             <TransitionGroup
               style={{ display: "flex", gap: "8px 0", flexDirection: "column" }}
