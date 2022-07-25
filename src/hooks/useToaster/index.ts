@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { ToasterContext } from "../../context/ToasterContext"
 
 export function useToaster() {
-  const { addToast } = useContext(ToasterContext)
+  const { addToast, removeAll } = useContext(ToasterContext)
 
-  return { addToast }
+  return { addToast, removeAll }
 }
