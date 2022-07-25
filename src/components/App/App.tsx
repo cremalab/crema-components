@@ -8,9 +8,9 @@ import { ToastPlayground } from "./ToastPlayground"
 
 const toasterConfig = new ToasterConfig({
   duration: 3000,
-  behavior: "replace",
+  behavior: "stack",
   position: {
-    vertical: "center",
+    vertical: "bottom",
     horizontal: "center",
   },
 })

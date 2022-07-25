@@ -69,6 +69,7 @@ export const ToasterContext = createContext<ContextProps>({
 export function ToasterProvider({ children, config }: ToasterProviderProps) {
   const { animationDuration, duration, behavior, position } = config.getConfig()
   const [toasts, setToasts] = useState<Toast[]>([])
+  const [isExiting, setIsExiting] = useState(false)
   const timer = useRef<NodeJS.Timeout>()
 
   console.log(toasts)
@@ -84,13 +85,13 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
   useKeyPress(["Escape"], removeOldest)
 
   useEffect(() => {
-    if (toasts.length) {
+    if (toasts.length && !isExiting) {
       timer.current = setTimeout(removeOldest, duration)
     }
     return () => {
       clearTimeout(timer.current)
     }
-  }, [toasts.length, duration, removeOldest])
+  }, [toasts.length, duration, removeOldest, isExiting])
 
   const addToast: ContextProps["addToast"] = useCallback(
     (toast) => {
@@ -105,7 +106,7 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
         setToasts([newToast])
       }
     },
-    [behavior, position],
+    [behavior, position.vertical],
   )
 
   const removeAll = () => {
@@ -123,12 +124,17 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
             >
               {toasts.map((toast) => (
                 <Transition
+                  onExited={() => {
+                    setIsExiting(false)
+                  }}
+                  onExiting={() => setIsExiting(true)}
                   unmountOnExit
                   key={toast.id}
                   timeout={animationDuration}
                 >
                   {(state) => (
                     <div
+                      id={toast.id}
                       style={getToastTransitionStyles({
                         animationDuration,
                         transitionStatus: state,
