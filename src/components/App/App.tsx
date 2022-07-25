@@ -1,15 +1,15 @@
 import { useState } from "react"
-import {
-  ToasterProvider,
-  createToasterConfig,
-} from "../../context/ToasterContext"
+import { ToasterConfig, ToasterProvider } from "../../context/ToasterContext"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 import { ToastContainer } from "./ToastContainer"
 
-const toasterConfig = createToasterConfig({ position: { vertical: "center" } })
+const toasterConfig = new ToasterConfig({
+  duration: 3000,
+  behavior: "stack",
+})
 
 export function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
