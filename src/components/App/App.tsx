@@ -4,7 +4,7 @@ import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
-import { ToastContainer } from "./ToastContainer"
+import { ToastPlayground } from "./ToastPlayground"
 
 const toasterConfig = new ToasterConfig({
   duration: 3000,
@@ -49,7 +49,7 @@ export function App() {
           hideLabel={false}
           helperText="this is helper text"
         />
-        <ToastContainer />
+        <ToastPlayground />
       </div>
     </ToasterProvider>
   )
