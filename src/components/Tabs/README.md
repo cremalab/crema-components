@@ -7,7 +7,7 @@ with a mouse or left/right arrows calls `onTab(Tab)` with a tab object.
 ## Example Usage
 
 ```tsx
-<Tabs currentTab={0} onTab={(tab) => setCurrentTab(tab.index)}>
+<Tabs currentTab={0} onTab={(nextIndex) => setCurrentTab(nextIndex)}>
   <Tab label="Tab 1">Content 1</Tab>
   <Tab label="Tab 2">Content 2</Tab>
   <Tab label="Tab 3">Content 3</Tab>
