@@ -79,21 +79,16 @@ describe("Tabs", () => {
   it("onTab is called when tab is clicked", () => {
     // Arrange
     const onTab = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
-    const content1 = "Content 2"
 
     // Act
     render(
       <Tabs onTab={onTab} currentTab={0}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>{content1}</Tab>
+        <Tab label="Tab 1">Content 1</Tab>
+        <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
     )
 
-    const menuItemNode2 = screen.getByText(label1)
-
+    const menuItemNode2 = screen.getByText("Tab 2")
     fireEvent.click(menuItemNode2)
 
     // Assert
@@ -103,20 +98,16 @@ describe("Tabs", () => {
   it("onTab is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
     // Arrange
     const onTab = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
-    const content1 = "Content 2"
 
     // Act
     render(
       <Tabs onTab={onTab} currentTab={1}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>{content1}</Tab>
+        <Tab label="Tab 1">Content 1</Tab>
+        <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
     )
 
-    const menuItemNode1 = screen.getByText(label1)
+    const menuItemNode1 = screen.getByText("Tab 2")
     menuItemNode1.focus()
     userEvent.keyboard("{arrowleft}")
 
@@ -127,20 +118,16 @@ describe("Tabs", () => {
   it("onTab is called with expected 'tab' data when ArrowLeft loops back to end", () => {
     // Arrange
     const onTab = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
-    const content1 = "Content 2"
 
     // Act
     render(
       <Tabs onTab={onTab} currentTab={0}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>{content1}</Tab>
+        <Tab label="Tab 1">Content 1</Tab>
+        <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
     )
 
-    const menuItemNode1 = screen.getByText(label0)
+    const menuItemNode1 = screen.getByText("Tab 1")
     menuItemNode1.focus()
     userEvent.keyboard("{arrowleft}")
 
@@ -151,20 +138,16 @@ describe("Tabs", () => {
   it("onTab is called with expected 'tab' data when ArrowRight pressed from 0", () => {
     // Arrange
     const onTab = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
-    const content1 = "Content 2"
 
     // Act
     render(
       <Tabs onTab={onTab} currentTab={0}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>{content1}</Tab>
+        <Tab label="Tab 1">Content 1</Tab>
+        <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
     )
 
-    const menuItemNode1 = screen.getByText(label0)
+    const menuItemNode1 = screen.getByText("Tab 1")
     menuItemNode1.focus()
     userEvent.keyboard("{arrowright}")
 
@@ -175,20 +158,16 @@ describe("Tabs", () => {
   it("onTab is called with expected 'tab' data when ArrowRight loops back to 0", () => {
     // Arrange
     const onTab = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
-    const content1 = "Content 2"
 
     // Act
     render(
       <Tabs onTab={onTab} currentTab={1}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>{content1}</Tab>
+        <Tab label="Tab 1">Content 1</Tab>
+        <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
     )
 
-    const menuItemNode1 = screen.getByText(label0)
+    const menuItemNode1 = screen.getByText("Tab 2")
     menuItemNode1.focus()
     userEvent.keyboard("{arrowright}")
 
