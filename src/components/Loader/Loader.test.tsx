@@ -70,6 +70,23 @@ describe("Loader", () => {
     expect(received).toBeInTheDocument()
     expect(received).toHaveTextContent(text)
   })
+
+  it("renders the expected structure with default props", () => {
+    // Arrange
+    jest.useFakeTimers()
+
+    // Act
+    render(<Loader />)
+
+    act(() => {
+      jest.advanceTimersByTime(200)
+    })
+
+    const received = screen.queryByLabelText("Loading now please wait")
+
+    // Assert
+    expect(received).toBeInTheDocument()
+  })
 })
 
 describe("DefaultSpinner", () => {
@@ -110,5 +127,17 @@ describe("DefaultSpinner", () => {
 
     // Assert
     expect(spinner).toHaveClass("DefaultSpinner", size)
+  })
+
+  it("renders the expected structure with no default props", () => {
+    // Arrange
+
+    // Act
+    render(<DefaultSpinner />)
+
+    const spinner = screen.getByTestId("spinner")
+
+    // Assert
+    expect(spinner).toHaveClass("DefaultSpinner", "medium")
   })
 })
