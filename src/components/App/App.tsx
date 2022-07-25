@@ -10,6 +10,7 @@ import "./App.styles.css"
 export function App() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [sidebarExpanded, setSidebarExpanded] = useState(false)
+  const [currentTab, setCurrentTab] = useState(0)
 
   const modalChildren = (
     <Button
@@ -76,7 +77,7 @@ export function App() {
         totalPages={50}
         onPage={(_, page) => alert(`I want to go to page ${page}`)}
       />
-      <Tabs>
+      <Tabs currentTab={currentTab} onTab={(tab) => setCurrentTab(tab.index)}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
         <Tab label="Tab 3">Content 3</Tab>
