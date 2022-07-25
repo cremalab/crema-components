@@ -97,14 +97,7 @@ describe("Tabs", () => {
     fireEvent.click(menuItemNode2)
 
     // Assert
-    expect(onTab).toBeCalledWith({
-      children: content1,
-      id: "tab-1",
-      index: 1,
-      isSelected: false,
-      label: label1,
-      panelId: "tab-1-panel",
-    })
+    expect(onTab).toBeCalledWith(1)
   })
 
   it("onTab is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
@@ -128,14 +121,7 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTab).toBeCalledWith({
-      children: content0,
-      id: "tab-0",
-      index: 0,
-      isSelected: false,
-      label: label0,
-      panelId: "tab-0-panel",
-    })
+    expect(onTab).toBeCalledWith(0)
   })
 
   it("onTab is called with expected 'tab' data when ArrowLeft loops back to end", () => {
@@ -159,14 +145,7 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTab).toBeCalledWith({
-      children: content1,
-      id: "tab-1",
-      index: 1,
-      isSelected: false,
-      label: label1,
-      panelId: "tab-1-panel",
-    })
+    expect(onTab).toBeCalledWith(1)
   })
 
   it("onTab is called with expected 'tab' data when ArrowRight pressed from 0", () => {
@@ -190,14 +169,7 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTab).toBeCalledWith({
-      children: content1,
-      id: "tab-1",
-      index: 1,
-      isSelected: false,
-      label: label1,
-      panelId: "tab-1-panel",
-    })
+    expect(onTab).toBeCalledWith(1)
   })
 
   it("onTab is called with expected 'tab' data when ArrowRight loops back to 0", () => {
@@ -221,13 +193,6 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTab).toBeCalledWith({
-      children: content0,
-      id: "tab-0",
-      index: 0,
-      isSelected: false,
-      label: label0,
-      panelId: "tab-0-panel",
-    })
+    expect(onTab).toBeCalledWith(0)
   })
 })

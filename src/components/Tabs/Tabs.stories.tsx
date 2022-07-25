@@ -15,7 +15,7 @@ export default {
 export const Default = () => {
   const [currentTab, setCurrentTab] = useState(0)
   return (
-    <Tabs currentTab={currentTab} onTab={(tab) => setCurrentTab(tab.index)}>
+    <Tabs currentTab={currentTab} onTab={setCurrentTab}>
       <Tab label="Tab 1">Content 1</Tab>
       <Tab label="Tab 2">Content 2</Tab>
       <Tab label="Tab 3">Content 3</Tab>

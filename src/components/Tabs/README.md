@@ -16,10 +16,10 @@ with a mouse or left/right arrows calls `onTab(Tab)` with a tab object.
 
 ## API
 
-| Prop         | Type   | Description                                             |
-| ------------ | ------ | ------------------------------------------------------- |
-| `currentTab` | number | sets initial active tab/content by index (default: `0`) |
-| `onTab(Tab)` | func   | function called on tab click or ArrowLeft/ArrowRight    |
+| Prop            | Type   | Description                                 |
+| --------------- | ------ | ------------------------------------------- |
+| `currentTab`    | number | current tab index                           |
+| `onTab(number)` | func   | next index by tab click or arrow left/right |
 
 ## Directory Structure
 

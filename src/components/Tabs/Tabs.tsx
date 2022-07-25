@@ -11,7 +11,7 @@ interface TabsProps {
    **/
   children: ReactElement<TabProps> | Array<ReactElement<TabProps>>
   currentTab: number
-  onTab: (tab: Tab) => void
+  onTab: (index: number) => void
 }
 
 export function Tabs({ children, onTab, currentTab }: TabsProps) {
@@ -37,12 +37,12 @@ export function Tabs({ children, onTab, currentTab }: TabsProps) {
   )
 
   const onClick = (tab: Tab) => {
-    onTab(tab)
+    onTab(tab.index)
   }
 
   // Calls onTab with next tab AND focusses the next TabListItem
   const setCurrentTab = (nextIndex: number) => {
-    onTab(tabs[nextIndex])
+    onTab(nextIndex)
     tabListRefs.current[nextIndex]?.focus()
   }
 
