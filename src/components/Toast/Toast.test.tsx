@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
-import { Status } from "../../types/Toast"
 import { Button } from "../Button"
+import { Status } from "./types"
 import { Toast } from "./Toast"
 
 describe("Toast", () => {
