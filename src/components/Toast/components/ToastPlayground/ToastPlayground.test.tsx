@@ -128,9 +128,7 @@ describe("ToastPlayground", () => {
     await userEvent.keyboard("[Escape]")
 
     // Assert
-    await waitFor(async () =>
-      expect(await screen.findAllByTestId(testID)).toHaveLength(1),
-    )
+    await waitFor(() => expect(screen.getAllByTestId(testID)).toHaveLength(1))
   })
   it("throws an error if useToaster is used outside of it's context", () => {
     // Arrange
@@ -141,5 +139,28 @@ describe("ToastPlayground", () => {
     expect(() => render(<ToastPlayground />)).toThrow(
       "useToaster must be used within a ToasterProvider!",
     )
+  })
+  it("replaces previous Toast if behavior is set to 'replace'", async () => {
+    // Arrange
+    const buttonTextInfo = "Add Info Toast"
+    const buttonTextSuccess = "Add Warning Toast"
+    const testID = /toast/
+
+    // Act
+    render(
+      <ToasterProvider config={{ duration: Infinity, behavior: "replace" }}>
+        <ToastPlayground />
+      </ToasterProvider>,
+    )
+
+    const infoToastButton = screen.getByText(buttonTextInfo)
+    const warningToastButton = screen.getByText(buttonTextSuccess)
+
+    await userEvent.click(infoToastButton)
+
+    await userEvent.click(warningToastButton)
+
+    // Assert
+    await waitFor(() => expect(screen.getAllByTestId(testID)).toHaveLength(1))
   })
 })
