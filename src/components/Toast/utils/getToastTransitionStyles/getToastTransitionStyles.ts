@@ -8,7 +8,7 @@
 
 import { CSSProperties } from "react"
 import { TransitionStatus } from "react-transition-group"
-import { Position } from "../../../../types/Toast"
+import { Position } from "../../types"
 
 interface Args {
   animationDuration: number

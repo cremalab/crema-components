@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Status } from "../../types/Toast"
+import { Status } from "./types"
 import styles from "./Toast.module.css"
 
 interface ToastProps {

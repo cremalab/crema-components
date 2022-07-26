@@ -4,7 +4,7 @@
  * DESCRIPTION_HERE
  */
 
-import { Position } from "../../../../types/Toast"
+import { Position } from "../../types"
 
 export interface Config {
   duration: number

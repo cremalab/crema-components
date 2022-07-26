@@ -7,7 +7,7 @@
  */
 
 import { CSSProperties } from "react"
-import { Position } from "../../../../types/Toast"
+import { Position } from "../../types"
 
 interface Args {
   position: Position

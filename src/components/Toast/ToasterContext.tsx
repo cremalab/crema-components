@@ -10,8 +10,8 @@ import {
 import { createPortal } from "react-dom"
 import { v4 } from "uuid"
 import { Transition, TransitionGroup } from "react-transition-group"
-import { Toast as ToastType } from "../../types/Toast"
 import { useKeyPress } from "../../hooks/useKeyPress"
+import { Toast as ToastType } from "./types"
 import {
   ToasterConfig,
   getToastPositionStyles,
