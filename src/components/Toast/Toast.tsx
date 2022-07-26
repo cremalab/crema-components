@@ -14,18 +14,15 @@ export function Toast({ action, message, status = "success" }: ToastProps) {
       data-testid={`toast_${message}`}
       role="alert"
       aria-live={status === "error" ? "assertive" : "polite"}
+      aria-label={`a ${status} toast`}
+      data-type={status}
+      className={styles.toast}
     >
-      <div
-        aria-label={`a ${status} toast`}
-        data-type={status}
-        className={styles.toast}
-      >
-        <div className={styles.toastContent}>
-          <div>{message}</div>
-          {action ? (
-            <div className={styles.toastActionContainer}>{action}</div>
-          ) : null}
-        </div>
+      <div className={styles.toastContent}>
+        <div>{message}</div>
+        {action ? (
+          <div className={styles.toastActionContainer}>{action}</div>
+        ) : null}
       </div>
     </div>
   )
