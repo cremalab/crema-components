@@ -90,6 +90,174 @@ describe("Pagination", () => {
     ])
   })
 
+  it("renders enough siblings to the left to complete sequence if currentPage is close to siblingCount", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={4}
+        totalPages={10}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const buttons = screen.getAllByRole("button")
+
+    expect(buttons.map((x) => x.textContent)).toEqual([
+      "Previous",
+      "1",
+      "2",
+      "3",
+      "5",
+      "6",
+      "7",
+      "10",
+      "Next",
+    ])
+  })
+
+  it("renders no 'next' siblings if on last page", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={10}
+        totalPages={10}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const buttons = screen.getAllByRole("button")
+
+    expect(buttons.map((x) => x.textContent)).toEqual([
+      "Previous",
+      "1",
+      "7",
+      "8",
+      "9",
+      "Next",
+    ])
+  })
+
+  it("renders no 'previous' siblings if on first page", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={1}
+        totalPages={10}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const buttons = screen.getAllByRole("button")
+
+    expect(buttons.map((x) => x.textContent)).toEqual([
+      "Previous",
+      "2",
+      "3",
+      "4",
+      "10",
+      "Next",
+    ])
+  })
+
+  it("disables previous button when on first page", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={1}
+        totalPages={10}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const button = screen.getByText("Previous")
+
+    expect(button.hasAttribute("disabled")).toBe(true)
+  })
+
+  it("disables next button when on last page", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={10}
+        totalPages={10}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const button = screen.getByText("Next")
+
+    expect(button.hasAttribute("disabled")).toBe(true)
+  })
+
+  it("renders one ellipsis when no previous siblings but some next siblings", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={1}
+        totalPages={100}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const ellipses = screen.getAllByText("...")
+
+    expect(ellipses.length).toBe(1)
+  })
+
+  it("renders one ellipsis when no next siblings but some previous siblings", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={100}
+        totalPages={100}
+        onPage={pageFn}
+        siblingCount={3}
+      />,
+    )
+    const ellipses = screen.getAllByText("...")
+
+    expect(ellipses.length).toBe(1)
+  })
+
+  it("renders two ellipsis when gap between current page and first/last is big enough", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={5}
+        totalPages={10}
+        onPage={pageFn}
+        siblingCount={1}
+      />,
+    )
+    const ellipses = screen.getAllByText("...")
+
+    expect(ellipses.length).toBe(2)
+  })
+
+  it("renders no ellipsis when gap between current page and first/last is not big enough", async () => {
+    const pageFn = jest.fn()
+
+    render(
+      <Pagination
+        currentPage={2}
+        totalPages={3}
+        onPage={pageFn}
+        siblingCount={0}
+      />,
+    )
+    const ellipses = screen.queryAllByText("...")
+
+    expect(ellipses.length).toBe(0)
+  })
+
   it("renders an ellipsis for previous range if siblings don't account for all", async () => {
     const pageFn = jest.fn()
 
@@ -188,5 +356,14 @@ describe("Pagination", () => {
     const button = screen.queryByText("1")
 
     expect(button).toBeNull()
+  })
+
+  it("renders nothing if totalPages left blank", async () => {
+    const pageFn = jest.fn()
+
+    render(<Pagination totalPages={0} currentPage={10} onPage={pageFn} />)
+    const container = screen.queryByRole("navigation")
+
+    expect(container).toBeNull()
   })
 })

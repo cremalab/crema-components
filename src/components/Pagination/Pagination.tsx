@@ -79,10 +79,8 @@ function generatePaginators({
       : currentPage - siblingCount
 
   const prevPagesSize =
-    currentPage === firstPage
-      ? 0
-      : currentPage - siblingCount <= firstPage
-      ? currentPage - siblingCount
+    currentPage - siblingCount <= firstPage
+      ? currentPage - firstPage - 1
       : siblingCount
 
   const prevPages = range(prevPagesSize, prevPagesStart)
@@ -99,7 +97,9 @@ function generatePaginators({
 
   // Separators
   const hasPrevSeparator =
-    siblingCount > 0 ? prevPages[0] > firstPage + 1 : currentPage > firstPage
+    siblingCount > 0
+      ? prevPages[0] > firstPage + 1
+      : currentPage > firstPage && currentPage > firstPage + 1
 
   const hasNextSeparator = totalPages > currentPage + siblingCount + 1
 
@@ -108,7 +108,7 @@ function generatePaginators({
     {
       pageNumber: currentPage - 1,
       type: PaginatorElementTypes.PAGINATOR,
-      disabled: currentPage === firstPage,
+      disabled: currentPage <= firstPage,
       label: "Previous",
     },
     // First Page
@@ -139,14 +139,14 @@ function generatePaginators({
     {
       pageNumber: currentPage + 1,
       type: PaginatorElementTypes.PAGINATOR,
-      disabled: currentPage === totalPages,
+      disabled: currentPage >= totalPages,
       label: "Next",
     },
   ]
 }
 
 const PaginatorComponent = ({
-  type = PaginatorElementTypes.PAGINATOR,
+  type,
   pageNumber = 0,
   renderPaginator,
   onPage,
@@ -180,6 +180,9 @@ export function Pagination({
   renderPaginator = defaultrenderPaginator,
   siblingCount = 2,
 }: Props) {
+  if (!totalPages) {
+    return null
+  }
   const paginators = generatePaginators({
     firstPage,
     currentPage,
