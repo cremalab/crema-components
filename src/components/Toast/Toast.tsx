@@ -10,7 +10,11 @@ interface ToastProps {
 
 export function Toast({ action, message, status = "success" }: ToastProps) {
   return (
-    <div role="alert" aria-live={status === "error" ? "assertive" : "polite"}>
+    <div
+      data-testid={`toast_${message}`}
+      role="alert"
+      aria-live={status === "error" ? "assertive" : "polite"}
+    >
       <div
         aria-label={`a ${status} toast`}
         data-type={status}

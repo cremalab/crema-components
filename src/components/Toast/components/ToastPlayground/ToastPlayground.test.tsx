@@ -80,4 +80,35 @@ describe("ToastPlayground", () => {
     // Assert
     expect(received).toBeInTheDocument()
   })
+  it("pressing escape dismisses most oldest toast", async () => {
+    // Arrange
+    const toasterConfig = new ToasterConfig({ duration: Infinity })
+    const buttonTextInfo = "Add Info Toast"
+    const buttonTextSuccess = "Add Warning Toast"
+    const testID = /toast/
+
+    // Act
+    render(
+      <ToasterProvider config={toasterConfig}>
+        <ToastPlayground />
+      </ToasterProvider>,
+    )
+
+    const infoToastButton = screen.getByText(buttonTextInfo)
+    const warningToastButton = screen.getByText(buttonTextSuccess)
+
+    await userEvent.click(infoToastButton)
+    await userEvent.click(warningToastButton)
+
+    const received = screen.getAllByTestId(testID)
+
+    expect(received).toHaveLength(2)
+
+    await userEvent.keyboard("[Escape]")
+
+    // Assert
+    await waitFor(async () =>
+      expect(await screen.findAllByTestId(testID)).toHaveLength(1),
+    )
+  })
 })
