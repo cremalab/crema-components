@@ -1,5 +1,5 @@
-import { useToaster } from "../../hooks/useToaster"
 import { Button } from "../Button"
+import { useToaster } from "./useToaster"
 
 export function ToastPlayground() {
   const { addToast, removeAll } = useToaster()
