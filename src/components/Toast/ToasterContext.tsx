@@ -11,7 +11,7 @@ import { createPortal } from "react-dom"
 import { v4 } from "uuid"
 import { Transition, TransitionGroup } from "react-transition-group"
 import { useKeyPress } from "../../hooks/useKeyPress"
-import { Toast as ToastType } from "./types"
+import { Position, Toast as ToastType } from "./types"
 import {
   ToasterConfig,
   getToastPositionStyles,
@@ -27,6 +27,19 @@ interface ToasterProviderProps {
 interface ContextProps {
   addToast: (toast: Omit<ToastType, "id">) => void
   removeAll: () => void
+}
+
+const getHorizontalFlexAlignment = (
+  horizontalPosition: Position["horizontal"],
+) => {
+  switch (horizontalPosition) {
+    case "left":
+      return "flex-start"
+    case "right":
+      return "flex-end"
+    default:
+      return "center"
+  }
 }
 
 export const ToasterContext = createContext<ContextProps | undefined>(undefined)
@@ -78,6 +91,8 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
 
   const value = useMemo(() => ({ addToast, removeAll }), [addToast, removeAll])
 
+  const alignItems = getHorizontalFlexAlignment(position.horizontal)
+
   return (
     <ToasterContext.Provider value={value}>
       {children}
@@ -88,7 +103,7 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
               display: "flex",
               gap: "8px 0",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems,
             }}
           >
             {toasts.map((toast) => (
