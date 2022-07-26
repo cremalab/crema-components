@@ -1,5 +1,5 @@
-import { Button } from "../Button"
-import { useToaster } from "./useToaster"
+import { Button } from "../../../Button"
+import { useToaster } from "../../useToaster"
 
 export function ToastPlayground() {
   const { addToast, removeAll } = useToaster()
@@ -14,10 +14,10 @@ export function ToastPlayground() {
       }}
     >
       <Button
-        ariaLabel="add Toast"
+        ariaLabel="add success Toast"
         onClick={() =>
           addToast({
-            message: "Hello World",
+            message: "Success Toast",
             status: "success",
             action: (handleClose) => (
               <Button ariaLabel="close toast" onClick={handleClose}>
@@ -30,10 +30,10 @@ export function ToastPlayground() {
         Add Success Toast
       </Button>
       <Button
-        ariaLabel="add Toast"
+        ariaLabel="add info Toast"
         onClick={() =>
           addToast({
-            message: "Hello World",
+            message: "Info Toast",
             status: "info",
             action: () => (
               <Button ariaLabel="close toast" onClick={removeAll}>
@@ -46,15 +46,15 @@ export function ToastPlayground() {
         Add Info Toast
       </Button>
       <Button
-        ariaLabel="add Toast"
-        onClick={() => addToast({ message: "Hello Toast", status: "error" })}
+        ariaLabel="add error Toast"
+        onClick={() => addToast({ message: "Error Toast", status: "error" })}
       >
         Add Error Toast
       </Button>
       <Button
-        ariaLabel="add Toast"
+        ariaLabel="add warning Toast"
         onClick={() =>
-          addToast({ message: "Goodbye Toast", status: "warning" })
+          addToast({ message: "Warning Toast", status: "warning" })
         }
       >
         Add Warning Toast

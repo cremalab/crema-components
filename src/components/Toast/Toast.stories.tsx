@@ -6,7 +6,7 @@ import { ToasterConfig } from "./utils"
 import { Config } from "./utils/ToasterConfig/ToasterConfig"
 import { ToasterProvider } from "./ToasterContext"
 import { Toast } from "./Toast"
-import { ToastPlayground } from "./ToastPlayground"
+import { ToastPlayground } from "./components/ToastPlayground"
 
 /**
  * See Storybook Docs: Writing Stories
