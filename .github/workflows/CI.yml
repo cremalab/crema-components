@@ -42,7 +42,6 @@ jobs:
       - run: npm ci
       - run: npm run test:unit:coverage
       - uses: codecov/codecov-action@v3
-        ignore: "**/App.tsx"
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
