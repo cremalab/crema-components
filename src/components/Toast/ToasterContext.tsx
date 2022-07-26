@@ -29,10 +29,7 @@ interface ContextProps {
   removeAll: () => void
 }
 
-export const ToasterContext = createContext<ContextProps>({
-  addToast: () => null,
-  removeAll: () => null,
-})
+export const ToasterContext = createContext<ContextProps | undefined>(undefined)
 
 export function ToasterProvider({ children, config }: ToasterProviderProps) {
   const { animationDuration, duration, behavior, position } = config.getConfig()

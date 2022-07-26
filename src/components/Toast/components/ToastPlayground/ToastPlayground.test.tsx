@@ -111,4 +111,14 @@ describe("ToastPlayground", () => {
       expect(await screen.findAllByTestId(testID)).toHaveLength(1),
     )
   })
+  it("throws an error if useToaster is used outside of it's context", () => {
+    // Arrange
+
+    // Act
+
+    // Assert
+    expect(() => render(<ToastPlayground />)).toThrow(
+      "useToaster must be used within a ToasterProvider!",
+    )
+  })
 })
