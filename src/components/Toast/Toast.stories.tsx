@@ -1,7 +1,7 @@
 import { ComponentStory } from "@storybook/react"
 import { FC } from "react"
-import { Status } from "../../types/Toast"
 import { Button } from "../Button"
+import { Status } from "./types"
 import { ToasterConfig } from "./utils"
 import { Config } from "./utils/ToasterConfig/ToasterConfig"
 import { ToasterProvider } from "./ToasterContext"
