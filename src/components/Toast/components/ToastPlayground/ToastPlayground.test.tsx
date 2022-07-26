@@ -55,6 +55,32 @@ describe("ToastPlayground", () => {
     // Assert
     await waitFor(() => expect(receivedAfterDismiss).not.toBeInTheDocument())
   })
+  it("removes toast by its handleClose callback on custom action", async () => {
+    // Arrange
+    const buttonText = "Add Success Toast"
+    const dismissText = "Dismiss"
+    const toastMessage = "Success Toast"
+
+    // Act
+    render(
+      <ToasterProvider config={{ duration: Infinity }}>
+        <ToastPlayground />
+      </ToasterProvider>,
+    )
+
+    const receivedButton = screen.getByText(buttonText)
+
+    await userEvent.click(receivedButton)
+
+    const receivedDismissButton = await screen.findByText(dismissText)
+
+    await userEvent.click(receivedDismissButton)
+
+    const received = screen.queryByText(toastMessage)
+
+    // Assert
+    await waitFor(() => expect(received).not.toBeInTheDocument())
+  })
   it("allows interaction with an Error Toast", async () => {
     // Arrange
     const buttonText = "Add Error Toast"
@@ -76,7 +102,7 @@ describe("ToastPlayground", () => {
     // Assert
     expect(received).toBeInTheDocument()
   })
-  it("pressing escape dismisses most oldest toast", async () => {
+  it("pressing escape dismisses oldest toast", async () => {
     // Arrange
     const buttonTextInfo = "Add Info Toast"
     const buttonTextSuccess = "Add Warning Toast"
