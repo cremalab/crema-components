@@ -1,18 +1,9 @@
 import { useState } from "react"
-import { ToastPlayground, ToasterProvider, Utils } from "../Toast"
+import { ToastPlayground, ToasterProvider } from "../Toast"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
-
-const toasterConfig = new Utils.ToasterConfig({
-  duration: 3000,
-  behavior: "replace",
-  position: {
-    vertical: "center",
-    horizontal: "center",
-  },
-})
 
 export function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -28,7 +19,7 @@ export function App() {
     </Button>
   )
   return (
-    <ToasterProvider config={toasterConfig}>
+    <ToasterProvider config={{ duration: 3000, behavior: "replace" }}>
       <div className="App">
         <Button ariaLabel="example button" name="example button">
           Button text

@@ -11,17 +11,13 @@ import { createPortal } from "react-dom"
 import { v4 } from "uuid"
 import { Transition, TransitionGroup } from "react-transition-group"
 import { useKeyPress } from "../../hooks/useKeyPress"
-import { Toast as ToastType } from "./types"
-import {
-  ToasterConfig,
-  getToastPositionStyles,
-  getToastTransitionStyles,
-} from "./utils"
+import { Config, Toast as ToastType } from "./types"
+import { getToastPositionStyles, getToastTransitionStyles } from "./utils"
 import { Toast } from "./Toast"
 
 interface ToasterProviderProps {
   children: ReactNode
-  config: ToasterConfig
+  config?: Partial<Config>
 }
 
 interface ContextProps {
@@ -31,12 +27,26 @@ interface ContextProps {
 
 export const ToasterContext = createContext<ContextProps | undefined>(undefined)
 
-export function ToasterProvider({ children, config }: ToasterProviderProps) {
-  const { animationDuration, duration, behavior, position } = config.getConfig()
+const defaultConfig: Config = {
+  animationDuration: 300,
+  duration: 5000,
+  behavior: "stack",
+  position: {
+    vertical: "bottom",
+    horizontal: "center",
+  },
+}
+
+export function ToasterProvider({
+  children,
+  config = defaultConfig,
+}: ToasterProviderProps) {
+  const { position, animationDuration, duration, behavior } = config as Config
+
   const [toasts, setToasts] = useState<ToastType[]>([])
   const timer = useRef<NodeJS.Timeout>()
   const isTopOrCenter =
-    position.vertical === "top" || position.vertical === "center"
+    position?.vertical === "top" || position?.vertical === "center"
 
   const removeToast = useCallback((id: string) => {
     setToasts((toasts) => toasts.filter((toast) => toast.id !== id))

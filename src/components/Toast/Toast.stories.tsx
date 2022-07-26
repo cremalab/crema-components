@@ -1,9 +1,7 @@
 import { ComponentStory } from "@storybook/react"
 import { FC } from "react"
 import { Button } from "../Button"
-import { Status } from "./types"
-import { ToasterConfig } from "./utils"
-import { Config } from "./utils/ToasterConfig/ToasterConfig"
+import { Config, Status } from "./types"
 import { ToasterProvider } from "./ToasterContext"
 import { Toast } from "./Toast"
 import { ToastPlayground } from "./components/ToastPlayground"
@@ -24,9 +22,8 @@ const Template: ComponentStory<typeof Toast> = (args) => {
 }
 
 const ProviderTemplate: ComponentStory<FC<Config>> = (args) => {
-  const toasterConfig = new ToasterConfig(args)
   return (
-    <ToasterProvider config={toasterConfig}>
+    <ToasterProvider config={args}>
       <ToastPlayground />
     </ToasterProvider>
   )

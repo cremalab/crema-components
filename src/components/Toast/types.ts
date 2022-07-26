@@ -1,5 +1,12 @@
 import { ReactNode } from "react"
 
+export interface Config {
+  duration: number
+  animationDuration: number
+  position: Position
+  behavior: "stack" | "replace"
+}
+
 export interface Position {
   vertical: "top" | "center" | "bottom"
   horizontal: "left" | "center" | "right"
