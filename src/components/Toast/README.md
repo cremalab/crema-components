@@ -4,7 +4,7 @@ All Toast related dependencies are contained within this folder, with the except
 
 ## Directory Structure
 
-- `utils`: Toast utils 
+- `utils`: Toast utils
   - `getToastTransitionStyles`
     - a util for generating styles based on Toast behaviors and transition states
   - `getToastPositionStyles`
