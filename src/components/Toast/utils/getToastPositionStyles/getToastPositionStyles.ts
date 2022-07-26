@@ -1,11 +1,13 @@
 /**
  * getToastPositionStyles
  * ------------------------------------------------
- * DESCRIPTION_HERE
+ * This util is used to generate a styles object that
+ * dictates the toast position based on the Position
+ * arguments.
  */
 
 import { CSSProperties } from "react"
-import { Position } from "../../../types/Toast"
+import { Position } from "../../../../types/Toast"
 
 interface Args {
   position: Position

@@ -10,45 +10,14 @@ import {
 import { createPortal } from "react-dom"
 import { v4 } from "uuid"
 import { Transition, TransitionGroup } from "react-transition-group"
-import { Toast } from "../components/Toast"
-import { Position, Toast as ToastType } from "../types/Toast"
-import { useKeyPress } from "../hooks/useKeyPress"
+import { Toast as ToastType } from "../../types/Toast"
+import { useKeyPress } from "../../hooks/useKeyPress"
 import {
+  ToasterConfig,
   getToastPositionStyles,
   getToastTransitionStyles,
-} from "../utils/toastUtils"
-
-interface Config {
-  duration: number
-  animationDuration: number
-  position: Position
-  behavior: "stack" | "replace"
-}
-
-export class ToasterConfig {
-  private duration: Config["duration"]
-  private animationDuration: Config["animationDuration"]
-  private position: Config["position"]
-  private behavior: Config["behavior"]
-  constructor(config: Partial<Config> = {}) {
-    this.duration = config.duration || 5000
-    this.animationDuration = config.animationDuration || 300
-    this.position = config.position || {
-      vertical: "bottom",
-      horizontal: "center",
-    }
-    this.behavior = config.behavior || "stack"
-  }
-
-  getConfig() {
-    return {
-      duration: this.duration,
-      animationDuration: this.animationDuration,
-      position: this.position,
-      behavior: this.behavior,
-    }
-  }
-}
+} from "./utils"
+import { Toast } from "./Toast"
 
 interface ToasterProviderProps {
   children: ReactNode

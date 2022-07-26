@@ -1,7 +1,12 @@
 import { ComponentStory } from "@storybook/react"
+import { FC } from "react"
 import { Status } from "../../types/Toast"
 import { Button } from "../Button"
+import { ToasterConfig } from "./utils"
+import { Config } from "./utils/ToasterConfig/ToasterConfig"
+import { ToasterProvider } from "./ToasterContext"
 import { Toast } from "./Toast"
+import { ToastPlayground } from "./ToastPlayground"
 
 /**
  * See Storybook Docs: Writing Stories
@@ -10,18 +15,33 @@ import { Toast } from "./Toast"
 
 export default {
   title: "Components/Toast",
-  argTypes: {
-    type: {
-      control: "select",
-      options: ["error", "info", "success", "warning"] as Status[],
-    },
-  },
 }
 
 const defaultMessage = "Grab a 🍞 and make some toast!"
 
 const Template: ComponentStory<typeof Toast> = (args) => {
   return <Toast {...args} message={args.message || defaultMessage} />
+}
+
+const ProviderTemplate: ComponentStory<FC<Config>> = (args) => {
+  const toasterConfig = new ToasterConfig(args)
+  return (
+    <ToasterProvider config={toasterConfig}>
+      <ToastPlayground />
+    </ToasterProvider>
+  )
+}
+
+export const ProviderExample = ProviderTemplate.bind({})
+
+ProviderExample.args = {
+  animationDuration: 300,
+  behavior: "stack",
+  duration: 3000,
+  position: {
+    vertical: "center",
+    horizontal: "center",
+  },
 }
 
 export const WithAction = Template.bind({})
@@ -31,6 +51,13 @@ WithAction.args = {
 }
 
 export const WithDefaults = Template.bind({})
+
+WithDefaults.argTypes = {
+  status: {
+    control: "select",
+    options: ["error", "info", "success", "warning"] as Status[],
+  },
+}
 
 export const Warning = Template.bind({})
 

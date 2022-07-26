@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { ToasterConfig, ToasterProvider } from "../../context/ToasterContext"
+import { ToasterProvider } from "../Toast/ToasterContext"
+import { ToasterConfig } from "../Toast/utils"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
-import { ToastPlayground } from "./ToastPlayground"
+import { ToastPlayground } from "../Toast/ToastPlayground"
 
 const toasterConfig = new ToasterConfig({
   duration: 3000,

@@ -1,12 +1,14 @@
 /**
  * getToastTransitionStyles
  * ------------------------------------------------
- * DESCRIPTION_HERE
+ * This util is used to generate a transition styles object
+ * based on animation duration, transition state, position,
+ * and behavior.
  */
 
 import { CSSProperties } from "react"
 import { TransitionStatus } from "react-transition-group"
-import { Position } from "../../../types/Toast"
+import { Position } from "../../../../types/Toast"
 
 interface Args {
   animationDuration: number
