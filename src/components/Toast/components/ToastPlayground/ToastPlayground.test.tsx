@@ -31,7 +31,7 @@ describe("ToastPlayground", () => {
     // Arrange
     const toasterConfig = new ToasterConfig({ duration: Infinity })
     const buttonTextInfo = "Add Info Toast"
-    const buttonTextSuccess = "Add Success Toast"
+    const buttonTextSuccess = "Add Warning Toast"
     const toastMessage = "Info Toast"
     const removeAllButtonText = "Dismiss All"
 
@@ -43,11 +43,11 @@ describe("ToastPlayground", () => {
     )
 
     const infoToastButton = screen.getByText(buttonTextInfo)
-    const successToastButton = screen.getByText(buttonTextSuccess)
+    const warningToastButton = screen.getByText(buttonTextSuccess)
 
     await userEvent.click(infoToastButton)
 
-    await userEvent.click(successToastButton)
+    await userEvent.click(warningToastButton)
 
     const dismissAllButton = await screen.findByText(removeAllButtonText)
 
@@ -57,5 +57,27 @@ describe("ToastPlayground", () => {
 
     // Assert
     await waitFor(() => expect(receivedAfterDismiss).not.toBeInTheDocument())
+  })
+  it("allows interaction with an Error Toast", async () => {
+    // Arrange
+    const toasterConfig = new ToasterConfig({ duration: Infinity })
+    const buttonText = "Add Error Toast"
+    const toastMessage = "Error Toast"
+
+    // Act
+    render(
+      <ToasterProvider config={toasterConfig}>
+        <ToastPlayground />
+      </ToasterProvider>,
+    )
+
+    const button = screen.getByText(buttonText)
+
+    await userEvent.click(button)
+
+    const received = await screen.findByText(toastMessage)
+
+    // Assert
+    expect(received).toBeInTheDocument()
   })
 })
