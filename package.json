@@ -88,7 +88,9 @@
     "prepare": "husky install"
   },
   "jest": {
-    "coveragePathIgnorePatterns": ["src/components/App"],
+    "coveragePathIgnorePatterns": [
+      "src/components/App"
+    ],
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!**/*.d.ts",
