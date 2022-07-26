@@ -1,11 +1,3 @@
-/**
- * getToastPositionStyles
- * ------------------------------------------------
- * This util is used to generate a styles object that
- * dictates the toast position based on the Position
- * arguments.
- */
-
 import { CSSProperties } from "react"
 import { Position } from "../../types"
 
@@ -13,6 +5,13 @@ interface Args {
   position: Position
 }
 
+/**
+ * getToastPositionStyles
+ * ------------------------------------------------
+ * This util is used to generate a styles object that
+ * dictates the toast position based on the Position
+ * arguments.
+ */
 export const getToastPositionStyles = ({ position }: Args) => {
   const defaultStyle: CSSProperties = {
     position: "absolute",
