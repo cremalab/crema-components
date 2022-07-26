@@ -23,7 +23,7 @@
 - Slider
 - Chips/Tags
 - Progress Bar
-- Loader
+- ~~Loader~~
 - Toast
 - Banner
 - Tabs

@@ -1,0 +1,69 @@
+/* from: https://loading.io/css/ */
+
+.DefaultSpinner {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.DefaultSpinner.small {
+  width: 20px;
+  height: 20px;
+}
+
+.DefaultSpinner.medium {
+  width: 40px;
+  height: 40px;
+}
+
+.DefaultSpinner.large {
+  width: 60px;
+  height: 60px;
+}
+
+.DefaultSpinner div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 8px;
+  border: 8px solid #000;
+  border-radius: 50%;
+  animation: DefaultSpinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #000 transparent transparent transparent;
+}
+
+.DefaultSpinner.small div {
+  border-width: 2px;
+}
+
+.DefaultSpinner.medium div {
+  border-width: 4px;
+}
+
+.DefaultSpinner.large div {
+  border-width: 6px;
+}
+
+.DefaultSpinner div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.DefaultSpinner div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.DefaultSpinner div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes DefaultSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
