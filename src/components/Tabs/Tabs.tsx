@@ -15,7 +15,7 @@ interface TabsProps {
 }
 
 export function Tabs({ children, onTab, currentTab }: TabsProps) {
-  // We a list of refs for tablist nodes so we can focus them programmatically
+  // We use a list of refs for tablist nodes so we can focus them programmatically
   const tabListRefs = useRef<(HTMLLIElement | null)[]>([])
 
   // Sometimes children is an array; sometimes it's a single node
