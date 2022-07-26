@@ -19,18 +19,10 @@ interface Args {
 export const getToastTransitionStyles = ({
   animationDuration,
   transitionStatus,
-  position,
-  behavior,
 }: Args) => {
-  const isTopOrCenter =
-    position.vertical === "top" || position.vertical === "center"
-
-  const isAbsolute = isTopOrCenter && behavior === "replace"
-
   const defaultStyle: CSSProperties = {
     transition: `transform ${animationDuration}ms ease-in-out`,
     width: 300,
-    position: isAbsolute ? "absolute" : "relative",
   }
 
   const transitionStyles: { [key in TransitionStatus]: CSSProperties } = {
