@@ -1,19 +1,17 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { ToasterProvider } from "../../ToasterContext"
-import { ToasterConfig } from "../../utils"
 import { ToastPlayground } from "./ToastPlayground"
 
 describe("ToastPlayground", () => {
   it("adds a toast when a toast button is clicked", async () => {
     // Arrange
-    const toasterConfig = new ToasterConfig({ duration: Infinity })
     const buttonText = "Add Success Toast"
     const toastMessage = "Success Toast"
 
     // Act
     render(
-      <ToasterProvider config={toasterConfig}>
+      <ToasterProvider config={{ duration: Infinity }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -29,7 +27,6 @@ describe("ToastPlayground", () => {
   })
   it("removes all toasts when removeAll is triggered", async () => {
     // Arrange
-    const toasterConfig = new ToasterConfig({ duration: Infinity })
     const buttonTextInfo = "Add Info Toast"
     const buttonTextSuccess = "Add Warning Toast"
     const toastMessage = "Info Toast"
@@ -37,7 +34,7 @@ describe("ToastPlayground", () => {
 
     // Act
     render(
-      <ToasterProvider config={toasterConfig}>
+      <ToasterProvider config={{ duration: Infinity }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -60,13 +57,12 @@ describe("ToastPlayground", () => {
   })
   it("allows interaction with an Error Toast", async () => {
     // Arrange
-    const toasterConfig = new ToasterConfig({ duration: Infinity })
     const buttonText = "Add Error Toast"
     const toastMessage = "Error Toast"
 
     // Act
     render(
-      <ToasterProvider config={toasterConfig}>
+      <ToasterProvider config={{ duration: Infinity }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -82,14 +78,13 @@ describe("ToastPlayground", () => {
   })
   it("pressing escape dismisses most oldest toast", async () => {
     // Arrange
-    const toasterConfig = new ToasterConfig({ duration: Infinity })
     const buttonTextInfo = "Add Info Toast"
     const buttonTextSuccess = "Add Warning Toast"
     const testID = /toast/
 
     // Act
     render(
-      <ToasterProvider config={toasterConfig}>
+      <ToasterProvider config={{ duration: Infinity }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
