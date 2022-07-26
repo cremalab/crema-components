@@ -39,9 +39,14 @@ const defaultConfig: Config = {
 
 export function ToasterProvider({
   children,
-  config = defaultConfig,
+  config = {},
 }: ToasterProviderProps) {
-  const { position, animationDuration, duration, behavior } = config as Config
+  const {
+    position = defaultConfig.position,
+    animationDuration = defaultConfig.animationDuration,
+    duration = defaultConfig.duration,
+    behavior = defaultConfig.behavior,
+  } = config
 
   const [toasts, setToasts] = useState<ToastType[]>([])
   const timer = useRef<NodeJS.Timeout>()
