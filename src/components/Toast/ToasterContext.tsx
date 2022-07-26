@@ -48,6 +48,8 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
   const { animationDuration, duration, behavior, position } = config.getConfig()
   const [toasts, setToasts] = useState<ToastType[]>([])
   const timer = useRef<NodeJS.Timeout>()
+  const isTopOrCenter =
+    position.vertical === "top" || position.vertical === "center"
 
   const removeToast = useCallback((id: string) => {
     setToasts((toasts) => toasts.filter((toast) => toast.id !== id))
@@ -73,16 +75,12 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
     (toast) => {
       const newToast: ToastType = { ...toast, id: v4() }
       if (behavior === "stack") {
-        if (position.vertical === "center" || position.vertical === "top") {
-          setToasts((toasts) => [newToast, ...toasts])
-        } else {
-          setToasts((toasts) => [...toasts, newToast])
-        }
+        setToasts((toasts) => [...toasts, newToast])
       } else {
         setToasts([newToast])
       }
     },
-    [behavior, position.vertical],
+    [behavior],
   )
 
   const removeAll = useCallback(() => {
@@ -102,7 +100,7 @@ export function ToasterProvider({ children, config }: ToasterProviderProps) {
             style={{
               display: "flex",
               gap: "8px 0",
-              flexDirection: "column",
+              flexDirection: isTopOrCenter ? "column-reverse" : "column",
               alignItems,
             }}
           >
