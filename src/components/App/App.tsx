@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ToastPlayground, ToasterProvider } from "../Toast"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
+import { Pagination } from "../Pagination"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
@@ -44,6 +45,11 @@ export function App() {
           helperText="this is helper text"
         />
         <ToastPlayground />
+        <Pagination
+          currentPage={10}
+          totalPages={50}
+          onPage={(_, page) => alert(`I want to go to page ${page}`)}
+        />
       </div>
     </ToasterProvider>
   )
