@@ -114,5 +114,5 @@ return <button onClick={() => removeAll()}>Remove All</button>
 
 | Prop       | Type      | Required | Description         | Default                    |
 | ---------- | --------- | -------- | ------------------- | -------------------------- |
-| `children` | ReactNode | yes      | the toast id        |                            |
+| `children` | ReactNode | yes      |                     |                            |
 | `config`   | object    | no       | toast configuration | (see default config above) |
