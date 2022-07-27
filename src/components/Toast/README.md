@@ -20,7 +20,6 @@ All Toast related dependencies are contained within this folder, with the except
 - `index.ts`: Component export
 - `README.md`: Component documentation (hey, that's me!)
 
-
 ## Example Usage
 
 While the component is intended to be used within the given Toaster system, it can act outside of the ToasterContext though its not advised as you'll essentially have to create your own system for managing toasts.
@@ -34,15 +33,16 @@ While the component is intended to be used within the given Toaster system, it c
   onDismiss={(type, id) => doSomething(type, id)}
 />
 ```
+
 ## API
 
-| Prop            | Type   | Required | Description         | Default   |
-| --------------- | ------ | -------- | ------------------- | --------- |   
-| `id`            | number |   yes    | the toast id        |           |
-| `status`        | string |   no     | type of status      | "success" |
-| `message`       | string |   yes    | the toast message   |           |
-| `action`        | object |   no     | the type of action  |           |
-| `onDismiss`     | func   |   no     | the action callback |           |
+| Prop        | Type   | Required | Description         | Default   |
+| ----------- | ------ | -------- | ------------------- | --------- |
+| `id`        | number | yes      | the toast id        |           |
+| `status`    | string | no       | type of status      | "success" |
+| `message`   | string | yes      | the toast message   |           |
+| `action`    | object | no       | the type of action  |           |
+| `onDismiss` | func   | no       | the action callback |           |
 
 # ToasterContext
 
@@ -83,8 +83,9 @@ export function SomeComponent() {
 
   return (
     <div>
-      <button onClick={() =>
-        addToast({
+      <button
+        onClick={() =>
+          addToast({
             message: "Info Toast",
             status: "info",
             action: {
@@ -104,18 +105,14 @@ export function SomeComponent() {
 You can also programatically `removeAll` toasts if you wish.
 
 ```tsx
-  const { removeAll } = useToaster()
+const { removeAll } = useToaster()
 
-  return(
-    <button onClick={() => removeAll()}>
-      Remove All
-    </button>
-  )
+return <button onClick={() => removeAll()}>Remove All</button>
 ```
 
 ## API
 
-| Prop            | Type      | Required | Description         | Default                    |
-| --------------- | --------- | -------- | ------------------- | -------------------------- |   
-| `children`      | ReactNode |   yes    | the toast id        |                            |
-| `config`        | object    |   no     | toast configuration | (see default config above) |
+| Prop       | Type      | Required | Description         | Default                    |
+| ---------- | --------- | -------- | ------------------- | -------------------------- |
+| `children` | ReactNode | yes      | the toast id        |                            |
+| `config`   | object    | no       | toast configuration | (see default config above) |
