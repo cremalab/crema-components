@@ -97,7 +97,7 @@ Below is the project's file-tree with notes added as inline comments.
 │   │   ├── App
 │   │   │   ├── App.tsx # 👈 Contains main implementation
 │   │   │   ├── README.md # 👈  Every component has a README
-│   │   │   ├── index.tsx # 👈  Re-export
+│   │   │   ├── index.tsx # 👈  Export component
 │   │   │   └── styles.css # 👈  Component styles (not included in generated code)
 │   │   └── README.md # 👈  Every top-level directory in `src` has a README.md
 │   ├── types # 👈  Type definitions go here; use `npm run new:type` to generate
