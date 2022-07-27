@@ -18,7 +18,6 @@
 
 **🛣 Roadmap**
 
-- Pagination (in progress)
 - Breadcrumbs
 - Slider
 - Chips/Tags
