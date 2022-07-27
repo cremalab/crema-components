@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { Sidebar } from "../Sidebar"
+import { Pagination } from "../Pagination"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
@@ -69,6 +70,11 @@ export function App() {
           Close
         </Button>
       </Sidebar>
+      <Pagination
+        currentPage={10}
+        totalPages={50}
+        onPage={(_, page) => alert(`I want to go to page ${page}`)}
+      />
     </div>
   )
 }
