@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Button } from "../Button"
 import { Modal } from "../Modal"
+import { Pagination } from "../Pagination"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
@@ -40,6 +41,11 @@ export function App() {
         label="Test Input"
         hideLabel={false}
         helperText="this is helper text"
+      />
+      <Pagination
+        currentPage={10}
+        totalPages={50}
+        onPage={(_, page) => alert(`I want to go to page ${page}`)}
       />
     </div>
   )
