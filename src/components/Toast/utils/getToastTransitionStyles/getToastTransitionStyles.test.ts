@@ -1,10 +1,6 @@
 import { TransitionStatus } from "react-transition-group"
 import { getToastTransitionStyles } from "./getToastTransitionStyles"
 
-const defaultStyle = {
-  width: 300,
-}
-
 describe("getToastTransitionStyles", () => {
   it("returns different transition style based on animation duration", () => {
     // Arrange
@@ -19,7 +15,6 @@ describe("getToastTransitionStyles", () => {
     })
 
     const expected = {
-      ...defaultStyle,
       transform: "scale(1)",
       transition: `transform ${animationDuration}ms ease-in-out`,
     }
@@ -56,13 +51,11 @@ describe("getToastTransitionStyles", () => {
     const transition = "transform 300ms ease-in-out"
 
     const expectedEntered = {
-      ...defaultStyle,
       transform: "scale(1)",
       transition,
     }
 
     const expectedOthers = {
-      ...defaultStyle,
       transform: "scale(0)",
       transition,
     }

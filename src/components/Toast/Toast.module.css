@@ -4,9 +4,14 @@
   justify-content: space-between;
 }
 
+.toastMessage {
+  padding-right: 4px;
+}
+
 .toast {
   padding: 12px 24px 12px 24px;
   border-radius: 8px;
+  width: 300px;
 }
 
 .toast[data-type="success"] {

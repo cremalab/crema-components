@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-import { Position } from "../../types"
+import { Position } from "../../ToasterContext"
 
 interface Args {
   position: Position

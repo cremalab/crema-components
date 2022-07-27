@@ -1,9 +1,8 @@
 import { ComponentStory } from "@storybook/react"
 import { FC } from "react"
-import { Button } from "../Button"
-import { Config, Status } from "./types"
-import { ToasterProvider } from "./ToasterContext"
-import { Toast } from "./Toast"
+import { action } from "@storybook/addon-actions"
+import { Config, ToasterProvider } from "./ToasterContext"
+import { Toast, ToastStatus } from "./Toast"
 import { ToastPlayground } from "./components/ToastPlayground"
 
 /**
@@ -44,7 +43,8 @@ ProviderExample.args = {
 export const WithAction = Template.bind({})
 
 WithAction.args = {
-  action: <Button ariaLabel="Dismiss toast">Dismiss</Button>,
+  action: { type: "dismiss", text: "Dismiss" },
+  onDismiss: action("onDismiss"),
 }
 
 export const WithDefaults = Template.bind({})
@@ -52,8 +52,15 @@ export const WithDefaults = Template.bind({})
 WithDefaults.argTypes = {
   status: {
     control: "select",
-    options: ["error", "info", "success", "warning"] as Status[],
+    options: ["error", "info", "success", "warning"] as ToastStatus[],
   },
+}
+
+export const WithWrappedText = Template.bind({})
+
+WithWrappedText.args = {
+  message:
+    "Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.",
 }
 
 export const Warning = Template.bind({})

@@ -1,6 +1,6 @@
 import { CSSProperties } from "react"
 import { TransitionStatus } from "react-transition-group"
-import { Position } from "../../types"
+import { Position } from "../../ToasterContext"
 
 interface Args {
   animationDuration: number
@@ -22,7 +22,6 @@ export const getToastTransitionStyles = ({
 }: Args) => {
   const defaultStyle: CSSProperties = {
     transition: `transform ${animationDuration}ms ease-in-out`,
-    width: 300,
   }
 
   const transitionStyles: { [key in TransitionStatus]: CSSProperties } = {

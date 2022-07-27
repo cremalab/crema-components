@@ -2,7 +2,7 @@ import { Button } from "../../../Button"
 import { useToaster } from "../../useToaster"
 
 export function ToastPlayground() {
-  const { addToast, removeAll } = useToaster()
+  const { addToast } = useToaster()
 
   return (
     <div
@@ -19,11 +19,10 @@ export function ToastPlayground() {
           addToast({
             message: "Success Toast",
             status: "success",
-            action: (handleClose) => (
-              <Button ariaLabel="close toast" onClick={handleClose}>
-                Dismiss
-              </Button>
-            ),
+            action: {
+              type: "dismiss",
+              text: "Dismiss",
+            },
           })
         }
       >
@@ -35,11 +34,10 @@ export function ToastPlayground() {
           addToast({
             message: "Info Toast",
             status: "info",
-            action: () => (
-              <Button ariaLabel="close toast" onClick={removeAll}>
-                Dismiss All
-              </Button>
-            ),
+            action: {
+              type: "dismissAll",
+              text: "Dismiss All",
+            },
           })
         }
       >

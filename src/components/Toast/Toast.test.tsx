@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react"
-import { Button } from "../Button"
-import { Status } from "./types"
-import { Toast } from "./Toast"
+import userEvent from "@testing-library/user-event"
+import { Toast, ToastAction, ToastStatus } from "./Toast"
 
 describe("Toast", () => {
   it("has an aria-live value of 'assertive' if type is 'error'", () => {
@@ -9,7 +8,7 @@ describe("Toast", () => {
     const status = "error"
 
     // Act
-    render(<Toast status={status} message="Hello Toast!" />)
+    render(<Toast id={1} status={status} message="Hello Toast!" />)
 
     const received = screen.getByRole("alert")
 
@@ -21,7 +20,7 @@ describe("Toast", () => {
     const status = "success"
     // Act
 
-    render(<Toast status={status} message="Hello Toast!" />)
+    render(<Toast id={1} status={status} message="Hello Toast!" />)
 
     const received = screen.getByRole("alert")
 
@@ -29,14 +28,14 @@ describe("Toast", () => {
     expect(received).toHaveAttribute("aria-live", "polite")
   })
   it("renders toast for each type", () => {
-    const statuses = ["success", "error", "warning", "info"] as Status[]
+    const statuses = ["success", "error", "warning", "info"] as ToastStatus[]
     statuses.forEach((status) => {
       // Arrange
       const message = "Hello Toast!"
       const label = `a ${status} toast`
 
       // Act
-      render(<Toast status={status} message={message} />)
+      render(<Toast id={1} status={status} message={message} />)
 
       const received = screen.getByLabelText(label)
 
@@ -44,17 +43,26 @@ describe("Toast", () => {
       expect(received).toHaveAttribute("data-type", status)
     })
   })
-  it("renders an action element", () => {
+  it("invokes onDismiss callback", async () => {
     // Arrange
-    const actionLabel = "dismiss toast"
-    const action = <Button ariaLabel={actionLabel}>Dismiss</Button>
+    const onDismiss = jest.fn()
+    const action = { type: "dismiss", text: "Dismiss" } as ToastAction
 
     // Act
-    render(<Toast message="Hello Toast!" action={action} />)
+    render(
+      <Toast
+        id={1}
+        message="Hello Toast!"
+        action={action}
+        onDismiss={onDismiss}
+      />,
+    )
 
-    const received = screen.getByLabelText(actionLabel)
+    const button = screen.getByText(action.text)
+
+    await userEvent.click(button)
 
     // Assert
-    expect(received).toBeInTheDocument()
+    expect(onDismiss).toBeCalled()
   })
 })

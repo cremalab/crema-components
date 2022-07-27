@@ -11,7 +11,7 @@ describe("ToastPlayground", () => {
 
     // Act
     render(
-      <ToasterProvider config={{ duration: Infinity }}>
+      <ToasterProvider config={{ duration: 10000 }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -30,11 +30,11 @@ describe("ToastPlayground", () => {
     const buttonTextInfo = "Add Info Toast"
     const buttonTextSuccess = "Add Warning Toast"
     const toastMessage = "Info Toast"
-    const removeAllButtonText = "Dismiss All"
+    const dismissAllButtonText = "Dismiss All"
 
     // Act
     render(
-      <ToasterProvider config={{ duration: Infinity }}>
+      <ToasterProvider config={{ duration: 10000 }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -46,7 +46,7 @@ describe("ToastPlayground", () => {
 
     await userEvent.click(warningToastButton)
 
-    const dismissAllButton = await screen.findByText(removeAllButtonText)
+    const dismissAllButton = await screen.findByText(dismissAllButtonText)
 
     await userEvent.click(dismissAllButton)
 
@@ -63,7 +63,7 @@ describe("ToastPlayground", () => {
 
     // Act
     render(
-      <ToasterProvider config={{ duration: Infinity }}>
+      <ToasterProvider config={{ duration: 10000 }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -88,7 +88,7 @@ describe("ToastPlayground", () => {
 
     // Act
     render(
-      <ToasterProvider config={{ duration: Infinity }}>
+      <ToasterProvider config={{ duration: 10000 }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -110,7 +110,7 @@ describe("ToastPlayground", () => {
 
     // Act
     render(
-      <ToasterProvider config={{ duration: Infinity }}>
+      <ToasterProvider config={{ duration: 10000 }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -121,13 +121,9 @@ describe("ToastPlayground", () => {
     await userEvent.click(infoToastButton)
     await userEvent.click(warningToastButton)
 
-    const received = screen.getAllByTestId(testID)
-
-    expect(received).toHaveLength(2)
-
-    await userEvent.keyboard("[Escape]")
-
     // Assert
+    await waitFor(() => expect(screen.getAllByTestId(testID)).toHaveLength(2))
+    await userEvent.keyboard("[Escape]")
     await waitFor(() => expect(screen.getAllByTestId(testID)).toHaveLength(1))
   })
   it("throws an error if useToaster is used outside of it's context", () => {
@@ -143,7 +139,7 @@ describe("ToastPlayground", () => {
 
     // Act
     render(
-      <ToasterProvider config={{ duration: Infinity, behavior: "replace" }}>
+      <ToasterProvider config={{ duration: 10000, behavior: "replace" }}>
         <ToastPlayground />
       </ToasterProvider>,
     )
@@ -152,7 +148,6 @@ describe("ToastPlayground", () => {
     const warningToastButton = screen.getByText(buttonTextSuccess)
 
     await userEvent.click(infoToastButton)
-
     await userEvent.click(warningToastButton)
 
     // Assert

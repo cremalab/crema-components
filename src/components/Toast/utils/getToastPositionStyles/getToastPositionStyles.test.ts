@@ -1,4 +1,4 @@
-import { Position } from "../../types"
+import { Position } from "../../ToasterContext"
 import { getToastPositionStyles } from "./getToastPositionStyles"
 
 const defaultStyle = {

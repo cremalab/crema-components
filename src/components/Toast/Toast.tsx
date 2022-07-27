@@ -1,17 +1,46 @@
-import { ReactNode } from "react"
-import { Status } from "./types"
+import { Button } from "../Button"
 import styles from "./Toast.module.css"
 
-interface ToastProps {
-  status?: Status
-  message: string
-  action?: ReactNode
+export type ToastAction = {
+  type: "dismiss" | "dismissAll"
+  text: string
 }
 
-export function Toast({ action, message, status = "success" }: ToastProps) {
+export type ToastStatus = "success" | "info" | "error" | "warning"
+
+export interface ToastProps {
+  id: number
+  status?: ToastStatus
+  message: string
+  action?: ToastAction
+  onDismiss?: (action: ToastAction["type"], id: number) => void
+}
+
+export function Toast({
+  message,
+  status = "success",
+  action,
+  id,
+  onDismiss,
+}: ToastProps) {
+  const ActionElement = ({ action }: { action?: ToastAction }) => {
+    if (action) {
+      return (
+        <Button
+          ariaLabel={action.text}
+          onClick={() => onDismiss?.(action.type, id)}
+        >
+          {action.text}
+        </Button>
+      )
+    } else {
+      return null
+    }
+  }
+
   return (
     <div
-      data-testid={`toast_${message}`}
+      data-testid={`toast_${id}`}
       role="alert"
       aria-live={status === "error" ? "assertive" : "polite"}
       aria-label={`a ${status} toast`}
@@ -19,10 +48,8 @@ export function Toast({ action, message, status = "success" }: ToastProps) {
       className={styles.toast}
     >
       <div className={styles.toastContent}>
-        <div>{message}</div>
-        {action ? (
-          <div className={styles.toastActionContainer}>{action}</div>
-        ) : null}
+        <div className={styles.toastMessage}>{message}</div>
+        <ActionElement action={action} />
       </div>
     </div>
   )
