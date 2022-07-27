@@ -96,11 +96,10 @@ Below is the project's file-tree with notes added as inline comments.
 │   │   └── logo.svg
 │   ├── components # 👈  Use `npm run new:component` to generate
 │   │   ├── App
+│   │   │   ├── App.tsx # 👈 Contains main implementation
 │   │   │   ├── README.md # 👈  Every component has a README
-│   │   │   ├── index.tsx # 👈  Contains main implementation
-│   │   │   ├── stories.tsx # 👈  Component stories; use `npm run test:playground` to run
-│   │   │   ├── styles.css # 👈  Component styles (not included in generated code)
-│   │   │   └── test.tsx # 👈  Component tests; use `npm run test:unit` to run
+│   │   │   ├── index.tsx # 👈  Re-export
+│   │   │   └── styles.css # 👈  Component styles (not included in generated code)
 │   │   └── README.md # 👈  Every top-level directory in `src` has a README.md
 │   ├── types # 👈  Type definitions go here; use `npm run new:type` to generate
 │   │   └── README.md
