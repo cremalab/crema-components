@@ -5,13 +5,13 @@ import { Tab, Tabs } from "."
 describe("Tabs", () => {
   it("renders a single Tab", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
     const label = "Tab 1"
     const content = "Content 1"
 
     // Act
     render(
-      <Tabs currentTab={0} onTab={onTab}>
+      <Tabs currentTab={0} onTabChange={onTabChange}>
         <Tab label={label}>{content}</Tab>
       </Tabs>,
     )
@@ -26,14 +26,14 @@ describe("Tabs", () => {
 
   it("renders multiple Tabs but only one is not hidden", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
     const label0 = "Tab 1"
     const content0 = "Content 1"
     const label1 = "Tab 2"
 
     // Act
     render(
-      <Tabs currentTab={0} onTab={onTab}>
+      <Tabs currentTab={0} onTabChange={onTabChange}>
         <Tab label={label0}>{content0}</Tab>
         <Tab label={label1}>Content 2</Tab>
         <Tab label="Tab 3">Content 3</Tab>
@@ -52,7 +52,7 @@ describe("Tabs", () => {
 
   it("renders correct tab when currentTab set", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
     const label0 = "Tab 1"
     const content0 = "Content 1"
     const label1 = "Tab 2"
@@ -60,7 +60,7 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs currentTab={1} onTab={onTab}>
+      <Tabs currentTab={1} onTabChange={onTabChange}>
         <Tab label={label0}>{content0}</Tab>
         <Tab label={label1}>{content1}</Tab>
       </Tabs>,
@@ -76,13 +76,13 @@ describe("Tabs", () => {
     expect(contentNode2.textContent).toBe(content1)
   })
 
-  it("onTab is called when tab is clicked", () => {
+  it("onTabChange is called when tab is clicked", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
 
     // Act
     render(
-      <Tabs onTab={onTab} currentTab={0}>
+      <Tabs onTabChange={onTabChange} currentTab={0}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
@@ -92,16 +92,16 @@ describe("Tabs", () => {
     fireEvent.click(menuItemNode2)
 
     // Assert
-    expect(onTab).toBeCalledWith(1)
+    expect(onTabChange).toBeCalledWith(1)
   })
 
-  it("onTab is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
 
     // Act
     render(
-      <Tabs onTab={onTab} currentTab={1}>
+      <Tabs onTabChange={onTabChange} currentTab={1}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
@@ -112,16 +112,16 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTab).toBeCalledWith(0)
+    expect(onTabChange).toBeCalledWith(0)
   })
 
-  it("onTab is called with expected 'tab' data when ArrowLeft loops back to end", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowLeft loops back to end", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
 
     // Act
     render(
-      <Tabs onTab={onTab} currentTab={0}>
+      <Tabs onTabChange={onTabChange} currentTab={0}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
@@ -132,16 +132,16 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTab).toBeCalledWith(1)
+    expect(onTabChange).toBeCalledWith(1)
   })
 
-  it("onTab is called with expected 'tab' data when ArrowRight pressed from 0", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowRight pressed from 0", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
 
     // Act
     render(
-      <Tabs onTab={onTab} currentTab={0}>
+      <Tabs onTabChange={onTabChange} currentTab={0}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
@@ -152,16 +152,16 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTab).toBeCalledWith(1)
+    expect(onTabChange).toBeCalledWith(1)
   })
 
-  it("onTab is called with expected 'tab' data when ArrowRight loops back to 0", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowRight loops back to 0", () => {
     // Arrange
-    const onTab = jest.fn()
+    const onTabChange = jest.fn()
 
     // Act
     render(
-      <Tabs onTab={onTab} currentTab={1}>
+      <Tabs onTabChange={onTabChange} currentTab={1}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
       </Tabs>,
@@ -172,6 +172,6 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTab).toBeCalledWith(0)
+    expect(onTabChange).toBeCalledWith(0)
   })
 })
