@@ -1,18 +1,18 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { Modal } from "./Modal"
-import { ModalTitle } from "./ModalTitle"
+import { Sidebar } from "./Sidebar"
+import { SidebarTitle } from "./SidebarTitle"
 
-describe("Modal", () => {
+describe("Sidebar", () => {
   it("renders nothing when open = false", async () => {
     // Arrange
+    const children = "This should not render"
+
     // Act
-    const { asFragment } = render(
-      <Modal open={false}>this should not render</Modal>,
-    )
+    render(<Sidebar open={false}>{children}</Sidebar>)
 
     // Assert
-    expect(asFragment()).toMatchSnapshot()
+    expect(screen.queryByText(children)).toBeNull()
   })
 
   it("renders content when open = true", async () => {
@@ -22,19 +22,19 @@ describe("Modal", () => {
 
     // Act
     render(
-      <Modal open={true} title={title}>
+      <Sidebar open={true} title={title}>
         {children}
-      </Modal>,
+      </Sidebar>,
     )
-    const titleNode = await screen.findByText(title)
-    const childrenNode = await screen.findByText(children)
+    const titleNode = screen.queryByText(title)
+    const childrenNode = screen.queryByText(children)
 
     // Assert
     expect(titleNode).toBeInTheDocument()
     expect(childrenNode).toBeInTheDocument()
   })
 
-  it("calls onClose when the modal overlay is clicked", async () => {
+  it("calls onClose when the sidebar overlay is clicked", async () => {
     // Arrange
     const onClose = jest.fn()
     const title = "title"
@@ -42,11 +42,11 @@ describe("Modal", () => {
 
     // Act
     render(
-      <Modal open={true} title={title} onClose={onClose}>
+      <Sidebar open={true} title={title} onClose={onClose} hideOverlay={false}>
         {children}
-      </Modal>,
+      </Sidebar>,
     )
-    const overlay = await screen.findByTestId("modal-overlay")
+    const overlay = await screen.findByTestId("sidebar-backdrop")
     await userEvent.click(overlay)
 
     expect(onClose).toHaveBeenCalled()
@@ -60,17 +60,16 @@ describe("Modal", () => {
 
     // Act
     render(
-      <Modal open={true} title={title} onClose={onClose}>
+      <Sidebar open={true} title={title} onClose={onClose}>
         {children}
-      </Modal>,
+      </Sidebar>,
     )
-
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).toHaveBeenCalled()
   })
 
-  it("does not call onClose when the modal is not open and the escape key is pressed", async () => {
+  it("does not call onClose when the sidebar is not open and the escape key is pressed", async () => {
     // Arrange
     const onClose = jest.fn()
     const title = "title"
@@ -78,33 +77,33 @@ describe("Modal", () => {
 
     // Act
     render(
-      <Modal open={false} title={title} onClose={onClose}>
+      <Sidebar open={false} title={title} onClose={onClose}>
         {children}
-      </Modal>,
+      </Sidebar>,
     )
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).not.toHaveBeenCalled()
   })
 
-  it("does not render a title if no title is provided", async () => {
+  it("does not render a title when title is not provided", async () => {
     // Arrange
     const children = "children"
 
     // Act
-    render(<Modal open={true}>{children}</Modal>)
+    render(<Sidebar open={true}>{children}</Sidebar>)
 
     // Assert
     expect(screen.getByText(children)).toBeInTheDocument()
   })
 })
 
-describe("ModalTitle", () => {
+describe("SidebarTitle", () => {
   it("renders the children", async () => {
     // Arrange
     // Act
-    render(<ModalTitle>Test Title</ModalTitle>)
-    const received = await screen.findByText("Test Title")
+    render(<SidebarTitle>Test Title</SidebarTitle>)
+    const received = screen.queryByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
@@ -113,8 +112,9 @@ describe("ModalTitle", () => {
   it("does not render the close button if no onClose is given", async () => {
     // Arrange
     // Act
-    render(<ModalTitle>Test Title</ModalTitle>)
-    const closeButton = screen.queryByLabelText("close the modal")
+    render(<SidebarTitle>Test Title</SidebarTitle>)
+
+    const closeButton = screen.queryByText("close the sidebar")
 
     // Assert
     expect(closeButton).toBeNull()
@@ -125,11 +125,8 @@ describe("ModalTitle", () => {
     const onClose = jest.fn()
 
     // Act
-    render(<ModalTitle onClose={onClose}>Test Title</ModalTitle>)
-
-    const closeButton = screen.queryByLabelText(
-      "close the modal",
-    ) as HTMLElement
+    render(<SidebarTitle onClose={onClose}>Test Title</SidebarTitle>)
+    const closeButton = screen.getByRole("button")
     await userEvent.click(closeButton)
 
     // Assert
@@ -140,23 +137,23 @@ describe("ModalTitle", () => {
     // Arrange
     const children = "Test Title"
     // Act
-    render(<ModalTitle>{children}</ModalTitle>)
-    const received = await screen.findByText("Test Title")
+    render(<SidebarTitle>{children}</SidebarTitle>)
+    const received = screen.queryByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
-    expect(received.tagName).toBe("P")
+    expect(received?.tagName).toBe("P")
   })
 
   it("renders children in a div tag if children is not a string", async () => {
     // Arrange
     const children = <div>Test Title</div>
     // Act
-    render(<ModalTitle>{children}</ModalTitle>)
-    const received = await screen.findByText("Test Title")
+    render(<SidebarTitle>{children}</SidebarTitle>)
+    const received = screen.queryByText("Test Title")
 
     // Assert
     expect(received).toBeInTheDocument()
-    expect(received.tagName).toBe("DIV")
+    expect(received?.tagName).toBe("DIV")
   })
 })
