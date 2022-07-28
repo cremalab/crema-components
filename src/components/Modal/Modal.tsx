@@ -19,7 +19,7 @@ export function Modal({ children, open, onClose, title, ...props }: Props) {
   })
 
   useKeyPress(["Escape"], () => {
-    onClose?.()
+    if (open) onClose?.()
   })
 
   useEffect(() => {
