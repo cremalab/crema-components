@@ -1,0 +1,31 @@
+.progressBar {
+  position: fixed;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 4px 8px;
+}
+
+@keyframes indeterminate {
+  0% {
+    left: 1%;
+    width: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.progressBarIndeterminate {
+  animation: indeterminate 1.25s ease-in-out 0s infinite none running;
+}
+
+.progressBarIndicator {
+  background: green;
+}
+
+.progressBarTrack {
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  background-color: rgb(174, 228, 174);
+}
