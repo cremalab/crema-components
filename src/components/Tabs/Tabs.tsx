@@ -5,10 +5,6 @@ import { TabPanel } from "./components/TabPanel"
 import { Tab } from "./types"
 
 interface TabsProps {
-  /**
-   * We constrain `children` to be element(s) with a label and children
-   * props (e.g. `Tab`). This is only structural, however.
-   **/
   children: ReactElement<TabProps> | Array<ReactElement<TabProps>>
   currentTab: number
   onTabChange: (index: number) => void
@@ -23,16 +19,28 @@ export function Tabs({
   // We use a list of refs for tablist nodes so we can focus them programmatically
   const tabListRefs = useRef<(HTMLLIElement | null)[]>([])
 
-  // Sometimes children is an array; sometimes it's a single node
-  const childrenArray = (Array.isArray(children) ? children : [children]).map(
-    (child, index) => ({ ...child.props, index }),
+  // Sometimes children is an array; sometimes it's a single node—let's make it an array
+  const childrenArray = Array.isArray(children) ? children : [children]
+
+  // Importantly, we need to track the original index of the children; we spread props here
+  const childrenWithIndex = childrenArray.map((child, index) => ({
+    ...child.props,
+    index,
+  }))
+
+  // We need to know if the user passes a currentTab that is disabled—we need to fix that
+  const isDisabledCurrent = childrenWithIndex.find(
+    (child) => child.disabled && child.index === currentTabOriginal,
   )
-  const isDisabledCurrent = childrenArray.find(
-    (child, i) => child.disabled && i === currentTabOriginal,
-  )
-  const tabsEnabled = childrenArray.filter((child) => !child.disabled)
+
+  // Now we need to create a list of only enabled children
+  const childrenEnabled = childrenWithIndex.filter((child) => !child.disabled)
   if (isDisabledCurrent) {
-    currentTab = tabsEnabled[0].index
+    /**
+     * If we discovered that the currentTab is disabled, we set the new currentTab to
+     * the index of the first enabled tab we have.
+     **/
+    currentTab = childrenEnabled[0].index
   }
 
   /**
@@ -40,18 +48,26 @@ export function Tabs({
    * NOTE: We are computing `isSelected` at this point only
    * NOTE: `index` is stored here—we'll need it to handle skipping disabled tabs
    */
-  const tabsOriginal: Tab[] = tabsOfChildren(childrenArray, currentTab)
-  const tabs: Tab[] = tabsOfChildren(tabsEnabled, currentTab)
 
-  const tabCurrentIndex = tabs.findIndex((tab) => tab.index === currentTab)
-  const tabPrevIndex =
-    tabCurrentIndex === 0
-      ? tabs[tabs.length - 1]?.index
-      : tabs[tabCurrentIndex - 1]?.index
-  const tabNextIndex =
-    tabCurrentIndex === tabs.length - 1
-      ? tabs[0]?.index
-      : tabs[tabCurrentIndex + 1]?.index
+  // We need the full set of the original tabs—including disabled for rendering TabList
+  const tabsOriginal = tabsOfChildren(childrenWithIndex, currentTab)
+
+  // We need the fully mapped set of enabled tabs for arrow key navigation as well
+  const tabsEnabled = tabsOfChildren(childrenEnabled, currentTab)
+
+  const tabsEnabledCurrentIndex = tabsEnabled.findIndex(
+    (tab) => tab.index === currentTab,
+  )
+
+  const tabsEnabledPrevIndex =
+    tabsEnabledCurrentIndex === 0
+      ? tabsEnabled[tabsEnabled.length - 1]?.index
+      : tabsEnabled[tabsEnabledCurrentIndex - 1]?.index
+
+  const tabEnabledNextIndex =
+    tabsEnabledCurrentIndex === tabsEnabled.length - 1
+      ? tabsEnabled[0]?.index
+      : tabsEnabled[tabsEnabledCurrentIndex + 1]?.index
 
   const onClick = (tab: Tab) => {
     onTabChange(tab.index)
@@ -64,10 +80,10 @@ export function Tabs({
     }
 
     if (event.key === "ArrowLeft") {
-      setCurrentTab(tabPrevIndex)
+      setCurrentTab(tabsEnabledPrevIndex)
     }
     if (event.key === "ArrowRight") {
-      setCurrentTab(tabNextIndex)
+      setCurrentTab(tabEnabledNextIndex)
     }
   }
 
@@ -80,7 +96,7 @@ export function Tabs({
         tabs={tabsOriginal}
       />
       <>
-        {tabs.map((tab) => (
+        {tabsEnabled.map((tab) => (
           <TabPanel key={tab.panelId} tab={tab} />
         ))}
       </>
