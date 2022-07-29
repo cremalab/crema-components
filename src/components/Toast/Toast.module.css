@@ -1,0 +1,31 @@
+.toastContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toastMessage {
+  padding-right: 4px;
+}
+
+.toast {
+  padding: 12px 24px 12px 24px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.toast[data-type="success"] {
+  background: lightgreen;
+}
+
+.toast[data-type="error"] {
+  background: lightcoral;
+}
+
+.toast[data-type="info"] {
+  background: lightblue;
+}
+
+.toast[data-type="warning"] {
+  background: lightgoldenrodyellow;
+}
