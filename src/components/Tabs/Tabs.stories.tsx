@@ -42,3 +42,23 @@ export const WithDisabledIndex = () => {
     </Tabs>
   )
 }
+
+export const WithOutOfRangeIndex = () => {
+  const [currentTab, setCurrentTab] = useState(6)
+  return (
+    <Tabs currentTab={currentTab} onTabChange={setCurrentTab}>
+      <Tab label="Tab 0" disabled>
+        Content 0
+      </Tab>
+      <Tab label="Tab 1">Content 1</Tab>
+      <Tab label="Tab 2" disabled>
+        Content 2
+      </Tab>
+      <Tab label="Tab 3" disabled>
+        Content 3
+      </Tab>
+      <Tab label="Tab 4">Content 4</Tab>
+      <Tab label="Tab 5">Content 5</Tab>
+    </Tabs>
+  )
+}

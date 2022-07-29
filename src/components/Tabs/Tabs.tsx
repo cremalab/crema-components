@@ -10,17 +10,16 @@ interface TabsProps {
   onTabChange: (index: number) => void
 }
 
-export function Tabs({
-  children,
-  onTabChange,
-  currentTab: currentTabOriginal,
-}: TabsProps) {
-  let currentTab = currentTabOriginal
+export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
   // We use a list of refs for tablist nodes so we can focus them programmatically
   const tabListRefs = useRef<(HTMLLIElement | null)[]>([])
 
   // Sometimes children is an array; sometimes it's a single node—let's make it an array
   const childrenArray = Array.isArray(children) ? children : [children]
+
+  // Let's make sure the
+  let currentIndex =
+    currentTab < 0 || currentTab > childrenArray.length - 1 ? 0 : currentTab
 
   // Importantly, we need to track the original index of the children; we spread props here
   const childrenWithIndex = childrenArray.map((child, index) => ({
@@ -30,7 +29,7 @@ export function Tabs({
 
   // We need to know if the user passes a currentTab that is disabled—we need to fix that
   const isDisabledCurrent = childrenWithIndex.find(
-    (child) => child.disabled && child.index === currentTabOriginal,
+    (child) => child.disabled && child.index === currentIndex,
   )
 
   // Now we need to create a list of only enabled children
@@ -40,7 +39,7 @@ export function Tabs({
      * If we discovered that the currentTab is disabled, we set the new currentTab to
      * the index of the first enabled tab we have.
      **/
-    currentTab = childrenEnabled[0].index
+    currentIndex = childrenEnabled[0].index
   }
 
   /**
@@ -50,13 +49,13 @@ export function Tabs({
    */
 
   // We need the full set of the original tabs—including disabled for rendering TabList
-  const tabsOriginal = tabsOfChildren(childrenWithIndex, currentTab)
+  const tabsOriginal = tabsOfChildren(childrenWithIndex, currentIndex)
 
   // We need the fully mapped set of enabled tabs for arrow key navigation as well
-  const tabsEnabled = tabsOfChildren(childrenEnabled, currentTab)
+  const tabsEnabled = tabsOfChildren(childrenEnabled, currentIndex)
 
   const tabsEnabledCurrentIndex = tabsEnabled.findIndex(
-    (tab) => tab.index === currentTab,
+    (tab) => tab.index === currentIndex,
   )
 
   const tabsEnabledPrevIndex =

@@ -54,6 +54,7 @@ export function TabListItem({
   return (
     <li
       aria-controls={tab.panelId}
+      aria-disabled={tab.disabled}
       aria-selected={tab.isSelected}
       className={className}
       id={tab.id}

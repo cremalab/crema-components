@@ -16,10 +16,10 @@ describe("Tabs", () => {
       </Tabs>,
     )
 
+    // Assert
     const menuItemNode = screen.getByText(label)
     const contentNode = screen.getByText(content)
 
-    // Assert
     expect(menuItemNode).toBeInTheDocument()
     expect(contentNode).toBeInTheDocument()
   })
@@ -40,11 +40,11 @@ describe("Tabs", () => {
       </Tabs>,
     )
 
+    // Assert
     const menuItemNode1 = screen.getByText(label0)
     const menuItemNode2 = screen.getByText(label1)
     const contentNode1 = screen.getByRole("tabpanel")
 
-    // Assert
     expect(menuItemNode1).toBeInTheDocument()
     expect(menuItemNode2).toBeInTheDocument()
     expect(contentNode1.textContent).toBe(content0)
@@ -66,11 +66,11 @@ describe("Tabs", () => {
       </Tabs>,
     )
 
+    // Assert
     const menuItemNode1 = screen.getByText(label0)
     const menuItemNode2 = screen.getByText(label1)
     const contentNode2 = screen.getByRole("tabpanel")
 
-    // Assert
     expect(menuItemNode1).toBeInTheDocument()
     expect(menuItemNode2).toBeInTheDocument()
     expect(contentNode2.textContent).toBe(content1)
@@ -173,5 +173,65 @@ describe("Tabs", () => {
 
     // Assert
     expect(onTabChange).toBeCalledWith(0)
+  })
+
+  it("sets currentTab to first enabled tab if index of a disabled tab passed", () => {
+    // Arrange
+    const onTabChange = jest.fn()
+
+    // Act
+    render(
+      <Tabs onTabChange={onTabChange} currentTab={0}>
+        <Tab label="Tab 1" disabled>
+          Content 1
+        </Tab>
+        <Tab label="Tab 2">Content 2</Tab>
+        <Tab label="Tab 3">Content 3</Tab>
+      </Tabs>,
+    )
+
+    // Assert
+    const tabPanelContent = screen.getByRole("tabpanel").textContent
+    expect(tabPanelContent).toBe("Content 2")
+  })
+
+  it("handles bottom out-of-range currentTab", () => {
+    // Arrange
+    const onTabChange = jest.fn()
+
+    // Act
+    render(
+      <Tabs onTabChange={onTabChange} currentTab={-1}>
+        <Tab label="Tab 1" disabled>
+          Content 1
+        </Tab>
+        <Tab label="Tab 2">Content 2</Tab>
+        <Tab label="Tab 3">Content 3</Tab>
+      </Tabs>,
+    )
+
+    // Assert
+    const tabPanelContent = screen.getByRole("tabpanel").textContent
+    expect(tabPanelContent).toBe("Content 2")
+  })
+
+  it("handles top out-of-range currentTab", () => {
+    // Arrange
+    const onTabChange = jest.fn()
+
+    // Act
+    render(
+      <Tabs onTabChange={onTabChange} currentTab={3}>
+        <Tab label="Tab 1" disabled>
+          Content 1
+        </Tab>
+        <Tab label="Tab 2">Content 2</Tab>
+        <Tab label="Tab 3">Content 3</Tab>
+      </Tabs>,
+    )
+
+    // Assert
+    const tabPanelContent = screen.getByRole("tabpanel").textContent
+    expect(tabPanelContent).toBe("Content 2")
   })
 })
