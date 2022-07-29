@@ -8,6 +8,7 @@ import { ReactNode } from "react"
 
 export interface Tab {
   children: ReactNode
+  disabled?: boolean
   id: string
   index: number
   isSelected: boolean

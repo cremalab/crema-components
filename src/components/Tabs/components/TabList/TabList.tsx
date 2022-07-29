@@ -46,6 +46,7 @@ export function TabListItem({
 }: TabListItemProps) {
   const className = classNames(styles.TabListItem, {
     [styles.isActive]: tab.isSelected,
+    [styles.isDisabled]: tab.disabled,
   })
 
   const handleClick = () => onClick(tab)

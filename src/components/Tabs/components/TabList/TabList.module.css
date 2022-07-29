@@ -26,3 +26,8 @@
   border-color: lightgray;
   z-index: 1;
 }
+
+.TabListItem.isDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
