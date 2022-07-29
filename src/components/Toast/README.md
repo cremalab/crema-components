@@ -9,8 +9,6 @@ All Toast related dependencies are contained within this folder, with the except
     - a util for generating styles based on Toast behaviors and transition states
   - `getToastPositionStyles`
     - a util for generating styles based on Toast x and y axis positioning
-  - `ToasterConfig`
-    - a class for generating a conig object for the Toast Provider
 - `Toast.stories.tsx`: Component stories (`npm run test:playground`)
 - `Toast.test.tsx`: Component tests (`npm run test:unit`)
 - `Toast.tsx`: Component code
