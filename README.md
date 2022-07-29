@@ -21,7 +21,7 @@
 - Breadcrumbs
 - Slider
 - Chips/Tags
-- Progress Bar
+- ~~Progress Bar~~
 - ~~Loader~~
 - Toast
 - Banner
