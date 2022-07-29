@@ -77,7 +77,7 @@ export function App() {
         totalPages={50}
         onPage={(_, page) => alert(`I want to go to page ${page}`)}
       />
-      <Tabs currentTab={currentTab} onTab={(tab) => setCurrentTab(tab.index)}>
+      <Tabs currentTab={currentTab} onTabChange={setCurrentTab}>
         <Tab label="Tab 1">Content 1</Tab>
         <Tab label="Tab 2">Content 2</Tab>
         <Tab label="Tab 3">Content 3</Tab>
