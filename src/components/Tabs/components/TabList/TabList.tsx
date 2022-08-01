@@ -1,4 +1,3 @@
-import classNames from "classnames"
 import { KeyboardEvent, MutableRefObject } from "react"
 import { Tab } from "../../types"
 import styles from "./TabList.module.css"
@@ -44,10 +43,10 @@ export function TabListItem({
   tab,
   refs,
 }: TabListItemProps) {
-  const className = classNames(styles.TabListItem, {
-    [styles.selected]: tab.selected,
-    [styles.disabled]: tab.disabled,
-  })
+  const className =
+    styles.TabListItem +
+    (tab.selected ? " " + styles.selected : "") +
+    (tab.disabled ? " " + styles.disabled : "")
 
   const handleClick = () => onClick(tab)
 
