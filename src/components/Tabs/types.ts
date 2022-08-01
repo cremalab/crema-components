@@ -11,7 +11,7 @@ export interface Tab {
   disabled?: boolean
   id: string
   index: number
-  isSelected: boolean
+  selected: boolean
   label: string
   panelId: string
 }

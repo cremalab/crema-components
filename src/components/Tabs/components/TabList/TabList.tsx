@@ -45,8 +45,8 @@ export function TabListItem({
   refs,
 }: TabListItemProps) {
   const className = classNames(styles.TabListItem, {
-    [styles.isActive]: tab.isSelected,
-    [styles.isDisabled]: tab.disabled,
+    [styles.selected]: tab.selected,
+    [styles.disabled]: tab.disabled,
   })
 
   const handleClick = () => onClick(tab)
@@ -55,14 +55,14 @@ export function TabListItem({
     <li
       aria-controls={tab.panelId}
       aria-disabled={tab.disabled}
-      aria-selected={tab.isSelected}
+      aria-selected={tab.selected}
       className={className}
       id={tab.id}
       onClick={handleClick}
       onKeyDown={onKeyDown}
       ref={(ref) => (refs.current[tab.index] = ref)}
       role="tab"
-      tabIndex={tab.isSelected ? 0 : -1}
+      tabIndex={tab.selected ? 0 : -1}
     >
       {tab.label}
     </li>

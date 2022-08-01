@@ -20,14 +20,14 @@
   margin-left: 10px;
 }
 
-.TabListItem.isActive {
+.TabListItem.selected {
   background: white;
   box-shadow: 0 2px 0 -1px white;
   border-color: lightgray;
   z-index: 1;
 }
 
-.TabListItem.isDisabled {
+.TabListItem.disabled {
   pointer-events: none;
   opacity: 0.5;
 }

@@ -6,7 +6,7 @@ interface TabPanelProps {
 }
 
 export function TabPanel({ tab }: TabPanelProps) {
-  const ariaHidden = tab.isSelected === false
+  const ariaHidden = tab.selected === false
   const className = `${styles.TabPanel}${
     ariaHidden ? ` ${styles.isHidden}` : ""
   }`

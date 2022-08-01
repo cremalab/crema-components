@@ -95,7 +95,7 @@ function tabsOfChildren(childrenArray: Child[], currentTab: Tab["id"]): Tab[] {
     disabled,
     id,
     index,
-    isSelected: id === currentTab && !disabled,
+    selected: id === currentTab && !disabled,
     panelId: `tab-${index}-panel`,
   }))
 }
