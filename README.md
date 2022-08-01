@@ -23,7 +23,7 @@
 - Chips/Tags
 - Progress Bar
 - ~~Loader~~
-- Toast
+- ~~Toast~~
 - Banner
 - Tabs (in progress)
 - Tooltips
