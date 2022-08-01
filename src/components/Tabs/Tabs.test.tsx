@@ -202,6 +202,7 @@ describe("Tabs", () => {
 
   it("throws error if currentTab id is not within list of <Tab />s", () => {
     // Arrange
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     jest.spyOn(console, "error").mockImplementation(() => {})
     const onTabChange = jest.fn()
 
@@ -228,6 +229,7 @@ describe("Tabs", () => {
 
   it("throws error if currentTab id belongs to a disabled tab", () => {
     // Arrange
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     jest.spyOn(console, "error").mockImplementation(() => {})
     const onTabChange = jest.fn()
 
