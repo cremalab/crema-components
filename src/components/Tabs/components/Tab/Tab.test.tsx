@@ -8,7 +8,11 @@ describe("MenuItem", () => {
     const content = "Content"
 
     // Act
-    render(<Tab label={label}>{content}</Tab>)
+    render(
+      <Tab id="1" label={label}>
+        {content}
+      </Tab>,
+    )
     const result = screen.getByText(content)
 
     // Assert

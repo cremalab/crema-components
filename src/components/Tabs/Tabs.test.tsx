@@ -11,8 +11,10 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs currentTab={0} onTabChange={onTabChange}>
-        <Tab label={label}>{content}</Tab>
+      <Tabs currentTab={"first"} onTabChange={onTabChange}>
+        <Tab id="first" label={label}>
+          {content}
+        </Tab>
       </Tabs>,
     )
 
@@ -27,53 +29,56 @@ describe("Tabs", () => {
   it("renders multiple Tabs but only one is not hidden", () => {
     // Arrange
     const onTabChange = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
 
     // Act
     render(
-      <Tabs currentTab={0} onTabChange={onTabChange}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>Content 2</Tab>
-        <Tab label="Tab 3">Content 3</Tab>
+      <Tabs currentTab="1" onTabChange={onTabChange}>
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
+        <Tab id="3" label="Tab 3">
+          Content 3
+        </Tab>
       </Tabs>,
     )
 
     // Assert
-    const menuItemNode1 = screen.getByText(label0)
-    const menuItemNode2 = screen.getByText(label1)
+    const menuItemNode1 = screen.getByText("Tab 1")
+    const menuItemNode2 = screen.getByText("Tab 2")
     const contentNode1 = screen.getByRole("tabpanel")
 
     expect(menuItemNode1).toBeInTheDocument()
     expect(menuItemNode2).toBeInTheDocument()
-    expect(contentNode1.textContent).toBe(content0)
+    expect(contentNode1.textContent).toBe("Content 1")
   })
 
   it("renders correct tab when currentTab set", () => {
     // Arrange
     const onTabChange = jest.fn()
-    const label0 = "Tab 1"
-    const content0 = "Content 1"
-    const label1 = "Tab 2"
-    const content1 = "Content 2"
 
     // Act
     render(
-      <Tabs currentTab={1} onTabChange={onTabChange}>
-        <Tab label={label0}>{content0}</Tab>
-        <Tab label={label1}>{content1}</Tab>
+      <Tabs currentTab="2" onTabChange={onTabChange}>
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
       </Tabs>,
     )
 
     // Assert
-    const menuItemNode1 = screen.getByText(label0)
-    const menuItemNode2 = screen.getByText(label1)
+    const menuItemNode1 = screen.getByText("Tab 1")
+    const menuItemNode2 = screen.getByText("Tab 2")
     const contentNode2 = screen.getByRole("tabpanel")
 
     expect(menuItemNode1).toBeInTheDocument()
     expect(menuItemNode2).toBeInTheDocument()
-    expect(contentNode2.textContent).toBe(content1)
+    expect(contentNode2.textContent).toBe("Content 2")
   })
 
   it("onTabChange is called when tab is clicked", () => {
@@ -82,9 +87,13 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs onTabChange={onTabChange} currentTab={0}>
-        <Tab label="Tab 1">Content 1</Tab>
-        <Tab label="Tab 2">Content 2</Tab>
+      <Tabs onTabChange={onTabChange} currentTab="1">
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
       </Tabs>,
     )
 
@@ -92,7 +101,7 @@ describe("Tabs", () => {
     fireEvent.click(menuItemNode2)
 
     // Assert
-    expect(onTabChange).toBeCalledWith(1)
+    expect(onTabChange).toBeCalledWith("2")
   })
 
   it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
@@ -101,9 +110,13 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs onTabChange={onTabChange} currentTab={1}>
-        <Tab label="Tab 1">Content 1</Tab>
-        <Tab label="Tab 2">Content 2</Tab>
+      <Tabs onTabChange={onTabChange} currentTab="2">
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
       </Tabs>,
     )
 
@@ -112,7 +125,7 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith(0)
+    expect(onTabChange).toBeCalledWith("1")
   })
 
   it("onTabChange is called with expected 'tab' data when ArrowLeft loops back to end", () => {
@@ -121,9 +134,13 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs onTabChange={onTabChange} currentTab={0}>
-        <Tab label="Tab 1">Content 1</Tab>
-        <Tab label="Tab 2">Content 2</Tab>
+      <Tabs onTabChange={onTabChange} currentTab="1">
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
       </Tabs>,
     )
 
@@ -132,7 +149,7 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith(1)
+    expect(onTabChange).toBeCalledWith("2")
   })
 
   it("onTabChange is called with expected 'tab' data when ArrowRight pressed from 0", () => {
@@ -141,9 +158,13 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs onTabChange={onTabChange} currentTab={0}>
-        <Tab label="Tab 1">Content 1</Tab>
-        <Tab label="Tab 2">Content 2</Tab>
+      <Tabs onTabChange={onTabChange} currentTab="1">
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
       </Tabs>,
     )
 
@@ -152,7 +173,7 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith(1)
+    expect(onTabChange).toBeCalledWith("2")
   })
 
   it("onTabChange is called with expected 'tab' data when ArrowRight loops back to 0", () => {
@@ -161,9 +182,13 @@ describe("Tabs", () => {
 
     // Act
     render(
-      <Tabs onTabChange={onTabChange} currentTab={1}>
-        <Tab label="Tab 1">Content 1</Tab>
-        <Tab label="Tab 2">Content 2</Tab>
+      <Tabs onTabChange={onTabChange} currentTab="2">
+        <Tab id="1" label="Tab 1">
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
       </Tabs>,
     )
 
@@ -172,66 +197,58 @@ describe("Tabs", () => {
     userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith(0)
+    expect(onTabChange).toBeCalledWith("1")
   })
 
-  it("sets currentTab to first enabled tab if index of a disabled tab passed", () => {
+  it("throws error if currentTab id is not within list of <Tab />s", () => {
     // Arrange
+    jest.spyOn(console, "error").mockImplementation(() => {})
     const onTabChange = jest.fn()
 
     // Act
-    render(
-      <Tabs onTabChange={onTabChange} currentTab={0}>
-        <Tab label="Tab 1" disabled>
-          Content 1
-        </Tab>
-        <Tab label="Tab 2">Content 2</Tab>
-        <Tab label="Tab 3">Content 3</Tab>
-      </Tabs>,
-    )
+
+    const renderWithError = () =>
+      render(
+        <Tabs onTabChange={onTabChange} currentTab="4">
+          <Tab id="1" label="Tab 1" disabled>
+            Content 1
+          </Tab>
+          <Tab id="2" label="Tab 2">
+            Content 2
+          </Tab>
+          <Tab id="3" label="Tab 3">
+            Content 3
+          </Tab>
+        </Tabs>,
+      )
 
     // Assert
-    const tabPanelContent = screen.getByRole("tabpanel").textContent
-    expect(tabPanelContent).toBe("Content 2")
+    expect(renderWithError).toThrowError("currentTab '4' does not exist")
   })
 
-  it("handles bottom out-of-range currentTab", () => {
+  it("throws error if currentTab id belongs to a disabled tab", () => {
     // Arrange
+    jest.spyOn(console, "error").mockImplementation(() => {})
     const onTabChange = jest.fn()
 
     // Act
-    render(
-      <Tabs onTabChange={onTabChange} currentTab={-1}>
-        <Tab label="Tab 1" disabled>
-          Content 1
-        </Tab>
-        <Tab label="Tab 2">Content 2</Tab>
-        <Tab label="Tab 3">Content 3</Tab>
-      </Tabs>,
-    )
+
+    const renderWithError = () =>
+      render(
+        <Tabs onTabChange={onTabChange} currentTab="1">
+          <Tab id="1" label="Tab 1" disabled>
+            Content 1
+          </Tab>
+          <Tab id="2" label="Tab 2">
+            Content 2
+          </Tab>
+          <Tab id="3" label="Tab 3">
+            Content 3
+          </Tab>
+        </Tabs>,
+      )
 
     // Assert
-    const tabPanelContent = screen.getByRole("tabpanel").textContent
-    expect(tabPanelContent).toBe("Content 2")
-  })
-
-  it("handles top out-of-range currentTab", () => {
-    // Arrange
-    const onTabChange = jest.fn()
-
-    // Act
-    render(
-      <Tabs onTabChange={onTabChange} currentTab={3}>
-        <Tab label="Tab 1" disabled>
-          Content 1
-        </Tab>
-        <Tab label="Tab 2">Content 2</Tab>
-        <Tab label="Tab 3">Content 3</Tab>
-      </Tabs>,
-    )
-
-    // Assert
-    const tabPanelContent = screen.getByRole("tabpanel").textContent
-    expect(tabPanelContent).toBe("Content 2")
+    expect(renderWithError).toThrowError("currentTab '1' is disabled")
   })
 })
