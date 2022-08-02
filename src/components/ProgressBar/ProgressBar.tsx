@@ -20,7 +20,7 @@ const getIndicatorClasses = (value?: number) => {
 }
 
 const getAriaProgressLabels = (value?: number) => {
-  if (value) {
+  if (value || value === 0) {
     return {
       "aria-valuenow": value,
       "aria-valuemin": MIN,
