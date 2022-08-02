@@ -10,7 +10,7 @@ import { ProgressBar } from "./ProgressBar"
  */
 
 export default {
-  title: "ProgressBar",
+  title: "Components/ProgressBar",
 }
 
 const IndeterminateTemplate: ComponentStory<typeof ProgressBar> = (args) => (
@@ -31,17 +31,12 @@ const DeterminateTemplate: ComponentStory<FC<{ interval: number }>> = (
   }
 
   useEffect(() => {
-    timer.current = setInterval(
-      () =>
-        setPercentage((percentage) => {
-          if (percentage === 100) {
-            return 0
-          } else {
-            return percentage + 1
-          }
-        }),
-      args.interval,
-    )
+    if (percentage !== 100) {
+      timer.current = setInterval(
+        () => setPercentage((percentage) => percentage + 1),
+        args.interval,
+      )
+    }
     return () => {
       clearInterval(timer.current)
     }
@@ -64,5 +59,5 @@ const DeterminateTemplate: ComponentStory<FC<{ interval: number }>> = (
 export const Determinate = DeterminateTemplate.bind({})
 
 Determinate.args = {
-  interval: 5,
+  interval: 300,
 }
