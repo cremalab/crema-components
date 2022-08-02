@@ -1,33 +1,61 @@
 import classNames from "classnames"
 import styles from "./ProgressBar.module.css"
 
-export interface ProgressBarProps {
-  /** A number between 0-100 */
-  value?: number
-}
+const MIN = 0
+const MAX = 100
 
-const getPercentageString = (value?: number) => {
-  if (value) {
-    return value + "%"
+const getTransformStyle = (value?: number) => {
+  if (value || value === 0) {
+    const transform = value - 100
+    return `translateX(${transform}%)`
   } else {
-    return "100%"
+    return
   }
 }
 
-export function ProgressBar(props: ProgressBarProps) {
+const getIndicatorClasses = (value?: number) => {
+  return classNames(styles.progressBarIndicator, {
+    [styles.progressBarIndeterminate]: !value,
+  })
+}
+
+const getAriaProgressLabels = (value?: number) => {
+  if (value) {
+    return {
+      "aria-valuenow": value,
+      "aria-valuemin": MIN,
+      "aria-valuemax": MAX,
+    }
+  } else {
+    return {}
+  }
+}
+
+export interface ProgressBarProps {
+  /** A number between 0-100 */
+  value?: number
+  ariaLabel?: string
+}
+
+export function ProgressBar({ value, ariaLabel }: ProgressBarProps) {
+  const indicatorClasses = getIndicatorClasses(value)
+  const transform = getTransformStyle(value)
+  const ariaLabels = getAriaProgressLabels(value)
+
   return (
-    <div style={{ width: "auto" }}>
-      <div
-        className={classNames(styles.progressBarTrack, styles.progressBar)}
-      />
-      <div
-        style={{
-          width: getPercentageString(props.value),
-        }}
-        className={classNames(styles.progressBar, styles.progressBarIndicator, {
-          [styles.progressBarIndeterminate]: !props.value,
-        })}
-      />
+    <div
+      role="progressbar"
+      {...ariaLabels}
+      aria-busy={value !== 100}
+      aria-label={ariaLabel}
+    >
+      <div className={styles.progressBarTrack}>
+        <span
+          data-testid="progressbar_indicator"
+          style={{ transform }}
+          className={indicatorClasses}
+        />
+      </div>
     </div>
   )
 }
