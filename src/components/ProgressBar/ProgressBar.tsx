@@ -6,7 +6,7 @@ const MAX = 100
 
 const getTransformStyle = (value?: number) => {
   if (value || value === MIN) {
-    const transform = value - 100
+    const transform = value - MAX
     return `translateX(${transform}%)`
   } else {
     return
@@ -14,8 +14,8 @@ const getTransformStyle = (value?: number) => {
 }
 
 const getIndicatorClasses = (value?: number) => {
-  return classNames(styles.progressBarIndicator, {
-    [styles.progressBarIndeterminate]: value !== MIN && !value,
+  return classNames(styles.indicator, {
+    [styles.indeterminate]: value !== MIN && !value,
   })
 }
 
@@ -46,10 +46,10 @@ export function ProgressBar({ value, ariaLabel }: ProgressBarProps) {
     <div
       role="progressbar"
       {...ariaLabels}
-      aria-busy={value !== 100}
+      aria-busy={value !== MAX}
       aria-label={ariaLabel}
     >
-      <div className={styles.progressBarTrack}>
+      <div className={styles.track}>
         <span
           data-testid="progressbar_indicator"
           style={{ transform }}
