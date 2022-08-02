@@ -20,31 +20,27 @@ Composes children `<Tab />` components who's `label` and `children` props are us
 
 ## <Tabs /> API
 
-| Prop                  | Type   | Description                                 |
-| --------------------- | ------ | ------------------------------------------- |
-| `currentTab`          | string | current tab ID                              |
-| `onTabChange(number)` | func   | next index by tab click or arrow left/right |
+| Prop                         | Type   | Description                              |
+| ---------------------------- | ------ | ---------------------------------------- |
+| `currentTab`                 | string | current tab ID                           |
+| `onTabChange(tabId: string)` | func   | next ID by tab click or arrow left/right |
 
 ## <Tab /> API
 
 | Prop       | Type      | Description                          |
 | ---------- | --------- | ------------------------------------ |
+| `children` | ReactNode | content to be displayed in TabPanel  |
+| `disabled` | boolean   | makes tab non-interactable           |
 | `id`       | string    | unique ID                            |
 | `label`    | string    | label to be displayed in the TabList |
-| `children` | ReactNode | content to be displayed in TabPanel  |
 
 ## Directory Structure
 
-```
-Tabs
-├── components 👈 sub-components
-│   ├── Tab
-│   ├── TabList
-│   └── TabPanel
-├── README.md 👈 you are here
-├── Tabs.stories.tsx 👈 stories (`npm run test:playground`)
-├── Tabs.test.tsx 👈 tests (`npm run test:unit`)
-├── Tabs.tsx 👈 implementation
-├── index.ts 👈 export
-└── types.ts 👈 shared component types
-```
+- `README.md`: Component documentation (hey, that's me!)
+- `Tabs.test.tsx`: Component tests
+- `Tabs.tsx`: Component code
+- `index.ts`: Component export
+- components
+  - [Tab](./components/Tab/README.md)
+  - [TabList](./components/TabList/README.md)
+  - [TabPanel](./components/TabPanel/README.md)
