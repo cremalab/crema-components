@@ -9,11 +9,11 @@
   }
 }
 
-.progressBarIndeterminate {
+.indeterminate {
   animation: indeterminate 1.5s ease-in-out 0s infinite none running;
 }
 
-.progressBarIndicator {
+.indicator {
   position: relative;
   display: block;
   height: 100%;
@@ -21,7 +21,7 @@
   background: green;
 }
 
-.progressBarTrack {
+.track {
   border-radius: 2px;
   overflow: hidden;
   height: 12px;
