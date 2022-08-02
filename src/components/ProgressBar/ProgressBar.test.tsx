@@ -5,6 +5,9 @@ const ariaValueNow = "aria-valuenow"
 const ariaValueMin = "aria-valuemin"
 const ariaValueMax = "aria-valuemax"
 
+const min = "0"
+const max = "100"
+
 describe("ProgressBar", () => {
   it("defaults to indeterminate", () => {
     // Arrange
@@ -25,8 +28,6 @@ describe("ProgressBar", () => {
   })
   it("acts as determinate progress when value passed", () => {
     // Arrange
-    const min = "0"
-    const max = "100"
     const value = 25
     const ariaLabel = "determinate progress"
     const indicatorTestID = "progressbar_indicator"
@@ -57,5 +58,23 @@ describe("ProgressBar", () => {
     expect(receivedIndicator).toHaveStyle(
       `transform: translateX(${initialValue - 100}%)`,
     )
+  })
+  it("does not default to indeterminate when value is 0", () => {
+    // Arrange
+    const value = 0
+    const ariaLabel = "determinate progress"
+    const indicatorTestID = "progressbar_indicator"
+
+    // Act
+    render(<ProgressBar value={value} ariaLabel={ariaLabel} />)
+
+    const receivedContainer = screen.getByLabelText(ariaLabel)
+    const receivedIndicator = screen.getByTestId(indicatorTestID)
+
+    // Assert
+    expect(receivedIndicator).not.toHaveClass("progressBarIndeterminate")
+    expect(receivedContainer).toHaveAttribute(ariaValueNow, String(value))
+    expect(receivedContainer).toHaveAttribute(ariaValueMin, min)
+    expect(receivedContainer).toHaveAttribute(ariaValueMax, max)
   })
 })
