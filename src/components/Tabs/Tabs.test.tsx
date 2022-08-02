@@ -104,6 +104,36 @@ describe("Tabs", () => {
     expect(onTabChange).toBeCalledWith("2")
   })
 
+  it("supports disabled tabs", () => {
+    // Arrange
+    const onTabChange = jest.fn()
+
+    // Act
+
+    render(
+      <Tabs onTabChange={onTabChange} currentTab="2">
+        <Tab id="1" label="Tab 1" disabled>
+          Content 1
+        </Tab>
+        <Tab id="2" label="Tab 2">
+          Content 2
+        </Tab>
+        <Tab id="3" label="Tab 3">
+          Content 3
+        </Tab>
+      </Tabs>,
+    )
+
+    const labelNode = screen.getByLabelText("Tab 1")
+
+    fireEvent.click(labelNode)
+
+    // Assert
+    expect(onTabChange).not.toBeCalled()
+    expect(labelNode).toHaveAttribute("aria-disabled", "true")
+    expect(labelNode).toHaveClass("item disabled")
+  })
+
   it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
     // Arrange
     const onTabChange = jest.fn()

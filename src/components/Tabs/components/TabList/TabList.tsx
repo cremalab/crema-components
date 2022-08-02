@@ -43,13 +43,16 @@ function TabListItem({ onClick, onKeyDown, tab, refs }: TabListItemProps) {
     (tab.selected ? " " + styles.selected : "") +
     (tab.disabled ? " " + styles.disabled : "")
 
-  const handleClick = () => onClick(tab.id)
+  const handleClick = () => {
+    if (!tab.disabled) onClick(tab.id)
+  }
 
   return (
     <li
       aria-controls={tab.panelId}
       aria-disabled={tab.disabled}
       aria-selected={tab.selected}
+      aria-label={tab.label}
       className={className}
       id={tab.id}
       onClick={handleClick}
