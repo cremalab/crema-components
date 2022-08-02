@@ -11,7 +11,7 @@ interface TabsProps {
 }
 
 export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
-  const tabListRefs = useRef<(HTMLLIElement | null)[]>([])
+  const tabListRefs = useRef<HTMLLIElement[]>([])
   const childrenArray = Array.isArray(children) ? children : [children]
 
   const childrenWithIndex = childrenArray.map((child, index) => ({
