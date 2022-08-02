@@ -1,31 +1,31 @@
-.progressBar {
-  position: fixed;
-  border-radius: 8px;
-  display: inline-block;
-  padding: 4px 8px;
-}
-
 @keyframes indeterminate {
   0% {
-    left: 1%;
-    width: 0%;
+    transform: translateX(-100%);
+    width: 100%;
   }
   100% {
-    left: 100%;
+    transform: translateX(200%);
+    width: 50%;
   }
 }
 
 .progressBarIndeterminate {
-  animation: indeterminate 1.25s ease-in-out 0s infinite none running;
+  animation: indeterminate 1.5s ease-in-out 0s infinite none running;
 }
 
 .progressBarIndicator {
+  position: relative;
+  display: block;
+  height: 100%;
+  transition: transform 0.2s linear;
   background: green;
 }
 
 .progressBarTrack {
-  position: fixed;
+  border-radius: 2px;
+  overflow: hidden;
+  height: 12px;
+  position: relative;
   z-index: -1;
-  width: 100%;
-  background-color: rgb(174, 228, 174);
+  background: rgb(174, 228, 174);
 }
