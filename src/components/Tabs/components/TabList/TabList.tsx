@@ -30,19 +30,14 @@ export function TabList({ tabs, onClick, onKeyDown, refs }: TabListProps) {
   )
 }
 
-export interface TabListItemProps {
+interface TabListItemProps {
   onClick: (tabId: Tab["id"]) => void
   onKeyDown: (event: KeyboardEvent) => void
   tab: Tab
   refs: MutableRefObject<HTMLLIElement[]>
 }
 
-export function TabListItem({
-  onClick,
-  onKeyDown,
-  tab,
-  refs,
-}: TabListItemProps) {
+function TabListItem({ onClick, onKeyDown, tab, refs }: TabListItemProps) {
   const className =
     styles.item +
     (tab.selected ? " " + styles.selected : "") +
