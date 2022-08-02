@@ -1,4 +1,4 @@
-.TabList {
+.container {
   display: inline-flex;
   list-style: none;
   margin: 0;
@@ -7,7 +7,7 @@
   position: relative;
 }
 
-.TabListItem {
+.item {
   background: lightgray;
   border-color: lightgray;
   border-radius: 5px 5px 0 0;
@@ -18,18 +18,18 @@
   z-index: 0;
 }
 
-.TabListItem + .TabListItem {
+.item + .item {
   margin-left: 10px;
 }
 
-.TabListItem.selected {
+.item.selected {
   background: white;
   box-shadow: 0 2px 0 -1px white;
   border-color: lightgray;
   z-index: 1;
 }
 
-.TabListItem.disabled {
+.items.disabled {
   pointer-events: none;
   opacity: 0.5;
 }

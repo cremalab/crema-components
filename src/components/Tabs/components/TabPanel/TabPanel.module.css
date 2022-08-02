@@ -1,8 +1,8 @@
-.TabPanel {
+.container {
   padding: 20px;
   border: 1px solid lightgray;
 }
 
-.TabPanel.isHidden {
+.container.hidden {
   display: none;
 }

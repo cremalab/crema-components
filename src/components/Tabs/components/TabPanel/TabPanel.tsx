@@ -6,14 +6,14 @@ interface TabPanelProps {
 }
 
 export function TabPanel({ tab }: TabPanelProps) {
-  const ariaHidden = tab.selected === false
-  const className = styles.TabPanel + (ariaHidden ? " " + styles.isHidden : "")
+  const hidden = tab.selected === false
+  const className = styles.container + (hidden ? " " + styles.hidden : "")
 
   return (
     <div
       id={tab.panelId}
       aria-labelledby={tab.id}
-      aria-hidden={ariaHidden}
+      aria-hidden={hidden}
       className={className}
       role="tabpanel"
       tabIndex={0}

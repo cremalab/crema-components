@@ -14,7 +14,7 @@ export function TabList({ tabs, onClick, onKeyDown, refs }: TabListProps) {
     <ul
       aria-label="List of Tabs"
       aria-orientation="horizontal"
-      className={styles.TabList}
+      className={styles.container}
       role="tablist"
     >
       {tabs.map((tab) => (
@@ -44,7 +44,7 @@ export function TabListItem({
   refs,
 }: TabListItemProps) {
   const className =
-    styles.TabListItem +
+    styles.item +
     (tab.selected ? " " + styles.selected : "") +
     (tab.disabled ? " " + styles.disabled : "")
 
