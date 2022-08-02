@@ -89,13 +89,9 @@ export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
 type Child = TabProps & { index: number }
 
 function tabsOfChildren(childrenArray: Child[], currentTab: Tab["id"]): Tab[] {
-  return childrenArray.map(({ children, label, disabled, index, id }) => ({
-    children,
-    label,
-    disabled,
-    id,
-    index,
-    selected: id === currentTab && !disabled,
-    panelId: `tab-${index}-panel`,
+  return childrenArray.map((args) => ({
+    ...args,
+    selected: args.id === currentTab && !args.disabled,
+    panelId: `tab-${args.index}-panel`,
   }))
 }
