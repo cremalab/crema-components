@@ -5,7 +5,7 @@ const MIN = 0
 const MAX = 100
 
 const getTransformStyle = (value?: number) => {
-  if (value || value === 0) {
+  if (value || value === MIN) {
     const transform = value - 100
     return `translateX(${transform}%)`
   } else {
@@ -15,12 +15,12 @@ const getTransformStyle = (value?: number) => {
 
 const getIndicatorClasses = (value?: number) => {
   return classNames(styles.progressBarIndicator, {
-    [styles.progressBarIndeterminate]: !value,
+    [styles.progressBarIndeterminate]: value !== MIN && !value,
   })
 }
 
 const getAriaProgressLabels = (value?: number) => {
-  if (value || value === 0) {
+  if (value || value === MIN) {
     return {
       "aria-valuenow": value,
       "aria-valuemin": MIN,
