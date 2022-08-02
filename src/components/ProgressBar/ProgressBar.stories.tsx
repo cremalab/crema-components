@@ -13,11 +13,11 @@ export default {
   title: "Components/ProgressBar",
 }
 
-const IndeterminateTemplate: ComponentStory<typeof ProgressBar> = (args) => (
+const Template: ComponentStory<typeof ProgressBar> = (args) => (
   <ProgressBar {...args} />
 )
 
-export const Indeterminate = IndeterminateTemplate.bind({})
+export const Indeterminate = Template.bind({})
 
 const DeterminateTemplate: ComponentStory<FC<{ interval: number }>> = (
   args,
@@ -56,8 +56,14 @@ const DeterminateTemplate: ComponentStory<FC<{ interval: number }>> = (
   )
 }
 
-export const Determinate = DeterminateTemplate.bind({})
+export const Determinate = Template.bind({})
 
 Determinate.args = {
+  value: 0,
+}
+
+export const DeterminateExample = DeterminateTemplate.bind({})
+
+DeterminateExample.args = {
   interval: 300,
 }
