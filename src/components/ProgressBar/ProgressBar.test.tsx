@@ -21,7 +21,7 @@ describe("ProgressBar", () => {
     const receivedIndicator = screen.getByTestId(indicatorTestID)
 
     // Assert
-    expect(receivedIndicator).toHaveClass("progressBarIndeterminate")
+    expect(receivedIndicator).toHaveClass("indeterminate")
     expect(receivedContainer).not.toHaveAttribute(ariaValueNow)
     expect(receivedContainer).not.toHaveAttribute(ariaValueMin)
     expect(receivedContainer).not.toHaveAttribute(ariaValueMax)
@@ -39,7 +39,7 @@ describe("ProgressBar", () => {
     const receivedIndicator = screen.getByTestId(indicatorTestID)
 
     // Assert
-    expect(receivedIndicator).not.toHaveClass("progressBarIndeterminate")
+    expect(receivedIndicator).not.toHaveClass("indeterminate")
     expect(receivedContainer).toHaveAttribute(ariaValueNow, String(value))
     expect(receivedContainer).toHaveAttribute(ariaValueMin, min)
     expect(receivedContainer).toHaveAttribute(ariaValueMax, max)
@@ -72,7 +72,7 @@ describe("ProgressBar", () => {
     const receivedIndicator = screen.getByTestId(indicatorTestID)
 
     // Assert
-    expect(receivedIndicator).not.toHaveClass("progressBarIndeterminate")
+    expect(receivedIndicator).not.toHaveClass("indeterminate")
     expect(receivedContainer).toHaveAttribute(ariaValueNow, String(value))
     expect(receivedContainer).toHaveAttribute(ariaValueMin, min)
     expect(receivedContainer).toHaveAttribute(ariaValueMax, max)
