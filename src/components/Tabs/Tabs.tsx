@@ -7,7 +7,7 @@ import { Tab } from "./types"
 interface TabsProps {
   children: ReactElement<TabProps> | Array<ReactElement<TabProps>>
   currentTab: Tab["id"]
-  onTabChange: (id: Tab["id"]) => void
+  onTabChange: (tabId: Tab["id"]) => void
 }
 
 export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
