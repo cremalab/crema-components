@@ -1,7 +1,7 @@
 # 🌈 Crema Components
 
-[![Build Status](https://github.com/cremalab/crema-app-web/workflows/CI/badge.svg)](https://github.com/cremalab/crema-app-web/actions)
-[![codecov](https://codecov.io/gh/cremalab/app-web/branch/develop/graph/badge.svg?token=8epVUIKnmy)](https://codecov.io/gh/cremalab/app-web)
+[![Build Status](https://github.com/cremalab/crema-components/workflows/CI/badge.svg)](https://github.com/cremalab/crema-components/actions)
+[![codecov](https://codecov.io/gh/cremalab/crema-components/branch/develop/graph/badge.svg?token=DkFeJH1xvy)](https://codecov.io/gh/cremalab/crema-components)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **🧰 Tools Used**
@@ -21,7 +21,7 @@
 - Breadcrumbs
 - Slider
 - Chips/Tags
-- Progress Bar
+- ~~Progress Bar~~
 - ~~Loader~~
 - ~~Toast~~
 - Banner
