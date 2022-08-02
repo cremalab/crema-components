@@ -3,7 +3,7 @@ import { Tab } from "../../types"
 import styles from "./TabList.module.css"
 
 interface TabListProps {
-  onClick: (tab: Tab) => void
+  onClick: (tabId: Tab["id"]) => void
   onKeyDown: (event: KeyboardEvent) => void
   tabs: Tab[]
   refs: MutableRefObject<(HTMLLIElement | null)[]>
@@ -31,7 +31,7 @@ export function TabList({ tabs, onClick, onKeyDown, refs }: TabListProps) {
 }
 
 export interface TabListItemProps {
-  onClick: (tab: Tab) => void
+  onClick: (tabId: Tab["id"]) => void
   onKeyDown: (event: KeyboardEvent) => void
   tab: Tab
   refs: MutableRefObject<(HTMLLIElement | null)[]>
@@ -48,7 +48,7 @@ export function TabListItem({
     (tab.selected ? " " + styles.selected : "") +
     (tab.disabled ? " " + styles.disabled : "")
 
-  const handleClick = () => onClick(tab)
+  const handleClick = () => onClick(tab.id)
 
   return (
     <li

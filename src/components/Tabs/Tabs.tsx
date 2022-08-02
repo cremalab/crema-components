@@ -51,8 +51,8 @@ export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
       ? tabsEnabled[0]?.index
       : tabsEnabled[tabsEnabledCurrentIndex + 1]?.index
 
-  const onClick = (tab: Tab) => {
-    onTabChange(tab.id)
+  const onClick = (tabId: Tab["id"]) => {
+    onTabChange(tabId)
   }
 
   const handleKeyPress = (event: KeyboardEvent) => {
