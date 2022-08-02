@@ -1,24 +1,32 @@
+import { ReactNode, useContext } from "react"
+import { TabsContext } from "../../Tabs"
 import { Tab } from "../../types"
 import styles from "./TabPanel.module.css"
 
-interface TabPanelProps {
-  tab: Tab
+export interface TabPanelProps {
+  children: ReactNode
+  label: string
+  id: Tab["id"]
+  disabled?: boolean
 }
 
-export function TabPanel({ tab }: TabPanelProps) {
-  const hidden = tab.selected === false
+export function TabPanel({ id, children }: TabPanelProps) {
+  const ctx = useContext(TabsContext)
+  const selected = ctx?.selected === id
+
+  const hidden = selected === false
   const className = styles.container + (hidden ? " " + styles.hidden : "")
 
   return (
     <div
-      id={tab.panelId}
-      aria-labelledby={tab.id}
+      id={`panel-${id}`}
+      aria-labelledby={id}
       aria-hidden={hidden}
       className={className}
       role="tabpanel"
       tabIndex={0}
     >
-      {tab.children}
+      {children}
     </div>
   )
 }

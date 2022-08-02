@@ -47,7 +47,7 @@ function TabListItem({ onClick, onKeyDown, tab, refs }: TabListItemProps) {
 
   return (
     <li
-      aria-controls={tab.panelId}
+      aria-controls={`panel-${tab.id}`}
       aria-disabled={tab.disabled}
       aria-selected={tab.selected}
       className={className}

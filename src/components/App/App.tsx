@@ -4,7 +4,7 @@ import { Button } from "../Button"
 import { Modal } from "../Modal"
 import { Sidebar } from "../Sidebar"
 import { Pagination } from "../Pagination"
-import { Tab, Tabs } from "../Tabs"
+import { TabPanel, Tabs } from "../Tabs"
 import { TextInput } from "../TextInput"
 import "./App.styles.css"
 
@@ -110,15 +110,15 @@ export function App() {
         onPage={(_, page) => alert(`I want to go to page ${page}`)}
       />
       <Tabs currentTab={currentTab} onTabChange={setCurrentTab}>
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
-        <Tab id="3" label="Tab 3">
+        </TabPanel>
+        <TabPanel id="3" label="Tab 3">
           Content 3
-        </Tab>
+        </TabPanel>
       </Tabs>
     </ToasterProvider>
   )

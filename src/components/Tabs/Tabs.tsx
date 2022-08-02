@@ -1,14 +1,17 @@
-import { KeyboardEvent, ReactElement, useRef } from "react"
+import { KeyboardEvent, ReactElement, createContext, useRef } from "react"
 import { TabList } from "./components/TabList"
-import { TabProps } from "./components/Tab"
-import { TabPanel } from "./components/TabPanel"
+import { TabPanelProps } from "./components/TabPanel"
 import { Tab } from "./types"
 
 interface TabsProps {
-  children: ReactElement<TabProps> | Array<ReactElement<TabProps>>
+  children: ReactElement<TabPanelProps> | Array<ReactElement<TabPanelProps>>
   currentTab: Tab["id"]
   onTabChange: (tabId: Tab["id"]) => void
 }
+
+export const TabsContext = createContext<{ selected: Tab["id"] } | undefined>(
+  undefined,
+)
 
 export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
   const tabListRefs = useRef<HTMLLIElement[]>([])
@@ -70,28 +73,25 @@ export function Tabs({ children, onTabChange, currentTab }: TabsProps) {
   }
 
   return (
-    <section className="Tabs">
-      <TabList
-        onClick={onClick}
-        onKeyDown={handleKeyPress}
-        refs={tabListRefs}
-        tabs={tabsOriginal}
-      />
-      <>
-        {tabsEnabled.map((tab) => (
-          <TabPanel key={tab.panelId} tab={tab} />
-        ))}
-      </>
-    </section>
+    <TabsContext.Provider value={{ selected: currentTab }}>
+      <section className="Tabs">
+        <TabList
+          onClick={onClick}
+          onKeyDown={handleKeyPress}
+          refs={tabListRefs}
+          tabs={tabsOriginal}
+        />
+        <>{children}</>
+      </section>
+    </TabsContext.Provider>
   )
 }
 
-type Child = TabProps & { index: number }
+type Child = TabPanelProps & { index: number }
 
 function tabsOfChildren(childrenArray: Child[], currentTab: Tab["id"]): Tab[] {
   return childrenArray.map((args) => ({
     ...args,
     selected: args.id === currentTab && !args.disabled,
-    panelId: `tab-${args.index}-panel`,
   }))
 }

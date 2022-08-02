@@ -1,5 +1,3 @@
-import { ReactNode } from "react"
-
 /**
  * Tab
  * ---
@@ -7,11 +5,9 @@ import { ReactNode } from "react"
  */
 
 export interface Tab {
-  children: ReactNode
   disabled?: boolean
   id: string
   index: number
   selected: boolean
   label: string
-  panelId: string
 }

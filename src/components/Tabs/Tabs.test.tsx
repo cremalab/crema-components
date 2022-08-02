@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { Tab, Tabs } from "."
+import { TabPanel, Tabs } from "."
 
 describe("Tabs", () => {
   it("renders a single Tab", () => {
@@ -12,9 +12,9 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs currentTab={"first"} onTabChange={onTabChange}>
-        <Tab id="first" label={label}>
+        <TabPanel id="first" label={label}>
           {content}
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -33,15 +33,15 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs currentTab="1" onTabChange={onTabChange}>
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
-        <Tab id="3" label="Tab 3">
+        </TabPanel>
+        <TabPanel id="3" label="Tab 3">
           Content 3
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -62,12 +62,12 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs currentTab="2" onTabChange={onTabChange}>
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -88,12 +88,12 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs onTabChange={onTabChange} currentTab="1">
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -111,12 +111,12 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs onTabChange={onTabChange} currentTab="2">
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -135,12 +135,12 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs onTabChange={onTabChange} currentTab="1">
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -159,12 +159,12 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs onTabChange={onTabChange} currentTab="1">
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -183,12 +183,12 @@ describe("Tabs", () => {
     // Act
     render(
       <Tabs onTabChange={onTabChange} currentTab="2">
-        <Tab id="1" label="Tab 1">
+        <TabPanel id="1" label="Tab 1">
           Content 1
-        </Tab>
-        <Tab id="2" label="Tab 2">
+        </TabPanel>
+        <TabPanel id="2" label="Tab 2">
           Content 2
-        </Tab>
+        </TabPanel>
       </Tabs>,
     )
 
@@ -211,15 +211,15 @@ describe("Tabs", () => {
     const renderWithError = () =>
       render(
         <Tabs onTabChange={onTabChange} currentTab="4">
-          <Tab id="1" label="Tab 1" disabled>
+          <TabPanel id="1" label="Tab 1" disabled>
             Content 1
-          </Tab>
-          <Tab id="2" label="Tab 2">
+          </TabPanel>
+          <TabPanel id="2" label="Tab 2">
             Content 2
-          </Tab>
-          <Tab id="3" label="Tab 3">
+          </TabPanel>
+          <TabPanel id="3" label="Tab 3">
             Content 3
-          </Tab>
+          </TabPanel>
         </Tabs>,
       )
 
@@ -238,15 +238,15 @@ describe("Tabs", () => {
     const renderWithError = () =>
       render(
         <Tabs onTabChange={onTabChange} currentTab="1">
-          <Tab id="1" label="Tab 1" disabled>
+          <TabPanel id="1" label="Tab 1" disabled>
             Content 1
-          </Tab>
-          <Tab id="2" label="Tab 2">
+          </TabPanel>
+          <TabPanel id="2" label="Tab 2">
             Content 2
-          </Tab>
-          <Tab id="3" label="Tab 3">
+          </TabPanel>
+          <TabPanel id="3" label="Tab 3">
             Content 3
-          </Tab>
+          </TabPanel>
         </Tabs>,
       )
 
