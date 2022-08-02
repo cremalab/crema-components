@@ -6,7 +6,7 @@ interface TabListProps {
   onClick: (tabId: Tab["id"]) => void
   onKeyDown: (event: KeyboardEvent) => void
   tabs: Tab[]
-  refs: MutableRefObject<(HTMLLIElement | null)[]>
+  refs: MutableRefObject<HTMLLIElement[]>
 }
 
 export function TabList({ tabs, onClick, onKeyDown, refs }: TabListProps) {
@@ -34,7 +34,7 @@ export interface TabListItemProps {
   onClick: (tabId: Tab["id"]) => void
   onKeyDown: (event: KeyboardEvent) => void
   tab: Tab
-  refs: MutableRefObject<(HTMLLIElement | null)[]>
+  refs: MutableRefObject<HTMLLIElement[]>
 }
 
 export function TabListItem({
@@ -59,7 +59,9 @@ export function TabListItem({
       id={tab.id}
       onClick={handleClick}
       onKeyDown={onKeyDown}
-      ref={(ref) => (refs.current[tab.index] = ref)}
+      ref={(ref) => {
+        if (ref) refs.current[tab.index] = ref
+      }}
       role="tab"
       tabIndex={tab.selected ? 0 : -1}
     >
