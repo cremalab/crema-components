@@ -1,6 +1,6 @@
 # `<ProgressBar />`
 
-This component is intended to be used on processes that take longer than what a user would expect for a typical loading state. Examples include uploading, downloading, or even a page load that takes longer that what is typically expected. For traditional loading state use cases, it is recommended you use the [`<Loader />`](../Loader/README.md) component.
+This component is intended to be used on processes that take longer than what a user would expect for a typical loading state. Examples include uploading, downloading, or even a page load that takes longer than what is typically expected. For traditional loading state use cases, it is recommended you use the [`<Loader />`](../Loader/README.md) component.
 
 ## Directory Structure
 
