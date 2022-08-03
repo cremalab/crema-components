@@ -20,7 +20,7 @@
 
 - Breadcrumbs
 - Slider
-- Chips/Tags
+- ~~Chips/Tags~~
 - ~~Progress Bar~~
 - ~~Loader~~
 - ~~Toast~~
