@@ -1,11 +1,12 @@
-# `<Breadcrumbs />`
+# `<Breadcrumb />`
 
 DESCRIPTION_HERE
 
 ## Directory Structure
 
-- `Breadcrumbs.stories.tsx`: Component stories (`npm run test:playground`)
-- `Breadcrumbs.test.tsx`: Component tests (`npm run test:unit`)
-- `Breadcrumbs.tsx`: Component code
+- `Breadcrumb.stories.tsx`: Component stories (`npm run test:playground`)
+- `Breadcrumb.test.tsx`: Component tests (`npm run test:unit`)
+- `Breadcrumb.tsx`: Component code
+- `BreadcrumbItem.tsx`: Sub-component code
 - `index.ts`: Component export
 - `README.md`: Component documentation (hey, that's me!)
