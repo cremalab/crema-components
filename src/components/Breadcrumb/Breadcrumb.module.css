@@ -1,0 +1,26 @@
+.BreadcrumbContainer {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.BreadcrumbListItem {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.BreadcrumbListItem a {
+  color: black;
+}
+
+.BreadcrumbListItem span {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.BreadcrumbListItem [aria-current='page'] {
+  font-weight: bold;
+  text-decoration: none;
+}
