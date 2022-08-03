@@ -1,13 +1,13 @@
-import styles from './Breadcrumb.module.css';
+import styles from "./Breadcrumb.module.css"
 
 interface ItemProps {
-  href: string;
-  isCurrent: boolean;
-  label: string;
+  href: string
+  isCurrent: boolean
+  label: string
 }
 
 interface Props {
-  items: ItemProps[];
+  items: ItemProps[]
 }
 
 export function BreadcrumbItem({ items }: Props) {
@@ -15,10 +15,18 @@ export function BreadcrumbItem({ items }: Props) {
     <>
       {items.map((item, index) => (
         <li className={styles.BreadcrumbListItem} key={index}>
-          <a href={item.href} className={styles.link} aria-current={item.isCurrent ? "page" : "false"}>
+          <a
+            href={item.href}
+            className={styles.link}
+            aria-current={item.isCurrent ? "page" : "false"}
+          >
             {item.label}
           </a>
-          {!item.isCurrent && <span role="presentation" className={styles.Separator}>/</span>}
+          {!item.isCurrent && (
+            <span role="presentation" className={styles.Separator}>
+              /
+            </span>
+          )}
         </li>
       ))}
     </>

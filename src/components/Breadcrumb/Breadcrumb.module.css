@@ -20,7 +20,7 @@
   margin-left: 5px;
 }
 
-.BreadcrumbListItem [aria-current='page'] {
+.BreadcrumbListItem [aria-current="page"] {
   font-weight: bold;
   text-decoration: none;
 }
