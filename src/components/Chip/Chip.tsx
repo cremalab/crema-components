@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import styles from "./Chip.module.css"
 
 export interface ChipProps {
-  children?: ReactNode
+  children: ReactNode
   onSelect?: () => unknown
   onClose?: () => unknown
   closeElement?: ReactNode
@@ -15,7 +15,7 @@ export function Chip({
   onClose,
 }: ChipProps) {
   return (
-    <div className={styles.Chip}>
+    <div className={styles.container}>
       <div
         onClick={onSelect}
         // these next 3 props are important for a11y
