@@ -28,11 +28,13 @@ export function Tooltip({
   exitDelay,
   hideOnClick,
 }: TooltipProps) {
-  const timer = useRef<NodeJS.Timeout>()
+  const enterTimeout = useRef<NodeJS.Timeout>()
+  const exitTimeout = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
     return () => {
-      clearTimeout(timer.current)
+      clearTimeout(enterTimeout.current)
+      clearTimeout(exitTimeout.current)
     }
   }, [])
 
@@ -71,11 +73,21 @@ export function Tooltip({
   }
 
   const handleMouseEnter = () => {
-    timer.current = setTimeout(handleShow, enterDelay ?? 0)
+    clearTimeout(enterTimeout.current)
+    if (enterDelay) {
+      enterTimeout.current = setTimeout(handleShow, enterDelay)
+    } else {
+      handleShow()
+    }
   }
 
   const handleMouseLeave = () => {
-    timer.current = setTimeout(handleHide, exitDelay ?? 0)
+    clearTimeout(exitTimeout.current)
+    if (exitDelay) {
+      exitTimeout.current = setTimeout(handleHide, exitDelay)
+    } else {
+      handleHide()
+    }
   }
 
   return (
