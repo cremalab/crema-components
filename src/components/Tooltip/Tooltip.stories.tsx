@@ -39,6 +39,8 @@ Default.args = {
   showArrow: false,
   enterDelay: 0,
   exitDelay: 0,
+  hideOnClick: false,
+  alwaysShow: false,
 }
 
 export const WithArrow = Template.bind({})

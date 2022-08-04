@@ -1,5 +1,5 @@
 import { Placement } from "@popperjs/core"
-import { ReactNode, useEffect, useRef, useState } from "react"
+import { KeyboardEvent, ReactNode, useEffect, useRef, useState } from "react"
 import { usePopper } from "react-popper"
 import classes from "./Tooltip.module.css"
 
@@ -13,6 +13,7 @@ interface TooltipProps {
   placement?: Placement
   enterDelay?: number
   exitDelay?: number
+  hideOnClick?: boolean
 }
 
 export function Tooltip({
@@ -25,6 +26,7 @@ export function Tooltip({
   verticalOffset = 0,
   enterDelay,
   exitDelay,
+  hideOnClick,
 }: TooltipProps) {
   const timer = useRef<NodeJS.Timeout>()
 
@@ -53,6 +55,18 @@ export function Tooltip({
     strategy: "fixed",
   })
 
+  const handleHide = () => hideOnClick && setIsOpen(false)
+
+  const handleClick = () => {
+    handleHide()
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLSpanElement>) => {
+    if (e.key === "Enter") {
+      handleHide()
+    }
+  }
+
   const handleOpen = () => {
     timer.current = setTimeout(() => setIsOpen(true), enterDelay ?? 0)
   }
@@ -64,6 +78,10 @@ export function Tooltip({
   return (
     <div>
       <span
+        role={hideOnClick ? "button" : "none"}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        onClick={handleClick}
         onMouseEnter={handleOpen}
         onMouseLeave={handleClose}
         ref={setAnchorElement}
