@@ -55,24 +55,27 @@ export function Tooltip({
     strategy: "fixed",
   })
 
-  const handleHide = () => hideOnClick && setIsOpen(false)
+  const handleShow = () => setIsOpen(true)
 
-  const handleClick = () => {
-    handleHide()
-  }
+  const handleHide = () => setIsOpen(false)
+
+  const handleClick = () => hideOnClick && handleHide()
 
   const handleKeyDown = (e: KeyboardEvent<HTMLSpanElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Escape" && hideOnClick) {
       handleHide()
+    }
+    if (e.key === "Enter") {
+      handleShow()
     }
   }
 
-  const handleOpen = () => {
-    timer.current = setTimeout(() => setIsOpen(true), enterDelay ?? 0)
+  const handleMouseEnter = () => {
+    timer.current = setTimeout(handleShow, enterDelay ?? 0)
   }
 
-  const handleClose = () => {
-    timer.current = setTimeout(() => setIsOpen(false), exitDelay ?? 0)
+  const handleMouseLeave = () => {
+    timer.current = setTimeout(handleHide, exitDelay ?? 0)
   }
 
   return (
@@ -82,13 +85,14 @@ export function Tooltip({
         tabIndex={0}
         onKeyDown={handleKeyDown}
         onClick={handleClick}
-        onMouseEnter={handleOpen}
-        onMouseLeave={handleClose}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         ref={setAnchorElement}
       >
         {children}
       </span>
       <div
+        role="tooltip"
         ref={boxRef}
         style={styles.popper}
         data-is-open={isOpen || alwaysShow ? "true" : "false"}

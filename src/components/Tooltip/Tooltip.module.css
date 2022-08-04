@@ -4,7 +4,7 @@
   width: 8px;
 }
 
-.arrow:after {
+.arrow::after {
   position: absolute;
   content: "";
   transform: rotate(45deg);
