@@ -20,12 +20,12 @@
 
 - Breadcrumbs
 - Slider
-- Chips/Tags
+- ~~Chips/Tags~~
 - ~~Progress Bar~~
 - ~~Loader~~
 - ~~Toast~~
 - Banner
-- Tabs
+- ~~Tabs~~
 - Tooltips
 - Search Input
 - Link
