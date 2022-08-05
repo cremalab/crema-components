@@ -1,15 +1,12 @@
 import decoratedCenter from "@storybook/addon-centered"
 import { ComponentStory } from "@storybook/react"
+import { placements } from "./placements"
 import { Tooltip } from "./Tooltip"
 
 /**
  * See Storybook Docs: Writing Stories
  * https://storybook.js.org/docs/basics/writing-stories/
  */
-
-const basePlacement = ["top", "bottom", "left", "right", "auto"]
-const startPlacement = basePlacement.map((placement) => `${placement}-start`)
-const endPlacement = basePlacement.map((placement) => `${placement}-end`)
 
 export default {
   title: "Components/Tooltip",
@@ -18,7 +15,7 @@ export default {
     placement: {
       control: {
         type: "select",
-        options: [...basePlacement, ...startPlacement, ...endPlacement],
+        options: placements,
       },
     },
   },
@@ -60,30 +57,26 @@ WithoutArrow.args = {
 
 export const WithAdditionalContent: ComponentStory<typeof Tooltip> = (args) => {
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          in ipsum id orci porta dapibus.
-        </p>
-      </div>
-      <div>
-        <p>Some text above.</p>
-        <Tooltip {...args} />
-        <p>Some text below.</p>
-      </div>
-      <div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          in ipsum id orci porta dapibus.
-        </p>
-      </div>
+    <div
+      style={{
+        lineHeight: "24px",
+        width: 400,
+      }}
+    >
+      <p>
+        This is a tooltip that lives within a <Tooltip {...args} />. Tooltips
+        can be very handy for communicating additional information within a body
+        of text :).
+      </p>
     </div>
   )
 }
 
 WithAdditionalContent.args = {
   ...Default.args,
+  children: <b>paragraph</b>,
+  label:
+    "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering.",
   showArrow: true,
   placement: "bottom",
   alwaysShow: false,
