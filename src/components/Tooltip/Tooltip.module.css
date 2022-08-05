@@ -13,10 +13,6 @@
   background: #444444;
 }
 
-.box[data-is-open="false"] {
-  visibility: hidden;
-}
-
 .box {
   padding: 4px 8px;
   background: #444444;
@@ -42,13 +38,6 @@
   left: -4px;
 }
 
-.container {
-  position: absolute;
-}
-
-.wrapper {
-  position: relative;
-}
 
 
 
