@@ -1,11 +1,20 @@
 import { Placement } from "@popperjs/core"
-import { KeyboardEvent, ReactNode, useEffect, useRef, useState } from "react"
+import {
+  CSSProperties,
+  KeyboardEvent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { usePopper } from "react-popper"
+import { Transition, TransitionStatus } from "react-transition-group"
 import classes from "./Tooltip.module.css"
 
 interface TooltipProps {
   children: ReactNode
   label: string
+  animationDuration?: number
   alwaysShow?: boolean
   showArrow?: boolean
   horizontalOffset?: number
@@ -19,6 +28,7 @@ interface TooltipProps {
 export function Tooltip({
   children,
   label,
+  animationDuration = 300,
   showArrow,
   alwaysShow,
   placement = "auto",
@@ -90,6 +100,19 @@ export function Tooltip({
     }
   }
 
+  const defaultStyle = {
+    transition: `opacity ${animationDuration}ms ease-in-out`,
+    opacity: 0,
+  }
+
+  const transitionStyles: { [key in TransitionStatus]: CSSProperties } = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    exited: {},
+    exiting: {},
+    unmounted: {},
+  }
+
   return (
     <div>
       <span
@@ -103,19 +126,30 @@ export function Tooltip({
       >
         {children}
       </span>
-      <div
-        role="tooltip"
-        ref={boxRef}
-        style={styles.popper}
-        data-is-open={isOpen || alwaysShow ? "true" : "false"}
-        className={classes.box}
-        {...attributes.popper}
-      >
-        {label}
-        {showArrow && (
-          <div ref={arrowRef} className={classes.arrow} style={styles.arrow} />
+      <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
+        {(status) => (
+          <div
+            role="tooltip"
+            ref={boxRef}
+            style={{
+              ...styles.popper,
+              ...defaultStyle,
+              ...transitionStyles[status],
+            }}
+            className={classes.box}
+            {...attributes.popper}
+          >
+            {label}
+            {showArrow && (
+              <div
+                ref={arrowRef}
+                className={classes.arrow}
+                style={styles.arrow}
+              />
+            )}
+          </div>
         )}
-      </div>
+      </Transition>
     </div>
   )
 }
