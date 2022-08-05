@@ -166,6 +166,36 @@ describe("Tooltip", () => {
       timeout: exitDelay,
     })
   })
+  it("supports aria-describedby", async () => {
+    // Arrange
+    const ariaDescribedBy = "paragraphtext"
+    const children = <b>paragraph</b>
+    const spanTestID = "tooltip_span"
+    const label =
+      "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering."
+
+    // Act
+    render(
+      <p>
+        This is a tooltip that lives within a{" "}
+        <Tooltip label={label} ariaDescribedBy={ariaDescribedBy}>
+          {children}
+        </Tooltip>
+        . Tooltips can be very handy for communicating additional information
+        within a body of text :).
+      </p>,
+    )
+
+    const receivedWrapper = screen.getByTestId(spanTestID)
+
+    await userEvent.hover(receivedWrapper)
+
+    const receivedTooltip = screen.getByText(label)
+
+    // Assert
+    expect(receivedWrapper).toHaveAttribute("aria-describedby", ariaDescribedBy)
+    expect(receivedTooltip.id).toEqual(ariaDescribedBy)
+  })
   it("allows for custom placement", () => {
     placements.forEach(async (placement) => {
       // Act
