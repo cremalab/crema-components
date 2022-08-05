@@ -49,6 +49,7 @@ export function Tooltip({
   }, [])
 
   const [isOpen, setIsOpen] = useState(false)
+  // in order to ensure our tooltip is properly anchored, we need this state updated via the ref callback
   const [anchorElement, setAnchorElement] = useState<HTMLSpanElement | null>(
     null,
   )
@@ -74,7 +75,7 @@ export function Tooltip({
   const handleClick = () => hideOnClick && handleHide()
 
   const handleKeyDown = (e: KeyboardEvent<HTMLSpanElement>) => {
-    if (e.key === "Escape" && hideOnClick) {
+    if (e.key === "Escape") {
       handleHide()
     }
     if (e.key === "Enter") {
@@ -114,7 +115,7 @@ export function Tooltip({
   }
 
   return (
-    <div>
+    <>
       <span
         role={hideOnClick ? "button" : "none"}
         tabIndex={0}
@@ -142,6 +143,7 @@ export function Tooltip({
             {label}
             {showArrow && (
               <div
+                data-testid="tooltip_arrow"
                 ref={arrowRef}
                 className={classes.arrow}
                 style={styles.arrow}
@@ -150,6 +152,6 @@ export function Tooltip({
           </div>
         )}
       </Transition>
-    </div>
+    </>
   )
 }
