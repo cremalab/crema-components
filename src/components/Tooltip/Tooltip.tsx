@@ -14,11 +14,12 @@ import classes from "./Tooltip.module.css"
 interface TooltipProps {
   children: ReactNode
   label: string
+  ariaDescribedBy?: string
   animationDuration?: number
   alwaysShow?: boolean
   showArrow?: boolean
-  horizontalOffset?: number
-  verticalOffset?: number
+  distance?: number
+  skidding?: number
   placement?: Placement
   enterDelay?: number
   exitDelay?: number
@@ -28,12 +29,13 @@ interface TooltipProps {
 export function Tooltip({
   children,
   label,
+  ariaDescribedBy,
   animationDuration = 300,
   showArrow,
   alwaysShow,
   placement = "auto",
-  horizontalOffset = 10,
-  verticalOffset = 0,
+  distance = 10,
+  skidding = 0,
   enterDelay,
   exitDelay,
   hideOnClick,
@@ -61,7 +63,7 @@ export function Tooltip({
       { name: "arrow", options: { element: arrowRef.current } },
       {
         name: "offset",
-        options: { offset: [verticalOffset, horizontalOffset] },
+        options: { offset: [skidding, distance] },
       },
     ],
     placement,
@@ -117,7 +119,9 @@ export function Tooltip({
   return (
     <>
       <span
+        data-testid="tooltip_span"
         role={hideOnClick ? "button" : "none"}
+        aria-describedby={ariaDescribedBy}
         tabIndex={0}
         onKeyDown={handleKeyDown}
         onClick={handleClick}
@@ -130,6 +134,7 @@ export function Tooltip({
       <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
         {(status) => (
           <div
+            id={ariaDescribedBy}
             role="tooltip"
             ref={boxRef}
             style={{
