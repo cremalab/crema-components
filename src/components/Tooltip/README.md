@@ -23,20 +23,20 @@ For advance use cases, explore the Tooltip stories in our storybook.
 
 ## API
 
-| Prop                | Type      | Required | Description                     | Default |
-| ------------------- | --------- | -------- | ------------------------------- | ------- |
-| `children`          | ReactNode | yes      | the anchor element              |         |
-| `label`             | string    | yes      | the tooltip text                |         |
-| `distance`          | number    | no       | distance from anchor            | 10      |
-| `skidding`          | number    | no       | vertical/horizontal alignment   | 0       |
-| `showArrow`         | boolean   | no       | a tooltip with an arrow         |         |
-| `alwaysShow`        | boolean   | no       | tooltip always shown            |         |
-| `hideOnClick`       | boolean   | no       | onClick hides tooltip           |         |
-| `enterDelay`        | number    | no       | entry delay in ms               |         |
-| `exitDelay`         | number    | no       | exit delay in ms                |         |
-| `placement`         | string    | no       | positioning relative to anchor  | "auto"  |
-| `animationDuration` | number    | no       | duration in ms                  | 300     |
-| `ariaDescribedBy`   | string    | no       | link anchor and tooltip id      | 300     |
+| Prop                | Type      | Required | Description                    | Default |
+| ------------------- | --------- | -------- | ------------------------------ | ------- |
+| `children`          | ReactNode | yes      | the anchor element             |         |
+| `label`             | string    | yes      | the tooltip text               |         |
+| `distance`          | number    | no       | distance from anchor           | 10      |
+| `skidding`          | number    | no       | vertical/horizontal alignment  | 0       |
+| `showArrow`         | boolean   | no       | a tooltip with an arrow        |         |
+| `alwaysShow`        | boolean   | no       | tooltip always shown           |         |
+| `hideOnClick`       | boolean   | no       | onClick hides tooltip          |         |
+| `enterDelay`        | number    | no       | entry delay in ms              |         |
+| `exitDelay`         | number    | no       | exit delay in ms               |         |
+| `placement`         | string    | no       | positioning relative to anchor | "auto"  |
+| `animationDuration` | number    | no       | duration in ms                 | 300     |
+| `ariaDescribedBy`   | string    | no       | link anchor and tooltip id     | 300     |
 
 ## Food for thought from MDN
 
