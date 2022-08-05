@@ -15,6 +15,7 @@
 
 .box {
   padding: 4px 8px;
+  max-width: 250px;
   background: #444444;
   color: #ffffff;
   font-size: 14px;
