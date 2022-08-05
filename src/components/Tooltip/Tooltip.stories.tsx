@@ -30,8 +30,8 @@ export const Default = Template.bind({})
 Default.args = {
   children: "Hello",
   label: "World",
-  horizontalOffset: 10,
-  verticalOffset: 0,
+  distance: 10,
+  skidding: 0,
   placement: "bottom",
   showArrow: false,
   enterDelay: 0,
