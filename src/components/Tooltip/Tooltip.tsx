@@ -51,14 +51,18 @@ export function Tooltip({
   }, [])
 
   const [isOpen, setIsOpen] = useState(false)
-  // in order to ensure our tooltip is properly anchored, we need this state updated via the ref callback
+  /* 
+  in order to ensure all elements are properly anchored, 
+  we need these states updated via their ref callbacks
+  See docs: https://popper.js.org/react-popper/v2/#example
+  */
   const [anchorElement, setAnchorElement] = useState<HTMLSpanElement | null>(
     null,
   )
-  const boxRef = useRef<HTMLDivElement>(null)
+  const [boxElement, setBoxElement] = useState<HTMLDivElement | null>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
 
-  const { styles, attributes } = usePopper(anchorElement, boxRef.current, {
+  const { styles, attributes } = usePopper(anchorElement, boxElement, {
     modifiers: [
       { name: "arrow", options: { element: arrowRef.current } },
       {
@@ -131,12 +135,16 @@ export function Tooltip({
       >
         {children}
       </span>
-      <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
+      <Transition
+        mountOnEnter
+        in={isOpen || alwaysShow}
+        timeout={animationDuration}
+      >
         {(status) => (
           <div
             id={ariaDescribedBy}
             role="tooltip"
-            ref={boxRef}
+            ref={setBoxElement}
             style={{
               ...styles.popper,
               ...defaultStyle,
