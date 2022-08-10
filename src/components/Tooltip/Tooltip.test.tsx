@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { act, render, screen, waitFor } from "@testing-library/react"
 import { placements } from "./placements"
 import { Tooltip } from "./Tooltip"
 
@@ -135,6 +135,12 @@ describe("Tooltip", () => {
   })
   it("allows for an enterDelay or exitDelay to be set", async () => {
     // Arrange
+    jest.useFakeTimers()
+    /*
+      when using fake timers we have to set delay to null, 
+      otherwise the userEvent never resolves
+    */
+    const user = userEvent.setup({ delay: null })
     const children = "Hello"
     const label = "World"
     const enterDelay = 300
@@ -150,24 +156,29 @@ describe("Tooltip", () => {
     const receivedChildren = screen.getByText(children)
 
     // Assert
-    await userEvent.hover(receivedChildren)
+    await user.hover(receivedChildren)
 
     expect(screen.getByText(label)).not.toBeVisible()
 
-    await waitFor(() => expect(screen.getByText(label)).toBeVisible(), {
-      timeout: enterDelay,
+    act(() => {
+      jest.advanceTimersByTime(enterDelay)
     })
-
-    await userEvent.unhover(receivedChildren)
 
     expect(screen.getByText(label)).toBeVisible()
 
-    await waitFor(() => expect(screen.getByText(label)).not.toBeVisible(), {
-      timeout: exitDelay,
+    await user.unhover(receivedChildren)
+
+    expect(screen.getByText(label)).toBeVisible()
+
+    act(() => {
+      jest.advanceTimersByTime(exitDelay)
     })
+
+    expect(screen.getByText(label)).not.toBeVisible()
   })
   it("supports aria-describedby", async () => {
     // Arrange
+    jest.useRealTimers()
     const ariaDescribedBy = "paragraphtext"
     const children = <b>paragraph</b>
     const spanTestID = "tooltip_span"
