@@ -59,7 +59,7 @@ export function Tooltip({
   const [anchorElement, setAnchorElement] = useState<HTMLSpanElement | null>(
     null,
   )
-  const [boxElement, setBoxElement] = useState<HTMLDivElement | null>(null)
+  const [boxElement, setBoxElement] = useState<HTMLSpanElement | null>(null)
   const arrowRef = useRef<HTMLDivElement>(null)
 
   const { styles, attributes } = usePopper(anchorElement, boxElement, {
@@ -135,13 +135,9 @@ export function Tooltip({
       >
         {children}
       </span>
-      <Transition
-        mountOnEnter
-        in={isOpen || alwaysShow}
-        timeout={animationDuration}
-      >
+      <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
         {(status) => (
-          <div
+          <span
             id={ariaDescribedBy}
             role="tooltip"
             ref={setBoxElement}
@@ -162,7 +158,7 @@ export function Tooltip({
                 style={styles.arrow}
               />
             )}
-          </div>
+          </span>
         )}
       </Transition>
     </>
