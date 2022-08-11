@@ -1,5 +1,5 @@
-import decoratedCenter from "@storybook/addon-centered"
 import { ComponentStory } from "@storybook/react"
+import { FC } from "react"
 import { placements } from "./placements"
 import { Tooltip } from "./Tooltip"
 
@@ -10,7 +10,19 @@ import { Tooltip } from "./Tooltip"
 
 export default {
   title: "Components/Tooltip",
-  decorators: [decoratedCenter],
+  decorators: [
+    (Story: FC) => (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          margin: "5rem",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     placement: {
       control: {
