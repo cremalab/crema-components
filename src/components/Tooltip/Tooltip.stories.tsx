@@ -8,21 +8,21 @@ import { Tooltip } from "./Tooltip"
  * https://storybook.js.org/docs/basics/writing-stories/
  */
 
+const tooltipDecorator = (Story: FC) => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      margin: "5rem",
+    }}
+  >
+    <Story />
+  </div>
+)
+
 export default {
   title: "Components/Tooltip",
-  decorators: [
-    (Story: FC) => (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "5rem",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [tooltipDecorator],
   argTypes: {
     placement: {
       control: {
