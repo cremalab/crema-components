@@ -5,26 +5,28 @@ import { Tooltip } from "./Tooltip"
 
 describe("Tooltip", () => {
   it("displays tooltip onMouseEnter", async () => {
-    // Arrange
+    // ArrTestId
     const children = "Hello"
     const label = "World"
+    const testId = "tooltip"
 
     // Act
     render(<Tooltip label={label}>{children}</Tooltip>)
 
     const receivedChild = screen.getByText(children)
 
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
 
     await userEvent.hover(receivedChild)
 
     // Assert
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
   })
   it("hides tooltip onMouseLeave", async () => {
     // Arrange
     const children = "Hello"
     const label = "World"
+    const testId = "tooltip"
 
     // Act
     render(<Tooltip label={label}>{children}</Tooltip>)
@@ -33,17 +35,18 @@ describe("Tooltip", () => {
 
     await userEvent.hover(receivedChild)
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
 
     await userEvent.unhover(receivedChild)
 
     // Assert
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
   })
   it("can be focused and escaped by keyboard events", async () => {
     // Arrange
     const children = "Hello"
     const label = "World"
+    const testId = "tooltip"
 
     // Act
     render(<Tooltip label={label}>{children}</Tooltip>)
@@ -51,20 +54,21 @@ describe("Tooltip", () => {
     // Assert
     await userEvent.tab()
 
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
 
     await userEvent.keyboard("[Enter]")
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
 
     await userEvent.keyboard("[Escape]")
 
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
   })
   it("can be dismissed by clicking anchor element", async () => {
     // Arrange
     const children = "Hello"
     const label = "World"
+    const testId = "tooltip"
 
     // Act
     render(
@@ -78,16 +82,17 @@ describe("Tooltip", () => {
     // Assert
     await userEvent.hover(receivedChildren)
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
 
     await userEvent.click(receivedChildren)
 
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
   })
   it("can always be shown", async () => {
     // Arrange
     const children = "Hello"
     const label = "World"
+    const testId = "tooltip"
 
     // Act
     render(
@@ -103,13 +108,13 @@ describe("Tooltip", () => {
 
     await userEvent.keyboard("[Escape]")
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
 
     await userEvent.hover(receivedChildren)
 
     await userEvent.unhover(receivedChildren)
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
   })
   /* 
   We are making this async since this component internally sets state within a ref callback,
@@ -119,7 +124,7 @@ describe("Tooltip", () => {
     // Arrange
     const children = "Hello"
     const label = "World"
-    const arrowTestID = "tooltip_arrow"
+    const arrowTestId = "tooltip_arrow"
 
     // Act
     render(
@@ -128,7 +133,7 @@ describe("Tooltip", () => {
       </Tooltip>,
     )
 
-    const received = screen.getByTestId(arrowTestID)
+    const received = screen.getByTestId(arrowTestId)
 
     // Assert
     await waitFor(() => expect(received).toBeInTheDocument())
@@ -143,6 +148,7 @@ describe("Tooltip", () => {
     const user = userEvent.setup({ delay: null })
     const children = "Hello"
     const label = "World"
+    const testId = "tooltip"
     const enterDelay = 300
     const exitDelay = 500
 
@@ -158,30 +164,31 @@ describe("Tooltip", () => {
     // Assert
     await user.hover(receivedChildren)
 
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
 
     act(() => {
       jest.advanceTimersByTime(enterDelay)
     })
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
 
     await user.unhover(receivedChildren)
 
-    expect(screen.getByText(label)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeVisible()
 
     act(() => {
       jest.advanceTimersByTime(exitDelay)
     })
 
-    expect(screen.getByText(label)).not.toBeVisible()
+    expect(screen.getByTestId(testId)).not.toBeVisible()
   })
   it("supports aria-describedby", async () => {
     // Arrange
     jest.useRealTimers()
     const ariaDescribedBy = "paragraphtext"
     const children = <b>paragraph</b>
-    const spanTestID = "tooltip_span"
+    const spanTestId = "tooltip_span"
+    const testId = "tooltip"
     const label =
       "a distinct section of a piece of writing, usually dealing with a single theme and indicated by a new line, indentation, or numbering."
 
@@ -189,7 +196,7 @@ describe("Tooltip", () => {
     render(
       <p>
         This is a tooltip that lives within a{" "}
-        <Tooltip label={label} ariaDescribedBy={ariaDescribedBy}>
+        <Tooltip label={label} aria-describedby={ariaDescribedBy}>
           {children}
         </Tooltip>
         . Tooltips can be very handy for communicating additional information
@@ -197,11 +204,11 @@ describe("Tooltip", () => {
       </p>,
     )
 
-    const receivedWrapper = screen.getByTestId(spanTestID)
+    const receivedWrapper = screen.getByTestId(spanTestId)
 
     await userEvent.hover(receivedWrapper)
 
-    const receivedTooltip = screen.getByText(label)
+    const receivedTooltip = screen.getByTestId(testId)
 
     // Assert
     expect(receivedWrapper).toHaveAttribute("aria-describedby", ariaDescribedBy)
