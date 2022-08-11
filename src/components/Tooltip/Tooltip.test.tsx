@@ -181,10 +181,10 @@ describe("Tooltip", () => {
     })
 
     expect(screen.getByTestId(testId)).not.toBeVisible()
+    jest.useRealTimers()
   })
   it("supports aria-describedby", async () => {
     // Arrange
-    jest.useRealTimers()
     const ariaDescribedBy = "paragraphtext"
     const children = <b>paragraph</b>
     const spanTestId = "tooltip_span"
