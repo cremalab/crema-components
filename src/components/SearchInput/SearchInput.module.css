@@ -17,16 +17,9 @@
 }
 
 .endIcon {
-  visibility: hidden;
   border: 0;
   background: none;
   cursor: pointer;
-  pointer-events: none;
-}
-
-.endIcon:not([value=""]) {
-  visibility: visible;
-  pointer-events: all;
 }
 
 .input {
