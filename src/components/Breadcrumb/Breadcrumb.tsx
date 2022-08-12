@@ -7,7 +7,7 @@ interface Props {
 
 export function Breadcrumb({ children }: Props) {
   return (
-    <nav aria-label="breadcrumb" className={styles.BreadcrumbContainer}>
+    <nav aria-label="breadcrumbs" className={styles.BreadcrumbContainer}>
       <ol className={styles.BreadcrumbList}>{children}</ol>
     </nav>
   )

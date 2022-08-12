@@ -1,29 +1,29 @@
 import styles from "./Breadcrumb.module.css"
 
-interface ItemProps {
+interface LinkProps {
   href: string
   isCurrent: boolean
   label: string
 }
 
 interface Props {
-  items: ItemProps[]
+  links: LinkProps[]
 }
 
-export function BreadcrumbItem({ items }: Props) {
+export function BreadcrumbItem({ links }: Props) {
   return (
     <>
-      {items.map((item, index) => (
+      {links.map((link, index) => (
         <li className={styles.BreadcrumbListItem} key={index}>
           <a
-            href={item.href}
+            href={link.href}
             className={styles.link}
-            aria-current={item.isCurrent ? "page" : "false"}
+            aria-current={link.isCurrent ? "page" : "false"}
           >
-            {item.label}
+            {link.label}
           </a>
-          {!item.isCurrent && (
-            <span role="presentation" className={styles.Separator}>
+          {!link.isCurrent && (
+            <span aria-hidden="true" className={styles.Separator}>
               /
             </span>
           )}

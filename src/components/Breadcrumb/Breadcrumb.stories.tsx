@@ -16,7 +16,7 @@ export default {
   },
 } as ComponentMeta<typeof Breadcrumb>
 
-const breadcrumbItems = [
+const breadcrumbLinks = [
   {
     href: "#",
     label: "Home",
@@ -41,5 +41,5 @@ const Template: Story<ComponentProps<typeof Breadcrumb>> = (args) => (
 export const Default = Template.bind({})
 
 Default.args = {
-  children: <BreadcrumbItem items={breadcrumbItems} />,
+  children: <BreadcrumbItem links={breadcrumbLinks} />,
 }

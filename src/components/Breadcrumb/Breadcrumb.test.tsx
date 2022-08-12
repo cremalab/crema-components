@@ -4,7 +4,7 @@ import { BreadcrumbItem } from "./BreadcrumbItem"
 
 describe("Breadcrumb", () => {
   it("renders children", async () => {
-    const breadcrumbItems = [
+    const breadcrumbLinks = [
       {
         href: "#",
         label: "Home",
@@ -16,9 +16,18 @@ describe("Breadcrumb", () => {
         isCurrent: true,
       },
     ]
-    const children = <BreadcrumbItem items={breadcrumbItems} />
+    const children = <BreadcrumbItem links={breadcrumbLinks} />
+
     render(<Breadcrumb>{children}</Breadcrumb>)
+
     expect(screen.getByText("Home")).toBeInTheDocument()
     expect(screen.getByText("About")).toBeInTheDocument()
+
+    const lastLink = screen.getByText("About")
+    expect(lastLink).toHaveAttribute("aria-current", "page")
+
+    const nav = screen.getByRole("navigation")
+    expect(nav).toBeInTheDocument()
+    expect(nav).toHaveAttribute("aria-label", "breadcrumbs")
   })
 })
