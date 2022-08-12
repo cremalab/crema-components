@@ -1,4 +1,5 @@
-import decoratorCentered from "@storybook/addon-centered"
+import { action } from "@storybook/addon-actions"
+import { ComponentStory } from "@storybook/react"
 import { SearchInput } from "./SearchInput"
 
 /**
@@ -7,8 +8,37 @@ import { SearchInput } from "./SearchInput"
  */
 
 export default {
-  title: "SearchInput",
-  decorators: [decoratorCentered],
+  title: "Components/SearchInput",
 }
 
-export const Example = () => <SearchInput />
+const Template: ComponentStory<typeof SearchInput> = (args) => (
+  <SearchInput {...args} />
+)
+
+export const Basic = Template.bind({})
+
+Basic.args = {
+  name: "search_input",
+  onDebounce: action("onDebounce"),
+}
+
+export const WithPlaceholder = Template.bind({})
+
+WithPlaceholder.args = {
+  ...Basic.args,
+  placeholder: "Search...",
+}
+
+export const WithCustomStartIcon = Template.bind({})
+
+WithCustomStartIcon.args = {
+  ...Basic.args,
+  startIcon: "🎃",
+}
+
+export const WithCustomEndIcon = Template.bind({})
+
+WithCustomEndIcon.args = {
+  ...Basic.args,
+  endIcon: "❎",
+}

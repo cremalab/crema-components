@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.container:focus-within {
+  outline: 1px solid black;
+}
+
+.container:focus-within .startIcon {
+  visibility: visible;
+}
+
+.endIcon {
+  visibility: hidden;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.endIcon:not([value=""]) {
+  visibility: visible;
+}
+
+.input {
+  outline: none;
+  border: none;
+  padding: 0 4px;
+  width: 100%;
+}
+
+.startIcon {
+  visibility: hidden;
+}
+
+
+
