@@ -11,7 +11,6 @@ interface SearchInputProps extends Omit<ComponentProps<"input">, "value"> {
   startIcon?: ReactNode
   endIcon?: ReactNode
   label?: string
-  name: string
   onDebounce: (text: string) => void
   debounceDelay?: number
 }
@@ -43,8 +42,10 @@ export function SearchInput({
   }
 
   return (
-    <div className={styles.container}>
-      <span className={styles.startIcon}>{startIcon || "🔍"}</span>
+    <div className={styles.container} data-testid="container">
+      <span data-testid="start_icon" className={styles.startIcon}>
+        {startIcon || <span>🔍</span>}
+      </span>
       <input
         type="text"
         className={styles.input}
@@ -52,8 +53,13 @@ export function SearchInput({
         value={text}
         {...inputProps}
       />
-      <button value={text} className={styles.endIcon} onClick={handleReset}>
-        {endIcon || "❎"}
+      <button
+        aria-label="click icon to clear search"
+        hidden={!text.length}
+        className={styles.endIcon}
+        onClick={handleReset}
+      >
+        {endIcon || <span>❎</span>}
       </button>
     </div>
   )
