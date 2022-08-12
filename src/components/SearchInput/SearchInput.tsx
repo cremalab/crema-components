@@ -43,20 +43,18 @@ export function SearchInput({
   }
 
   return (
-    <div>
-      <div className={styles.container}>
-        <span className={styles.startIcon}>{startIcon || "🔍"}</span>
-        <input
-          type="text"
-          className={styles.input}
-          onChange={handleChange}
-          value={text}
-          {...inputProps}
-        />
-        <button value={text} className={styles.endIcon} onClick={handleReset}>
-          {endIcon || "x"}
-        </button>
-      </div>
+    <div className={styles.container}>
+      <span className={styles.startIcon}>{startIcon || "🔍"}</span>
+      <input
+        type="text"
+        className={styles.input}
+        onChange={handleChange}
+        value={text}
+        {...inputProps}
+      />
+      <button value={text} className={styles.endIcon} onClick={handleReset}>
+        {endIcon || "❎"}
+      </button>
     </div>
   )
 }
