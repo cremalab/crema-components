@@ -131,7 +131,6 @@ export function Tooltip({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={setAnchorElement}
-        // ensures screen reader can read out tootlip content without displaying it
         aria-label={label}
         {...aria}
       >
