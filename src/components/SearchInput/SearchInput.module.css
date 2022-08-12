@@ -13,7 +13,7 @@
 }
 
 .container:focus-within .startIcon {
-  visibility: visible;
+  opacity: 1;
 }
 
 .endIcon {
@@ -21,10 +21,12 @@
   border: 0;
   background: none;
   cursor: pointer;
+  pointer-events: none;
 }
 
 .endIcon:not([value=""]) {
   visibility: visible;
+  pointer-events: all;
 }
 
 .input {
@@ -35,7 +37,7 @@
 }
 
 .startIcon {
-  visibility: hidden;
+  opacity: 0.5;
 }
 
 
