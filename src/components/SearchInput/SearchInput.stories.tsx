@@ -33,12 +33,12 @@ export const WithCustomStartIcon = Template.bind({})
 
 WithCustomStartIcon.args = {
   ...Basic.args,
-  startIcon: "🎃",
+  startIcon: <span>🎃</span>,
 }
 
 export const WithCustomEndIcon = Template.bind({})
 
 WithCustomEndIcon.args = {
   ...Basic.args,
-  endIcon: "❎",
+  endIcon: <span>✖️</span>,
 }
