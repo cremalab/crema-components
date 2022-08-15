@@ -16,6 +16,12 @@ const Template: ComponentStory<typeof SearchInput> = (args) => (
   <SearchInput {...args} />
 )
 
+export const Basic = Template.bind({})
+
+Basic.args = {
+  onDebounce: action("onDebounce"),
+}
+
 export const WithPlaceholder = Template.bind({})
 
 WithPlaceholder.args = {
