@@ -1,6 +1,6 @@
 # `<SearchInput />`
 
-DESCRIPTION_HERE
+A minimal search input offering a few helpful callbacks including a debounced callback. Can be used as a controlled or uncontrolled input. For full control, supply your own onChange and value props. The simplest implementation would be to simply use the onDebounce callback and grab the value anytime its updated based on the debounceDelay (default of 300ms). If you wish to include a search button, simply supply a onSearchClick callback which will return the current value when the search button is clicked.
 
 ## Directory Structure
 
@@ -9,6 +9,19 @@ DESCRIPTION_HERE
 - `SearchInput.tsx`: Component code
 - `index.ts`: Component export
 - `README.md`: Component documentation (hey, that's me!)
+
+# Example Usage
+
+```tsx
+function MyComponent() {
+
+  const [value, setValue] = useState("")
+
+  return (
+    <SearchInput onDebounce={(text) => doSomethingWithDebouncedText(text)} />
+  )
+}
+```
 
 ## API
 
@@ -20,4 +33,4 @@ DESCRIPTION_HERE
 | `onDebounce`    | string                  | no       | A debounced callback that returns the current search term value |         |
 | `onSearchClick` | string                  | no       | A callback that returns the current search term value           |         |
 | `value`         | string                  | no       | The current input value                                         |         |
-| `inputProps`    | ComponentProps<"input"> | no       | excludes `name` and `placeholder`                               |         |
+| `...rest`       | ComponentProps<"input"> | no       |                                                                 |         |
