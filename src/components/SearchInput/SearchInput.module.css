@@ -5,7 +5,8 @@
   border: 1px solid black;
   padding: 4px;
   border-radius: 4px;
-  margin: 8px 0;
+  width: 100%;
+  height: inherit;
 }
 
 .container:focus-within {
@@ -29,6 +30,24 @@
   width: 100%;
 }
 
+.input::-webkit-search-cancel-button {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .startIcon {
   opacity: 0.5;
+}
+
+.searchButton {
+  display: flex;
+  height: 100%;
+  margin-left: 8px;
+}
+
+.wrapper {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
