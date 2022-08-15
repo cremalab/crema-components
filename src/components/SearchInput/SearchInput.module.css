@@ -13,11 +13,11 @@
   outline: 1px solid black;
 }
 
-.container:focus-within .startIcon {
+.container:focus-within .searchIcon {
   opacity: 1;
 }
 
-.endIcon {
+.clearIcon {
   border: 0;
   background: none;
   cursor: pointer;
@@ -35,7 +35,7 @@
   pointer-events: none;
 }
 
-.startIcon {
+.searchIcon {
   opacity: 0.5;
 }
 
