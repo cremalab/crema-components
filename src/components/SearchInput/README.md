@@ -14,7 +14,6 @@ A minimal search input offering a few helpful callbacks including a debounced ca
 
 ```tsx
 function MyComponent() {
-
   const [value, setValue] = useState("")
 
   return (
