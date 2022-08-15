@@ -11,8 +11,8 @@ import styles from "./SearchInput.module.css"
 interface SearchInputProps extends Omit<ComponentProps<"input">, "value"> {
   searchIcon?: ReactNode
   clearIcon?: ReactNode
-  onDebounce?: (text: string) => void
-  onSearchClick?: (text: string) => void
+  onDebounce?: (searchTerm: string) => void
+  onSearchClick?: (searchTerm: string) => void
   debounceDelay?: number
 }
 
@@ -24,27 +24,27 @@ export function SearchInput({
   onSearchClick,
   ...inputProps
 }: SearchInputProps) {
-  const [text, setText] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
   const [hideCancelButton, setHideCancelButton] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => onDebounce?.(text), debounceDelay)
+    const timer = setTimeout(() => onDebounce?.(searchTerm), debounceDelay)
     return () => {
       clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, debounceDelay])
+  }, [searchTerm, debounceDelay])
 
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     // we don't want the field to blur when a user clears the input
     e.preventDefault()
-    setText("")
+    setSearchTerm("")
     setHideCancelButton(true)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
-    setText(value)
+    setSearchTerm(value)
     inputProps.onChange?.(e)
     if (!value) setHideCancelButton(true)
     else setHideCancelButton(false)
@@ -55,7 +55,7 @@ export function SearchInput({
   }
 
   const handleFocus = () => {
-    if (text.length) {
+    if (searchTerm.length) {
       setHideCancelButton(false)
     }
   }
@@ -72,7 +72,7 @@ export function SearchInput({
           onChange={handleChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          value={text}
+          value={searchTerm}
           {...inputProps}
         />
         <button
@@ -90,7 +90,7 @@ export function SearchInput({
         <div className={styles.searchButton}>
           <button
             aria-label="click to search"
-            onClick={() => onSearchClick?.(text)}
+            onClick={() => onSearchClick?.(searchTerm)}
           >
             Search
           </button>
