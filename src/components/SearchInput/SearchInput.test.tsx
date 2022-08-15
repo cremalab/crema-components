@@ -127,4 +127,19 @@ describe("SearchInput", () => {
     expect(receivedStartIcon).toBeInTheDocument()
     expect(receivedEndIcon).toBeInTheDocument()
   })
+  it("renders a search button if onSearchClick function is passed", async () => {
+    // Arrange
+    const onSearchClick = jest.fn()
+    const label = "click to search"
+
+    // Act
+    render(<SearchInput onSearchClick={onSearchClick} />)
+
+    const button = screen.getByLabelText(label)
+
+    await userEvent.click(button)
+
+    // Assert
+    expect(onSearchClick).toBeCalled()
+  })
 })
