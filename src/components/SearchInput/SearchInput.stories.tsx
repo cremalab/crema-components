@@ -42,3 +42,10 @@ WithCustomEndIcon.args = {
   ...Basic.args,
   endIcon: <span>✖️</span>,
 }
+
+export const WithSearchButton = Template.bind({})
+
+WithSearchButton.args = {
+  ...Basic.args,
+  onSearchClick: action("onSearchClick"),
+}
