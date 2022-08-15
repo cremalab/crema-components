@@ -29,7 +29,7 @@ export function SearchInput({
   value = "",
   ...inputProps
 }: SearchInputProps) {
-  const [inputValue, setInputValue] = useState("")
+  const [inputValue, setInputValue] = useState(value)
   const [hideCancelButton, setHideCancelButton] = useState(true)
 
   useEffect(() => {
@@ -39,10 +39,6 @@ export function SearchInput({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, debounceDelay])
-
-  useEffect(() => {
-    setInputValue(value)
-  }, [value])
 
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     // we don't want the field to blur when a user clears the input
@@ -55,7 +51,7 @@ export function SearchInput({
     const { value } = e.currentTarget
     inputProps.onChange?.(e)
     setInputValue(value)
-    if (!inputValue) setHideCancelButton(true)
+    if (!value) setHideCancelButton(true)
     else setHideCancelButton(false)
   }
 
@@ -66,7 +62,7 @@ export function SearchInput({
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     inputProps.onFocus?.(e)
-    if (inputValue?.length) setHideCancelButton(false)
+    if (value?.length) setHideCancelButton(false)
   }
 
   return (
