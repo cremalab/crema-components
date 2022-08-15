@@ -81,7 +81,7 @@ describe("SearchInput", () => {
     await waitFor(() => expect(onDebounce).toBeCalled())
     jest.useRealTimers()
   })
-  it("clears the input when the end icon is clicked", async () => {
+  it("clears the input when the clear icon is clicked", async () => {
     // Arrange
     const inputLabel = "search"
     const clearIconlabel = "click icon to clear search"
@@ -103,7 +103,7 @@ describe("SearchInput", () => {
     // Assert
     expect(input.value).toBe("")
   })
-  it("renders custom start icon and end icon", () => {
+  it("renders custom search icon and clear icon", () => {
     // Arrange
     const searchIconLabel = "a pumpkin"
     const clearIconLabel = "clear input"
@@ -141,5 +141,34 @@ describe("SearchInput", () => {
 
     // Assert
     expect(onSearchClick).toBeCalled()
+  })
+  it("invokes the following 'onBlur', 'onChange', and 'onFocus'", async () => {
+    // Arrange
+    const onBlur = jest.fn()
+    const onChange = jest.fn()
+    const onFocus = jest.fn()
+    const label = "search"
+
+    // Act
+    render(
+      <SearchInput
+        aria-label={label}
+        onBlur={onBlur}
+        onChange={onChange}
+        onFocus={onFocus}
+      />,
+    )
+
+    const received = screen.getByLabelText(label)
+
+    // Assert
+    await userEvent.type(received, "Hello World")
+    expect(onChange).toBeCalled()
+
+    await userEvent.click(received)
+    expect(onFocus).toBeCalled()
+
+    await userEvent.tab()
+    expect(onBlur).toBeCalled()
   })
 })

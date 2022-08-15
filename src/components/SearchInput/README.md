@@ -16,7 +16,8 @@ DESCRIPTION_HERE
 | --------------- | ----------------------- | -------- | --------------------------------------------------------------- | ------- |
 | `searchIcon`    | ReactNode               | no       |                                                                 | 🔍      |
 | `clearIcon`     | ReactNode               | no       |                                                                 | ❎      |
-| `debounceDelay` | number                  | no       | the debounce delay in ms                                        |         |
+| `debounceDelay` | number                  | no       | the debounce delay in ms                                        | 300     |
 | `onDebounce`    | string                  | no       | A debounced callback that returns the current search term value |         |
 | `onSearchClick` | string                  | no       | A callback that returns the current search term value           |         |
-| `...rest`       | ComponentProps<"input"> |          |                                                                 |         |
+| `value`         | string                  | no       | The current input value                                         |         |
+| `inputProps`    | ComponentProps<"input"> | no       | excludes `name` and `placeholder`                               |         |
