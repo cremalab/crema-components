@@ -130,17 +130,24 @@ describe("SearchInput", () => {
   it("renders a search button if onSearchClick function is passed", async () => {
     // Arrange
     const onSearchClick = jest.fn()
-    const label = "click to search"
+    const inputLabel = "search"
+    const searchButtonLabel = "click to search"
+    const text = "Hello World"
 
     // Act
-    render(<SearchInput onSearchClick={onSearchClick} />)
+    render(
+      <SearchInput aria-label={inputLabel} onSearchClick={onSearchClick} />,
+    )
 
-    const button = screen.getByLabelText(label)
+    const input = screen.getByLabelText(inputLabel)
+    const button = screen.getByLabelText(searchButtonLabel)
 
+    await userEvent.type(input, text)
     await userEvent.click(button)
 
     // Assert
     expect(onSearchClick).toBeCalled()
+    expect(onSearchClick).toBeCalledWith(text)
   })
   it("invokes the following 'onBlur', 'onChange', and 'onFocus'", async () => {
     // Arrange

@@ -62,7 +62,7 @@ export function SearchInput({
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     inputProps.onFocus?.(e)
-    if (value?.length) setHideCancelButton(false)
+    if (inputValue?.length) setHideCancelButton(false)
   }
 
   return (
@@ -97,7 +97,7 @@ export function SearchInput({
         <div className={styles.searchButton}>
           <button
             aria-label="click to search"
-            onClick={() => onSearchClick?.(value)}
+            onClick={() => onSearchClick?.(inputValue)}
           >
             Search
           </button>
