@@ -29,28 +29,28 @@ export function SearchInput({
   value = "",
   ...inputProps
 }: SearchInputProps) {
-  const [inputValue, setInputValue] = useState(value)
+  const [searchTerm, setSearchTerm] = useState(value)
   const [hideCancelButton, setHideCancelButton] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => onDebounce?.(inputValue), debounceDelay)
+    const timer = setTimeout(() => onDebounce?.(searchTerm), debounceDelay)
     return () => {
       clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue, debounceDelay])
+  }, [searchTerm, debounceDelay])
 
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     // we don't want the field to blur when a user clears the input
     e.preventDefault()
-    setInputValue("")
+    setSearchTerm("")
     setHideCancelButton(true)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
     inputProps.onChange?.(e)
-    setInputValue(value)
+    setSearchTerm(value)
     if (!value) setHideCancelButton(true)
     else setHideCancelButton(false)
   }
@@ -62,7 +62,7 @@ export function SearchInput({
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     inputProps.onFocus?.(e)
-    if (inputValue?.length) setHideCancelButton(false)
+    if (searchTerm?.length) setHideCancelButton(false)
   }
 
   return (
@@ -77,7 +77,7 @@ export function SearchInput({
           className={styles.input}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          value={inputValue}
+          value={searchTerm}
           name={name}
           placeholder={placeholder}
           onChange={handleChange}
@@ -97,7 +97,7 @@ export function SearchInput({
         <div className={styles.searchButton}>
           <button
             aria-label="click to search"
-            onClick={() => onSearchClick?.(inputValue)}
+            onClick={() => onSearchClick?.(searchTerm)}
           >
             Search
           </button>
