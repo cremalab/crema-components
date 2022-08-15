@@ -9,17 +9,16 @@ import {
 import styles from "./SearchInput.module.css"
 
 interface SearchInputProps extends Omit<ComponentProps<"input">, "value"> {
-  startIcon?: ReactNode
-  endIcon?: ReactNode
-  label?: string
+  searchIcon?: ReactNode
+  clearIcon?: ReactNode
   onDebounce?: (text: string) => void
   onSearchClick?: (text: string) => void
   debounceDelay?: number
 }
 
 export function SearchInput({
-  startIcon,
-  endIcon,
+  searchIcon,
+  clearIcon,
   onDebounce,
   debounceDelay = 300,
   onSearchClick,
@@ -64,8 +63,8 @@ export function SearchInput({
   return (
     <div className={styles.wrapper}>
       <div className={styles.container} data-testid="container">
-        <span data-testid="start_icon" className={styles.startIcon}>
-          {startIcon || <span>🔍</span>}
+        <span data-testid="search_icon" className={styles.searchIcon}>
+          {searchIcon || <span>🔍</span>}
         </span>
         <input
           type="search"
@@ -81,10 +80,10 @@ export function SearchInput({
           tabIndex={-1}
           aria-label="click icon to clear search"
           hidden={hideCancelButton}
-          className={styles.endIcon}
+          className={styles.clearIcon}
           onMouseDown={handleReset}
         >
-          {endIcon || <span>❎</span>}
+          {clearIcon || <span>❎</span>}
         </button>
       </div>
       {onSearchClick && (

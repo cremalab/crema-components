@@ -4,19 +4,19 @@ import { act } from "react-dom/test-utils"
 import { SearchInput } from "./SearchInput"
 
 describe("SearchInput", () => {
-  it("renders start icon", () => {
+  it("renders search icon", () => {
     // Arrange
-    const startIconTestId = "start_icon"
+    const searchIconTestId = "search_icon"
 
     // Act
     render(<SearchInput onDebounce={jest.fn()} />)
 
-    const receivedIcon = screen.getByTestId(startIconTestId)
+    const receivedIcon = screen.getByTestId(searchIconTestId)
 
     // Assert
     expect(receivedIcon).toBeInTheDocument()
   })
-  it("end icon is not visible if search term is empty", () => {
+  it("clear icon is not visible if search term is empty", () => {
     // Arrange
     const label = "click icon to clear search"
 
@@ -84,7 +84,7 @@ describe("SearchInput", () => {
   it("clears the input when the end icon is clicked", async () => {
     // Arrange
     const inputLabel = "search"
-    const endIconlabel = "click icon to clear search"
+    const clearIconlabel = "click icon to clear search"
     const text = "Hello World"
 
     // Act
@@ -92,40 +92,40 @@ describe("SearchInput", () => {
 
     const input = screen.getByLabelText<HTMLInputElement>(inputLabel)
 
-    const endIcon = screen.getByLabelText(endIconlabel)
+    const clearIcon = screen.getByLabelText(clearIconlabel)
 
     await userEvent.type(input, text)
 
     expect(input.value).toBe(text)
 
-    await userEvent.click(endIcon)
+    await userEvent.click(clearIcon)
 
     // Assert
     expect(input.value).toBe("")
   })
   it("renders custom start icon and end icon", () => {
     // Arrange
-    const startIconLabel = "a pumpkin"
-    const endIconLabel = "clear input"
-    const startIcon = <span aria-label={startIconLabel}>🎃</span>
-    const endIcon = <span aria-label={endIconLabel}>✖️</span>
+    const searchIconLabel = "a pumpkin"
+    const clearIconLabel = "clear input"
+    const searchIcon = <span aria-label={searchIconLabel}>🎃</span>
+    const clearIcon = <span aria-label={clearIconLabel}>✖️</span>
 
     // Act
     render(
       <SearchInput
         onDebounce={jest.fn()}
-        startIcon={startIcon}
-        endIcon={endIcon}
+        searchIcon={searchIcon}
+        clearIcon={clearIcon}
       />,
     )
 
-    const receivedStartIcon = screen.getByLabelText(startIconLabel)
+    const receivedsearchIcon = screen.getByLabelText(searchIconLabel)
 
-    const receivedEndIcon = screen.getByLabelText(endIconLabel)
+    const receivedclearIcon = screen.getByLabelText(clearIconLabel)
 
     // Assert
-    expect(receivedStartIcon).toBeInTheDocument()
-    expect(receivedEndIcon).toBeInTheDocument()
+    expect(receivedsearchIcon).toBeInTheDocument()
+    expect(receivedclearIcon).toBeInTheDocument()
   })
   it("renders a search button if onSearchClick function is passed", async () => {
     // Arrange

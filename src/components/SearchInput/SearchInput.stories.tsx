@@ -29,18 +29,18 @@ WithPlaceholder.args = {
   placeholder: "Search...",
 }
 
-export const WithCustomStartIcon = Template.bind({})
+export const WithCustomSearchIcon = Template.bind({})
 
-WithCustomStartIcon.args = {
+WithCustomSearchIcon.args = {
   ...Basic.args,
-  startIcon: <span>🎃</span>,
+  searchIcon: <span>🎃</span>,
 }
 
-export const WithCustomEndIcon = Template.bind({})
+export const WithCustomClearIcon = Template.bind({})
 
-WithCustomEndIcon.args = {
+WithCustomClearIcon.args = {
   ...Basic.args,
-  endIcon: <span>✖️</span>,
+  clearIcon: <span>✖️</span>,
 }
 
 export const WithSearchButton = Template.bind({})
