@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { act } from "react-dom/test-utils"
 import { SearchInput } from "./SearchInput"
@@ -78,7 +78,7 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    await waitFor(() => expect(onSearch).toBeCalled())
+    expect(onSearch).toBeCalled()
     jest.useRealTimers()
   })
   it("clears the input when the clear icon is clicked", async () => {
