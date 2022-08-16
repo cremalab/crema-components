@@ -49,5 +49,5 @@ export const WithSearchButton = Template.bind({})
 
 WithSearchButton.args = {
   ...Basic.args,
-  onSearchClick: action("onSearchClick"),
+  showSearchButton: true,
 }

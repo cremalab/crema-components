@@ -24,15 +24,15 @@ function MyComponent() {
 
 ## API
 
-| Prop            | Type      | Required | Description                                                     | Default |
-| --------------- | --------- | -------- | --------------------------------------------------------------- | ------- |
-| `name`          | string    | no       |                                                                 |         |
-| `placeholder`   | string    | no       |                                                                 |         |
-| `searchIcon`    | ReactNode | no       |                                                                 | 🔍      |
-| `clearIcon`     | ReactNode | no       |                                                                 | ❎      |
-| `debounceDelay` | number    | no       | the debounce delay in ms                                        | 300     |
-| `onSearch`      | function  | no       | A debounced callback that returns the current search term value |         |
-| `onSearchClick` | function  | no       | A callback that returns the current search term value           |         |
-| `onBlur`        | function  | no       | A callback triggered when the input is blurred                  |         |
-| `onFocus`       | function  | no       | A callback triggered when the input is focused                  |         |
-| `initialValue`  | string    | no       | The initial value to display                                    |         |
+| Prop               | Type      | Required | Description                                                     | Default |
+| ------------------ | --------- | -------- | --------------------------------------------------------------- | ------- |
+| `name`             | string    | no       |                                                                 |         |
+| `placeholder`      | string    | no       |                                                                 |         |
+| `showSearchButton` | boolean   | no       | whether to show the search button or not                        |         |
+| `searchIcon`       | ReactNode | no       |                                                                 | 🔍      |
+| `clearIcon`        | ReactNode | no       |                                                                 | ❎      |
+| `debounceDelay`    | number    | no       | the debounce delay in ms                                        | 300     |
+| `onSearch`         | function  | no       | A debounced callback that returns the current search term value |         |
+| `onBlur`           | function  | no       | A callback triggered when the input is blurred                  |         |
+| `onFocus`          | function  | no       | A callback triggered when the input is focused                  |         |
+| `initialValue`     | string    | no       | The initial value to display                                    |         |

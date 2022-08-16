@@ -135,9 +135,7 @@ describe("SearchInput", () => {
     const text = "Hello World"
 
     // Act
-    render(
-      <SearchInput aria-label={inputLabel} onSearchClick={onSearchClick} />,
-    )
+    render(<SearchInput aria-label={inputLabel} showSearchButton />)
 
     const input = screen.getByLabelText(inputLabel)
     const button = screen.getByLabelText(searchButtonLabel)

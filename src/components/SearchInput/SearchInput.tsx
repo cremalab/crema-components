@@ -17,7 +17,7 @@ interface SearchInputProps extends Pick<AriaAttributes, "aria-label"> {
   debounceDelay?: number
   initialValue?: string
   onSearch?: (searchTerm: string) => void
-  onSearchClick?: (searchTerm: string) => void
+  showSearchButton?: boolean
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void
 }
@@ -29,7 +29,7 @@ export function SearchInput({
   clearIcon,
   onSearch,
   debounceDelay = 300,
-  onSearchClick,
+  showSearchButton,
   initialValue = "",
   onBlur,
   onFocus,
@@ -107,11 +107,11 @@ export function SearchInput({
           {clearIcon || <span>❎</span>}
         </button>
       </div>
-      {onSearchClick && (
+      {showSearchButton && (
         <div className={styles.searchButton}>
           <button
             aria-label="click to search"
-            onClick={() => onSearchClick?.(searchTerm)}
+            onClick={() => onSearch?.(searchTerm)}
           >
             Search
           </button>
