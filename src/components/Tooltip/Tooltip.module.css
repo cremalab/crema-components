@@ -1,0 +1,41 @@
+.arrow {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+}
+
+.arrow::after {
+  position: absolute;
+  content: "";
+  transform: rotate(45deg);
+  height: 8px;
+  width: 8px;
+  background: #444444;
+}
+
+.box {
+  padding: 4px 8px;
+  max-width: 250px;
+  background: #444444;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 21px;
+  border-radius: 2px;
+  filter: drop-shadow(0 0 0.1rem #999999);
+}
+
+.box[data-popper-placement^="top"] > .arrow {
+  bottom: -4px;
+}
+
+.box[data-popper-placement^="bottom"] > .arrow {
+  top: -4px;
+}
+
+.box[data-popper-placement^="left"] > .arrow {
+  right: -4px;
+}
+
+.box[data-popper-placement^="right"] > .arrow {
+  left: -4px;
+}
