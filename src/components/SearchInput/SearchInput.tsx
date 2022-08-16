@@ -70,7 +70,6 @@ export function SearchInput({
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     onBlur?.(e)
-    console.log("handleBlur")
     setCancelButtonHidden(true)
   }
 
