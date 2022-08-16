@@ -45,7 +45,7 @@ export function SearchInput({
   }, [initialValue])
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchTerm && !showSearchButton) {
       timer.current = setTimeout(() => onSearch?.(searchTerm), debounceDelay)
     }
     return () => {
@@ -111,7 +111,7 @@ export function SearchInput({
         <div className={styles.searchButton}>
           <button
             aria-label="click to search"
-            onClick={() => onSearch?.(searchTerm)}
+            onClick={() => searchTerm && onSearch?.(searchTerm)}
           >
             Search
           </button>
