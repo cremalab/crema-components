@@ -56,6 +56,7 @@ describe("SearchInput", () => {
 
     // Assert
     expect(onSearch).toBeCalled()
+    expect(onSearch).toBeCalledWith(text)
     jest.useRealTimers()
   })
   it("has a default delay of 300", async () => {
