@@ -1,20 +1,19 @@
-import { ReactElement } from "react"
 import styles from "./Breadcrumb.module.css"
 import { BreadcrumbItem, LinkProps } from "./BreadcrumbItem"
 
 interface Props {
-  children: Array<ReactElement<LinkProps>>
+  links: LinkProps[]
 }
 
-export function Breadcrumb({ children }: Props) {
+export const Breadcrumb = ({ links }: Props) => {
   return (
     <nav aria-label="breadcrumbs" className={styles.BreadcrumbContainer}>
-      <ol className={styles.BreadcrumbList}>
-        {children.map((item, index, array) => (
+      <ol className={styles.BreadcrumbItem}>
+        {links.map((link, index) => (
           <BreadcrumbItem
             key={index}
-            {...item.props}
-            isCurrent={array.length - 1 === index}
+            {...link}
+            isCurrent={index === links.length - 1}
           />
         ))}
       </ol>

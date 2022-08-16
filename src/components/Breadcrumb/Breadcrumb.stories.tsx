@@ -38,7 +38,5 @@ const Template: Story<ComponentProps<typeof Breadcrumb>> = (args) => (
 export const Default = Template.bind({})
 
 Default.args = {
-  children: breadcrumbLinks.map((link, index) => (
-    <BreadcrumbItem key={index} {...link} />
-  )),
+  links: breadcrumbLinks,
 }
