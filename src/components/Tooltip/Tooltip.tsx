@@ -113,7 +113,7 @@ export function Tooltip({
   }
 
   const transitionStyles: { [key in TransitionStatus]: CSSProperties } = {
-    entering: { opacity: 1 },
+    entering: { opacity: 0 },
     entered: { opacity: 1 },
     exited: {},
     exiting: {},
@@ -136,7 +136,11 @@ export function Tooltip({
       >
         {children}
       </span>
-      <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
+      <Transition
+        unmountOnExit
+        in={isOpen || alwaysShow}
+        timeout={animationDuration}
+      >
         {(status) => (
           <span
             id={aria["aria-describedby"]}

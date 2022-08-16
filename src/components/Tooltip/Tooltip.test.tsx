@@ -15,12 +15,12 @@ describe("Tooltip", () => {
 
     const receivedChild = screen.getByText(children)
 
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    expect(screen.queryByTestId(testId)).not.toBeInTheDocument()
 
     await userEvent.hover(receivedChild)
 
     // Assert
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
   })
   it("hides tooltip onMouseLeave", async () => {
     // Arrange
@@ -35,12 +35,14 @@ describe("Tooltip", () => {
 
     await userEvent.hover(receivedChild)
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
 
     await userEvent.unhover(receivedChild)
 
     // Assert
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    await waitFor(() =>
+      expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
+    )
   })
   it("can be focused and escaped by keyboard events", async () => {
     // Arrange
@@ -54,15 +56,17 @@ describe("Tooltip", () => {
     // Assert
     await userEvent.tab()
 
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    expect(screen.queryByTestId(testId)).not.toBeInTheDocument()
 
     await userEvent.keyboard("[Enter]")
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
 
     await userEvent.keyboard("[Escape]")
 
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    await waitFor(() =>
+      expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
+    )
   })
   it("can be dismissed by clicking anchor element", async () => {
     // Arrange
@@ -82,11 +86,13 @@ describe("Tooltip", () => {
     // Assert
     await userEvent.hover(receivedChildren)
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
 
     await userEvent.click(receivedChildren)
 
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    await waitFor(() =>
+      expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
+    )
   })
   it("can always be shown", async () => {
     // Arrange
@@ -108,13 +114,13 @@ describe("Tooltip", () => {
 
     await userEvent.keyboard("[Escape]")
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
 
     await userEvent.hover(receivedChildren)
 
     await userEvent.unhover(receivedChildren)
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
   })
   /* 
   We are making this async since this component internally sets state within a ref callback,
@@ -128,7 +134,7 @@ describe("Tooltip", () => {
 
     // Act
     render(
-      <Tooltip showArrow label={label}>
+      <Tooltip alwaysShow showArrow label={label}>
         {children}
       </Tooltip>,
     )
@@ -164,23 +170,25 @@ describe("Tooltip", () => {
     // Assert
     await user.hover(receivedChildren)
 
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    expect(screen.queryByTestId(testId)).not.toBeInTheDocument()
 
     act(() => {
       jest.advanceTimersByTime(enterDelay)
     })
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    await screen.findByTestId(testId)
 
     await user.unhover(receivedChildren)
 
-    expect(screen.getByTestId(testId)).toBeVisible()
+    expect(screen.getByTestId(testId)).toBeInTheDocument()
 
     act(() => {
       jest.advanceTimersByTime(exitDelay)
     })
 
-    expect(screen.getByTestId(testId)).not.toBeVisible()
+    await waitFor(() =>
+      expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
+    )
     jest.useRealTimers()
   })
   it("supports aria-describedby", async () => {
