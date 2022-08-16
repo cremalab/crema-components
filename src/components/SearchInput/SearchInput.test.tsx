@@ -137,19 +137,20 @@ describe("SearchInput", () => {
     // Act
     render(
       <SearchInput
-        initialValue={text}
         aria-label={inputLabel}
         showSearchButton
         onSearch={onSearch}
       />,
     )
 
+    const input = screen.getByLabelText(inputLabel)
     const button = screen.getByLabelText(searchButtonLabel)
 
+    await userEvent.type(input, text)
     await userEvent.click(button)
 
     // Assert
-    expect(onSearch).toBeCalled()
+    expect(onSearch).toBeCalledTimes(1)
     expect(onSearch).toBeCalledWith(text)
   })
   it("invokes 'onBlur' and 'onFocus'", async () => {
