@@ -9,7 +9,7 @@ describe("SearchInput", () => {
     const searchIconTestId = "search_icon"
 
     // Act
-    render(<SearchInput onDebounce={jest.fn()} />)
+    render(<SearchInput onSearch={jest.fn()} />)
 
     const receivedIcon = screen.getByTestId(searchIconTestId)
 
@@ -21,7 +21,7 @@ describe("SearchInput", () => {
     const label = "click icon to clear search"
 
     // Act
-    render(<SearchInput onDebounce={jest.fn()} />)
+    render(<SearchInput onSearch={jest.fn()} />)
 
     const receivedIcon = screen.getByLabelText(label)
 
@@ -32,7 +32,7 @@ describe("SearchInput", () => {
     // Arrange
     jest.useFakeTimers()
     const user = userEvent.setup({ delay: null })
-    const onDebounce = jest.fn()
+    const onSearch = jest.fn()
     const label = "search"
     const text = "hello world"
     const debounceDelay = 600
@@ -41,7 +41,7 @@ describe("SearchInput", () => {
     render(
       <SearchInput
         aria-label={label}
-        onDebounce={onDebounce}
+        onSearch={onSearch}
         debounceDelay={debounceDelay}
       />,
     )
@@ -55,19 +55,19 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    await waitFor(() => expect(onDebounce).toBeCalled())
+    await waitFor(() => expect(onSearch).toBeCalled())
     jest.useRealTimers()
   })
   it("has a default delay of 300", async () => {
     // Arrange
     jest.useFakeTimers()
     const user = userEvent.setup({ delay: null })
-    const onDebounce = jest.fn()
+    const onSearch = jest.fn()
     const label = "search"
     const text = "hello world"
 
     // Act
-    render(<SearchInput aria-label={label} onDebounce={onDebounce} />)
+    render(<SearchInput aria-label={label} onSearch={onSearch} />)
 
     const input = screen.getByLabelText(label)
 
@@ -78,7 +78,7 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    await waitFor(() => expect(onDebounce).toBeCalled())
+    await waitFor(() => expect(onSearch).toBeCalled())
     jest.useRealTimers()
   })
   it("clears the input when the clear icon is clicked", async () => {
@@ -88,7 +88,7 @@ describe("SearchInput", () => {
     const text = "Hello World"
 
     // Act
-    render(<SearchInput aria-label={inputLabel} onDebounce={jest.fn()} />)
+    render(<SearchInput aria-label={inputLabel} onSearch={jest.fn()} />)
 
     const input = screen.getByLabelText<HTMLInputElement>(inputLabel)
 
@@ -113,7 +113,7 @@ describe("SearchInput", () => {
     // Act
     render(
       <SearchInput
-        onDebounce={jest.fn()}
+        onSearch={jest.fn()}
         searchIcon={searchIcon}
         clearIcon={clearIcon}
       />,
@@ -149,29 +149,18 @@ describe("SearchInput", () => {
     expect(onSearchClick).toBeCalled()
     expect(onSearchClick).toBeCalledWith(text)
   })
-  it("invokes the following 'onBlur', 'onChange', and 'onFocus'", async () => {
+  it("invokes 'onBlur' and 'onFocus'", async () => {
     // Arrange
     const onBlur = jest.fn()
-    const onChange = jest.fn()
     const onFocus = jest.fn()
     const label = "search"
 
     // Act
-    render(
-      <SearchInput
-        aria-label={label}
-        onBlur={onBlur}
-        onChange={onChange}
-        onFocus={onFocus}
-      />,
-    )
+    render(<SearchInput aria-label={label} onBlur={onBlur} onFocus={onFocus} />)
 
     const received = screen.getByLabelText(label)
 
     // Assert
-    await userEvent.type(received, "Hello World")
-    expect(onChange).toBeCalled()
-
     await userEvent.click(received)
     expect(onFocus).toBeCalled()
 

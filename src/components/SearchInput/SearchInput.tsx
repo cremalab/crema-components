@@ -1,6 +1,6 @@
 import {
+  AriaAttributes,
   ChangeEvent,
-  ComponentProps,
   FocusEvent,
   MouseEvent,
   ReactNode,
@@ -9,13 +9,17 @@ import {
 } from "react"
 import styles from "./SearchInput.module.css"
 
-interface SearchInputProps extends ComponentProps<"input"> {
+interface SearchInputProps extends Pick<AriaAttributes, "aria-label"> {
+  name?: string
+  placeholder?: string
   searchIcon?: ReactNode
   clearIcon?: ReactNode
-  onDebounce?: (searchTerm: string) => void
   debounceDelay?: number
+  initialValue?: string
+  onSearch?: (searchTerm: string) => void
   onSearchClick?: (searchTerm: string) => void
-  value?: string
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void
 }
 
 export function SearchInput({
@@ -23,19 +27,28 @@ export function SearchInput({
   placeholder,
   searchIcon,
   clearIcon,
-  onDebounce,
+  onSearch,
   debounceDelay = 300,
   onSearchClick,
-  value = "",
-  ...inputProps
+  initialValue = "",
+  onBlur,
+  onFocus,
+  ...aria
 }: SearchInputProps) {
-  const [searchTerm, setSearchTerm] = useState(value)
-  const [hideCancelButton, setHideCancelButton] = useState(true)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [cancelButtonHidden, setCancelButtonHidden] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => onDebounce?.(searchTerm), debounceDelay)
+    setSearchTerm(initialValue)
+  }, [initialValue])
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined
+    if (searchTerm) {
+      timer = setTimeout(() => onSearch?.(searchTerm), debounceDelay)
+    }
     return () => {
-      clearTimeout(timer)
+      if (timer) clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, debounceDelay])
@@ -44,25 +57,26 @@ export function SearchInput({
     // we don't want the field to blur when a user clears the input
     e.preventDefault()
     setSearchTerm("")
-    setHideCancelButton(true)
+    onSearch?.("")
+    setCancelButtonHidden(true)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
-    inputProps.onChange?.(e)
     setSearchTerm(value)
-    if (!value) setHideCancelButton(true)
-    else setHideCancelButton(false)
+    if (!value) setCancelButtonHidden(true)
+    else setCancelButtonHidden(false)
   }
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    inputProps.onBlur?.(e)
-    setHideCancelButton(true)
+    onBlur?.(e)
+    console.log("handleBlur")
+    setCancelButtonHidden(true)
   }
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
-    inputProps.onFocus?.(e)
-    if (searchTerm?.length) setHideCancelButton(false)
+    onFocus?.(e)
+    if (searchTerm?.length) setCancelButtonHidden(false)
   }
 
   return (
@@ -72,7 +86,7 @@ export function SearchInput({
           {searchIcon || <span>🔍</span>}
         </span>
         <input
-          {...inputProps}
+          {...aria}
           type="search"
           className={styles.input}
           onBlur={handleBlur}
@@ -85,8 +99,8 @@ export function SearchInput({
         <button
           // we are ignoring tabbing since 'esc' is the keyboard accessible means of clearing an input
           tabIndex={-1}
+          hidden={cancelButtonHidden}
           aria-label="click icon to clear search"
-          hidden={hideCancelButton}
           className={styles.clearIcon}
           onMouseDown={handleReset}
         >
