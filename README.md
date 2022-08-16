@@ -26,7 +26,7 @@
 - ~~Toast~~
 - Banner
 - ~~Tabs~~
-- Tooltips
+- ~~Tooltips~~
 - Search Input
 - Link
 
