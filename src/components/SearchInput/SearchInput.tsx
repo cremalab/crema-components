@@ -5,6 +5,7 @@ import {
   MouseEvent,
   ReactNode,
   useEffect,
+  useRef,
   useState,
 } from "react"
 import styles from "./SearchInput.module.css"
@@ -37,18 +38,18 @@ export function SearchInput({
 }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [cancelButtonHidden, setCancelButtonHidden] = useState(true)
+  const timer = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
     setSearchTerm(initialValue)
   }, [initialValue])
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | undefined
     if (searchTerm) {
-      timer = setTimeout(() => onSearch?.(searchTerm), debounceDelay)
+      timer.current = setTimeout(() => onSearch?.(searchTerm), debounceDelay)
     }
     return () => {
-      if (timer) clearTimeout(timer)
+      clearTimeout(timer.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, debounceDelay])
