@@ -1,6 +1,6 @@
 # `<Breadcrumb />`
 
-DESCRIPTION_HERE
+This component is meant to represent a "breadcrumb" component that contains a set of links using an ordered list. The `<nav>` element identifies the structure as a breadcrumb trail and is identified as a navigation landmark. The Breadcrumb component is intended to contain links to the parent pages of of the current page in hierarchial order.
 
 ## Directory Structure
 
