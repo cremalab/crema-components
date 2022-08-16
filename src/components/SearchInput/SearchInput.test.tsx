@@ -129,16 +129,28 @@ describe("SearchInput", () => {
   })
   it("renders a search button if showSearchButton is true", async () => {
     // Arrange
+    const searchButtonLabel = "click to search"
+
+    // Act
+    render(<SearchInput showSearchButton />)
+
+    const button = screen.getByLabelText(searchButtonLabel)
+
+    // Assert
+    expect(button).toBeInTheDocument()
+  })
+  it("invokes 'onSearch' only when search button is clicked when showSearchButton = 'true'", async () => {
+    // Arrange
     const onSearch = jest.fn()
+    const text = "Hello World"
     const inputLabel = "search"
     const searchButtonLabel = "click to search"
-    const text = "Hello World"
 
     // Act
     render(
       <SearchInput
-        aria-label={inputLabel}
         showSearchButton
+        aria-label={inputLabel}
         onSearch={onSearch}
       />,
     )
