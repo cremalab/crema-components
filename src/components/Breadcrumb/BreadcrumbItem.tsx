@@ -1,34 +1,24 @@
 import styles from "./Breadcrumb.module.css"
 
-interface LinkProps {
+export interface LinkProps {
   href: string
-  isCurrent: boolean
   label: string
+  isCurrent?: boolean
 }
 
-interface Props {
-  links: LinkProps[]
-}
+export const BreadcrumbItem = ({ href, isCurrent, label }: LinkProps) => {
+  const ariaCurrent = isCurrent ? "page" : undefined
 
-export function BreadcrumbItem({ links }: Props) {
   return (
-    <>
-      {links.map((link, index) => (
-        <li className={styles.BreadcrumbListItem} key={index}>
-          <a
-            href={link.href}
-            className={styles.link}
-            aria-current={link.isCurrent ? "page" : "false"}
-          >
-            {link.label}
-          </a>
-          {!link.isCurrent && (
-            <span aria-hidden="true" className={styles.Separator}>
-              /
-            </span>
-          )}
-        </li>
-      ))}
-    </>
+    <li className={styles.BreadcrumbItem}>
+      <a href={href} className={styles.link} aria-current={ariaCurrent}>
+        {label}
+      </a>
+      {!isCurrent && (
+        <span aria-hidden="true" className={styles.Separator}>
+          /
+        </span>
+      )}
+    </li>
   )
 }

@@ -3,20 +3,20 @@
   text-align: left;
 }
 
-.BreadcrumbListItem {
+.BreadcrumbItem {
   display: inline;
 }
 
-.BreadcrumbListItem a {
+.BreadcrumbItem a {
   color: black;
 }
 
-.BreadcrumbListItem span {
+.BreadcrumbItem span {
   margin-right: 5px;
   margin-left: 5px;
 }
 
-.BreadcrumbListItem [aria-current="page"] {
+.BreadcrumbItem [aria-current="page"] {
   font-weight: bold;
   text-decoration: none;
 }

@@ -20,17 +20,14 @@ const breadcrumbLinks = [
   {
     href: "#",
     label: "Home",
-    isCurrent: false,
   },
   {
     href: "#",
     label: "About",
-    isCurrent: false,
   },
   {
     href: "#",
     label: "Contact",
-    isCurrent: true,
   },
 ]
 
@@ -41,5 +38,7 @@ const Template: Story<ComponentProps<typeof Breadcrumb>> = (args) => (
 export const Default = Template.bind({})
 
 Default.args = {
-  children: <BreadcrumbItem links={breadcrumbLinks} />,
+  children: breadcrumbLinks.map((link, index) => (
+    <BreadcrumbItem key={index} {...link} />
+  )),
 }
