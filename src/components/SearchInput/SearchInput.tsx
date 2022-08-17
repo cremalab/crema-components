@@ -16,7 +16,7 @@ interface SearchInputProps extends Pick<AriaAttributes, "aria-label"> {
   searchIcon?: ReactNode
   clearIcon?: ReactNode
   debounceDelay?: number
-  initialValue?: string
+  value?: string
   onSearch?: (searchTerm: string) => void
   showSearchButton?: boolean
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void
@@ -31,7 +31,7 @@ export function SearchInput({
   onSearch,
   debounceDelay = 300,
   showSearchButton,
-  initialValue = "",
+  value = "",
   onBlur,
   onFocus,
   ...aria
@@ -41,8 +41,8 @@ export function SearchInput({
   const timer = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
-    setSearchTerm(initialValue)
-  }, [initialValue])
+    setSearchTerm(value)
+  }, [value])
 
   useEffect(() => {
     if (searchTerm && !showSearchButton) {
@@ -63,9 +63,9 @@ export function SearchInput({
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget
-    setSearchTerm(value)
-    if (!value) setCancelButtonHidden(true)
+    const currentValue = e.currentTarget.value
+    setSearchTerm(currentValue)
+    if (!currentValue) setCancelButtonHidden(true)
     else setCancelButtonHidden(false)
   }
 

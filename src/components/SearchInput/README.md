@@ -35,4 +35,4 @@ function MyComponent() {
 | `onSearch`         | function  | no       | A debounced callback that returns the current search term value |         |
 | `onBlur`           | function  | no       | A callback triggered when the input is blurred                  |         |
 | `onFocus`          | function  | no       | A callback triggered when the input is focused                  |         |
-| `initialValue`     | string    | no       | The initial value to display                                    |         |
+| `value`            | string    | no       | The initial value to display                                    |         |
