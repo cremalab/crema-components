@@ -1,19 +1,38 @@
+import { ReactNode } from "react"
 import styles from "./Breadcrumb.module.css"
-import { BreadcrumbItem, LinkProps } from "./BreadcrumbItem"
+import { BreadcrumbItem } from "./BreadcrumbItem"
 
-interface Props {
-  links: LinkProps[]
+export interface Link {
+  href: string
+  label: string
+  onClick?: () => void
 }
 
-export const Breadcrumb = ({ links }: Props) => {
+export interface LinkElement {
+  renderItem?: ({
+    item,
+    isCurrent,
+  }: {
+    item: Link
+    isCurrent: boolean
+  }) => ReactNode
+}
+
+interface Props {
+  links: Link[]
+  linkElement?: LinkElement
+}
+
+export const Breadcrumb = ({ links, linkElement }: Props) => {
   return (
-    <nav aria-label="breadcrumbs" className={styles.BreadcrumbContainer}>
-      <ol className={styles.BreadcrumbItem}>
+    <nav aria-label="breadcrumbs" className={styles.container}>
+      <ol className={styles.list}>
         {links.map((link, index) => (
           <BreadcrumbItem
             key={index}
-            {...link}
+            link={link}
             isCurrent={index === links.length - 1}
+            linkElement={linkElement}
           />
         ))}
       </ol>

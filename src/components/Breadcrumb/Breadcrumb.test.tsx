@@ -49,4 +49,19 @@ describe("Breadcrumb", () => {
 
     expect(li).toHaveLength(breadcrumbLinks.length)
   })
+
+  it("renders the breadcrumb items as buttons if the linkElement prop is provided", async () => {
+    render(
+      <Breadcrumb
+        links={breadcrumbLinks}
+        linkElement={{
+          renderItem: ({ item }) => <button>{item.label}</button>,
+        }}
+      />,
+    )
+
+    const buttonElement = screen.getByText("Home")
+
+    expect(buttonElement.tagName).toBe("BUTTON")
+  })
 })
