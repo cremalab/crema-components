@@ -1,4 +1,3 @@
-import { Link } from "@reach/router"
 import { action } from "@storybook/addon-actions"
 import { ComponentMeta, Story } from "@storybook/react"
 import { ComponentProps } from "react"
@@ -50,19 +49,6 @@ WithButtons.args = {
   linkElement: {
     renderItem: ({ item }) => (
       <button onClick={action("onClick")}>{item.label}</button>
-    ),
-  },
-}
-
-export const WithRouterLinks = Template.bind({})
-
-WithRouterLinks.args = {
-  links: breadcrumbLinks,
-  linkElement: {
-    renderItem: ({ item, isCurrent }) => (
-      <Link to={item.href} aria-current={isCurrent} onClick={action("onClick")}>
-        {item.label}
-      </Link>
     ),
   },
 }
