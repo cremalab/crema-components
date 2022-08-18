@@ -14,9 +14,7 @@ A minimal search input offering a few helpful callbacks including a debounced ca
 
 ```tsx
 function MyComponent() {
-  return (
-    <SearchInput onSearch={(text) => doSomethingWithOnSearchText(text)} />
-  )
+  return <SearchInput onSearch={(text) => doSomethingWithOnSearchText(text)} />
 }
 ```
 
