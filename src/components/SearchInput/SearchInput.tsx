@@ -65,8 +65,7 @@ export function SearchInput({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.currentTarget.value
     setSearchTerm(currentValue)
-    if (!currentValue) setCancelButtonHidden(true)
-    else setCancelButtonHidden(false)
+    setCancelButtonHidden(!currentValue)
   }
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
@@ -76,7 +75,7 @@ export function SearchInput({
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     onFocus?.(e)
-    if (searchTerm?.length) setCancelButtonHidden(false)
+    setCancelButtonHidden(!searchTerm.length)
   }
 
   return (
