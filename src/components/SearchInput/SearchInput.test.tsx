@@ -184,4 +184,24 @@ describe("SearchInput", () => {
     await userEvent.tab()
     expect(onBlur).toBeCalled()
   })
+  it("shows clear button on focus when value is defined and hides when blurred", async () => {
+    // Arrange
+    const clearButtonLabel = "click icon to clear search"
+    const inputLabel = "search"
+    const text = "Hello World"
+
+    // Act
+    render(<SearchInput aria-label={inputLabel} />)
+
+    const input = screen.getByLabelText(inputLabel)
+    const button = screen.getByLabelText(clearButtonLabel)
+
+    // Assert
+    await userEvent.click(input)
+    expect(button).not.toBeVisible()
+    await userEvent.type(input, text)
+    expect(button).toBeVisible()
+    await userEvent.tab()
+    expect(button).not.toBeVisible()
+  })
 })
