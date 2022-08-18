@@ -1,5 +1,7 @@
+import classNames from "classnames"
 import {
   ChangeEvent,
+  ComponentProps,
   FocusEvent,
   MouseEvent,
   ReactNode,
@@ -7,40 +9,37 @@ import {
   useRef,
   useState,
 } from "react"
+import { useKeyPress } from "../../hooks/useKeyPress"
 import styles from "./SearchInput.module.css"
 
-interface SearchInputProps {
-  ariaLabel: string
-  id?: string
-  name?: string
-  placeholder?: string
+type Omitted = "onChange" | "type"
+
+interface SearchInputProps extends Omit<ComponentProps<"input">, Omitted> {
+  "aria-label": string
   searchIcon?: ReactNode
   clearIcon?: ReactNode
   debounceDelay?: number
   value?: string
   onSearch?: (searchTerm: string) => void
   showSearchButton?: boolean
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
-  onFocus?: (e: FocusEvent<HTMLInputElement>) => void
 }
 
 export function SearchInput({
-  ariaLabel,
-  id,
-  name,
-  placeholder,
   searchIcon,
   clearIcon,
   onSearch,
   debounceDelay = 300,
   showSearchButton,
   value = "",
-  onBlur,
-  onFocus,
+  ...inputProps
 }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [cancelButtonHidden, setCancelButtonHidden] = useState(true)
   const timer = useRef<NodeJS.Timeout>()
+
+  useKeyPress(["Enter"], () => {
+    onSearch?.(searchTerm)
+  })
 
   useEffect(() => {
     setSearchTerm(value)
@@ -53,8 +52,7 @@ export function SearchInput({
     return () => {
       clearTimeout(timer.current)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm, debounceDelay])
+  }, [searchTerm, onSearch, showSearchButton, debounceDelay])
 
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     // we don't want the field to blur when a user clears the input
@@ -71,12 +69,12 @@ export function SearchInput({
   }
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    onBlur?.(e)
+    inputProps.onBlur?.(e)
     setCancelButtonHidden(true)
   }
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
-    onFocus?.(e)
+    inputProps.onFocus?.(e)
     setCancelButtonHidden(!searchTerm.length)
   }
 
@@ -87,15 +85,12 @@ export function SearchInput({
           {searchIcon || <span>🔍</span>}
         </span>
         <input
-          aria-label={ariaLabel}
-          id={id}
+          {...inputProps}
           type="search"
-          className={styles.input}
+          className={classNames(styles.input, inputProps.className)}
           onBlur={handleBlur}
           onFocus={handleFocus}
           value={searchTerm}
-          name={name}
-          placeholder={placeholder}
           onChange={handleChange}
         />
         <button

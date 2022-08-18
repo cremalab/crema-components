@@ -9,7 +9,7 @@ describe("SearchInput", () => {
     const searchIconTestId = "search_icon"
 
     // Act
-    render(<SearchInput ariaLabel="search" onSearch={jest.fn()} />)
+    render(<SearchInput aria-label="search" onSearch={jest.fn()} />)
 
     const receivedIcon = screen.getByTestId(searchIconTestId)
 
@@ -21,7 +21,7 @@ describe("SearchInput", () => {
     const label = "click icon to clear search"
 
     // Act
-    render(<SearchInput ariaLabel="search" onSearch={jest.fn()} />)
+    render(<SearchInput aria-label="search" onSearch={jest.fn()} />)
 
     const receivedIcon = screen.getByLabelText(label)
 
@@ -40,7 +40,7 @@ describe("SearchInput", () => {
     // Act
     render(
       <SearchInput
-        ariaLabel={label}
+        aria-label={label}
         onSearch={onSearch}
         debounceDelay={debounceDelay}
       />,
@@ -68,7 +68,7 @@ describe("SearchInput", () => {
     const text = "hello world"
 
     // Act
-    render(<SearchInput ariaLabel={label} onSearch={onSearch} />)
+    render(<SearchInput aria-label={label} onSearch={onSearch} />)
 
     const input = screen.getByLabelText(label)
 
@@ -89,7 +89,7 @@ describe("SearchInput", () => {
     const text = "Hello World"
 
     // Act
-    render(<SearchInput ariaLabel={inputLabel} onSearch={jest.fn()} />)
+    render(<SearchInput aria-label={inputLabel} onSearch={jest.fn()} />)
 
     const input = screen.getByLabelText<HTMLInputElement>(inputLabel)
 
@@ -114,7 +114,7 @@ describe("SearchInput", () => {
     // Act
     render(
       <SearchInput
-        ariaLabel="search"
+        aria-label="search"
         onSearch={jest.fn()}
         searchIcon={searchIcon}
         clearIcon={clearIcon}
@@ -134,7 +134,7 @@ describe("SearchInput", () => {
     const searchButtonLabel = "click to search"
 
     // Act
-    render(<SearchInput ariaLabel="search" showSearchButton />)
+    render(<SearchInput aria-label="search" showSearchButton />)
 
     const button = screen.getByLabelText(searchButtonLabel)
 
@@ -152,7 +152,7 @@ describe("SearchInput", () => {
     render(
       <SearchInput
         showSearchButton
-        ariaLabel={inputLabel}
+        aria-label={inputLabel}
         onSearch={onSearch}
       />,
     )
@@ -174,7 +174,7 @@ describe("SearchInput", () => {
     const label = "search"
 
     // Act
-    render(<SearchInput ariaLabel={label} onBlur={onBlur} onFocus={onFocus} />)
+    render(<SearchInput aria-label={label} onBlur={onBlur} onFocus={onFocus} />)
 
     const received = screen.getByLabelText(label)
 
@@ -192,7 +192,7 @@ describe("SearchInput", () => {
     const text = "Hello World"
 
     // Act
-    render(<SearchInput ariaLabel={inputLabel} />)
+    render(<SearchInput aria-label={inputLabel} />)
 
     const input = screen.getByLabelText(inputLabel)
     const button = screen.getByLabelText(clearButtonLabel)
