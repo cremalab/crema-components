@@ -17,13 +17,9 @@ export const BreadcrumbItem = ({
   return (
     <li className={styles.listItem}>
       {renderItem ? (
-        renderItem({ item: link, isCurrent, className: styles.listItem })
+        renderItem({ item: link, isCurrent, className: styles.link })
       ) : (
-        <a
-          href={link.href}
-          aria-current={ariaCurrent}
-          className={styles.listItem}
-        >
+        <a href={link.href} aria-current={ariaCurrent} className={styles.link}>
           {link.label}
         </a>
       )}

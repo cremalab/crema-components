@@ -1,11 +1,14 @@
-.container {
+.list {
   list-style: none;
   text-align: left;
 }
 
+.link {
+  color: black;
+}
+
 .listItem {
   display: inline;
-  color: black;
 }
 
 .listItem span {

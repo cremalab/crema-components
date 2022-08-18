@@ -15,7 +15,7 @@ export type RenderItem = ({
 }: {
   item: Link
   isCurrent: boolean
-  className?: string
+  className: string
 }) => ReactNode
 
 interface Props {
@@ -25,8 +25,8 @@ interface Props {
 
 export const Breadcrumb = ({ links, renderItem }: Props) => {
   return (
-    <nav aria-label="breadcrumbs" className={styles.container}>
-      <ol>
+    <nav aria-label="breadcrumbs">
+      <ol className={styles.list}>
         {links.map((link, index) => (
           <BreadcrumbItem
             key={index}
