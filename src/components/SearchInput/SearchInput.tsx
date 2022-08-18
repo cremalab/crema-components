@@ -1,5 +1,4 @@
 import {
-  AriaAttributes,
   ChangeEvent,
   FocusEvent,
   MouseEvent,
@@ -10,7 +9,9 @@ import {
 } from "react"
 import styles from "./SearchInput.module.css"
 
-interface SearchInputProps extends Pick<AriaAttributes, "aria-label"> {
+interface SearchInputProps {
+  ariaLabel: string
+  id?: string
   name?: string
   placeholder?: string
   searchIcon?: ReactNode
@@ -24,6 +25,8 @@ interface SearchInputProps extends Pick<AriaAttributes, "aria-label"> {
 }
 
 export function SearchInput({
+  ariaLabel,
+  id,
   name,
   placeholder,
   searchIcon,
@@ -34,7 +37,6 @@ export function SearchInput({
   value = "",
   onBlur,
   onFocus,
-  ...aria
 }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [cancelButtonHidden, setCancelButtonHidden] = useState(true)
@@ -85,7 +87,8 @@ export function SearchInput({
           {searchIcon || <span>🔍</span>}
         </span>
         <input
-          {...aria}
+          aria-label={ariaLabel}
+          id={id}
           type="search"
           className={styles.input}
           onBlur={handleBlur}
