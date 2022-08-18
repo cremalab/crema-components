@@ -31,7 +31,7 @@
 }
 
 .input::-webkit-search-cancel-button {
-  visibility: hidden;
+  -webkit-appearance: none;
   pointer-events: none;
 }
 
