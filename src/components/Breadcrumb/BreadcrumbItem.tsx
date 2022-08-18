@@ -1,25 +1,29 @@
-import { Link, LinkElement } from "./Breadcrumb"
+import { Link, RenderItem } from "./Breadcrumb"
 import styles from "./Breadcrumb.module.css"
 
 export interface BreadcrumbItemProps {
   isCurrent: boolean
   link: Link
-  linkElement?: LinkElement
+  renderItem?: RenderItem
 }
 
 export const BreadcrumbItem = ({
   isCurrent,
   link,
-  linkElement,
+  renderItem,
 }: BreadcrumbItemProps) => {
   const ariaCurrent = isCurrent ? "page" : undefined
 
   return (
-    <li className={styles.list}>
-      {linkElement?.renderItem ? (
-        linkElement.renderItem({ item: link, isCurrent })
+    <li className={styles.listItem}>
+      {renderItem ? (
+        renderItem({ item: link, isCurrent, className: styles.listItem })
       ) : (
-        <a href={link.href} aria-current={ariaCurrent}>
+        <a
+          href={link.href}
+          aria-current={ariaCurrent}
+          className={styles.listItem}
+        >
           {link.label}
         </a>
       )}

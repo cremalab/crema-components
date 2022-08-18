@@ -3,25 +3,22 @@
   text-align: left;
 }
 
-.list {
+.listItem {
   display: inline;
-}
-
-.list a {
   color: black;
 }
 
-.list span {
+.listItem span {
   margin-right: 5px;
   margin-left: 5px;
 }
 
-.list [aria-current="page"] {
+.listItem [aria-current="page"] {
   font-weight: bold;
   text-decoration: none;
 }
 
-.list [aria-current="true"] {
+.listItem [aria-current="true"] {
   font-weight: bold;
   text-decoration: none;
 }

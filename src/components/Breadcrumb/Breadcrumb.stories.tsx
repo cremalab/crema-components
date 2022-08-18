@@ -46,9 +46,7 @@ export const WithButtons = Template.bind({})
 
 WithButtons.args = {
   links: breadcrumbLinks,
-  linkElement: {
-    renderItem: ({ item }) => (
-      <button onClick={action("onClick")}>{item.label}</button>
-    ),
-  },
+  renderItem: ({ item }) => (
+    <button onClick={action("onClick")}>{item.label}</button>
+  ),
 }

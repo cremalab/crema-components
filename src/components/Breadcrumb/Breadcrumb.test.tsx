@@ -54,9 +54,7 @@ describe("Breadcrumb", () => {
     render(
       <Breadcrumb
         links={breadcrumbLinks}
-        linkElement={{
-          renderItem: ({ item }) => <button>{item.label}</button>,
-        }}
+        renderItem={(props) => <button>{props.item.label}</button>}
       />,
     )
 
