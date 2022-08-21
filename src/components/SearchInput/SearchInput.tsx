@@ -1,4 +1,3 @@
-import classNames from "classnames"
 import {
   ChangeEvent,
   ComponentProps,
@@ -83,6 +82,8 @@ export function SearchInput({
     clearButtonHidden && styles.hidden,
   ].join(" ")
 
+  const inputClasses = [styles.input, inputProps.className].join(" ")
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container} data-testid="container">
@@ -92,7 +93,7 @@ export function SearchInput({
         <input
           {...inputProps}
           type="search"
-          className={classNames(styles.input, inputProps.className)}
+          className={inputClasses}
           onBlur={handleBlur}
           onFocus={handleFocus}
           value={searchTerm}
