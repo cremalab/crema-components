@@ -26,7 +26,7 @@ describe("SearchInput", () => {
     const receivedIcon = screen.getByLabelText(label)
 
     // Assert
-    expect(receivedIcon).not.toBeVisible()
+    expect(receivedIcon).toHaveClass("hidden")
   })
   it("debounces and invokes a callback", async () => {
     // Arrange
@@ -199,10 +199,24 @@ describe("SearchInput", () => {
 
     // Assert
     await userEvent.click(input)
-    expect(button).not.toBeVisible()
+    expect(button).toHaveClass("hidden")
     await userEvent.type(input, text)
-    expect(button).toBeVisible()
+    expect(button).not.toHaveClass("hidden")
     await userEvent.tab()
-    expect(button).not.toBeVisible()
+    expect(button).toHaveClass("hidden")
+  })
+  it("invokes onSearch when enter is pressed", async () => {
+    // Arrange
+    const onSearch = jest.fn()
+    const text = "hello world"
+
+    // Act
+    render(<SearchInput value={text} aria-label="search" onSearch={onSearch} />)
+
+    await userEvent.keyboard("[Enter]")
+
+    // Assert
+    expect(onSearch).toBeCalledTimes(1)
+    expect(onSearch).toBeCalledWith(text)
   })
 })
