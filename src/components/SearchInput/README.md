@@ -20,6 +20,8 @@ function MyComponent() {
 
 ## API
 
+The following props are unique to the `<SearchInput />`. It also implements all props belonging to the native `<input />` less `onChange` and `type`. Passing a value is not necessary but may be relevant when needing to pass in a value from url parameters or other scenarios where a value needs persistence. 
+
 | Prop               | Type      | Required | Description                                                     | Default |
 | ------------------ | --------- | -------- | --------------------------------------------------------------- | ------- |
 | `name`             | string    | no       |                                                                 |         |
@@ -29,6 +31,3 @@ function MyComponent() {
 | `clearIcon`        | ReactNode | no       |                                                                 | ❎      |
 | `debounceDelay`    | number    | no       | the debounce delay in ms                                        | 300     |
 | `onSearch`         | function  | no       | A debounced callback that returns the current search term value |         |
-| `onBlur`           | function  | no       | A callback triggered when the input is blurred                  |         |
-| `onFocus`          | function  | no       | A callback triggered when the input is focused                  |         |
-| `value`            | string    | no       | The initial value to display                                    |         |
