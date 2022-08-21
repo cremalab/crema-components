@@ -17,10 +17,14 @@
   opacity: 1;
 }
 
-.clearIcon {
+.clearButton {
   border: 0;
   background: none;
   cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .input {

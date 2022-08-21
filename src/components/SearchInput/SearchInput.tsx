@@ -34,7 +34,7 @@ export function SearchInput({
   ...inputProps
 }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("")
-  const [cancelButtonHidden, setCancelButtonHidden] = useState(true)
+  const [clearButtonHidden, setClearButtonHidden] = useState(true)
   const timer = useRef<NodeJS.Timeout>()
 
   useKeyPress(["Enter"], () => {
@@ -59,24 +59,29 @@ export function SearchInput({
     e.preventDefault()
     setSearchTerm("")
     onSearch?.("")
-    setCancelButtonHidden(true)
+    setClearButtonHidden(true)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.currentTarget.value
     setSearchTerm(currentValue)
-    setCancelButtonHidden(!currentValue)
+    setClearButtonHidden(!currentValue)
   }
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     inputProps.onBlur?.(e)
-    setCancelButtonHidden(true)
+    setClearButtonHidden(true)
   }
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     inputProps.onFocus?.(e)
-    setCancelButtonHidden(!searchTerm.length)
+    setClearButtonHidden(!searchTerm.length)
   }
+
+  const clearButtonClasses = [
+    styles.clearButton,
+    clearButtonHidden && styles.hidden,
+  ].join(" ")
 
   return (
     <div className={styles.wrapper}>
@@ -96,9 +101,8 @@ export function SearchInput({
         <button
           // we are ignoring tabbing since 'esc' is the keyboard accessible means of clearing an input
           tabIndex={-1}
-          hidden={cancelButtonHidden}
           aria-label="click icon to clear search"
-          className={styles.clearIcon}
+          className={clearButtonClasses}
           onMouseDown={handleReset}
         >
           {clearIcon || <span>❎</span>}
