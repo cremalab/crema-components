@@ -8,12 +8,11 @@ interface AvatarProps {
 }
 
 export function Avatar({ name, size = "small", src }: AvatarProps) {
-  const initials = getInitials(name)
-
   const Child = () => {
     if (src) {
       return null
     } else {
+      const initials = getInitials(name)
       return <div className={styles.text}>{initials}</div>
     }
   }
