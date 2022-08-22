@@ -63,5 +63,6 @@ export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
 }
 
 WithLabel.args = {
+  ...Basic.args,
   id: "search_input",
 }
