@@ -2,6 +2,7 @@
   --small: 48px;
   --medium: 64px;
   --large: 96px;
+  --ratio: 0.5;
 }
 
 .container {
@@ -16,19 +17,19 @@
 }
 
 .container[data-size="sm"] {
-  font-size: calc(var(--small) * 0.5);
+  font-size: calc(var(--small) * var(--ratio));
   width: var(--small);
   height: var(--small);
 }
 
 .container[data-size="md"] {
-  font-size: calc(var(--medium) * 0.5);
+  font-size: calc(var(--medium) * var(--ratio));
   width: var(--medium);
   height: var(--medium);
 }
 
 .container[data-size="lg"] {
-  font-size: calc(var(--large) * 0.5);
+  font-size: calc(var(--large) * var(--ratio));
   width: var(--large);
   height: var(--large);
 }
