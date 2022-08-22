@@ -8,13 +8,13 @@ const getInitial = (str: string) => {
   return capitalized
 }
 
-const getInitialsArray = (name: string) => {
+const getInitialArray = (name: string) => {
   return name.split(" ").map(getInitial)
 }
 
 export const getInitials = (name: string) => {
-  const initialsArray = getInitialsArray(name)
-  const firstInitial = initialsArray[0]
-  const lastInitial = initialsArray[initialsArray.length - 1] ?? ""
+  const initialArray = getInitialArray(name)
+  const firstInitial = initialArray[0]
+  const lastInitial = initialArray[initialArray.length - 1] ?? ""
   return `${firstInitial}${lastInitial}`
 }
