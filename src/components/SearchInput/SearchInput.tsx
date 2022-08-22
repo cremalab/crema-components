@@ -31,8 +31,8 @@ const shouldInvokeDebounce = (
 }
 
 export function SearchInput({
-  searchIcon,
-  clearIcon,
+  searchIcon = <span>🔍</span>,
+  clearIcon = <span>❎</span>,
   onSearch,
   debounceDelay = 300,
   showSearchButton,
@@ -94,7 +94,7 @@ export function SearchInput({
     <div className={styles.wrapper}>
       <div className={styles.container} data-testid="container">
         <span data-testid="search_icon" className={styles.searchIcon}>
-          {searchIcon || <span>🔍</span>}
+          {searchIcon}
         </span>
         <input
           {...inputProps}
@@ -112,7 +112,7 @@ export function SearchInput({
           className={clearButtonClasses}
           onMouseDown={handleReset}
         >
-          {clearIcon || <span>❎</span>}
+          {clearIcon}
         </button>
       </div>
       {showSearchButton && (
