@@ -4,12 +4,12 @@ import { getInitials } from "./utils/getInitials"
 export type AvatarSize = "sm" | "md" | "lg"
 
 interface AvatarProps {
-  name?: string
+  name: string
   size?: AvatarSize
   src?: string
 }
 
-export function Avatar({ name = "", size = "sm", src }: AvatarProps) {
+export function Avatar({ name, size = "sm", src }: AvatarProps) {
   const Child = () => {
     if (src) {
       return null
@@ -19,8 +19,11 @@ export function Avatar({ name = "", size = "sm", src }: AvatarProps) {
     }
   }
 
+  const aria = src ? { "aria-label": `An image of ${name}` } : {}
+
   return (
     <div
+      {...aria}
       style={{
         backgroundImage: `url(${src})`,
       }}
