@@ -1,4 +1,3 @@
-import decoratorCentered from "@storybook/addon-centered"
 import { ComponentStory } from "@storybook/react"
 import { Avatar } from "./Avatar"
 
@@ -9,7 +8,9 @@ import { Avatar } from "./Avatar"
 
 export default {
   title: "Components/Avatar",
-  decorators: [decoratorCentered],
+  parameters: {
+    layout: "centered",
+  },
 }
 
 const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />
