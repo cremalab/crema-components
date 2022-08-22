@@ -61,7 +61,6 @@ export function SearchInput({
   }, [searchTerm, onSearch, showSearchButton, debounceDelay])
 
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
-    // we don't want the field to blur when a user clears the input
     e.preventDefault()
     setSearchTerm("")
     onSearch?.("")
