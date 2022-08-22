@@ -51,3 +51,17 @@ WithSearchButton.args = {
   ...Basic.args,
   showSearchButton: true,
 }
+
+export const WithLabel: ComponentStory<typeof SearchInput> = (args) => {
+  return (
+    <div>
+      <label htmlFor={args.id}>Search</label>
+      <div style={{ margin: 8 }} />
+      <SearchInput {...args} />
+    </div>
+  )
+}
+
+WithLabel.args = {
+  id: "search_input",
+}
