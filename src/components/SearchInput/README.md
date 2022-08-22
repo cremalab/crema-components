@@ -31,3 +31,4 @@ The following props are unique to the `<SearchInput />`. It also implements all 
 | `clearIcon`        | ReactNode | no       |                                                                 | ❎      |
 | `debounceDelay`    | number    | no       | the debounce delay in ms                                        | 300     |
 | `onSearch`         | function  | no       | A debounced callback that returns the current search term value |         |
+| `initialValue`     | string    | no       | the initial value of the input                                  |         |

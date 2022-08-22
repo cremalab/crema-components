@@ -11,14 +11,14 @@ import {
 import { useKeyPress } from "../../hooks/useKeyPress"
 import styles from "./SearchInput.module.css"
 
-type Omitted = "onChange" | "type"
+type Omitted = "onChange" | "type" | "value"
 
 interface SearchInputProps extends Omit<ComponentProps<"input">, Omitted> {
   "aria-label": string
   searchIcon?: ReactNode
   clearIcon?: ReactNode
   debounceDelay?: number
-  value?: string
+  initialValue?: string
   onSearch?: (searchTerm: string) => void
   showSearchButton?: boolean
 }
@@ -36,7 +36,7 @@ export function SearchInput({
   onSearch,
   debounceDelay = 300,
   showSearchButton,
-  value = "",
+  initialValue = "",
   ...inputProps
 }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("")
@@ -48,8 +48,8 @@ export function SearchInput({
   })
 
   useEffect(() => {
-    setSearchTerm(value)
-  }, [value])
+    setSearchTerm(initialValue)
+  }, [initialValue])
 
   useEffect(() => {
     if (shouldInvokeDebounce(searchTerm, showSearchButton)) {

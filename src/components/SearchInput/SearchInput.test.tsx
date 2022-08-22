@@ -211,7 +211,13 @@ describe("SearchInput", () => {
     const text = "hello world"
 
     // Act
-    render(<SearchInput value={text} aria-label="search" onSearch={onSearch} />)
+    render(
+      <SearchInput
+        initialValue={text}
+        aria-label="search"
+        onSearch={onSearch}
+      />,
+    )
 
     await userEvent.keyboard("[Enter]")
 
