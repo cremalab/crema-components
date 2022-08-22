@@ -7,12 +7,16 @@ interface AvatarProps {
   src?: string
 }
 
-const shouldShowInitials = (src?: string) => {
-  return !src
-}
-
 export function Avatar({ name, size = "small", src }: AvatarProps) {
   const initials = getInitials(name)
+
+  const Child = () => {
+    if (src) {
+      return null
+    } else {
+      return <div className={styles.text}>{initials}</div>
+    }
+  }
 
   return (
     <div
@@ -22,7 +26,7 @@ export function Avatar({ name, size = "small", src }: AvatarProps) {
       className={styles.container}
       data-size={size}
     >
-      {shouldShowInitials(src) && <div className={styles.text}>{initials}</div>}
+      <Child />
     </div>
   )
 }
