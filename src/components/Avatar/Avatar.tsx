@@ -1,9 +1,11 @@
 import styles from "./Avatar.module.css"
 import { getInitials } from "./utils/getInitials"
 
+export type AvatarSize = "sm" | "md" | "lg"
+
 interface AvatarProps {
   name?: string
-  size?: "sm" | "md" | "lg"
+  size?: AvatarSize
   src?: string
 }
 

@@ -1,15 +1,23 @@
 import { ComponentStory } from "@storybook/react"
-import { Avatar } from "./Avatar"
+import { Avatar, AvatarSize } from "./Avatar"
 
 /**
  * See Storybook Docs: Writing Stories
  * https://storybook.js.org/docs/basics/writing-stories/
  */
 
+const options: AvatarSize[] = ["sm", "md", "lg"]
+
 export default {
   title: "Components/Avatar",
   parameters: {
     layout: "centered",
+  },
+  argTypes: {
+    size: {
+      control: "select",
+      options,
+    },
   },
 }
 
