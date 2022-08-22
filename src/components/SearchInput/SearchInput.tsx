@@ -23,6 +23,13 @@ interface SearchInputProps extends Omit<ComponentProps<"input">, Omitted> {
   showSearchButton?: boolean
 }
 
+const shouldInvokeDebounce = (
+  searchTerm: string,
+  showSearchButton?: boolean,
+) => {
+  return Boolean(searchTerm && !showSearchButton)
+}
+
 export function SearchInput({
   searchIcon,
   clearIcon,
@@ -45,7 +52,7 @@ export function SearchInput({
   }, [value])
 
   useEffect(() => {
-    if (searchTerm && !showSearchButton) {
+    if (shouldInvokeDebounce(searchTerm, showSearchButton)) {
       timer.current = setTimeout(() => onSearch?.(searchTerm), debounceDelay)
     }
     return () => {
