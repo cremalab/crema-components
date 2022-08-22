@@ -1,6 +1,6 @@
 # `<SearchInput />`
 
-A minimal search input offering a few helpful callbacks including a debounced callback. Can be used as a controlled or uncontrolled input. For full control, supply your own onChange and value props. The simplest implementation would be to simply use the onDebounce callback and grab the value anytime its updated based on the debounceDelay (default of 300ms). If you wish to include a search button, simply supply a onSearchClick callback which will return the current value when the search button is clicked.
+A minimal search input offering a few helpful callbacks including a debounced callback. The simplest implementation would be to simply use the onDebounce callback and grab the value anytime its updated based on the debounceDelay (default of 300ms). If you wish to include a search button, simply supply a onSearchClick callback which will return the current value when the search button is clicked.
 
 ## Directory Structure
 
