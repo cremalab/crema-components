@@ -15,19 +15,19 @@
   background-size: cover;
 }
 
-.container[data-size="small"] {
+.container[data-size="sm"] {
   font-size: calc(var(--small) * 0.5);
   width: var(--small);
   height: var(--small);
 }
 
-.container[data-size="medium"] {
+.container[data-size="md"] {
   font-size: calc(var(--medium) * 0.5);
   width: var(--medium);
   height: var(--medium);
 }
 
-.container[data-size="large"] {
+.container[data-size="lg"] {
   font-size: calc(var(--large) * 0.5);
   width: var(--large);
   height: var(--large);

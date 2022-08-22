@@ -22,20 +22,20 @@ Basic.args = {
 
 export const Small = Template.bind({})
 
-Small.args = { ...Basic.args, size: "small" }
+Small.args = { ...Basic.args, size: "sm" }
 
 export const Medium = Template.bind({})
 
-Medium.args = { ...Basic.args, size: "medium" }
+Medium.args = { ...Basic.args, size: "md" }
 
 export const Large = Template.bind({})
 
-Large.args = { ...Basic.args, size: "large" }
+Large.args = { ...Basic.args, size: "lg" }
 
 export const WithImage = Template.bind({})
 
 WithImage.args = {
   ...Basic.args,
-  size: "large",
+  size: "lg",
   src: "https://assets.website-files.com/5b6b50e79e9b6f7d0d3959a2/614a3f0710df4f2ff20e5bbd_JustinK.jpg",
 }

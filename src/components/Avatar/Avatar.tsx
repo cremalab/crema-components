@@ -2,12 +2,12 @@ import styles from "./Avatar.module.css"
 import { getInitials } from "./utils/getInitials"
 
 interface AvatarProps {
-  name: string
-  size: "small" | "medium" | "large"
+  name?: string
+  size?: "sm" | "md" | "lg"
   src?: string
 }
 
-export function Avatar({ name, size = "small", src }: AvatarProps) {
+export function Avatar({ name = "", size = "sm", src }: AvatarProps) {
   const Child = () => {
     if (src) {
       return null
