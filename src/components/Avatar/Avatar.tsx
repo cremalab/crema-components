@@ -19,11 +19,13 @@ export function Avatar({ name, size = "sm", src }: AvatarProps) {
     }
   }
 
-  const aria = src ? { "aria-label": `An image of ${name}` } : {}
+  const ariaLabel = src
+    ? `An avatar with an image of ${name}`
+    : `An avatar with initials for ${name}`
 
   return (
     <div
-      {...aria}
+      aria-label={ariaLabel}
       style={{
         backgroundImage: `url(${src})`,
       }}

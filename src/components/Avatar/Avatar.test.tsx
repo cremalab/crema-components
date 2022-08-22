@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { Avatar } from "./Avatar"
+import { Avatar, AvatarSize } from "./Avatar"
 import { getInitials } from "./utils/getInitials"
 
 describe("Avatar", () => {
@@ -29,20 +29,45 @@ describe("Avatar", () => {
     // Assert
     expect(received).not.toBeInTheDocument()
   })
-  it("renders a meaningful aria label when an image is supplied", () => {
+  it("renders an aria label when an image is supplied", () => {
     // Arrange
     const name = "Crema Components"
-    const initials = getInitials(name)
-    const ariaLabel = `An image of ${name}`
+    const ariaLabel = `An avatar with an image of ${name}`
 
     // Act
     render(<Avatar name={name} src="someUrl" />)
 
-    const received = screen.queryByText(initials)
     const label = screen.getByLabelText(ariaLabel)
 
     // Assert
-    expect(received).not.toBeInTheDocument()
     expect(label).toBeInTheDocument()
+  })
+  it("renders an aria label when an image is not supplied", () => {
+    // Arrange
+    const name = "Crema Components"
+    const ariaLabel = `An avatar with initials for ${name}`
+
+    // Act
+    render(<Avatar name={name} />)
+
+    const label = screen.getByLabelText(ariaLabel)
+
+    // Assert
+    expect(label).toBeInTheDocument()
+  })
+  it("renders 3 sizes of avatars", () => {
+    // Arrange
+    const sizes: AvatarSize[] = ["sm", "md", "lg"]
+
+    sizes.forEach((size) => {
+      // Act
+      const label = `An avatar with initials for ${size}`
+      render(<Avatar size={size} name={size} />)
+
+      const received = screen.getByLabelText(label)
+
+      // Assert
+      expect(received).toHaveAttribute("data-size", size)
+    })
   })
 })
