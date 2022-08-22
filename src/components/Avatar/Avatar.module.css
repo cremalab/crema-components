@@ -1,3 +1,9 @@
+:root {
+  --small: 48px;
+  --medium: 64px;
+  --large: 96px;
+}
+
 .container {
   background: #999999;
   color: #333333;
@@ -10,20 +16,20 @@
 }
 
 .container[data-size="small"] {
-  font-size: 24px;
-  width: 48px;
-  height: 48px;
+  font-size: calc(var(--small) * 0.5);
+  width: var(--small);
+  height: var(--small);
 }
 
 .container[data-size="medium"] {
-  font-size: 32px;
-  width: 64px;
-  height: 64px;
+  font-size: calc(var(--medium) * 0.5);
+  width: var(--medium);
+  height: var(--medium);
 }
 
 .container[data-size="large"] {
-  font-size: 48px;
-  width: 96px;
-  height: 96px;
+  font-size: calc(var(--large) * 0.5);
+  width: var(--large);
+  height: var(--large);
 }
 
