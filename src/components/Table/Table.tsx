@@ -1,9 +1,18 @@
-import { useState } from "react"
-import { ColumnConfig, ColumnConfigs, WithID } from "./types"
+import { ReactNode, useState } from "react"
+
+export interface WithID {
+  id: string
+}
+
+export interface ColumnConfig<Datum extends WithID> {
+  label: string | null
+  getValue?: (datum: Datum) => ReactNode
+  sortable?: boolean
+}
 
 interface Props<Datum extends WithID> {
   data: Datum[]
-  columnConfigs: ColumnConfigs<Datum>
+  columnConfigs: ColumnConfig<Datum>[]
 }
 
 export function Table<Datum extends WithID>(props: Props<Datum>) {

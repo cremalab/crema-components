@@ -1,2 +1,1 @@
-export { Table } from "./Table"
-export type { ColumnConfig, ColumnConfigs } from "./types"
+export { Table, type ColumnConfig } from "./Table"

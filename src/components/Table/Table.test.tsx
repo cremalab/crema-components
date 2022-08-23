@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { ColumnConfigs, Table } from "."
+import { ColumnConfig, Table } from "."
 
 interface User {
   id: string
@@ -16,7 +16,7 @@ const data: User[] = [
   { id: "2", a: "2A", b: "2B", c: "2C", d: { e: "2D" } },
 ]
 
-const columnConfigs: ColumnConfigs<User> = [
+const columnConfigs: ColumnConfig<User>[] = [
   { label: null },
   { label: "LA", getValue: (user) => user.a, sortable: true },
   { label: "LB", getValue: (user) => user.b },
