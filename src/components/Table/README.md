@@ -20,7 +20,7 @@ const data: User[] = [
 
 <Table
   data={data}
-  columnConfigs={[
+  columns={[
     { label: "Name", getValue: (user) => user.name, sortable: true },
     { label: "Age", getValue: (user) => user.age, sortable: true },
   ]}
@@ -29,23 +29,22 @@ const data: User[] = [
 
 ## Props
 
-| Prop            | Type                     | Description                                              |
-| --------------- | ------------------------ | -------------------------------------------------------- |
-| `data`          | `WithID[]`               | Array of objects that must have, at least, an `id`       |
-| `columnConfigs` | `ColumnConfig<WithID>[]` | An array of objects that define each column of the table |
+| Prop      | Type               | Description                                              |
+| --------- | ------------------ | -------------------------------------------------------- |
+| `data`    | `WithID[]`         | Array of objects that must have, at least, an `id`       |
+| `columns` | `Column<WithID>[]` | An array of objects that define each column of the table |
 
 ## ColumnConfig
 
 ```typescript
-interface ColumnConfig<Datum extends WithID> {
+interface Column<Datum extends WithID> {
   // Used for column header text
   label: string | null
-  // Returns the value for column
-  getValue?: (datum: Datum) => ReactNode
-  /**
-   * Enables sorting for column
-   * (sorting is only supported for string | number | boolean values)
-   **/
+
+  // Returns the primitive value for column
+  getValue: (datum: Datum) => string | number | boolean
+
+  // Enables sorting for column
   sortable?: boolean
 }
 ```

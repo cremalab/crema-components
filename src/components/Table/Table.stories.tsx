@@ -25,7 +25,7 @@ const data: User[] = [
 export const Example = () => (
   <Table
     data={data}
-    columnConfigs={[
+    columns={[
       { label: "Name", getValue: (user) => user.name, sortable: true },
       { label: "Age", getValue: (user) => user.age, sortable: true },
     ]}

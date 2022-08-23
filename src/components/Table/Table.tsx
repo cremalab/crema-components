@@ -4,7 +4,7 @@ export interface WithID {
   id: string
 }
 
-export interface ColumnConfig<Datum extends WithID> {
+export interface Column<Datum extends WithID> {
   label: string | null
   getValue: (datum: Datum) => string | number | boolean
   sortable?: boolean
@@ -12,47 +12,46 @@ export interface ColumnConfig<Datum extends WithID> {
 
 interface Props<Datum extends WithID> {
   data: Datum[]
-  columnConfigs: ColumnConfig<Datum>[]
+  columns: Column<Datum>[]
 }
 
 export function Table<Datum extends WithID>(props: Props<Datum>) {
-  const { data: dataUnsorted, columnConfigs } = props
-  const [sortConfig, setSortConfig] = useState<ColumnConfig<Datum>>()
+  const { data: dataUnsorted, columns } = props
+  const [sortColumn, setSortColumn] = useState<Column<Datum>>()
   const [sortAsc, setSortAsc] = useState<boolean>(false)
 
   const data = [...dataUnsorted].sort((a, b) => {
-    const valueA = sortConfig?.getValue(a)
-    const valueB = sortConfig?.getValue(b)
+    const valueA = sortColumn?.getValue(a)
+    const valueB = sortColumn?.getValue(b)
     if (valueA === undefined || valueB === undefined) return 0
     if (valueA > valueB) return sortAsc ? 1 : -1
     if (valueA < valueB) return sortAsc ? -1 : 1
     return 0
   })
 
-  const handleSort = (columnConfig: ColumnConfig<Datum>) => () => {
-    if (!columnConfig.sortable) return
-    if (columnConfig === sortConfig || !sortConfig)
-      setSortAsc((value) => !value)
-    setSortConfig(columnConfig)
+  const handleSort = (column: Column<Datum>) => () => {
+    if (!column.sortable) return
+    if (column === sortColumn || !sortColumn) setSortAsc((value) => !value)
+    setSortColumn(column)
   }
 
-  const headers = columnConfigs.map((columnConfig, i) => {
+  const headers = columns.map((column, i) => {
     return (
       <th
         scope="col"
-        key={`th-${columnConfig.label}-${i}`}
-        onClick={handleSort(columnConfig)}
+        key={`th-${column.label}-${i}`}
+        onClick={handleSort(column)}
       >
-        {columnConfig.label}
-        {columnConfig === sortConfig ? (sortAsc ? "↑" : "↓") : " "}
+        {column.label}
+        {column === sortColumn ? (sortAsc ? "↑" : "↓") : " "}
       </th>
     )
   })
 
   const rows = data.map((datum) => (
     <tr key={`tr-${datum.id}`}>
-      {columnConfigs.map((columnConfig, i) => (
-        <td key={`tr-${datum.id}-td-${i}`}>{columnConfig.getValue(datum)}</td>
+      {columns.map((column, i) => (
+        <td key={`tr-${datum.id}-td-${i}`}>{column.getValue(datum)}</td>
       ))}
     </tr>
   ))

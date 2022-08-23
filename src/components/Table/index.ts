@@ -1,1 +1,1 @@
-export { Table, type ColumnConfig } from "./Table"
+export { Table, type Column } from "./Table"

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { ColumnConfig, Table } from "."
+import { Column, Table } from "."
 
 interface User {
   id: string
@@ -16,7 +16,7 @@ const data: User[] = [
   { id: "2", a: "2A", b: "2B", c: "2C", d: { e: "2D" } },
 ]
 
-const columnConfigs: ColumnConfig<User>[] = [
+const columns: Column<User>[] = [
   { label: "LA", getValue: (user) => user.a, sortable: true },
   { label: "LB", getValue: (user) => user.b },
   { label: "LC", getValue: (user) => user.c, sortable: true },
@@ -27,29 +27,29 @@ describe("Table", () => {
   it("is defined", expect(Table).toBeDefined)
 
   it("renders labels", () => {
-    render(<Table data={data} columnConfigs={columnConfigs} />)
+    render(<Table data={data} columns={columns} />)
     const matcher = /LA|LB|LC|LD/
     const headers = screen.getAllByText(matcher, { selector: "thead tr th" })
     expect(headers).toHaveLength(4)
   })
 
   it("renders rows", () => {
-    render(<Table data={data} columnConfigs={columnConfigs} />)
+    render(<Table data={data} columns={columns} />)
     const matcher = /1A|2A|3A/
     const rows = screen.getAllByText(matcher, { selector: "tbody tr td" })
     expect(rows).toHaveLength(3)
   })
 
-  it("renders row columns", () => {
-    render(<Table data={data} columnConfigs={columnConfigs} />)
+  it("renders row cells", () => {
+    render(<Table data={data} columns={columns} />)
     const matcher = /1A|1B|1C|1D/
-    const columns = screen.getAllByText(matcher, { selector: "tbody tr td" })
-    expect(columns).toHaveLength(4)
+    const cells = screen.getAllByText(matcher, { selector: "tbody tr td" })
+    expect(cells).toHaveLength(4)
   })
 
   describe("sorting", () => {
     it("does not sort if column is not marked sortable", async () => {
-      render(<Table data={data} columnConfigs={columnConfigs} />)
+      render(<Table data={data} columns={columns} />)
       const header = screen.getByText("LB")
       await userEvent.click(header)
       const rows = screen.getAllByText(/1A|2A|3A/).map((e) => e.innerHTML)
@@ -62,7 +62,7 @@ describe("Table", () => {
         { id: "3", a: "1A", b: "3B", c: "3C", d: { e: "3D" } },
         { id: "2", a: "1A", b: "2B", c: "2C", d: { e: "2D" } },
       ]
-      render(<Table data={data} columnConfigs={columnConfigs} />)
+      render(<Table data={data} columns={columns} />)
       const header = screen.getByText("LA")
       await userEvent.click(header)
       const rows = screen.getAllByText(/1A|2A|3A/).map((e) => e.innerHTML)
@@ -70,7 +70,7 @@ describe("Table", () => {
     })
 
     it("sorts in ascending order on first click", async () => {
-      render(<Table data={data} columnConfigs={columnConfigs} />)
+      render(<Table data={data} columns={columns} />)
       const header = screen.getByText("LA")
       await userEvent.click(header)
       const rows = screen.getAllByText(/1A|2A|3A/).map((e) => e.innerHTML)
@@ -78,7 +78,7 @@ describe("Table", () => {
     })
 
     it("sorts in descending order on second click", async () => {
-      render(<Table data={data} columnConfigs={columnConfigs} />)
+      render(<Table data={data} columns={columns} />)
       const header = screen.getByText("LA")
       await userEvent.click(header)
       await userEvent.click(header)
@@ -87,7 +87,7 @@ describe("Table", () => {
     })
 
     it("maintains sort order when switching sort columns", async () => {
-      render(<Table data={data} columnConfigs={columnConfigs} />)
+      render(<Table data={data} columns={columns} />)
       const header1 = screen.getByText("LA")
       const header2 = screen.getByText("LC")
       await userEvent.click(header1)
