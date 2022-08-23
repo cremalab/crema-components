@@ -66,6 +66,7 @@ describe("Avatar", () => {
     sizes.forEach((size) => {
       // Act
       const label = `An avatar with initials for ${size}`
+
       render(<Avatar size={size} name={size} />)
 
       const received = screen.getByLabelText(label)

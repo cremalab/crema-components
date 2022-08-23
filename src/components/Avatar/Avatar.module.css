@@ -1,11 +1,8 @@
-:root {
+.container {
   --small: 48px;
   --medium: 64px;
   --large: 96px;
   --ratio: 0.5;
-}
-
-.container {
   background: #999999;
   color: #333333;
   display: flex;
