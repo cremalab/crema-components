@@ -17,7 +17,6 @@ const data: User[] = [
 ]
 
 const columnConfigs: ColumnConfig<User>[] = [
-  { label: null },
   { label: "LA", getValue: (user) => user.a, sortable: true },
   { label: "LB", getValue: (user) => user.b },
   { label: "LC", getValue: (user) => user.c, sortable: true },

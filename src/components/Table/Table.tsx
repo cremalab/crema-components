@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react"
+import { useState } from "react"
 
 export interface WithID {
   id: string
@@ -6,7 +6,7 @@ export interface WithID {
 
 export interface ColumnConfig<Datum extends WithID> {
   label: string | null
-  getValue?: (datum: Datum) => ReactNode
+  getValue: (datum: Datum) => string | number | boolean
   sortable?: boolean
 }
 
@@ -21,9 +21,9 @@ export function Table<Datum extends WithID>(props: Props<Datum>) {
   const [sortAsc, setSortAsc] = useState<boolean>(false)
 
   const data = [...dataUnsorted].sort((a, b) => {
-    const valueA = sortConfig?.getValue?.(a)
-    const valueB = sortConfig?.getValue?.(b)
-    if (isSortable(valueA) && isSortable(valueB)) {
+    const valueA = sortConfig?.getValue(a)
+    const valueB = sortConfig?.getValue(b)
+    if (valueA && valueB) {
       if (valueA > valueB) return sortAsc ? 1 : -1
       if (valueA < valueB) return sortAsc ? -1 : 1
     }
@@ -31,7 +31,7 @@ export function Table<Datum extends WithID>(props: Props<Datum>) {
   })
 
   const handleSort = (columnConfig: ColumnConfig<Datum>) => () => {
-    if (columnConfig.sortable && columnConfig.getValue) {
+    if (columnConfig.sortable) {
       if (columnConfig === sortConfig || !sortConfig) {
         setSortAsc((value) => !value)
       }
@@ -55,7 +55,7 @@ export function Table<Datum extends WithID>(props: Props<Datum>) {
   const rows = data.map((datum) => (
     <tr key={`tr-${datum.id}`}>
       {columnConfigs.map((columnConfig, i) => (
-        <td key={`tr-${datum.id}-td-${i}`}>{columnConfig.getValue?.(datum)}</td>
+        <td key={`tr-${datum.id}-td-${i}`}>{columnConfig.getValue(datum)}</td>
       ))}
     </tr>
   ))
@@ -67,13 +67,5 @@ export function Table<Datum extends WithID>(props: Props<Datum>) {
       </thead>
       <tbody>{rows}</tbody>
     </table>
-  )
-}
-
-function isSortable<A>(
-  a: A | string | number | boolean,
-): a is string | number | boolean {
-  return (
-    typeof a === "string" || typeof a === "number" || typeof a === "boolean"
   )
 }
