@@ -5,8 +5,8 @@ export interface WithID {
 }
 
 export interface Column<Datum extends WithID> {
-  label: string | null
   getValue: (datum: Datum) => string | number | boolean
+  label: string | null
   sortable?: boolean
 }
 
