@@ -134,7 +134,9 @@ describe("SearchInput", () => {
     const searchButtonLabel = "click to search"
 
     // Act
-    render(<SearchInput aria-label="search" showSearchButton />)
+    render(
+      <SearchInput onSearch={jest.fn()} aria-label="search" showSearchButton />,
+    )
 
     const button = screen.getByLabelText(searchButtonLabel)
 
@@ -174,7 +176,14 @@ describe("SearchInput", () => {
     const label = "search"
 
     // Act
-    render(<SearchInput aria-label={label} onBlur={onBlur} onFocus={onFocus} />)
+    render(
+      <SearchInput
+        onSearch={jest.fn()}
+        aria-label={label}
+        onBlur={onBlur}
+        onFocus={onFocus}
+      />,
+    )
 
     const received = screen.getByLabelText(label)
 
@@ -192,7 +201,7 @@ describe("SearchInput", () => {
     const text = "Hello World"
 
     // Act
-    render(<SearchInput aria-label={inputLabel} />)
+    render(<SearchInput onSearch={jest.fn()} aria-label={inputLabel} />)
 
     const input = screen.getByLabelText(inputLabel)
     const button = screen.getByLabelText(clearButtonLabel)

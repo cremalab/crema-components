@@ -5,11 +5,13 @@ import {
   MouseEvent,
   ReactNode,
   useEffect,
-  useRef,
+  useMemo,
   useState,
 } from "react"
 import { useKeyPress } from "../../hooks/useKeyPress"
 import styles from "./SearchInput.module.css"
+
+const DEFAULT_DELAY = 300
 
 type Omitted = "onChange" | "type" | "value"
 
@@ -19,46 +21,33 @@ interface SearchInputProps extends Omit<ComponentProps<"input">, Omitted> {
   clearIcon?: ReactNode
   debounceDelay?: number
   initialValue?: string
-  onSearch?: (searchTerm: string) => void
+  onSearch: (searchTerm: string) => void
   showSearchButton?: boolean
-}
-
-const shouldInvokeDebounce = (
-  searchTerm: string,
-  showSearchButton?: boolean,
-) => {
-  return Boolean(searchTerm && !showSearchButton)
 }
 
 export function SearchInput({
   searchIcon = <span>🔍</span>,
   clearIcon = <span>❎</span>,
   onSearch,
-  debounceDelay = 300,
+  debounceDelay = DEFAULT_DELAY,
   showSearchButton,
   initialValue = "",
   ...inputProps
 }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [clearButtonHidden, setClearButtonHidden] = useState(true)
-  const timer = useRef<NodeJS.Timeout>()
+
+  const debouncedOnSearch = useMemo(() => {
+    return debounce(onSearch, debounceDelay)
+  }, [debounceDelay, onSearch])
 
   useKeyPress(["Enter"], () => {
-    onSearch?.(searchTerm)
+    debouncedOnSearch(searchTerm)
   })
 
   useEffect(() => {
     setSearchTerm(initialValue)
   }, [initialValue])
-
-  useEffect(() => {
-    if (shouldInvokeDebounce(searchTerm, showSearchButton)) {
-      timer.current = setTimeout(() => onSearch?.(searchTerm), debounceDelay)
-    }
-    return () => {
-      clearTimeout(timer.current)
-    }
-  }, [searchTerm, onSearch, showSearchButton, debounceDelay])
 
   const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -68,9 +57,10 @@ export function SearchInput({
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const currentValue = e.currentTarget.value
+    const currentValue = e.currentTarget?.value
     setSearchTerm(currentValue)
     setClearButtonHidden(!currentValue)
+    shouldDebounceOnChange(showSearchButton) && debouncedOnSearch(currentValue)
   }
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
@@ -119,7 +109,7 @@ export function SearchInput({
         <div className={styles.searchButton}>
           <button
             aria-label="click to search"
-            onClick={() => searchTerm && onSearch?.(searchTerm)}
+            onClick={() => debouncedOnSearch(searchTerm)}
           >
             Search
           </button>
@@ -127,4 +117,24 @@ export function SearchInput({
       )}
     </div>
   )
+}
+
+const shouldDebounceOnChange = (showSearchButton?: boolean) => {
+  return !showSearchButton
+}
+
+function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
+  func: F,
+  waitFor: number,
+) {
+  let timer: NodeJS.Timeout
+
+  const debouncedFunc = (...args: Parameters<F>) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      func(...args)
+    }, waitFor)
+  }
+
+  return debouncedFunc
 }
