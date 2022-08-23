@@ -1,5 +1,5 @@
 import { ComponentStory } from "@storybook/react"
-import { Avatar, AvatarSize } from "./Avatar"
+import { Avatar, AvatarSize } from "."
 
 /**
  * See Storybook Docs: Writing Stories

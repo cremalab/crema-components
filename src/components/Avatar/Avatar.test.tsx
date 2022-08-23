@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
-import { Avatar, AvatarSize } from "./Avatar"
 import { getInitials } from "./utils/getInitials"
+import { Avatar, AvatarSize } from "."
 
 describe("Avatar", () => {
   it("renders an avatar with initials", () => {
