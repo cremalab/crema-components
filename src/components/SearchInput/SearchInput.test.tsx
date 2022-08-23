@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event"
 import { act } from "react-dom/test-utils"
 import { SearchInput } from "./SearchInput"
 
+const userWithoutDelay = userEvent.setup({ delay: null })
+
 describe("SearchInput", () => {
   it("renders search icon", () => {
     // Arrange
@@ -31,7 +33,6 @@ describe("SearchInput", () => {
   it("debounces and invokes a callback", async () => {
     // Arrange
     jest.useFakeTimers()
-    const user = userEvent.setup({ delay: null })
     const onSearch = jest.fn()
     const label = "search"
     const text = "hello world"
@@ -48,7 +49,7 @@ describe("SearchInput", () => {
 
     const input = screen.getByLabelText(label)
 
-    await user.type(input, text)
+    await userWithoutDelay.type(input, text)
 
     act(() => {
       jest.advanceTimersByTime(debounceDelay)
@@ -62,7 +63,6 @@ describe("SearchInput", () => {
   it("has a default delay of 300", async () => {
     // Arrange
     jest.useFakeTimers()
-    const user = userEvent.setup({ delay: null })
     const onSearch = jest.fn()
     const label = "search"
     const text = "hello world"
@@ -72,7 +72,7 @@ describe("SearchInput", () => {
 
     const input = screen.getByLabelText(label)
 
-    await user.type(input, text)
+    await userWithoutDelay.type(input, text)
 
     act(() => {
       jest.advanceTimersByTime(300)
@@ -145,6 +145,7 @@ describe("SearchInput", () => {
   })
   it("invokes 'onSearch' only when search button is clicked when showSearchButton = 'true'", async () => {
     // Arrange
+    jest.useFakeTimers()
     const onSearch = jest.fn()
     const text = "Hello World"
     const inputLabel = "search"
@@ -162,12 +163,17 @@ describe("SearchInput", () => {
     const input = screen.getByLabelText(inputLabel)
     const button = screen.getByLabelText(searchButtonLabel)
 
-    await userEvent.type(input, text)
-    await userEvent.click(button)
+    await userWithoutDelay.type(input, text)
+    await userWithoutDelay.click(button)
+
+    act(() => {
+      jest.advanceTimersByTime(300)
+    })
 
     // Assert
     expect(onSearch).toBeCalledTimes(1)
     expect(onSearch).toBeCalledWith(text)
+    jest.useRealTimers()
   })
   it("invokes 'onBlur' and 'onFocus'", async () => {
     // Arrange
@@ -216,6 +222,7 @@ describe("SearchInput", () => {
   })
   it("invokes onSearch when enter is pressed", async () => {
     // Arrange
+    jest.useFakeTimers()
     const onSearch = jest.fn()
     const text = "hello world"
 
@@ -228,10 +235,15 @@ describe("SearchInput", () => {
       />,
     )
 
-    await userEvent.keyboard("[Enter]")
+    await userWithoutDelay.keyboard("[Enter]")
+
+    act(() => {
+      jest.advanceTimersByTime(300)
+    })
 
     // Assert
     expect(onSearch).toBeCalledTimes(1)
     expect(onSearch).toBeCalledWith(text)
+    jest.useRealTimers()
   })
 })
