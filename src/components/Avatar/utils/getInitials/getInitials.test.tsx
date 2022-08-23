@@ -7,31 +7,30 @@ describe("getInitials", () => {
 
     // Act
     const initials = getInitials(name)
-
     const expected = "CC"
 
     // Assert
     expect(initials).toBe(expected)
   })
+
   it("capitalizes each initial", () => {
     // Arrange
     const name = "hello world"
 
     // Act
     const initials = getInitials(name)
-
     const expected = "HW"
 
     // Assert
     expect(initials).toBe(expected)
   })
+
   it("generates initials for complex names", () => {
     // Arrange
     const name = "This is a complext name"
 
     // Act
     const initials = getInitials(name)
-
     const expected = "TN"
 
     // Assert

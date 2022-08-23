@@ -16,6 +16,7 @@ describe("Avatar", () => {
     // Assert
     expect(received).toBeInTheDocument()
   })
+
   it("does not render initials if image is supplied", () => {
     // Arrange
     const name = "Crema Components"
@@ -29,6 +30,7 @@ describe("Avatar", () => {
     // Assert
     expect(received).not.toBeInTheDocument()
   })
+
   it("renders an aria label when an image is supplied", () => {
     // Arrange
     const name = "Crema Components"
@@ -42,6 +44,7 @@ describe("Avatar", () => {
     // Assert
     expect(label).toBeInTheDocument()
   })
+
   it("renders an aria label when an image is not supplied", () => {
     // Arrange
     const name = "Crema Components"
@@ -55,6 +58,7 @@ describe("Avatar", () => {
     // Assert
     expect(label).toBeInTheDocument()
   })
+
   it("renders 3 sizes of avatars", () => {
     // Arrange
     const sizes: AvatarSize[] = ["sm", "md", "lg"]
