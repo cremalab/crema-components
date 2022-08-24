@@ -27,7 +27,7 @@
 - Banner
 - ~~Tabs~~
 - ~~Tooltips~~
-- Search Input
+- ~~Search Input~~
 - Link
 
 ## 🏗 Setup
