@@ -1,6 +1,5 @@
 import { ComponentElement, ComponentState } from "react"
-import { Avatar, AvatarProps } from "../Avatar/Avatar"
-import avatarStyles from "../Avatar/Avatar.module.css"
+import { Avatar, AvatarProps, avatarStyles } from "../Avatar"
 import styles from "./AvatarGroup.module.css"
 
 interface AvatarGroupProps {
