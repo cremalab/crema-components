@@ -118,9 +118,9 @@ describe("AvatarList", () => {
     // Act
     render(
       <AvatarGroup>
-        <Avatar size="sm" name="Crema Components" />
-        <Avatar size="md" name="Jane Doe" />
-        <Avatar size="lg" name="Foo Bar" />
+        <Avatar name="Crema Components" />
+        <Avatar name="Jane Doe" />
+        <Avatar name="Foo Bar" />
       </AvatarGroup>,
     )
 
