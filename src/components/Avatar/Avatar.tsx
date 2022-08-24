@@ -1,10 +1,9 @@
-import { DataHTMLAttributes } from "react"
 import styles from "./Avatar.module.css"
 import { getInitials } from "./utils/getInitials"
 
 export type AvatarSize = "sm" | "md" | "lg"
 
-export interface AvatarProps extends DataHTMLAttributes<"div"> {
+export interface AvatarProps {
   name: string
   size?: AvatarSize
   src?: string
