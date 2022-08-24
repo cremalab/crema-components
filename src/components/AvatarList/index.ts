@@ -1,1 +1,0 @@
-export { AvatarList } from "./AvatarList"

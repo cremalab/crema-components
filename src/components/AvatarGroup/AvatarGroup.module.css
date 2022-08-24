@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item {
+  margin-left: -8px;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+}

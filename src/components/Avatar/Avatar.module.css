@@ -2,8 +2,8 @@
   --small: 48px;
   --medium: 64px;
   --large: 96px;
-  --ratio: 0.5;
-  background: #999999;
+  --ratio: 0.4;
+  background: #b3b3b3;
   color: #333333;
   display: flex;
   align-items: center;
