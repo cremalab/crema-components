@@ -47,7 +47,7 @@ describe("AvatarList", () => {
 
   it("has a default max of 3", () => {
     // Arrange
-    const expectedText = "+1"
+    const hiddenLabel = "1 hidden avatar"
     const hiddenName = "John Doe"
 
     // Act
@@ -61,7 +61,7 @@ describe("AvatarList", () => {
     )
 
     const hidden = screen.queryByText(hiddenName)
-    const received = screen.getByText(expectedText)
+    const received = screen.getByLabelText(hiddenLabel)
 
     // Assert
     expect(hidden).not.toBeInTheDocument()
@@ -132,5 +132,47 @@ describe("AvatarList", () => {
     avatars.forEach((avatar) => {
       expect(avatar).toHaveAttribute("data-size", size)
     })
+  })
+
+  it("does not render hidden count element if number of children equals max", () => {
+    // Arrange
+    const testId = "hidden_count"
+
+    // Act
+    render(
+      <AvatarGroup>
+        <Avatar name="Crema Components" />
+        <Avatar name="Jane Doe" />
+        <Avatar name="Foo Bar" />
+      </AvatarGroup>,
+    )
+
+    const received = screen.queryByTestId(testId)
+
+    // Assert
+    expect(received).not.toBeInTheDocument()
+  })
+
+  it("allows for custom hidden element", () => {
+    // Arrange
+    const label = "hidden count"
+    const hiddenElement = (hiddenCount: number) => (
+      <p aria-label={label}>{hiddenCount}</p>
+    )
+
+    // Act
+    render(
+      <AvatarGroup renderHiddenCount={hiddenElement}>
+        <Avatar name="Crema Components" />
+        <Avatar name="Jane Doe" />
+        <Avatar name="John Doe" />
+        <Avatar name="Foo Bar" />
+      </AvatarGroup>,
+    )
+
+    const received = screen.getByLabelText(label)
+
+    // Assert
+    expect(received).toBeInTheDocument()
   })
 })
