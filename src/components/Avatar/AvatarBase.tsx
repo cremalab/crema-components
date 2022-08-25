@@ -24,7 +24,7 @@ export function AvatarBase({
     <div
       aria-label={ariaLabel}
       style={{
-        backgroundImage: `url(${src})`,
+        ...(src && { backgroundImage: `url(${src})` }),
         color: fontColor,
         backgroundColor,
       }}
