@@ -17,10 +17,10 @@ const data: User[] = [
 ]
 
 const columns: Column<User>[] = [
-  { label: "LA", getValue: (user) => user.a, sortable: true },
-  { label: "LB", getValue: (user) => user.b },
-  { label: "LC", getValue: (user) => user.c, sortable: true },
-  { label: "LD", getValue: (user) => user.d.e },
+  { label: "LA", renderCell: (user) => user.a, sortBy: (user) => user.a },
+  { label: "LB", renderCell: (user) => user.b },
+  { label: "LC", renderCell: (user) => user.c, sortBy: (user) => user.c },
+  { label: "LD", renderCell: (user) => user.d.e },
 ]
 
 describe("Table", () => {
@@ -47,8 +47,29 @@ describe("Table", () => {
     expect(cells).toHaveLength(4)
   })
 
+  it("renders value to JSX", async () => {
+    const handleClick = jest.fn()
+    render(
+      <Table
+        data={data}
+        columns={[
+          {
+            label: "LA",
+            sortBy: (d) => d.a,
+            renderCell: (d) => (
+              <button onClick={() => handleClick(d.a)}>Click Me: {d.a}</button>
+            ),
+          },
+        ]}
+      />,
+    )
+    const buttonNode = screen.getByText("Click Me: 1A")
+    await userEvent.click(buttonNode)
+    expect(handleClick).toBeCalledWith("1A")
+  })
+
   describe("sorting", () => {
-    it("does not sort if column is not marked sortable", async () => {
+    it("does not sort if sortBy omitted", async () => {
       render(<Table data={data} columns={columns} />)
       const header = screen.getByText("LB")
       await userEvent.click(header)

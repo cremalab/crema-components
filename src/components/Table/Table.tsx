@@ -1,36 +1,39 @@
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 
 export interface WithID {
   id: string
 }
 
-export interface Column<Datum extends WithID> {
-  getValue: (datum: Datum) => string | number | boolean
+// type Value = string | number | boolean
+
+export interface Column<D extends WithID> {
   label: string | null
-  sortable?: boolean
+  renderCell: (datum: D) => ReactNode
+  sortBy?: (datum: D) => string | number | boolean
 }
 
-interface Props<Datum extends WithID> {
-  data: Datum[]
-  columns: Column<Datum>[]
+interface Props<D extends WithID> {
+  data: D[]
+  columns: Column<D>[]
 }
 
-export function Table<Datum extends WithID>(props: Props<Datum>) {
+export function Table<D extends WithID>(props: Props<D>) {
   const { data: dataUnsorted, columns } = props
-  const [sortColumn, setSortColumn] = useState<Column<Datum>>()
+  const [sortColumn, setSortColumn] = useState<Column<D>>()
   const [sortAsc, setSortAsc] = useState<boolean>(false)
 
   const data = [...dataUnsorted].sort((a, b) => {
-    const valueA = sortColumn?.getValue(a)
-    const valueB = sortColumn?.getValue(b)
+    if (!sortColumn?.sortBy) return 0
+    const valueA = sortColumn.sortBy(a)
+    const valueB = sortColumn.sortBy(b)
     if (valueA === undefined || valueB === undefined) return 0
     if (valueA > valueB) return sortAsc ? 1 : -1
     if (valueA < valueB) return sortAsc ? -1 : 1
     return 0
   })
 
-  const handleSort = (column: Column<Datum>) => () => {
-    if (!column.sortable) return
+  const handleSort = (column: Column<D>) => () => {
+    if (!column.sortBy) return
     if (column === sortColumn || !sortColumn) setSortAsc((value) => !value)
     setSortColumn(column)
   }
@@ -51,7 +54,7 @@ export function Table<Datum extends WithID>(props: Props<Datum>) {
   const rows = data.map((datum) => (
     <tr key={`tr-${datum.id}`}>
       {columns.map((column, i) => (
-        <td key={`tr-${datum.id}-td-${i}`}>{column.getValue(datum)}</td>
+        <td key={`tr-${datum.id}-td-${i}`}>{column.renderCell(datum)}</td>
       ))}
     </tr>
   ))

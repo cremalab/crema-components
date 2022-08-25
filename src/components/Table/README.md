@@ -21,8 +21,12 @@ const data: User[] = [
 <Table
   data={data}
   columns={[
-    { label: "Name", getValue: (user) => user.name, sortable: true },
-    { label: "Age", getValue: (user) => user.age, sortable: true },
+    { label: "Name", renderCell: (user) => user.name, sortable: true },
+    {
+      label: "Age",
+      renderCell: (age) => <strong>{age}</strong>,
+      sortBy: (user) => user.age,
+    },
   ]}
 />
 ```
@@ -37,15 +41,15 @@ const data: User[] = [
 ## ColumnConfig
 
 ```typescript
-interface Column<Datum extends WithID> {
-  // Used for column header text
+export interface Column<D extends WithID> {
+  // Text for display in column header
   label: string | null
 
-  // Returns the primitive value for column
-  getValue: (datum: Datum) => string | number | boolean
+  // Returns customized JSX
+  renderCell: (datum: D) => ReactNode
 
-  // Enables sorting for column
-  sortable?: boolean
+  // Returns which property to sort by
+  sortBy?: (datum: D) => string | number | boolean
 }
 ```
 

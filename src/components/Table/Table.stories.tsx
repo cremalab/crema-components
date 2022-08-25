@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions"
 import { Table } from "."
 
 /**
@@ -22,12 +23,36 @@ const data: User[] = [
   { id: "2", name: "Tim", age: 40 },
 ]
 
-export const Example = () => (
+export const Default = () => (
   <Table
     data={data}
     columns={[
-      { label: "Name", getValue: (user) => user.name, sortable: true },
-      { label: "Age", getValue: (user) => user.age, sortable: true },
+      {
+        label: "Name",
+        renderCell: ({ name }) => name,
+        sortBy: ({ name }) => name,
+      },
+      {
+        label: "Age",
+        renderCell: ({ age }) => age,
+        sortBy: ({ age }) => age,
+      },
+    ]}
+  />
+)
+
+export const WithRenderValue = () => (
+  <Table
+    data={data}
+    columns={[
+      { label: "Name", renderCell: ({ name }) => name },
+      {
+        label: "Age",
+        sortBy: ({ age }) => age,
+        renderCell: ({ age }) => (
+          <button onClick={() => action("Click")(age)}>{age}</button>
+        ),
+      },
     ]}
   />
 )
