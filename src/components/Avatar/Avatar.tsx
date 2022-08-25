@@ -1,4 +1,3 @@
-import styles from "./Avatar.module.css"
 import { AvatarBase, AvatarBaseProps } from "./AvatarBase"
 import { getInitials } from "./utils/getInitials"
 
@@ -12,7 +11,7 @@ export function Avatar({ name, ...avatarBaseProps }: AvatarProps) {
       return null
     } else {
       const initials = getInitials(name)
-      return <div className={styles.text}>{initials}</div>
+      return <span>{initials}</span>
     }
   }
 

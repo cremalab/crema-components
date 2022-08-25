@@ -1,5 +1,5 @@
 import { ComponentStory } from "@storybook/react"
-import { Avatar, AvatarProps } from "../Avatar"
+import { Avatar, AvatarProps } from ".."
 import { AvatarGroup } from "./AvatarGroup"
 
 /**

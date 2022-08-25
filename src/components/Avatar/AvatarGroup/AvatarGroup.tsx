@@ -1,6 +1,6 @@
 import { ComponentElement, ComponentState } from "react"
-import { Avatar, AvatarProps } from "../Avatar"
-import { AvatarBase } from "../Avatar/AvatarBase"
+import { Avatar, AvatarProps } from ".."
+import { AvatarBase } from "../AvatarBase"
 import styles from "./AvatarGroup.module.css"
 
 type AvatarGroupChildren =

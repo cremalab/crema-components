@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import styles from "./Avatar.module.css"
+import styles from "./AvatarBase.module.css"
 
 export type AvatarSize = "sm" | "md" | "lg"
 
