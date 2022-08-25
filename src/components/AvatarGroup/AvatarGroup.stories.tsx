@@ -43,9 +43,9 @@ Basic.args = {
   )),
 }
 
-export const WithCustomRemainingElement = Template.bind({})
+export const WithCustomHiddenCountElement = Template.bind({})
 
-WithCustomRemainingElement.args = {
+WithCustomHiddenCountElement.args = {
   ...Basic.args,
   renderHiddenCount: (hiddenCount) => (
     <p style={{ marginLeft: 8, fontSize: 24 }}>+{hiddenCount}</p>
