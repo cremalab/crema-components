@@ -1,3 +1,2 @@
-import avatarStyles from "./Avatar.module.css"
-export { Avatar, type AvatarSize, type AvatarProps } from "./Avatar"
-export { avatarStyles }
+export { Avatar, type AvatarProps } from "./Avatar"
+export { type AvatarSize } from "./AvatarBase"
