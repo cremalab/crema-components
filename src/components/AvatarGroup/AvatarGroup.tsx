@@ -5,6 +5,7 @@ import styles from "./AvatarGroup.module.css"
 interface AvatarGroupProps {
   max?: number
   size?: AvatarProps["size"]
+  renderHiddenCount?: (hiddenCount: number) => JSX.Element
   children:
     | ComponentElement<AvatarProps, ComponentState>
     | ComponentElement<AvatarProps, ComponentState>[]
@@ -14,35 +15,32 @@ export function AvatarGroup({
   size = "sm",
   max = 3,
   children,
+  renderHiddenCount,
 }: AvatarGroupProps) {
   const childrenArray = Array.isArray(children) ? children : [children]
   const slicedChildren = childrenArray.slice(0, max)
-  const remaining = childrenArray.length - slicedChildren.length
+  const hiddenCount = childrenArray.length - slicedChildren.length
 
   if (childrenArray.some((child) => child.type.name !== "Avatar")) {
     throw new Error("<AvatarGroup /> only accepts <Avatar /> children")
   }
 
-  if (childrenArray.length < 2) {
-    throw new Error(
-      "<AvatarGroup /> should contain at least 2 children. \n Consider using <Avatar /> on its own.",
-    )
-  }
+  const HiddenCount = () => {
+    if (!hiddenCount) return null
 
-  const Remaining = () => {
-    if (remaining) {
+    if (renderHiddenCount) {
+      return renderHiddenCount(hiddenCount)
+    } else {
       return (
         <div
           className={styles.item}
           style={{ zIndex: 1000 - childrenArray.length }}
         >
           <div data-size={size} className={avatarStyles.container}>
-            <p>+{remaining}</p>
+            <p>+{hiddenCount}</p>
           </div>
         </div>
       )
-    } else {
-      return null
     }
   }
 
@@ -58,7 +56,7 @@ export function AvatarGroup({
           <Avatar {...props} size={size} />
         </div>
       ))}
-      <Remaining />
+      <HiddenCount />
     </div>
   )
 }

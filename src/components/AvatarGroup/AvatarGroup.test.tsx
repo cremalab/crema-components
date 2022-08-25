@@ -45,26 +45,6 @@ describe("AvatarList", () => {
     jest.restoreAllMocks()
   })
 
-  it("throws if there are less than 2 <Avatar />'s", () => {
-    // Arrange
-    jest.spyOn(console, "error").mockImplementation(() => null)
-
-    // Act
-    const Rendered = () =>
-      render(
-        <AvatarGroup>
-          <Avatar name="Crema Components" />
-        </AvatarGroup>,
-      )
-
-    // Assert
-
-    expect(Rendered).toThrowError(
-      "<AvatarGroup /> should contain at least 2 children. \n Consider using <Avatar /> on its own.",
-    )
-    jest.restoreAllMocks()
-  })
-
   it("has a default max of 3", () => {
     // Arrange
     const expectedText = "+1"

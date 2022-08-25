@@ -42,3 +42,12 @@ Basic.args = {
     <Avatar key={props.name + index} {...props} />
   )),
 }
+
+export const WithCustomRemainingElement = Template.bind({})
+
+WithCustomRemainingElement.args = {
+  ...Basic.args,
+  renderHiddenCount: (hiddenCount) => (
+    <p style={{ marginLeft: 8, fontSize: 24 }}>+{hiddenCount}</p>
+  ),
+}
