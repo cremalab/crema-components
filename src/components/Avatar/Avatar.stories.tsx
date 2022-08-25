@@ -48,3 +48,11 @@ WithImage.args = {
   size: "lg",
   src: "https://assets.website-files.com/5b6b50e79e9b6f7d0d3959a2/614a3f0710df4f2ff20e5bbd_JustinK.jpg",
 }
+
+export const WithCustomColors = Template.bind({})
+
+WithCustomColors.args = {
+  ...Basic.args,
+  fontColor: "#000000",
+  backgroundColor: "#FFA500",
+}

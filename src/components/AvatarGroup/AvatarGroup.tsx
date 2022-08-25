@@ -74,12 +74,10 @@ function HiddenCount({
         : `${hiddenCount} hidden avatars`
 
     return (
-      <div
-        aria-label={ariaLabel}
-        className={styles.item}
-        style={{ zIndex: 1000 - total }}
-      >
-        <AvatarBase size={size}>+{hiddenCount}</AvatarBase>
+      <div className={styles.item} style={{ zIndex: 1000 - total }}>
+        <AvatarBase ariaLabel={ariaLabel} size={size}>
+          +{hiddenCount}
+        </AvatarBase>
       </div>
     )
   }
