@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.11.5",
+    "@types/styled-components": "^5.1.26",
+    "@types/styled-system": "^5.1.15",
     "classnames": "^2.3.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
