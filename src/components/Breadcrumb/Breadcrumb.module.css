@@ -1,0 +1,27 @@
+.list {
+  list-style: none;
+  text-align: left;
+}
+
+.link {
+  color: black;
+}
+
+.listItem {
+  display: inline;
+}
+
+.listItem span {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.listItem [aria-current="page"] {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.listItem [aria-current="true"] {
+  font-weight: bold;
+  text-decoration: none;
+}
