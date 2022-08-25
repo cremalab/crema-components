@@ -1,5 +1,6 @@
 import { ComponentElement, ComponentState } from "react"
-import { Avatar, AvatarProps, avatarStyles } from "../Avatar"
+import { Avatar, AvatarProps } from "../Avatar"
+import { AvatarBase } from "../Avatar/AvatarBase"
 import styles from "./AvatarGroup.module.css"
 
 interface AvatarGroupProps {
@@ -36,9 +37,7 @@ export function AvatarGroup({
           className={styles.item}
           style={{ zIndex: 1000 - childrenArray.length }}
         >
-          <div data-size={size} className={avatarStyles.container}>
-            <p>+{hiddenCount}</p>
-          </div>
+          <AvatarBase size={size}>+{hiddenCount}</AvatarBase>
         </div>
       )
     }
