@@ -75,4 +75,27 @@ describe("Avatar", () => {
       expect(received).toHaveAttribute("data-size", size)
     })
   })
+
+  it("allows for override of background and font color", () => {
+    // Arrange
+    const name = "Crema Components"
+    const fontColor = "rgb(255, 0, 0)"
+    const backgroundColor = "rgb(0, 0, 0)"
+
+    // Act
+    render(
+      <Avatar
+        backgroundColor={backgroundColor}
+        fontColor={fontColor}
+        name={name}
+      />,
+    )
+
+    const received = screen.getByLabelText(name, { exact: false })
+
+    // Assert
+    expect(received).toHaveStyle(
+      `color: ${fontColor}; background-color: ${backgroundColor};`,
+    )
+  })
 })
