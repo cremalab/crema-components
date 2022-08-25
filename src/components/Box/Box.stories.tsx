@@ -1,4 +1,3 @@
-import decoratorCentered from "@storybook/addon-centered"
 import { Box } from "./Box"
 
 /**
@@ -7,8 +6,23 @@ import { Box } from "./Box"
  */
 
 export default {
-  title: "Box",
-  decorators: [decoratorCentered],
+  title: "Components/Box",
+  parameters: {
+    layout: "centered",
+  },
 }
 
-export const Example = () => <Box />
+export const Example = () => (
+  <Box
+    display="flex"
+    bg="red"
+    height={100}
+    width={100}
+    borderRadius={8}
+    flexDirection="column"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <p>Hello World</p>
+  </Box>
+)
