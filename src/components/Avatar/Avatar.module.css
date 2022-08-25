@@ -3,8 +3,6 @@
   --medium: 64px;
   --large: 96px;
   --ratio: 0.4;
-  background: #b3b3b3;
-  color: #333333;
   display: flex;
   align-items: center;
   justify-content: center;
