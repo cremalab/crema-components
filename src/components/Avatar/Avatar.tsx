@@ -1,17 +1,14 @@
 import styles from "./Avatar.module.css"
+import { AvatarBase, AvatarBaseProps } from "./AvatarBase"
 import { getInitials } from "./utils/getInitials"
 
-export type AvatarSize = "sm" | "md" | "lg"
-
-export interface AvatarProps {
+export interface AvatarProps extends Omit<AvatarBaseProps, "children"> {
   name: string
-  size?: AvatarSize
-  src?: string
 }
 
-export function Avatar({ name, size = "sm", src }: AvatarProps) {
+export function Avatar({ name, ...avatarBaseProps }: AvatarProps) {
   const Child = () => {
-    if (src) {
+    if (avatarBaseProps.src) {
       return null
     } else {
       const initials = getInitials(name)
@@ -19,20 +16,13 @@ export function Avatar({ name, size = "sm", src }: AvatarProps) {
     }
   }
 
-  const ariaLabel = src
+  const ariaLabel = avatarBaseProps.src
     ? `An avatar with an image of ${name}`
     : `An avatar with initials for ${name}`
 
   return (
-    <div
-      aria-label={ariaLabel}
-      style={{
-        backgroundImage: `url(${src})`,
-      }}
-      className={styles.container}
-      data-size={size}
-    >
+    <AvatarBase ariaLabel={ariaLabel} {...avatarBaseProps}>
       <Child />
-    </div>
+    </AvatarBase>
   )
 }
