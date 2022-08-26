@@ -84,11 +84,7 @@ describe("Avatar", () => {
 
     // Act
     render(
-      <Avatar
-        backgroundColor={backgroundColor}
-        fontColor={fontColor}
-        name={name}
-      />,
+      <Avatar background={backgroundColor} fontColor={fontColor} name={name} />,
     )
 
     const received = screen.getByLabelText(name, { exact: false })
