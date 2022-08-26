@@ -8,7 +8,6 @@
   justify-content: center;
   border-radius: 100%;
   flex-wrap: nowrap;
-  background-size: cover;
 }
 
 .container[data-size="sm"] {

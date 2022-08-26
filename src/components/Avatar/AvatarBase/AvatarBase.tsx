@@ -24,9 +24,9 @@ export function AvatarBase({
     <div
       aria-label={ariaLabel}
       style={{
-        ...(src && { backgroundImage: `url(${src})` }),
         color,
-        background,
+        background: src ? `url(${src})` : background,
+        backgroundSize: "contain",
       }}
       className={styles.container}
       data-size={size}
