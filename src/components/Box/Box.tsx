@@ -10,12 +10,25 @@ import {
   SpaceProps,
   border,
   color,
+  compose,
   flexbox,
   layout,
   margin,
   padding,
   space,
+  system,
 } from "styled-system"
+
+interface ShortHand {
+  b: string
+  br: string | number
+  h: string | number
+  w: string | number
+  maxH: string | number
+  maxW: string | number
+  minH: string | number
+  minW: string | number
+}
 
 export interface BoxProps
   extends ColorProps,
@@ -24,12 +37,39 @@ export interface BoxProps
     BorderProps,
     FlexboxProps,
     PaddingProps,
-    MarginProps {
+    MarginProps,
+    ShortHand {
   children: ReactNode
 }
 
-export const Box: React.FC<BoxProps> = styled.div(
-  { boxSizing: "border-box" },
+const shortHand = system({
+  b: {
+    property: "background",
+  },
+  br: {
+    property: "borderRadius",
+  },
+  h: {
+    property: "height",
+  },
+  w: {
+    property: "width",
+  },
+  maxH: {
+    property: "maxHeight",
+  },
+  maxW: {
+    property: "maxWidth",
+  },
+  minH: {
+    property: "minHeight",
+  },
+  minW: {
+    property: "minWidth",
+  },
+})
+
+const styleProps = compose(
   color,
   layout,
   space,
@@ -37,4 +77,10 @@ export const Box: React.FC<BoxProps> = styled.div(
   flexbox,
   padding,
   margin,
+  shortHand,
+)
+
+export const Box: React.FC<BoxProps> = styled.div(
+  { boxSizing: "border-box" },
+  styleProps,
 )
