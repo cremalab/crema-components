@@ -1,3 +1,4 @@
+import { ComponentStory } from "@storybook/react"
 import { Box } from "./Box"
 
 /**
@@ -12,17 +13,18 @@ export default {
   },
 }
 
-export const Example = () => (
-  <Box
-    display="flex"
-    bg="red"
-    height={100}
-    width={100}
-    borderRadius={8}
-    flexDirection="column"
-    justifyContent="center"
-    alignItems="center"
-  >
-    <p>Hello World</p>
-  </Box>
-)
+const Template: ComponentStory<typeof Box> = (args) => <Box {...args} />
+
+export const Example = Template.bind({})
+
+Example.args = {
+  height: 500,
+  width: 500,
+  bg: "#888888",
+  borderRadius: 8,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  children: <p style={{ fontSize: 48 }}>Hello World</p>,
+  opacity: 0.75,
+}
