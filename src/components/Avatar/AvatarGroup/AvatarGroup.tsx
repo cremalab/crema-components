@@ -7,7 +7,7 @@ type AvatarGroupChildren =
   | ComponentElement<AvatarProps, ComponentState>
   | ComponentElement<AvatarProps, ComponentState>[]
 
-interface AvatarGroupProps {
+export interface AvatarGroupProps {
   max?: number
   size?: AvatarProps["size"]
   renderHiddenCount?: (hiddenCount: number) => JSX.Element
