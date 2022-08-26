@@ -1,0 +1,25 @@
+.table {
+  width: 100%;
+  position: relative;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+}
+
+.table thead th {
+  background: gainsboro;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+}
+
+.table thead th[data-sortable="true"] {
+  cursor: pointer;
+}
+
+.table tbody {
+  background: whitesmoke;
+}

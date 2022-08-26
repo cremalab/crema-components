@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react"
+import styles from "./Table.module.css"
 
 export interface WithID {
   id: string
@@ -44,6 +45,7 @@ export function Table<D extends WithID>(props: Props<D>) {
         scope="col"
         key={`th-${column.label}-${i}`}
         onClick={handleSort(column)}
+        data-sortable={!!column.sortBy}
       >
         {column.label}
         {column === sortColumn ? (sortAsc ? "↑" : "↓") : " "}
@@ -60,7 +62,7 @@ export function Table<D extends WithID>(props: Props<D>) {
   ))
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>{headers}</tr>
       </thead>
