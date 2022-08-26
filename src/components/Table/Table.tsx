@@ -45,7 +45,7 @@ export function Table<D extends WithID>(props: Props<D>) {
         data-sortable={!!column.sortBy}
       >
         {column.label}
-        {column === sortColumn ? (sortAsc ? "↑" : "↓") : " "}
+        {column === sortColumn ? (sortAsc ? " ↑" : " ↓") : "  "}
       </th>
     )
   })
