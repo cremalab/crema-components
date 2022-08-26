@@ -25,7 +25,6 @@ export function Table<D extends WithID>(props: Props<D>) {
     if (!sortColumn?.sortBy) return 0
     const valueA = sortColumn.sortBy(a)
     const valueB = sortColumn.sortBy(b)
-    if (valueA === undefined || valueB === undefined) return 0
     if (valueA > valueB) return sortAsc ? 1 : -1
     if (valueA < valueB) return sortAsc ? -1 : 1
     return 0
