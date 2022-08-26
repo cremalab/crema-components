@@ -5,8 +5,6 @@ export interface WithID {
   id: string
 }
 
-// type Value = string | number | boolean
-
 export interface Column<D extends WithID> {
   label: string | null
   renderCell: (datum: D) => ReactNode
