@@ -54,5 +54,5 @@ export const WithCustomColors = Template.bind({})
 WithCustomColors.args = {
   ...Basic.args,
   fontColor: "#000000",
-  backgroundColor: "#FFA500",
+  background: "#FFA500",
 }
