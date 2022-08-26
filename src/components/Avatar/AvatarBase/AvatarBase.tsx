@@ -9,7 +9,7 @@ export interface AvatarBaseProps {
   ariaLabel?: string
   src?: string
   fontColor?: string
-  backgroundColor?: string
+  background?: string
 }
 
 export function AvatarBase({
@@ -17,16 +17,16 @@ export function AvatarBase({
   children,
   src,
   size = "sm",
-  fontColor = "#444444",
-  backgroundColor = "#b3b3b3",
+  fontColor: color = "#444444",
+  background = "#b3b3b3",
 }: AvatarBaseProps) {
   return (
     <div
       aria-label={ariaLabel}
       style={{
         ...(src && { backgroundImage: `url(${src})` }),
-        color: fontColor,
-        backgroundColor,
+        color,
+        background,
       }}
       className={styles.container}
       data-size={size}

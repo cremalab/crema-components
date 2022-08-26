@@ -140,7 +140,7 @@ describe("AvatarList", () => {
 
     // Act
     render(
-      <AvatarGroup>
+      <AvatarGroup max={3}>
         <Avatar name="Crema Components" />
         <Avatar name="Jane Doe" />
         <Avatar name="Foo Bar" />

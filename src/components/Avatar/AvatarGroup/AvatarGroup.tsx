@@ -35,7 +35,7 @@ export function AvatarGroup({
           data-testid={`avatar_item_${index}`}
           key={index}
           className={styles.item}
-          style={{ zIndex: 1000 - index }}
+          style={{ zIndex: index }}
         >
           <Avatar {...props} size={size} />
         </div>
@@ -65,20 +65,18 @@ function HiddenCount({
 }: HiddenCountProps) {
   if (!hiddenCount) return null
 
-  if (renderHiddenCount) {
-    return renderHiddenCount(hiddenCount)
-  } else {
-    const ariaLabel =
-      hiddenCount === 1
-        ? `${hiddenCount} hidden avatar`
-        : `${hiddenCount} hidden avatars`
+  if (renderHiddenCount) return renderHiddenCount(hiddenCount)
 
-    return (
-      <div className={styles.item} style={{ zIndex: 1000 - total }}>
-        <AvatarBase ariaLabel={ariaLabel} size={size}>
-          +{hiddenCount}
-        </AvatarBase>
-      </div>
-    )
-  }
+  const ariaLabel =
+    hiddenCount === 1
+      ? `${hiddenCount} hidden avatar`
+      : `${hiddenCount} hidden avatars`
+
+  return (
+    <div className={styles.item} style={{ zIndex: total - 1 }}>
+      <AvatarBase ariaLabel={ariaLabel} size={size}>
+        +{hiddenCount}
+      </AvatarBase>
+    </div>
+  )
 }
