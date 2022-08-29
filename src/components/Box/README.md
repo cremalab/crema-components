@@ -26,4 +26,3 @@ A component for building out quick layouts. Provides a number of layout related 
   <p>{text}</p>
 </Box>,
 ```
-
