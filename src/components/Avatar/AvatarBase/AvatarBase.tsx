@@ -26,7 +26,7 @@ export function AvatarBase({
       style={{
         color,
         background: src ? `url(${src})` : background,
-        backgroundSize: "contain",
+        backgroundSize: "cover",
       }}
       className={styles.container}
       data-size={size}

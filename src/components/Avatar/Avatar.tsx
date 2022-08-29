@@ -11,7 +11,7 @@ export function Avatar({ name, ...avatarBaseProps }: AvatarProps) {
       return null
     } else {
       const initials = getInitials(name)
-      return <span>{initials}</span>
+      return <>{initials}</>
     }
   }
 
