@@ -46,7 +46,7 @@ export const WithImage = Template.bind({})
 WithImage.args = {
   ...Basic.args,
   size: "lg",
-  src: "https://assets.website-files.com/5b6b50e79e9b6f7d0d3959a2/614a3f0710df4f2ff20e5bbd_JustinK.jpg",
+  src: require("../../assets/justink.jpeg"),
 }
 
 export const WithCustomColors = Template.bind({})

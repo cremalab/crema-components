@@ -12,7 +12,7 @@ const avatars: AvatarProps[] = [
   { name: "Hello World", size: "md" },
   {
     name: "Foo Bar",
-    src: "https://assets.website-files.com/5b6b50e79e9b6f7d0d3959a2/614a3f0710df4f2ff20e5bbd_JustinK.jpg",
+    src: require("../../../assets/justink.jpeg"),
   },
   { name: "John Doe" },
 ]
