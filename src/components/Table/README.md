@@ -35,11 +35,11 @@ const data: User[] = [
       renderCell: ({ age }) => age,
       sortBy: ({ age }) => age,
       renderHeader: ({ sort, column }) =>
-        `${column.label} ${sort.current ? sort.dir === "asc"? "🔼" : "🔽" : ""}`
+        `${column.label} ${sort.isCurrent ? sort.dir === "asc"? "🔼" : "🔽" : ""}`
     },
   ]}
   renderHeader={({ sort, column }) =>
-    `${column.label} ${sort.current ? sort.dir === "asc"? "👆" : "👇" : ""}`
+    `${column.label} ${sort.isCurrent ? sort.dir === "asc"? "👆" : "👇" : ""}`
   }
 />
 ```
