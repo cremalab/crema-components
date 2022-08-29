@@ -17,16 +17,26 @@ const data: User[] = [
 ]
 
 const columns: Column<User>[] = [
-  { label: "LA", renderCell: (user) => user.a, sortBy: (user) => user.a },
-  { label: "LB", renderCell: (user) => user.b },
-  { label: "LC", renderCell: (user) => user.c, sortBy: (user) => user.c },
-  { label: "LD", renderCell: (user) => user.d.e },
+  {
+    id: "la",
+    header: "LA",
+    renderCell: (user) => user.a,
+    sortBy: (user) => user.a,
+  },
+  { id: "lb", header: "LB", renderCell: (user) => user.b },
+  {
+    id: "lc",
+    header: "LC",
+    renderCell: (user) => user.c,
+    sortBy: (user) => user.c,
+  },
+  { id: "ld", header: "LD", renderCell: (user) => user.d.e },
 ]
 
 describe("Table", () => {
   it("is defined", expect(Table).toBeDefined)
 
-  it("renders labels", () => {
+  it("renders column headers", () => {
     render(<Table data={data} columns={columns} />)
     const matcher = /LA|LB|LC|LD/
     const headers = screen.getAllByText(matcher, { selector: "thead tr th" })
@@ -47,15 +57,15 @@ describe("Table", () => {
     expect(cells).toHaveLength(4)
   })
 
-  it("renders value to JSX", async () => {
+  it("renders column cell via renderCell", async () => {
     const handleClick = jest.fn()
     render(
       <Table
         data={data}
         columns={[
           {
-            label: "LA",
-            sortBy: (d) => d.a,
+            id: "la",
+            header: "LA",
             renderCell: (d) => (
               <button onClick={() => handleClick(d.a)}>Click Me: {d.a}</button>
             ),
@@ -66,6 +76,41 @@ describe("Table", () => {
     const buttonNode = screen.getByText("Click Me: 1A")
     await userEvent.click(buttonNode)
     expect(handleClick).toBeCalledWith("1A")
+  })
+
+  it("renders header via table-wide renderHeader", async () => {
+    render(
+      <Table
+        data={data}
+        renderHeader={({ column }) => `Custom ${column.header}`}
+        columns={[{ id: "la", header: "LA", renderCell: ({ a }) => a }]}
+      />,
+    )
+    const customHeader = screen.getByText("Custom LA")
+    expect(customHeader).toBeVisible()
+  })
+
+  it("renders header via column-specific renderHeader", async () => {
+    render(
+      <Table
+        data={data}
+        renderHeader={({ column }) => `Custom ${column.header}`}
+        columns={[
+          { id: "la", header: "LA", renderCell: ({ a }) => a },
+          {
+            id: "lb",
+            header: "LB",
+            renderCell: ({ a }) => a,
+            renderHeader: ({ column }) => `Column-specific ${column.header}`,
+          },
+        ]}
+      />,
+    )
+    const topLevelCustomHeader = screen.getByText("Custom LA")
+    expect(topLevelCustomHeader).toBeVisible()
+
+    const columnSpecificCustomHeader = screen.getByText("Column-specific LB")
+    expect(columnSpecificCustomHeader).toBeVisible()
   })
 
   describe("sorting", () => {
@@ -115,6 +160,23 @@ describe("Table", () => {
       await userEvent.click(header2)
       const rows = screen.getAllByText(/1A|2A|3A/).map((e) => e.innerHTML)
       expect(rows).toEqual(["1A", "2A", "3A"])
+    })
+
+    it("shows ascending indicator by default", async () => {
+      render(<Table data={data} columns={columns} />)
+      const header = screen.getByText("LA")
+      await userEvent.click(header)
+      const headerWithArrow = screen.getByText("LA ↑")
+      expect(headerWithArrow).toBeVisible()
+    })
+
+    it("shows descending indicator by default", async () => {
+      render(<Table data={data} columns={columns} />)
+      const header = screen.getByText("LA")
+      await userEvent.click(header)
+      await userEvent.click(header)
+      const headerWithArrow = screen.getByText("LA ↓")
+      expect(headerWithArrow).toBeVisible()
     })
   })
 })

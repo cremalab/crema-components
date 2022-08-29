@@ -28,12 +28,14 @@ export const Default = () => (
     data={data}
     columns={[
       {
-        label: "Name",
+        id: "name",
+        header: "Name",
         renderCell: ({ name }) => name,
         sortBy: ({ name }) => name,
       },
       {
-        label: "Age",
+        id: "age",
+        header: "Age",
         renderCell: ({ age }) => age,
         sortBy: ({ age }) => age,
       },
@@ -45,9 +47,14 @@ export const WithRenderValue = () => (
   <Table
     data={data}
     columns={[
-      { label: "Name", renderCell: ({ name }) => name },
       {
-        label: "Age",
+        id: "name",
+        header: "Name",
+        renderCell: ({ name }) => name,
+      },
+      {
+        id: "age",
+        header: "Age",
         sortBy: ({ age }) => age,
         renderCell: ({ age }) => (
           <button onClick={() => action("Click")(age)}>{age}</button>
