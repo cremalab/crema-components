@@ -29,13 +29,13 @@ export const Default = () => (
     columns={[
       {
         id: "name",
-        header: "Name",
+        label: "Name",
         renderCell: ({ name }) => name,
         sortBy: ({ name }) => name,
       },
       {
         id: "age",
-        header: "Age",
+        label: "Age",
         renderCell: ({ age }) => age,
         sortBy: ({ age }) => age,
       },
@@ -49,12 +49,12 @@ export const WithRenderValue = () => (
     columns={[
       {
         id: "name",
-        header: "Name",
+        label: "Name",
         renderCell: ({ name }) => name,
       },
       {
         id: "age",
-        header: "Age",
+        label: "Age",
         sortBy: ({ age }) => age,
         renderCell: ({ age }) => (
           <button onClick={() => action("Click")(age)}>{age}</button>

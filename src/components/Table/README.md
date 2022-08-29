@@ -5,6 +5,8 @@ Provides a component for rendering a simple table that supports sorting.
 ## Usage Example
 
 ```tsx
+import { Table } from "..."
+
 interface User {
   id: string
   name: string
@@ -12,45 +14,101 @@ interface User {
 }
 
 const data: User[] = [
-  { id: "1", name: "Joe", age: 12 },
-  { id: "2", name: "Tim", age: 52 },
-  { id: "3", name: "Rob", age: 29 },
-  { id: "4", name: "Andrea", age: 29 },
+  { id: "1", name: "Joe", age: 43 },
+  { id: "4", name: "Andrea", age: 34 },
+  { id: "3", name: "Rob", age: 37 },
+  { id: "2", name: "Tim", age: 40 },
 ]
 
 <Table
   data={data}
   columns={[
-    { label: "Name", renderCell: (user) => user.name, sortable: true },
     {
+      id: "name",
+      label: "Name",
+      renderCell: ({ name }) => name,
+      sortBy: ({ name }) => name,
+    },
+    {
+      id: "age",
       label: "Age",
-      renderCell: (age) => <strong>{age}</strong>,
-      sortBy: (user) => user.age,
+      renderCell: ({ age }) => age,
+      sortBy: ({ age }) => age,
+      renderHeader: ({ sort, column }) =>
+        `${column.label} ${sort.current ? sort.dir === "asc"? "🔼" : "🔽" : ""}`
     },
   ]}
+  renderHeader={({ sort, column }) =>
+    `${column.label} ${sort.current ? sort.dir === "asc"? "👆" : "👇" : ""}`
+  }
 />
 ```
 
-## Props
+## `TableProps<D>`
 
-| Prop      | Type               | Description                                              |
-| --------- | ------------------ | -------------------------------------------------------- |
-| `data`    | `WithID[]`         | Array of objects that must have, at least, an `id`       |
-| `columns` | `Column<WithID>[]` | An array of objects that define each column of the table |
-
-## ColumnConfig
+Properties for `<Table>` component
 
 ```typescript
-export interface Column<D extends WithID> {
-  // Text for display in column header
+interface TableProps<D extends WithID> {
+  // Array of any data as long as `id` is present (i.e. `WithID`)
+  data: D[]
+
+  // Array of TableColumn (see below)
+  columns: TableColumn<D>[]
+
+  // Function that defines how all table headers are rendered (unless specified per-column)
+  renderHeader?: TableRenderHeader<D>
+}
+```
+
+## `TableColumn<D>`
+
+Defines a column within the Table system
+
+```typescript
+interface TableColumn<D extends WithID> {
+  // Unique id
+  id: string
+
+  // Label rendered in header
   label: string | null
 
-  // Returns customized JSX
+  // Define how datum is rendered in column cell
   renderCell: (datum: D) => ReactNode
 
-  // Returns which property to sort by
+  // Function that defines how specific column header is rendered (overrides Table `renderHeader`)
+  renderHeader?: TableRenderHeader<D>
+
+  // Enables sorting by returned datum value
   sortBy?: (datum: D) => string | number | boolean
 }
+```
+
+## `TableRenderHeader<D>`
+
+An optional function used in both `TableProps` and `TableColumn` to define how header(s) are rendered
+
+```typescript
+interface Args {
+  // Column sort information; used to render sort icons, etc.
+  sort: { dir: TableSortDirection; isCurrent: boolean }
+
+  // The current TableColumn
+  column: TableColumn<D>
+
+  // All data—potentially for getting data.length
+  data: D[]
+}
+
+type TableRenderHeader<D extends WithID> = (args: Args) => ReactNode
+```
+
+## `TableSortDirection`
+
+Represents the current sorting direction
+
+```typescript
+type TableSortDirection = "asc" | "dsc"
 ```
 
 ## Directory Structure

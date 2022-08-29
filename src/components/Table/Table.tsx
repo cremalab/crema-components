@@ -5,38 +5,38 @@ export interface WithID {
   id: string
 }
 
-type SortDirection = "asc" | "dsc"
+export type TableSortDirection = "asc" | "dsc"
 
-type RenderHeader<D extends WithID> = (args: {
+export type TableRenderHeader<D extends WithID> = (args: {
   sort: {
-    dir: SortDirection
+    dir: TableSortDirection
     isCurrent: boolean
   }
-  column: Column<D>
+  column: TableColumn<D>
   data: D[]
 }) => ReactNode
 
-export interface Column<D extends WithID> {
-  header: string
+export interface TableColumn<D extends WithID> {
   id: string
+  label: string | null
   renderCell: (datum: D) => ReactNode
-  renderHeader?: RenderHeader<D>
+  renderHeader?: TableRenderHeader<D>
   sortBy?: (datum: D) => string | number | boolean
 }
 
-interface Props<D extends WithID> {
+export interface TableProps<D extends WithID> {
   data: D[]
-  columns: Column<D>[]
-  renderHeader?: RenderHeader<D>
+  columns: TableColumn<D>[]
+  renderHeader?: TableRenderHeader<D>
 }
 
 export function Table<D extends WithID>({
   data: dataUnsorted,
   columns,
   renderHeader = renderHeaderDefault<D>(),
-}: Props<D>) {
-  const [sortColumn, setSortColumn] = useState<Column<D>>()
-  const [sortDir, setSortDir] = useState<SortDirection>("dsc")
+}: TableProps<D>) {
+  const [sortColumn, setSortColumn] = useState<TableColumn<D>>()
+  const [sortDir, setSortDir] = useState<TableSortDirection>("dsc")
 
   const data = [...dataUnsorted].sort((a, b) => {
     if (!sortColumn?.sortBy) return 0
@@ -47,7 +47,7 @@ export function Table<D extends WithID>({
     return 0
   })
 
-  const handleSort = (column: Column<D>) => () => {
+  const handleSort = (column: TableColumn<D>) => () => {
     if (!column.sortBy) return
     if (column === sortColumn || !sortColumn)
       setSortDir((dir) => (dir === "asc" ? "dsc" : "asc"))
@@ -96,7 +96,7 @@ export function Table<D extends WithID>({
   )
 }
 
-function renderHeaderDefault<D extends WithID>(): RenderHeader<D> {
+function renderHeaderDefault<D extends WithID>(): TableRenderHeader<D> {
   return ({ sort, column }) =>
-    `${column.header} ${sort.isCurrent ? (sort.dir === "asc" ? "↑" : "↓") : ""}`
+    `${column.label} ${sort.isCurrent ? (sort.dir === "asc" ? "↑" : "↓") : ""}`
 }

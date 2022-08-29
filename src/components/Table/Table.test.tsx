@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { Column, Table } from "."
+import { Table, TableColumn } from "."
 
 interface User {
   id: string
@@ -16,27 +16,27 @@ const data: User[] = [
   { id: "2", a: "2A", b: "2B", c: "2C", d: { e: "2D" } },
 ]
 
-const columns: Column<User>[] = [
+const columns: TableColumn<User>[] = [
   {
     id: "la",
-    header: "LA",
+    label: "LA",
     renderCell: (user) => user.a,
     sortBy: (user) => user.a,
   },
-  { id: "lb", header: "LB", renderCell: (user) => user.b },
+  { id: "lb", label: "LB", renderCell: (user) => user.b },
   {
     id: "lc",
-    header: "LC",
+    label: "LC",
     renderCell: (user) => user.c,
     sortBy: (user) => user.c,
   },
-  { id: "ld", header: "LD", renderCell: (user) => user.d.e },
+  { id: "ld", label: "LD", renderCell: (user) => user.d.e },
 ]
 
 describe("Table", () => {
   it("is defined", expect(Table).toBeDefined)
 
-  it("renders column headers", () => {
+  it("renders column header label", () => {
     render(<Table data={data} columns={columns} />)
     const matcher = /LA|LB|LC|LD/
     const headers = screen.getAllByText(matcher, { selector: "thead tr th" })
@@ -65,7 +65,7 @@ describe("Table", () => {
         columns={[
           {
             id: "la",
-            header: "LA",
+            label: "LA",
             renderCell: (d) => (
               <button onClick={() => handleClick(d.a)}>Click Me: {d.a}</button>
             ),
@@ -82,8 +82,8 @@ describe("Table", () => {
     render(
       <Table
         data={data}
-        renderHeader={({ column }) => `Custom ${column.header}`}
-        columns={[{ id: "la", header: "LA", renderCell: ({ a }) => a }]}
+        renderHeader={({ column }) => `Custom ${column.label}`}
+        columns={[{ id: "la", label: "LA", renderCell: ({ a }) => a }]}
       />,
     )
     const customHeader = screen.getByText("Custom LA")
@@ -94,14 +94,14 @@ describe("Table", () => {
     render(
       <Table
         data={data}
-        renderHeader={({ column }) => `Custom ${column.header}`}
+        renderHeader={({ column }) => `Custom ${column.label}`}
         columns={[
-          { id: "la", header: "LA", renderCell: ({ a }) => a },
+          { id: "la", label: "LA", renderCell: ({ a }) => a },
           {
             id: "lb",
-            header: "LB",
+            label: "LB",
             renderCell: ({ a }) => a,
-            renderHeader: ({ column }) => `Column-specific ${column.header}`,
+            renderHeader: ({ column }) => `Column-specific ${column.label}`,
           },
         ]}
       />,
