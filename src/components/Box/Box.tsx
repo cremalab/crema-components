@@ -39,7 +39,7 @@ export interface BoxProps
     PaddingProps,
     MarginProps,
     ShortHand {
-  children: ReactNode
+  children?: ReactNode
 }
 
 const shortHand = system({

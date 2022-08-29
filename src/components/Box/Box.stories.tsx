@@ -15,16 +15,26 @@ export default {
 
 const Template: ComponentStory<typeof Box> = (args) => <Box {...args} />
 
-export const Example = Template.bind({})
+export const WithChildren = Template.bind({})
 
-Example.args = {
+const defaultArgs = {
   height: 500,
   width: 500,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  children: <p style={{ fontSize: 48 }}>Hello World</p>,
   opacity: 0.75,
-  b: "#888888",
-  br: 8,
+  b: "orange",
+  border: "1px solid black",
+}
+
+WithChildren.args = {
+  ...defaultArgs,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  children: <p style={{ fontSize: 48 }}>Hello World</p>,
+}
+
+export const WithoutChildren = Template.bind({})
+
+WithoutChildren.args = {
+  ...defaultArgs,
 }
