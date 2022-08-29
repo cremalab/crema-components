@@ -20,14 +20,14 @@ import {
 } from "styled-system"
 
 interface ShortHand {
-  b: string
-  br: string | number
-  h: string | number
-  w: string | number
-  maxH: string | number
-  maxW: string | number
-  minH: string | number
-  minW: string | number
+  b?: string
+  br?: string | number
+  h?: string | number
+  w?: string | number
+  maxH?: string | number
+  maxW?: string | number
+  minH?: string | number
+  minW?: string | number
 }
 
 export interface BoxProps
