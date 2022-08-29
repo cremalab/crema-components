@@ -18,8 +18,10 @@ A component for rendering a circular container used to display a user's initials
 
 ## API
 
-| Prop   | Type   | Required | Description      | Default |
-| ------ | ------ | -------- | ---------------- | ------- |
-| `name` | string | yes      | A user's name    |         |
-| `size` | string | no       | the avatar size  | "sm"    |
-| `src`  | string | no       | the image source |         |
+| Prop         | Type   | Required | Description         | Default |
+| ------------ | ------ | -------- | ------------------- | ------- |
+| `name`       | string | yes      | A user's name       |         |
+| `size`       | string | no       | the avatar size     | "sm"    |
+| `src`        | string | no       | the image source    |         |
+| `background` | string | no       | override background |         |
+| `fontColor`  | string | no       | override font color |         |

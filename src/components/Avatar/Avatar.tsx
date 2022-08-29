@@ -1,7 +1,8 @@
 import { AvatarBase, AvatarBaseProps } from "./AvatarBase"
 import { getInitials } from "./utils/getInitials"
 
-export interface AvatarProps extends Omit<AvatarBaseProps, "children"> {
+export interface AvatarProps
+  extends Omit<AvatarBaseProps, "children" | "ariaLabel"> {
   name: string
 }
 
