@@ -69,6 +69,5 @@ describe("Box", () => {
     expect(received).toHaveStyle(
       "background: orange; width: 100px; height: 100px",
     )
-    expect(received).toBeInTheDocument()
   })
 })
