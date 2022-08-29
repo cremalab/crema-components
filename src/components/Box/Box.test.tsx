@@ -56,12 +56,19 @@ describe("Box", () => {
     // Arrange
     const label = "without children"
 
+    const width = 100
+    const height = 100
+    const background = "orange"
+
     // Act
-    render(<Box aria-label={label} />)
+    render(<Box aria-label={label} w={width} h={height} bg={background} />)
 
     const received = screen.getByLabelText(label)
 
     // Assert
+    expect(received).toHaveStyle(
+      "background: orange; width: 100px; height: 100px",
+    )
     expect(received).toBeInTheDocument()
   })
 })
