@@ -52,4 +52,16 @@ describe("Box", () => {
       "background: red; borderRadius: 8px; height: 100px; width: 100px; maxHeight: 200px; maxWidth: 200px; minHeight: 50px; minWidth: 50px",
     )
   })
+  it("renders without children", () => {
+    // Arrange
+    const label = "without children"
+
+    // Act
+    render(<Box aria-label={label} />)
+
+    const received = screen.getByLabelText(label)
+
+    // Assert
+    expect(received).toBeInTheDocument()
+  })
 })

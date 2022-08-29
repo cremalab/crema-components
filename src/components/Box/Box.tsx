@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ComponentProps, ReactNode } from "react"
 import styled from "styled-components"
 import {
   BorderProps,
@@ -31,7 +31,8 @@ interface ShortHand {
 }
 
 export interface BoxProps
-  extends ColorProps,
+  extends Omit<ComponentProps<"div">, "color">,
+    ColorProps,
     LayoutProps,
     SpaceProps,
     BorderProps,
