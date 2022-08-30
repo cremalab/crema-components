@@ -9,22 +9,14 @@ describe("useKeyPress", () => {
 
     await userEvent.keyboard("{enter}")
 
-    expect(callback).toHaveBeenCalled()
     expect(result.current.keyPressed).toBe("Enter")
   })
 
-  it("calls the callback with the expected event", async () => {
+  it("calls the callback function when the key is pressed", async () => {
     const callback = jest.fn()
     renderHook(() => useKeyPress(["Enter"], callback))
 
     await userEvent.keyboard("{enter}")
-
-    expect(callback).toHaveBeenCalledWith(
-      expect.objectContaining({
-        code: "Enter",
-        key: "Enter",
-      }),
-    )
 
     expect(callback).toHaveBeenCalledTimes(1)
   })
