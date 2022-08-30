@@ -31,12 +31,16 @@ describe("AvatarBase", () => {
 
     // Act
     render(
-      <AvatarBase background={backgroundColor} fontColor={fontColor}>
+      <AvatarBase
+        ariaLabel={name}
+        background={backgroundColor}
+        fontColor={fontColor}
+      >
         {name}
       </AvatarBase>,
     )
 
-    const received = screen.getByText(name)
+    const received = screen.getByLabelText(name)
 
     // Assert
     expect(received).toHaveStyle(
