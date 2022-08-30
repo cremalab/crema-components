@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 /**
  * useKeyPress
@@ -10,13 +10,10 @@ export function useKeyPress(
   keyCodes: string[],
   handler: (event: KeyboardEvent) => void,
 ) {
-  const [keyPressed, setKeyPressed] = useState("")
-
   useEffect(() => {
     const listener = (event: KeyboardEvent) => {
       if (keyCodes.includes(event.code)) {
         handler(event)
-        setKeyPressed(event.code)
       }
     }
 
@@ -26,6 +23,4 @@ export function useKeyPress(
       document.removeEventListener("keydown", listener)
     }
   }, [handler, keyCodes])
-
-  return { keyPressed }
 }
