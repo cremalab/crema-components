@@ -21,8 +21,8 @@ export function AvatarGroup({
   renderHiddenCount,
 }: AvatarGroupProps) {
   const childrenArray = Array.isArray(children) ? children : [children]
-  const slicedChildren = childrenArray.slice(0, max)
-  const hiddenCount = childrenArray.length - slicedChildren.length
+  const visibleChildren = childrenArray.slice(0, max)
+  const hiddenCount = childrenArray.length - visibleChildren.length
 
   if (childrenArray.some((child) => child.type.name !== "Avatar")) {
     throw new Error("<AvatarGroup /> only accepts <Avatar /> children")
@@ -30,20 +30,19 @@ export function AvatarGroup({
 
   return (
     <div className={styles.container}>
-      {slicedChildren.map(({ props }, index) => (
+      {visibleChildren.map(({ props }, index) => (
         <div
           data-testid={`avatar_item_${index}`}
           key={index}
           className={styles.item}
-          style={{ zIndex: index }}
         >
           <Avatar {...props} size={size} />
         </div>
       ))}
       <HiddenCount
-        hiddenCount={hiddenCount}
+        count={hiddenCount}
         size={size}
-        renderHiddenCount={renderHiddenCount}
+        render={renderHiddenCount}
         total={childrenArray.length}
       />
     </div>
@@ -51,31 +50,24 @@ export function AvatarGroup({
 }
 
 interface HiddenCountProps {
-  hiddenCount: number
+  count: number
   size: AvatarGroupProps["size"]
-  renderHiddenCount: AvatarGroupProps["renderHiddenCount"]
+  render: AvatarGroupProps["renderHiddenCount"]
   total: number
 }
 
-function HiddenCount({
-  hiddenCount,
-  renderHiddenCount,
-  size,
-  total,
-}: HiddenCountProps) {
-  if (!hiddenCount) return null
+function HiddenCount({ count, render, size, total }: HiddenCountProps) {
+  if (!count) return null
 
-  if (renderHiddenCount) return renderHiddenCount(hiddenCount)
+  if (render) return render(count)
 
   const ariaLabel =
-    hiddenCount === 1
-      ? `${hiddenCount} hidden avatar`
-      : `${hiddenCount} hidden avatars`
+    count === 1 ? `${count} hidden avatar` : `${count} hidden avatars`
 
   return (
     <div className={styles.item} style={{ zIndex: total - 1 }}>
       <AvatarBase ariaLabel={ariaLabel} size={size}>
-        +{hiddenCount}
+        +{count}
       </AvatarBase>
     </div>
   )

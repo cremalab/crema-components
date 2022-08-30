@@ -6,7 +6,7 @@ export type AvatarSize = "sm" | "md" | "lg"
 export interface AvatarBaseProps {
   size?: AvatarSize
   children: ReactNode
-  ariaLabel?: string
+  ariaLabel: string
   src?: string
   fontColor?: string
   background?: string

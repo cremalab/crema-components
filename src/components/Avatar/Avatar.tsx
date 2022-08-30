@@ -7,14 +7,7 @@ export interface AvatarProps
 }
 
 export function Avatar({ name, ...avatarBaseProps }: AvatarProps) {
-  const Child = () => {
-    if (avatarBaseProps.src) {
-      return null
-    } else {
-      const initials = getInitials(name)
-      return <>{initials}</>
-    }
-  }
+  const hasImage = Boolean(avatarBaseProps.src)
 
   const ariaLabel = avatarBaseProps.src
     ? `An avatar with an image of ${name}`
@@ -22,7 +15,7 @@ export function Avatar({ name, ...avatarBaseProps }: AvatarProps) {
 
   return (
     <AvatarBase ariaLabel={ariaLabel} {...avatarBaseProps}>
-      <Child />
+      {hasImage ? null : getInitials(name)}
     </AvatarBase>
   )
 }
