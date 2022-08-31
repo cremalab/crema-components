@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks"
+import { renderHook } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { useKeyPress } from "./"
 
@@ -7,7 +7,7 @@ describe("useKeyPress", () => {
     const callback = jest.fn()
     renderHook(() => useKeyPress(["Enter"], callback))
 
-    await userEvent.keyboard("{enter}")
+    await userEvent.keyboard("{Enter}")
 
     expect(callback).toHaveBeenCalledTimes(1)
   })
@@ -16,7 +16,7 @@ describe("useKeyPress", () => {
     const callback = jest.fn()
     renderHook(() => useKeyPress(["Enter"], callback))
 
-    await userEvent.keyboard("{esc}")
+    await userEvent.keyboard("{Escape}")
 
     expect(callback).not.toHaveBeenCalled()
   })
