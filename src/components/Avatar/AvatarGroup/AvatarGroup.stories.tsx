@@ -1,5 +1,6 @@
 import { ComponentStory } from "@storybook/react"
 import { Avatar, AvatarProps } from ".."
+import avatarImage from "../../../assets/justink.jpeg"
 import { AvatarGroup } from "./AvatarGroup"
 
 /**
@@ -12,7 +13,7 @@ const avatars: AvatarProps[] = [
   { name: "Hello World", size: "md" },
   {
     name: "Foo Bar",
-    src: require("../../../assets/justink.jpeg"),
+    src: avatarImage,
   },
   { name: "John Doe" },
 ]
