@@ -31,6 +31,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
+
     const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
@@ -55,6 +56,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
+
     const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
@@ -77,6 +79,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
+
     const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
@@ -101,6 +104,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
@@ -127,6 +131,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
@@ -150,6 +155,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const buttons = screen.getAllByRole("button")
 
     expect(buttons.map((x) => x.textContent)).toEqual([
@@ -173,6 +179,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const button = screen.getByText("Previous")
 
     expect(button.hasAttribute("disabled")).toBe(true)
@@ -189,6 +196,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const button = screen.getByText("Next")
 
     expect(button.hasAttribute("disabled")).toBe(true)
@@ -205,6 +213,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const ellipses = screen.getAllByText("...")
 
     expect(ellipses.length).toBe(1)
@@ -221,6 +230,7 @@ describe("Pagination", () => {
         siblingCount={3}
       />,
     )
+
     const ellipses = screen.getAllByText("...")
 
     expect(ellipses.length).toBe(1)
@@ -237,6 +247,7 @@ describe("Pagination", () => {
         siblingCount={1}
       />,
     )
+
     const ellipses = screen.getAllByText("...")
 
     expect(ellipses.length).toBe(2)
@@ -253,6 +264,7 @@ describe("Pagination", () => {
         siblingCount={0}
       />,
     )
+
     const ellipses = screen.queryAllByText("...")
 
     expect(ellipses.length).toBe(0)
@@ -269,6 +281,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
+
     const ellipsis = screen.getByText("...")
 
     expect(ellipsis).toBeDefined()
@@ -285,6 +298,7 @@ describe("Pagination", () => {
         siblingCount={2}
       />,
     )
+
     const ellipsis = screen.getByText("...")
 
     expect(ellipsis).toBeDefined()
@@ -309,6 +323,7 @@ describe("Pagination", () => {
         )}
       />,
     )
+
     const match = screen.getByTitle("Go to page 4")
 
     expect(match.tagName).toEqual("A")
@@ -353,6 +368,7 @@ describe("Pagination", () => {
         onPage={pageFn}
       />,
     )
+
     const button = screen.queryByText("1")
 
     expect(button).toBeNull()

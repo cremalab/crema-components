@@ -20,6 +20,7 @@ describe("Button", () => {
         Button
       </Button>,
     )
+
     const button = screen.getByText("Button")
     fireEvent.click(button)
 
@@ -34,6 +35,7 @@ describe("Button", () => {
         {text}
       </Button>,
     )
+
     const buttonText = await screen.findByText(text)
 
     expect(buttonText).toBeDisabled()

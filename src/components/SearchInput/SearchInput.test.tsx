@@ -18,6 +18,7 @@ describe("SearchInput", () => {
     // Assert
     expect(receivedIcon).toBeInTheDocument()
   })
+
   it("clear icon is not visible if search term is empty", () => {
     // Arrange
     const label = "click icon to clear search"
@@ -30,6 +31,7 @@ describe("SearchInput", () => {
     // Assert
     expect(receivedIcon).toHaveClass("hidden")
   })
+
   it("debounces and invokes a callback", async () => {
     // Arrange
     jest.useFakeTimers()
@@ -56,10 +58,11 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    expect(onSearch).toBeCalled()
-    expect(onSearch).toBeCalledWith(text)
+    expect(onSearch).toHaveBeenCalled()
+    expect(onSearch).toHaveBeenCalledWith(text)
     jest.useRealTimers()
   })
+
   it("has a default delay of 300", async () => {
     // Arrange
     jest.useFakeTimers()
@@ -79,9 +82,10 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    expect(onSearch).toBeCalled()
+    expect(onSearch).toHaveBeenCalled()
     jest.useRealTimers()
   })
+
   it("clears the input when the clear icon is clicked", async () => {
     // Arrange
     const inputLabel = "search"
@@ -104,6 +108,7 @@ describe("SearchInput", () => {
     // Assert
     expect(input.value).toBe("")
   })
+
   it("renders custom search icon and clear icon", () => {
     // Arrange
     const searchIconLabel = "a pumpkin"
@@ -129,6 +134,7 @@ describe("SearchInput", () => {
     expect(receivedsearchIcon).toBeInTheDocument()
     expect(receivedclearIcon).toBeInTheDocument()
   })
+
   it("renders a search button if showSearchButton is true", async () => {
     // Arrange
     const searchButtonLabel = "click to search"
@@ -143,6 +149,7 @@ describe("SearchInput", () => {
     // Assert
     expect(button).toBeInTheDocument()
   })
+
   it("invokes 'onSearch' only when search button is clicked when showSearchButton = 'true'", async () => {
     // Arrange
     jest.useFakeTimers()
@@ -171,10 +178,11 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    expect(onSearch).toBeCalledTimes(1)
-    expect(onSearch).toBeCalledWith(text)
+    expect(onSearch).toHaveBeenCalledTimes(1)
+    expect(onSearch).toHaveBeenCalledWith(text)
     jest.useRealTimers()
   })
+
   it("invokes 'onBlur' and 'onFocus'", async () => {
     // Arrange
     const onBlur = jest.fn()
@@ -195,11 +203,12 @@ describe("SearchInput", () => {
 
     // Assert
     await userEvent.click(received)
-    expect(onFocus).toBeCalled()
+    expect(onFocus).toHaveBeenCalled()
 
     await userEvent.tab()
-    expect(onBlur).toBeCalled()
+    expect(onBlur).toHaveBeenCalled()
   })
+
   it("shows clear button on focus when value is defined and hides when blurred", async () => {
     // Arrange
     const clearButtonLabel = "click icon to clear search"
@@ -220,6 +229,7 @@ describe("SearchInput", () => {
     await userEvent.tab()
     expect(button).toHaveClass("hidden")
   })
+
   it("invokes onSearch when enter is pressed", async () => {
     // Arrange
     jest.useFakeTimers()
@@ -242,8 +252,8 @@ describe("SearchInput", () => {
     })
 
     // Assert
-    expect(onSearch).toBeCalledTimes(1)
-    expect(onSearch).toBeCalledWith(text)
+    expect(onSearch).toHaveBeenCalledTimes(1)
+    expect(onSearch).toHaveBeenCalledWith(text)
     jest.useRealTimers()
   })
 })

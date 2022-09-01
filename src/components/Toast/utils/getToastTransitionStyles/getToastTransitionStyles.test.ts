@@ -22,6 +22,7 @@ describe("getToastTransitionStyles", () => {
     // Assert
     expect(received).toEqual(expected)
   })
+
   it("returns different transition style for each transition status", () => {
     // Arrange
     const transitionStatuses = [
