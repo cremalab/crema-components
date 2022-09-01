@@ -39,9 +39,8 @@ describe("AvatarList", () => {
       )
 
     // Assert
-    expect(Rendered).toThrowError(
-      "<AvatarGroup /> only accepts <Avatar /> children",
-    )
+    expect(Rendered).toThrow("<AvatarGroup /> only accepts <Avatar /> children")
+
     jest.restoreAllMocks()
   })
 
@@ -88,6 +87,7 @@ describe("AvatarList", () => {
       const hidden = screen.queryByText(name)
       expect(hidden).not.toBeInTheDocument()
     })
+
     expect(received).toBeInTheDocument()
   })
 
