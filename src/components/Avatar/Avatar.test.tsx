@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { getInitials } from "./utils/getInitials"
-import { Avatar, AvatarSize } from "."
+import { Avatar } from "."
 
 describe("Avatar", () => {
   it("renders an avatar with initials", () => {
@@ -57,22 +57,5 @@ describe("Avatar", () => {
 
     // Assert
     expect(label).toBeInTheDocument()
-  })
-
-  it("renders 3 sizes of avatars", () => {
-    // Arrange
-    const sizes: AvatarSize[] = ["sm", "md", "lg"]
-
-    sizes.forEach((size) => {
-      // Act
-      const label = `An avatar with initials for ${size}`
-
-      render(<Avatar size={size} name={size} />)
-
-      const received = screen.getByLabelText(label)
-
-      // Assert
-      expect(received).toHaveAttribute("data-size", size)
-    })
   })
 })

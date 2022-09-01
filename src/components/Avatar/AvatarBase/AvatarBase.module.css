@@ -2,15 +2,12 @@
   --small: 48px;
   --medium: 64px;
   --large: 96px;
-  --ratio: 0.5;
-  background: #999999;
-  color: #333333;
+  --ratio: 0.4;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
   flex-wrap: nowrap;
-  background-size: cover;
 }
 
 .container[data-size="sm"] {
