@@ -1,4 +1,5 @@
 import { ComponentStory } from "@storybook/react"
+import avatarImage from "../../assets/justink.jpeg"
 import { Avatar, AvatarSize } from "."
 
 /**
@@ -46,5 +47,13 @@ export const WithImage = Template.bind({})
 WithImage.args = {
   ...Basic.args,
   size: "lg",
-  src: "https://assets.website-files.com/5b6b50e79e9b6f7d0d3959a2/614a3f0710df4f2ff20e5bbd_JustinK.jpg",
+  src: avatarImage,
+}
+
+export const WithCustomColors = Template.bind({})
+
+WithCustomColors.args = {
+  ...Basic.args,
+  fontColor: "#000000",
+  background: "#FFA500",
 }
