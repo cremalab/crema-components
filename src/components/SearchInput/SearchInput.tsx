@@ -131,6 +131,7 @@ function debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
 
   const debouncedFunc = (...args: Parameters<F>) => {
     clearTimeout(timer)
+
     timer = setTimeout(() => {
       func(...args)
     }, waitFor)

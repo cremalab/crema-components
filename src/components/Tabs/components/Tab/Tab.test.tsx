@@ -13,6 +13,7 @@ describe("MenuItem", () => {
         {content}
       </Tab>,
     )
+
     const result = screen.getByText(content)
 
     // Assert

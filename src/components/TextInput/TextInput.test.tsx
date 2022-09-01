@@ -37,7 +37,7 @@ describe("TextInput", () => {
     const received = await screen.findByLabelText("Test Input")
 
     await userEvent.type(received, textToType)
-    userEvent.tab()
+    await userEvent.tab()
 
     expect(events.onClick).toHaveBeenCalledTimes(1)
     expect(events.onFocus).toHaveBeenCalledTimes(1)
@@ -55,10 +55,12 @@ describe("TextInput", () => {
         helperText={helperText}
       />,
     )
+
     const receivedInput = await screen.findByLabelText("Test Input")
     const receivedHelperText = await screen.findByText(helperText)
 
     expect(receivedHelperText).toBeInTheDocument()
+
     expect(receivedInput).toHaveAttribute(
       "aria-describedby",
       receivedHelperText.id,
@@ -87,6 +89,7 @@ describe("TextInput", () => {
     render(
       <TextInput name="test-input" label="Test Input" disabled {...events} />,
     )
+
     const received = await screen.findByLabelText("Test Input")
 
     userEvent.type(received, textToType)
@@ -108,10 +111,12 @@ describe("TextInput", () => {
         helperText={helperText}
       />,
     )
+
     const receivedInput = await screen.findByLabelText("Test Input")
     const receivedHelperText = await screen.findByText(helperText)
 
     expect(receivedHelperText).toBeInTheDocument()
+
     expect(receivedInput).toHaveAttribute(
       "aria-describedby",
       receivedHelperText.id,

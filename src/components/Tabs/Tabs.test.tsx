@@ -134,7 +134,7 @@ describe("Tabs", () => {
     expect(labelNode).toHaveClass("item disabled")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -152,13 +152,13 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 2")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowleft}")
+    await userEvent.keyboard("{arrowleft}")
 
     // Assert
     expect(onTabChange).toBeCalledWith("1")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowLeft loops back to end", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowLeft loops back to end", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -176,13 +176,13 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 1")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowleft}")
+    await userEvent.keyboard("{arrowleft}")
 
     // Assert
     expect(onTabChange).toBeCalledWith("2")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowRight pressed from 0", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowRight pressed from 0", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -200,13 +200,13 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 1")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowright}")
+    await userEvent.keyboard("{arrowright}")
 
     // Assert
     expect(onTabChange).toBeCalledWith("2")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowRight loops back to 0", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowRight loops back to 0", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -224,7 +224,7 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 2")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowright}")
+    await userEvent.keyboard("{arrowright}")
 
     // Assert
     expect(onTabChange).toBeCalledWith("1")
