@@ -4,17 +4,6 @@ import { Modal } from "./Modal"
 import { ModalTitle } from "./ModalTitle"
 
 describe("Modal", () => {
-  it("renders nothing when open = false", async () => {
-    // Arrange
-    // Act
-    const { asFragment } = render(
-      <Modal open={false}>this should not render</Modal>,
-    )
-
-    // Assert
-    expect(asFragment()).toMatchSnapshot()
-  })
-
   it("renders content when open = true", async () => {
     // Arrange
     const title = "title"

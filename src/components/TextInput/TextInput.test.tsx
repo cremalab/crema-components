@@ -3,18 +3,6 @@ import userEvent from "@testing-library/user-event"
 import { TextInput } from "./TextInput"
 
 describe("TextInput", () => {
-  it("renders the expected markup", () => {
-    const { asFragment } = render(
-      <TextInput
-        helperText="Test Helper Text"
-        name="test-input"
-        label="Test Input"
-      />,
-    )
-
-    expect(asFragment()).toMatchSnapshot()
-  })
-
   it("renders an input w/ the required attributes", async () => {
     render(<TextInput name="test-input" label="Test Input" />)
     const received = await screen.findByLabelText("Test Input")
