@@ -15,6 +15,7 @@ describe("Modal", () => {
         {children}
       </Modal>,
     )
+
     const titleNode = await screen.findByText(title)
     const childrenNode = await screen.findByText(children)
 
@@ -35,6 +36,7 @@ describe("Modal", () => {
         {children}
       </Modal>,
     )
+
     const overlay = await screen.findByTestId("modal-overlay")
     await userEvent.click(overlay)
 
@@ -71,6 +73,7 @@ describe("Modal", () => {
         {children}
       </Modal>,
     )
+
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).not.toHaveBeenCalled()

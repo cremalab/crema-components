@@ -66,6 +66,7 @@ describe("getToastPositionStyles", () => {
     expect(receivedVerticalTop).toEqual(expectedVerticalTop)
     expect(receivedVerticalBottom).toEqual(expectedVerticalBottom)
   })
+
   it("returns styles for horizontal positions", () => {
     // Arrange
     const horizontalCenter: Position = {

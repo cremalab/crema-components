@@ -26,6 +26,7 @@ describe("ProgressBar", () => {
     expect(receivedContainer).not.toHaveAttribute(ariaValueMin)
     expect(receivedContainer).not.toHaveAttribute(ariaValueMax)
   })
+
   it("acts as determinate progress when value passed", () => {
     // Arrange
     const value = 25
@@ -44,6 +45,7 @@ describe("ProgressBar", () => {
     expect(receivedContainer).toHaveAttribute(ariaValueMin, min)
     expect(receivedContainer).toHaveAttribute(ariaValueMax, max)
   })
+
   it("has dynamic transform based on determinate value", () => {
     // Arrange
     const initialValue = 0
@@ -59,6 +61,7 @@ describe("ProgressBar", () => {
       `transform: translateX(${initialValue - 100}%)`,
     )
   })
+
   it("does not default to indeterminate when value is 0", () => {
     // Arrange
     const value = 0

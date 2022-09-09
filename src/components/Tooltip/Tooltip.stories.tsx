@@ -102,6 +102,7 @@ PlacementTop.args = {
   alwaysShow: true,
   showArrow: true,
 }
+
 export const PlacementRight = Template.bind({})
 
 PlacementRight.args = {

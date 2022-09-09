@@ -1,5 +1,5 @@
-import userEvent from "@testing-library/user-event"
 import { act, render, screen, waitFor } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { placements } from "./placements"
 import { Tooltip } from "./Tooltip"
 
@@ -22,6 +22,7 @@ describe("Tooltip", () => {
     // Assert
     expect(screen.getByTestId(testId)).toBeInTheDocument()
   })
+
   it("hides tooltip onMouseLeave", async () => {
     // Arrange
     const children = "Hello"
@@ -44,6 +45,7 @@ describe("Tooltip", () => {
       expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
     )
   })
+
   it("can be focused and escaped by keyboard events", async () => {
     // Arrange
     const children = "Hello"
@@ -68,6 +70,7 @@ describe("Tooltip", () => {
       expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
     )
   })
+
   it("can be dismissed by clicking anchor element", async () => {
     // Arrange
     const children = "Hello"
@@ -94,6 +97,7 @@ describe("Tooltip", () => {
       expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
     )
   })
+
   it("can always be shown", async () => {
     // Arrange
     const children = "Hello"
@@ -122,6 +126,7 @@ describe("Tooltip", () => {
 
     expect(screen.getByTestId(testId)).toBeInTheDocument()
   })
+
   /* 
   We are making this async since this component internally sets state within a ref callback,
   otherwise testing library complains about state being set and not wrapping fireEvent in 'act' 
@@ -144,6 +149,7 @@ describe("Tooltip", () => {
     // Assert
     await waitFor(() => expect(received).toBeInTheDocument())
   })
+
   it("allows for an enterDelay or exitDelay to be set", async () => {
     // Arrange
     jest.useFakeTimers()
@@ -189,8 +195,10 @@ describe("Tooltip", () => {
     await waitFor(() =>
       expect(screen.queryByTestId(testId)).not.toBeInTheDocument(),
     )
+
     jest.useRealTimers()
   })
+
   it("supports aria-describedby", async () => {
     // Arrange
     const ariaDescribedBy = "paragraphtext"
@@ -222,11 +230,13 @@ describe("Tooltip", () => {
     expect(receivedWrapper).toHaveAttribute("aria-describedby", ariaDescribedBy)
     expect(receivedTooltip.id).toEqual(ariaDescribedBy)
   })
+
   it("allows for custom placement", () => {
     placements.forEach(async (placement) => {
       // Act
       const children = "Hello" + placement
       const label = "World"
+
       // Act
       render(
         <Tooltip placement={placement} label={label}>

@@ -1,11 +1,12 @@
 import { action } from "@storybook/addon-actions"
-import decoratorCentered from "@storybook/addon-centered"
 import { ComponentMeta, ComponentStory } from "@storybook/react"
 import { Pagination } from "./Pagination"
 
 export default {
   title: "Components/Pagination",
-  decorators: [decoratorCentered],
+  parameters: {
+    layout: "centered",
+  },
 } as ComponentMeta<typeof Pagination>
 
 const Template: ComponentStory<typeof Pagination> = (args) => (
