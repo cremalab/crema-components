@@ -101,7 +101,7 @@ describe("Tabs", () => {
     fireEvent.click(menuItemNode2)
 
     // Assert
-    expect(onTabChange).toBeCalledWith("2")
+    expect(onTabChange).toHaveBeenCalledWith("2")
   })
 
   it("supports disabled tabs", () => {
@@ -129,12 +129,12 @@ describe("Tabs", () => {
     fireEvent.click(labelNode)
 
     // Assert
-    expect(onTabChange).not.toBeCalled()
+    expect(onTabChange).not.toHaveBeenCalled()
     expect(labelNode).toHaveAttribute("aria-disabled", "true")
     expect(labelNode).toHaveClass("item disabled")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowLeft pressed from 1", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -152,13 +152,13 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 2")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowleft}")
+    await userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith("1")
+    expect(onTabChange).toHaveBeenCalledWith("1")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowLeft loops back to end", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowLeft loops back to end", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -176,13 +176,13 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 1")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowleft}")
+    await userEvent.keyboard("{arrowleft}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith("2")
+    expect(onTabChange).toHaveBeenCalledWith("2")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowRight pressed from 0", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowRight pressed from 0", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -200,13 +200,13 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 1")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowright}")
+    await userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith("2")
+    expect(onTabChange).toHaveBeenCalledWith("2")
   })
 
-  it("onTabChange is called with expected 'tab' data when ArrowRight loops back to 0", () => {
+  it("onTabChange is called with expected 'tab' data when ArrowRight loops back to 0", async () => {
     // Arrange
     const onTabChange = jest.fn()
 
@@ -224,10 +224,10 @@ describe("Tabs", () => {
 
     const menuItemNode1 = screen.getByText("Tab 2")
     menuItemNode1.focus()
-    userEvent.keyboard("{arrowright}")
+    await userEvent.keyboard("{arrowright}")
 
     // Assert
-    expect(onTabChange).toBeCalledWith("1")
+    expect(onTabChange).toHaveBeenCalledWith("1")
   })
 
   it("throws error if currentTab id is not within list of <Tab />s", () => {
@@ -254,7 +254,7 @@ describe("Tabs", () => {
       )
 
     // Assert
-    expect(renderWithError).toThrowError("currentTab '4' does not exist")
+    expect(renderWithError).toThrow("currentTab '4' does not exist")
   })
 
   it("throws error if currentTab id belongs to a disabled tab", () => {
@@ -281,6 +281,6 @@ describe("Tabs", () => {
       )
 
     // Assert
-    expect(renderWithError).toThrowError("currentTab '1' is disabled")
+    expect(renderWithError).toThrow("currentTab '1' is disabled")
   })
 })

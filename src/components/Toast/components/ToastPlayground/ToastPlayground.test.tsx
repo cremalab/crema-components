@@ -25,6 +25,7 @@ describe("ToastPlayground", () => {
     // Assert
     expect(received).toBeInTheDocument()
   })
+
   it("removes all toasts when removeAll is triggered", async () => {
     // Arrange
     const buttonTextInfo = "Add Info Toast"
@@ -55,6 +56,7 @@ describe("ToastPlayground", () => {
     // Assert
     await waitFor(() => expect(receivedAfterDismiss).not.toBeInTheDocument())
   })
+
   it("removes toast by its handleClose callback on custom action", async () => {
     // Arrange
     const buttonText = "Add Success Toast"
@@ -81,6 +83,7 @@ describe("ToastPlayground", () => {
     // Assert
     await waitFor(() => expect(received).not.toBeInTheDocument())
   })
+
   it("allows interaction with an Error Toast", async () => {
     // Arrange
     const buttonText = "Add Error Toast"
@@ -102,6 +105,7 @@ describe("ToastPlayground", () => {
     // Assert
     expect(received).toBeInTheDocument()
   })
+
   it("pressing escape dismisses oldest toast", async () => {
     // Arrange
     const buttonTextInfo = "Add Info Toast"
@@ -126,11 +130,13 @@ describe("ToastPlayground", () => {
     await userEvent.keyboard("[Escape]")
     await waitFor(() => expect(screen.getAllByTestId(testID)).toHaveLength(1))
   })
+
   it("throws an error if useToaster is used outside of it's context", () => {
     expect(() => render(<ToastPlayground />)).toThrow(
       "useToaster must be used within a ToasterProvider!",
     )
   })
+
   it("replaces previous Toast if behavior is set to 'replace'", async () => {
     // Arrange
     const buttonTextInfo = "Add Info Toast"

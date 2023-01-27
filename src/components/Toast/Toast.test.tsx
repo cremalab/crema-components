@@ -15,6 +15,7 @@ describe("Toast", () => {
     // Assert
     expect(received).toHaveAttribute("aria-live", "assertive")
   })
+
   it("has an aria-live value of 'polite' if not type of 'error'", () => {
     // Arrange
     const status = "success"
@@ -27,8 +28,10 @@ describe("Toast", () => {
     // Assert
     expect(received).toHaveAttribute("aria-live", "polite")
   })
+
   it("renders toast for each type", () => {
     const statuses = ["success", "error", "warning", "info"] as ToastStatus[]
+
     statuses.forEach((status) => {
       // Arrange
       const message = "Hello Toast!"
@@ -43,6 +46,7 @@ describe("Toast", () => {
       expect(received).toHaveAttribute("data-type", status)
     })
   })
+
   it("invokes onDismiss callback", async () => {
     // Arrange
     const onDismiss = jest.fn()
@@ -63,6 +67,6 @@ describe("Toast", () => {
     await userEvent.click(button)
 
     // Assert
-    expect(onDismiss).toBeCalled()
+    expect(onDismiss).toHaveBeenCalled()
   })
 })

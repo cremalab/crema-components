@@ -26,6 +26,7 @@ describe("Sidebar", () => {
         {children}
       </Sidebar>,
     )
+
     const titleNode = screen.queryByText(title)
     const childrenNode = screen.queryByText(children)
 
@@ -46,6 +47,7 @@ describe("Sidebar", () => {
         {children}
       </Sidebar>,
     )
+
     const overlay = await screen.findByTestId("sidebar-backdrop")
     await userEvent.click(overlay)
 
@@ -64,6 +66,7 @@ describe("Sidebar", () => {
         {children}
       </Sidebar>,
     )
+
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).toHaveBeenCalled()
@@ -81,6 +84,7 @@ describe("Sidebar", () => {
         {children}
       </Sidebar>,
     )
+
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).not.toHaveBeenCalled()

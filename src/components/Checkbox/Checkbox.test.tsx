@@ -24,6 +24,7 @@ describe("Checkbox", () => {
         onClick={onClick}
       />,
     )
+
     const received = await screen.findByLabelText("Test Label")
 
     fireEvent.click(received)
@@ -41,6 +42,7 @@ describe("Checkbox", () => {
         aria-label="Test Label"
       />,
     )
+
     const received = await screen.findByLabelText("Test Label")
 
     expect(received).toBeInTheDocument()
@@ -63,6 +65,7 @@ describe("Checkbox", () => {
     await render(
       <Checkbox handleChange={onChange} label="Test Label" checked={false} />,
     )
+
     const received = await screen.findByLabelText("Test Label")
 
     expect(received).toBeInTheDocument()

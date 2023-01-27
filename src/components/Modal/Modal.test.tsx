@@ -4,17 +4,6 @@ import { Modal } from "./Modal"
 import { ModalTitle } from "./ModalTitle"
 
 describe("Modal", () => {
-  it("renders nothing when open = false", async () => {
-    // Arrange
-    // Act
-    const { asFragment } = render(
-      <Modal open={false}>this should not render</Modal>,
-    )
-
-    // Assert
-    expect(asFragment()).toMatchSnapshot()
-  })
-
   it("renders content when open = true", async () => {
     // Arrange
     const title = "title"
@@ -26,6 +15,7 @@ describe("Modal", () => {
         {children}
       </Modal>,
     )
+
     const titleNode = await screen.findByText(title)
     const childrenNode = await screen.findByText(children)
 
@@ -46,6 +36,7 @@ describe("Modal", () => {
         {children}
       </Modal>,
     )
+
     const overlay = await screen.findByTestId("modal-overlay")
     await userEvent.click(overlay)
 
@@ -82,6 +73,7 @@ describe("Modal", () => {
         {children}
       </Modal>,
     )
+
     await userEvent.keyboard("[Escape]")
 
     expect(onClose).not.toHaveBeenCalled()

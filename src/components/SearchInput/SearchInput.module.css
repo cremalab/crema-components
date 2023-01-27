@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 4px;
+  border-radius: 4px;
+  width: 100%;
+  height: inherit;
+}
+
+.container:focus-within {
+  outline: 1px solid black;
+}
+
+.container:focus-within .searchIcon {
+  opacity: 1;
+}
+
+.clearButton {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.input {
+  outline: none;
+  border: none;
+  padding: 0 4px;
+  width: 100%;
+}
+
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  pointer-events: none;
+}
+
+.searchIcon {
+  opacity: 0.5;
+}
+
+.searchButton {
+  display: flex;
+  height: 100%;
+  margin-left: 8px;
+}
+
+.wrapper {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}

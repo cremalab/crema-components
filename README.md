@@ -18,7 +18,7 @@
 
 **🛣 Roadmap**
 
-- Breadcrumbs
+- ~~Breadcrumbs~~
 - Slider
 - ~~Chips/Tags~~
 - ~~Progress Bar~~
@@ -27,7 +27,7 @@
 - Banner
 - ~~Tabs~~
 - ~~Tooltips~~
-- Search Input
+- ~~Search Input~~
 - Link
 
 ## 🏗 Setup
