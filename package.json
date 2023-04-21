@@ -87,7 +87,7 @@
     "test:analyze": "run-s test:analyze:*",
     "test:analyze:build": "npm run build",
     "test:analyze:explore": "source-map-explorer build/static/js/main.*",
-    "build-storybook": "build-storybook -s public",
+    "build-storybook": "build-storybook",
     "storybook": "start-storybook -p 6006 -s public",
     "prepare": "husky install"
   },
