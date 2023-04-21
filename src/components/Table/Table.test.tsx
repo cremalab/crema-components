@@ -20,17 +20,17 @@ const columns: TableColumn<User>[] = [
   {
     id: "la",
     label: "LA",
-    renderCell: (user) => user.a,
+    cell: (user) => user.a,
     sortBy: (user) => user.a,
   },
-  { id: "lb", label: "LB", renderCell: (user) => user.b },
+  { id: "lb", label: "LB", cell: (user) => user.b },
   {
     id: "lc",
     label: "LC",
-    renderCell: (user) => user.c,
+    cell: (user) => user.c,
     sortBy: (user) => user.c,
   },
-  { id: "ld", label: "LD", renderCell: (user) => user.d.e },
+  { id: "ld", label: "LD", cell: (user) => user.d.e },
 ]
 
 describe("Table", () => {
@@ -66,7 +66,7 @@ describe("Table", () => {
           {
             id: "la",
             label: "LA",
-            renderCell: (d) => (
+            cell: (d) => (
               <button onClick={() => handleClick(d.a)}>Click Me: {d.a}</button>
             ),
           },
@@ -82,8 +82,8 @@ describe("Table", () => {
     render(
       <Table
         data={data}
-        renderHeader={({ column }) => `Custom ${column.label}`}
-        columns={[{ id: "la", label: "LA", renderCell: ({ a }) => a }]}
+        header={({ column }) => `Custom ${column.label}`}
+        columns={[{ id: "la", label: "LA", cell: ({ a }) => a }]}
       />,
     )
     const customHeader = screen.getByText("Custom LA")
@@ -94,14 +94,14 @@ describe("Table", () => {
     render(
       <Table
         data={data}
-        renderHeader={({ column }) => `Custom ${column.label}`}
+        header={({ column }) => `Custom ${column.label}`}
         columns={[
-          { id: "la", label: "LA", renderCell: ({ a }) => a },
+          { id: "la", label: "LA", cell: ({ a }) => a },
           {
             id: "lb",
             label: "LB",
-            renderCell: ({ a }) => a,
-            renderHeader: ({ column }) => `Column-specific ${column.label}`,
+            cell: ({ a }) => a,
+            header: ({ column }) => `Column-specific ${column.label}`,
           },
         ]}
       />,

@@ -30,13 +30,13 @@ export const Default = () => (
       {
         id: "name",
         label: "Name",
-        renderCell: ({ name }) => name,
+        cell: ({ name }) => name,
         sortBy: ({ name }) => name,
       },
       {
         id: "age",
         label: "Age",
-        renderCell: ({ age }) => age,
+        cell: ({ age }) => age,
         sortBy: ({ age }) => age,
       },
     ]}
@@ -50,13 +50,13 @@ export const WithRenderValue = () => (
       {
         id: "name",
         label: "Name",
-        renderCell: ({ name }) => name,
+        cell: ({ name }) => name,
       },
       {
         id: "age",
         label: "Age",
         sortBy: ({ age }) => age,
-        renderCell: ({ age }) => (
+        cell: ({ age }) => (
           <button onClick={() => action("Click")(age)}>{age}</button>
         ),
       },

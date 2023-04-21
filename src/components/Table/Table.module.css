@@ -1,25 +1,26 @@
-.table {
+.container {
   width: 100%;
   position: relative;
   table-layout: fixed;
 }
 
-.table th,
-.table td {
+.container th,
+.container td {
   padding: 10px;
+  vertical-align: middle;
 }
 
-.table thead th {
+.container thead th {
   background: gainsboro;
   position: sticky;
   top: 0;
   padding: 10px;
 }
 
-.table thead th[data-sortable="true"] {
+.container thead th[data-sortable="true"] {
   cursor: pointer;
 }
 
-.table tbody {
+.container tbody {
   background: whitesmoke;
 }

@@ -8,32 +8,32 @@ export interface WithID {
 export type TableSortDirection = "asc" | "dsc"
 
 export type TableRenderHeader<D extends WithID> = (args: {
+  column: TableColumn<D>
+  data: D[]
   sort: {
     dir: TableSortDirection
     isCurrent: boolean
   }
-  column: TableColumn<D>
-  data: D[]
 }) => ReactNode
 
 export interface TableColumn<D extends WithID> {
   id: string
   label: string | null
-  renderCell: (datum: D) => ReactNode
-  renderHeader?: TableRenderHeader<D>
+  cell: (datum: D) => ReactNode
+  header?: TableRenderHeader<D>
   sortBy?: (datum: D) => string | number | boolean
 }
 
 export interface TableProps<D extends WithID> {
   data: D[]
   columns: TableColumn<D>[]
-  renderHeader?: TableRenderHeader<D>
+  header?: TableRenderHeader<D>
 }
 
 export function Table<D extends WithID>({
   data: dataUnsorted,
   columns,
-  renderHeader = renderHeaderDefault<D>(),
+  header = renderHeaderDefault<D>(),
 }: TableProps<D>) {
   const [sortColumn, setSortColumn] = useState<TableColumn<D>>()
   const [sortDir, setSortDir] = useState<TableSortDirection>("dsc")
@@ -61,8 +61,8 @@ export function Table<D extends WithID>({
       column,
     }
 
-    const header =
-      column.renderHeader?.(renderHeaderArgs) ?? renderHeader(renderHeaderArgs)
+    const headerContent =
+      column.header?.(renderHeaderArgs) ?? header(renderHeaderArgs)
 
     return (
       <th
@@ -71,7 +71,7 @@ export function Table<D extends WithID>({
         onClick={handleSort(column)}
         data-sortable={!!column.sortBy}
       >
-        {header}
+        {headerContent}
       </th>
     )
   })
@@ -79,15 +79,13 @@ export function Table<D extends WithID>({
   const rows = data.map((datum) => (
     <tr key={`tr-${datum.id}`}>
       {columns.map((column) => (
-        <td key={`tr-${datum.id}-td-${column.id}`}>
-          {column.renderCell(datum)}
-        </td>
+        <td key={`tr-${datum.id}-td-${column.id}`}>{column.cell(datum)}</td>
       ))}
     </tr>
   ))
 
   return (
-    <table className={styles.table}>
+    <table className={styles.container}>
       <thead>
         <tr>{headers}</tr>
       </thead>
