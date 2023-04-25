@@ -15,7 +15,7 @@ jobs:
         with:
           cache: npm
       - run: npm ci
-
+      
   Test:
     runs-on: ubuntu-latest
     env:
@@ -40,6 +40,7 @@ jobs:
         with:
           path: coverage/**
           key: build-${{ env.cache-name }}-${{ github.sha }}
+        
 
   Sonar:
     runs-on: ubuntu-latest
