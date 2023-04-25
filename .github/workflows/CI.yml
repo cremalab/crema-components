@@ -24,7 +24,7 @@ jobs:
     steps:
       - run: git config --global core.autocrlf false
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/node-setup@v3
         with:
           cache: npm
       - run: npm ci --offline
@@ -69,7 +69,7 @@ jobs:
       CI: true
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/node-setup@v3
         with:
           cache: npm
       - run: npm ci --offline
@@ -82,7 +82,7 @@ jobs:
       CI: true
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/node-setup@v3
         with:
           cache: npm
       - run: npm ci --offline
